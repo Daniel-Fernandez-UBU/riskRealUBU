@@ -1,0 +1,31 @@
+{
+  "questionary": {
+    "title": "Habilidades Directivas",
+    "questions": [
+      {
+        "id": 1,
+        "description": "¿Cuál es la capital de Francia?",
+        "image": "paris.jpg",
+        "answers": [
+          {
+            "text": "Londres",
+            "value": 10
+          },
+          {
+            "text": "Madrid",
+            "value": 5
+          },
+          {
+            "text": "París",
+            "value": -4
+          },
+          {
+            "text": "Roma",
+            "value": 0
+          }
+        ]
+      }
+    ]
+  }
+}
+
