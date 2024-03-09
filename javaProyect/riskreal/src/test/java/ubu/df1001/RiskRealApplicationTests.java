@@ -1,10 +1,10 @@
-package tfg.dfb1001.riskreal;
+package ubu.df1001;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RiskrealApplicationTests {
+class RiskRealApplicationTests {
 
 	@Test
 	void contextLoads() {
