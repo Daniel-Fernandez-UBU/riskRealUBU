@@ -1,4 +1,4 @@
-package ubu.df1001;
+package ubu.dfb1001.riskReal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
