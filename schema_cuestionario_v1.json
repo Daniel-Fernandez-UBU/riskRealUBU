@@ -2,7 +2,7 @@
   "questionary": {
     "title": "Habilidades Directivas",
     "image": "principalHD.jpg",
-	"languaje": "SPA",
+    "languaje": "SPA",
     "questions": [
       {
         "id": 1,
@@ -11,22 +11,22 @@
         "answers": [
           {
             "text": "Londres",
-			"image": "principalHD.jpg",
+            "image": "principalHD.jpg",
             "value": 10
           },
           {
             "text": "Madrid",
-			"image": "principalHD.jpg",
+            "image": "principalHD.jpg",
             "value": 5
           },
           {
             "text": "París",
-			"image": "principalHD.jpg",
+            "image": "principalHD.jpg",
             "value": -4
           },
           {
             "text": "Roma",
-			"image": "principalHD.jpg",
+            "image": "principalHD.jpg",
             "value": 0
           }
         ]
