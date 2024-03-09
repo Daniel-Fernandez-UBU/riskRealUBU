@@ -7,6 +7,6 @@ public class HomeController {
 	
 	@GetMapping("/") //Página inicial
 	public String inicio() {
-		return "RiskReal";
+		return "home";
 	}
 }
