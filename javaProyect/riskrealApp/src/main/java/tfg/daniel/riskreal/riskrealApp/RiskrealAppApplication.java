@@ -1,13 +1,13 @@
-package ubu.dfb1001.riskReal;
+package tfg.daniel.riskreal.riskrealApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RiskRealApplication {
+public class RiskrealAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RiskRealApplication.class, args);
+		SpringApplication.run(RiskrealAppApplication.class, args);
 	}
 
 }
