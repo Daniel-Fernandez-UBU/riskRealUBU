@@ -1,10 +1,10 @@
 package tfg.daniel.riskreal.riskrealApp.model;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * Clase Cuestionario.
@@ -13,13 +13,13 @@ import org.springframework.core.io.ClassPathResource;
  * 
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cuestionario {
 	
 	private String title;
 	private String image;
-	private Idioma languaje;
+	private String languaje;
 	private List<Preguntas> preguntas;
-	private String imagePath = "image/";
 		
 	//Getters and Setters
 	public String getTitle() {
@@ -28,17 +28,17 @@ public class Cuestionario {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public File getImage() {
-		return getImageFile(this.image);
+	public String getImage() {
+		return this.image;
 	}
 	public void setImage(String image) {
-		this.image = imagePath + image;
+		this.image = image;
 	}
 	
-	public Idioma getLanguaje() {
+	public String getLanguaje() {
 		return languaje;
 	}
-	public void setLanguaje(Idioma languaje) {
+	public void setLanguaje(String languaje) {
 		this.languaje = languaje;
 	}
 	public List<Preguntas> getPreguntas() {
@@ -47,21 +47,6 @@ public class Cuestionario {
 	public void setPreguntas(List<Preguntas> preguntas) {
 		this.preguntas = preguntas;
 	}
-	
-	//Metodo para convertir la imagen en File
-	private File getImageFile(String image) {
-		File imageFile = null;
-		ClassPathResource staticDataResource = new ClassPathResource(image);
-		try {
-			imageFile = staticDataResource.getFile();
-		} catch (IOException e) {
-			System.out.println("Imagen: " + image + " no encontrada");
-			e.printStackTrace();
-		}
-		
-		return imageFile;
 
-	}
-	
 
 }

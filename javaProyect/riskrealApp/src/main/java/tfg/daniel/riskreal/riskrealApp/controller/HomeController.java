@@ -1,16 +1,16 @@
 
 package tfg.daniel.riskreal.riskrealApp.controller;
 
-//import java.io.File;
-//import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
 
-//import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-//import tfg.daniel.riskreal.riskrealApp.model.Cuestionario;
+import tfg.daniel.riskreal.riskrealApp.model.Cuestionario;
 
 @Controller
 public class HomeController {
@@ -18,7 +18,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String inicio() {
 		
-		/**
+		
 		// create Object Mapper
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -31,7 +31,7 @@ public class HomeController {
 		    System.out.println(quest);
 		} catch (IOException e) {
 		    e.printStackTrace();
-		}*/
+		}
 		
 		return "home"; 
 	}
