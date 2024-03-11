@@ -7,26 +7,33 @@ import java.util.List;
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * Clase Cuestionario.
+ * Clase Preguntas.
  * 
- * Clase para almacenar cada cuestionario como objeto
+ * Clase para almacenar las preguntas de los cuestionarios como objeto
+ * y un listado de posibles Respuestas
  * 
  */
-
-public class Cuestionario {
+public class Preguntas {
 	
-	private String title;
+	private int id;
+	private String description;
 	private String image;
-	private Idioma languaje;
-	private List<Preguntas> preguntas;
+	private List<Respuestas> respuestas;
+	
 	private String imagePath = "image/";
-		
-	//Getters and Setters
-	public String getTitle() {
-		return title;
+	
+	//Getters and setters
+	public int getId() {
+		return id;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public File getImage() {
 		return getImageFile(this.image);
@@ -34,18 +41,11 @@ public class Cuestionario {
 	public void setImage(String image) {
 		this.image = imagePath + image;
 	}
-	
-	public Idioma getLanguaje() {
-		return languaje;
+	public List<Respuestas> getRespuestas() {
+		return respuestas;
 	}
-	public void setLanguaje(Idioma languaje) {
-		this.languaje = languaje;
-	}
-	public List<Preguntas> getPreguntas() {
-		return preguntas;
-	}
-	public void setPreguntas(List<Preguntas> preguntas) {
-		this.preguntas = preguntas;
+	public void setRespuestas(List<Respuestas> respuestas) {
+		this.respuestas = respuestas;
 	}
 	
 	//Metodo para convertir la imagen en File
@@ -60,8 +60,5 @@ public class Cuestionario {
 		}
 		
 		return imageFile;
-
 	}
-	
-
 }

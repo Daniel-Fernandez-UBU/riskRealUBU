@@ -2,31 +2,37 @@ package tfg.daniel.riskreal.riskrealApp.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * Clase Cuestionario.
+ * Clase Respuestas.
  * 
- * Clase para almacenar cada cuestionario como objeto
+ * Clase para cada posible respuesta.
  * 
  */
 
-public class Cuestionario {
+public class Respuestas {
 	
-	private String title;
+	private String text;
+	private int value = 0; //Valor por defecto
 	private String image;
-	private Idioma languaje;
-	private List<Preguntas> preguntas;
+	
 	private String imagePath = "image/";
-		
-	//Getters and Setters
-	public String getTitle() {
-		return title;
+	
+	//Getters and setters
+	public String getText() {
+		return text;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
 	}
 	public File getImage() {
 		return getImageFile(this.image);
@@ -34,20 +40,7 @@ public class Cuestionario {
 	public void setImage(String image) {
 		this.image = imagePath + image;
 	}
-	
-	public Idioma getLanguaje() {
-		return languaje;
-	}
-	public void setLanguaje(Idioma languaje) {
-		this.languaje = languaje;
-	}
-	public List<Preguntas> getPreguntas() {
-		return preguntas;
-	}
-	public void setPreguntas(List<Preguntas> preguntas) {
-		this.preguntas = preguntas;
-	}
-	
+
 	//Metodo para convertir la imagen en File
 	private File getImageFile(String image) {
 		File imageFile = null;
@@ -60,7 +53,6 @@ public class Cuestionario {
 		}
 		
 		return imageFile;
-
 	}
 	
 
