@@ -1,5 +1,5 @@
-{
-  "cuestionario": {
+{	
+    "id": 1,
     "title": "Habilidades Directivas",
     "image": "principalHD.jpg",
     "languaje": "SPA",
@@ -32,6 +32,5 @@
         ]
       }
     ]
-  }
 }
 
