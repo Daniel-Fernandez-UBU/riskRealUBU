@@ -45,6 +45,11 @@
 		    <artifactId>json</artifactId>
 		    <version>20240303</version>
 		</dependency>
+        <dependency>
+            <groupId>org.mvnpm</groupId>
+		    <artifactId>bulma</artifactId>
+		    <version>0.9.4</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -54,5 +59,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
