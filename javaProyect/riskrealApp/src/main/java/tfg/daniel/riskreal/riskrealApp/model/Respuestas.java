@@ -35,6 +35,10 @@ public class Respuestas {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	@Override
+	public String toString() {
+		return "Respuestas [text=" + text + ", image=" + image + ", value=" + value + "]";
+	}
 
 
 }

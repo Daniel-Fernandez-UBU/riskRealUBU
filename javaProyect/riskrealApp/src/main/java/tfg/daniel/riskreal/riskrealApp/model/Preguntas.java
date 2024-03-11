@@ -19,7 +19,6 @@ public class Preguntas {
 	private String image;
 	private List<Respuestas> respuestas;
 	
-	
 	//Getters and setters
 	public int getId() {
 		return id;

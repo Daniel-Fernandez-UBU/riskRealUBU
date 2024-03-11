@@ -3,8 +3,6 @@ package tfg.daniel.riskreal.riskrealApp.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 /**
  * Clase Cuestionario.
@@ -13,15 +11,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * 
  */
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cuestionario {
 	
+	private int id;
 	private String title;
 	private String image;
 	private String languaje;
 	private List<Preguntas> preguntas;
-		
+	
+
 	//Getters and Setters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
