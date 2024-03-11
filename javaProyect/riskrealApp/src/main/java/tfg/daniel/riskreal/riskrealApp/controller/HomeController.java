@@ -21,16 +21,22 @@ public class HomeController {
 		
 		// create Object Mapper
 		ObjectMapper mapper = new ObjectMapper();
+		
+		Cuestionario quest = null;
 
 		// read JSON file and map/convert to java POJO
 		try {
-			Cuestionario quest = new Cuestionario();
+			
 			ClassPathResource staticDataResource = new ClassPathResource("schema_cuestionario_v1.json");
 			File json = staticDataResource.getFile();
-		    mapper.readValue(json, Cuestionario.class);
-		    System.out.println(quest);
+		    quest = mapper.readValue(json, Cuestionario.class);
+
 		} catch (IOException e) {
 		    e.printStackTrace();
+		}
+		
+		if (quest == null) {
+			System.out.println("No se ha cargado el json");
 		}
 		
 		return "home"; 
