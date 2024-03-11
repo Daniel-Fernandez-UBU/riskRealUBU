@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cuestionario de Ejemplo</title>
+</head>
+<body>
+	<h1 th:text="${cuestionario.title}"></h1>
+	<div th:each="pregunta : ${cuestionario.preguntas}">
+		<h3 th:text="${pregunta.description}"></h3>
+		<div th:each="respuesta : ${pregunta.respuestas}">
+			<input type="checkbox"  th:text="${respuesta.text}"><br>
+		</div>
+	</div>
+</body>
+</html>
