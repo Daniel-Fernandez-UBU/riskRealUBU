@@ -27,8 +27,6 @@ public class HomeController {
 	@GetMapping("/cuestionario")
 	public String mostrarCuestionario(Model model) {
 		
-		
-		
 		// Obtenemos el objeto del json.
 		Cuestionario cuestionario = getCuestionario();
 		
@@ -39,28 +37,6 @@ public class HomeController {
 		model.addAttribute("dwIndex", removeIndex());
 		
 		return "cuestionario";
-	}
-	
-	/**
-	 * Página cuestionario.html
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/cuestionario2")
-	public String mostrarCuestionario2(Model model) {
-		
-		
-		
-		// Obtenemos el objeto del json.
-		Cuestionario cuestionario = getCuestionario();
-		
-		// Lo cargamos en el modelo
-		model.addAttribute("cuestionario", cuestionario);
-		model.addAttribute("indice", getIndex());
-		model.addAttribute("upIndex", updateIndex());
-		model.addAttribute("dwIndex", removeIndex());
-		
-		return "cuestionario2";
 	}
 	
     // Controlador para manejar la solicitud POST
