@@ -6,11 +6,19 @@
 </head>
 <body>
 	<h1 th:text="${cuestionario.title}"></h1>
-	<div th:each="pregunta : ${cuestionario.preguntas}">
+	<div th:with="pregunta=${cuestionario.getPreguntas().get(indice)}">
 		<h3 th:text="${pregunta.description}"></h3>
 		<div th:each="respuesta : ${pregunta.respuestas}">
 			<input type="checkbox"  th:text="${respuesta.text}"><br>
 		</div>
 	</div>
+    <form th:action="@{/}" method="post">
+        <input type="hidden" id="nombre" th:field="${upIndex}">
+        <button type="submit">Siguiente</button>
+    </form>
+        <form th:action="@{/cuestionario}" method="post">
+        <input type="hidden" id="nombre" th:field="${dwIndex}">
+        <button type="submit">Anterior</button>
+    </form>
 </body>
 </html>
