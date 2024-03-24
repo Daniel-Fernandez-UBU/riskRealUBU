@@ -30,6 +30,33 @@
             "value": 0
           }
         ]
+      },
+      {
+        "id": 2,
+        "description": "¿Cuál es la capital de España?",
+        "image": "madrid.jpg",
+        "respuestas": [
+          {
+            "text": "Londres",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "Madrid",
+            "image": "principalHD.jpg",
+            "value": 5
+          },
+          {
+            "text": "París",
+            "image": "principalHD.jpg",
+            "value": -3
+          },
+          {
+            "text": "Roma",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
       }
     ]
 }
