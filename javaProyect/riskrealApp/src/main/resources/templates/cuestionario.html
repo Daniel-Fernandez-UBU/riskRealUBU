@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Cuestionario de Ejemplo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<h1 th:text="${cuestionario.title}"></h1>
-	<div th:with="pregunta=${cuestionario.getPreguntas().get(indice)}">
-		<h3 th:text="${pregunta.description}"></h3>
-		<div th:each="respuesta : ${pregunta.respuestas}">
-			<input type="checkbox"  th:text="${respuesta.text}"><br>
-		</div>
+	<div class="container">
+	    <h1 th:text="${cuestionario.getTitle()}"></h1>
+	    <ul class="nav nav-tabs" id="questionTabs" role="tablist">
+	        <li class="nav-item" th:each="pregunta : ${cuestionario.getPreguntas()}" >
+	            <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="tab" th:href="'#question' + ${pregunta.getId()}" 
+	                role="tab" th:text="${pregunta.description}" th:class="${pregunta.id == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.id == 1}"></a>
+	        </li>
+	    </ul>
+	    <div class="tab-content" id="questionContent">
+	        <div th:each="pregunta : ${cuestionario.getPreguntas()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.id == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
+	            <h2 th:text="${pregunta.description}">Question 1</h2>
+	            <div th:each="respuesta : ${pregunta.getRespuestas()}" >
+	                <input type="checkbox"  th:text="${respuesta.text}"><br>
+	            </div>
+	        </div>
+	    </div>
+	    <button class="btn btn-primary" onclick="previousQuestion()">Previous</button>
+	    <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
 	</div>
-    <form th:action="@{/}" method="post">
-        <input type="hidden" id="nombre" th:field="${upIndex}">
-        <button type="submit">Siguiente</button>
-    </form>
-        <form th:action="@{/cuestionario}" method="post">
-        <input type="hidden" id="nombre" th:field="${dwIndex}">
-        <button type="submit">Anterior</button>
-    </form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function previousQuestion() {
+            var activeTab = $('.nav-link.active');
+            var prevTab = activeTab.parent().prev().children('.nav-link');
+            if (prevTab.length > 0) {
+                prevTab.tab('show');
+            }
+        }
+
+        function nextQuestion() {
+            var activeTab = $('.nav-link.active');
+            var nextTab = activeTab.parent().next().children('.nav-link');
+            if (nextTab.length > 0) {
+                nextTab.tab('show');
+            }
+        }
+    </script>
 </body>
 </html>

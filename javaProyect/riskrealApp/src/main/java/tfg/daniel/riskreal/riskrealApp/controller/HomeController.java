@@ -27,8 +27,6 @@ public class HomeController {
 	@GetMapping("/cuestionario")
 	public String mostrarCuestionario(Model model) {
 		
-		
-		
 		// Obtenemos el objeto del json.
 		Cuestionario cuestionario = getCuestionario();
 		
