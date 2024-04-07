@@ -12,7 +12,7 @@
 	    <ul class="nav nav-tabs" id="questionTabs" role="tablist">
 	        <li class="nav-item" th:each="pregunta : ${cuestionario.getPreguntas()}" >
 	            <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="tab" th:href="'#question' + ${pregunta.getId()}" 
-	                role="tab" th:text="${pregunta.description}" th:class="${pregunta.id == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.id == 1}"></a>
+	                role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.getId() == 1}"></a>
 	        </li>
 	    </ul>
 	    <div class="tab-content" id="questionContent">
