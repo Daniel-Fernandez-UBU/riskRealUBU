@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire</title>
+    <title>Quiz</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 	    <h1 th:text="${cuestionario.getTitle()}"></h1>
 	    <ul class="nav nav-tabs" id="questionTabs" role="tablist">
-	        <li class="nav-item" th:each="pregunta : ${cuestionario.getPreguntas()}" >
+	        <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}" >
 	            <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="tab" th:href="'#question' + ${pregunta.getId()}" 
 	                role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.getId() == 1}"></a>
 	        </li>
 	    </ul>
 	    <div class="tab-content" id="questionContent">
-	        <div th:each="pregunta : ${cuestionario.getPreguntas()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.id == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
+	        <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.id == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
 	            <h2 th:text="${pregunta.description}">Question 1</h2>
-	            <div th:each="respuesta : ${pregunta.getRespuestas()}" >
-	                <input type="checkbox"  th:text="${respuesta.text}"><br>
+	            <div th:each="respuesta : ${pregunta.getAnswers()}" >
+	                <input type="radio" th:name="'question_' + ${preguntaIndex.index}" th:id="'respuesta_' + ${pregunta.getId()}" th:value="${respuesta.getValue()}">
+	                <label th:for="'respuesta_' + ${pregunta.id}" th:text="' ' + ${respuesta.text}"></label><br>
 	            </div>
 	        </div>
 	    </div>
@@ -46,6 +47,7 @@
                 nextTab.tab('show');
             }
         }
+        
     </script>
 </body>
 </html>
