@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import tfg.daniel.riskreal.riskrealApp.model.Cuestionario;
+import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 
 @Controller
 public class HomeController {
@@ -28,7 +28,7 @@ public class HomeController {
 	public String mostrarCuestionario(Model model) {
 		
 		// Obtenemos el objeto del json.
-		Cuestionario cuestionario = getCuestionario();
+		Quiz cuestionario = getQuiz();
 		
 		// Lo cargamos en el modelo
 		model.addAttribute("cuestionario", cuestionario);
@@ -76,25 +76,25 @@ public class HomeController {
 	 * Método para obtener el cuestionario del json
 	 * @return
 	 */
-	private Cuestionario getCuestionario() {
+	private Quiz getQuiz() {
 		// create Object Mapper
 		ObjectMapper mapper = new ObjectMapper();
 		
-		Cuestionario quest = null;
+		Quiz quiz = null;
 
 		// read JSON file and map/convert to java POJO
 		try {
 			
 			ClassPathResource staticDataResource = new ClassPathResource("schema_cuestionario_v1.json");
 			File json = staticDataResource.getFile();
-		    quest = mapper.readValue(json, Cuestionario.class);
+			quiz = mapper.readValue(json, Quiz.class);
 		    
 
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
 		
-		return quest;
+		return quiz;
 	}
 	
 	public int updateIndex() {
