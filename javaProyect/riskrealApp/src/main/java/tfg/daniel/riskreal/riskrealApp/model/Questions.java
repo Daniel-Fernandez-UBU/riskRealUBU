@@ -1,6 +1,5 @@
 package tfg.daniel.riskreal.riskrealApp.model;
 
-
 import java.util.List;
 
 
@@ -8,30 +7,31 @@ import java.util.List;
 /**
  * Clase Preguntas.
  * 
- * Clase para almacenar las preguntas de los cuestionarios como objeto
- * y un listado de posibles Respuestas
+ * Class to store quiz questions as an object
+ * and a list of possible Answers
  * 
  */
-public class Preguntas {
+
+public class Questions {
 	
 	private int id;
 	private String description;
 	private String image;
-	private List<Respuestas> respuestas;
-	private int skillId;
+	private List<Answers> answers;
+	private int skill;
 	
 	//Getters and setters
+	public int getSkill() {
+		return skill;
+	}
+	public void setSkill(int skill) {
+		this.skill = skill;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getSkillId() {
-		return skillId;
-	}
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
 	}
 	public String getDescription() {
 		return description;
@@ -45,11 +45,11 @@ public class Preguntas {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public List<Respuestas> getRespuestas() {
-		return respuestas;
+	public List<Answers> getAnswers() {
+		return answers;
 	}
-	public void setRespuestas(List<Respuestas> respuestas) {
-		this.respuestas = respuestas;
+	public void setRespuestas(List<Answers> answers) {
+		this.answers = answers;
 	}
-	
+
 }
