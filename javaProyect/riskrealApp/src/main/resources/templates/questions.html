@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:inline="javascript">
+        var preguntaJson = /*[[${param.pregunta}]]*/ '{}';
+        var pregunta = JSON.parse(preguntaJson);
+    </script>
     <title th:text="'Pregunta ' + ${pregunta.getId()}"></title>
 </head>
 <body>
@@ -24,11 +28,4 @@
     </th:block>
 
 </body>
-
-<script>
-  const preguntaJson = getUrlParameter("pregunta");
-  const mapper = new ObjectMapper();
-  const pregunta = mapper.readValue(preguntaJson, Question.class); // Reemplaza con tu clase de pregunta
-</script>
-
 </html>

@@ -48,7 +48,7 @@ public class Questions {
 	public List<Answers> getAnswers() {
 		return answers;
 	}
-	public void setRespuestas(List<Answers> answers) {
+	public void setAnswers(List<Answers> answers) {
 		this.answers = answers;
 	}
 

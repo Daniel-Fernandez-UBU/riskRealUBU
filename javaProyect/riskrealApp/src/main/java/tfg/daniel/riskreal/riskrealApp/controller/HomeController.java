@@ -69,21 +69,7 @@ public class HomeController {
 	 * 
 	 */
 	@GetMapping("/questions")
-	public String showQuestion(Model model, @RequestParam(name="pregunta", required=false) String preguntaJson) {
-	    // Obtén el objeto Question de donde sea que lo tengas en tu aplicación
-	    Questions pregunta = new Questions();
-
-	    // Serializa el objeto Question a JSON
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    try {
-	        preguntaJson = objectMapper.writeValueAsString(pregunta);
-	    } catch (JsonProcessingException e) {
-	        e.printStackTrace();
-	    }
-
-	    // Agrega el JSON de la pregunta al modelo
-	    model.addAttribute("preguntaJson", preguntaJson);
-
+	public String showQuestion() {
 	    return "questions";
 	}
     
