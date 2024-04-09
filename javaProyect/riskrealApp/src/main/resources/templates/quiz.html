@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 bg-light border p-3">
+                <h2>Cuestionario</h2>
+                <p>Aquí puedes escribir un comentario o instrucciones generales.</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-1 bg-light border fixed-left">
+                <h3 class="p-3 d-flex justify-content-center">Preguntas</h3>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
+                        <a class="nav-link" th:id="'pregunta' + ${pregunta.getId()} + '-tab'" data-toggle="collapse" th:href="'#pregunta' + ${pregunta.getId()}" role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'active show' : 'collapsed'"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-11 border fixed-right">
+                <!-- Agrega el iframe con la ID contenedorPregunta -->
+                <iframe id="contenedorPregunta" src="/questions"></iframe>
+            </div>
+        </div>
+        <div class="mt-3 d-flex justify-content-center fixed-bottom">
+            <button class="btn btn-primary mr-2" onclick="preguntaAnterior()">Anterior</button>
+            <button class="btn btn-primary" onclick="preguntaSiguiente()">Siguiente</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var indicePreguntaActual = 0;
+        var preguntas = "${cuestionario.getQuestions()}"; // Cambia esto según cómo obtengas las preguntas en JSON
+        
+        function preguntaAnterior() {
+            if (indicePreguntaActual > 0) {
+                indicePreguntaActual--;
+                actualizarContenedorPregunta(preguntas[indicePreguntaActual].id);
+            }
+        }
+
+        function preguntaSiguiente() {
+            if (indicePreguntaActual < preguntas.length - 1) {
+                indicePreguntaActual++;
+                actualizarContenedorPregunta(preguntas[indicePreguntaActual].id);
+            }
+        }
+
+        function actualizarContenedorPregunta(idPregunta) {
+            var preguntaActual = preguntas[indicePreguntaActual];
+            console.log("Pregunta actual:", preguntaActual);
+
+            var preguntaJson = JSON.stringify(preguntaActual);
+            console.log("Pregunta JSON:", preguntaJson);
+
+            var url = "/questions?pregunta=" + encodeURIComponent(preguntaJson);
+            console.log("URL:", url);
+
+            document.getElementById("contenedorPregunta").src = url;
+            var enlacesNavegacion = document.querySelectorAll(".nav-link");
+            enlacesNavegacion.forEach(enlace => enlace.classList.remove("active", "show", "collapsed"));
+            document.getElementById("pregunta" + idPregunta + "-tab").classList.add("active", "show");
+        }
+
+    </script>
+</body>
+</html>

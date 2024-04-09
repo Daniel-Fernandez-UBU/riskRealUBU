@@ -9,9 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
+import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 
 @Controller
@@ -38,28 +43,49 @@ public class HomeController {
 		
 		return "cuestionario";
 	}
+ 
+	/**
+	 * Página quiz.html
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/quiz")
+	public String showQuiz(Model model) {
+		
+		// Obtenemos el objeto del json.
+		Quiz cuestionario = getQuiz();
+		
+		// Lo cargamos en el modelo
+		model.addAttribute("cuestionario", cuestionario);
+		
+		return "quiz";
+	}
+    
 	
-    // Controlador para manejar la solicitud POST
-    @PostMapping("/")
-    public String upIndex(Model model) {
-        // Lógica para actualizar el índice aquí
-		model.addAttribute("upIndex", updateIndex());
+	/**
+	 * Página quiz.html
+	 * @param model
+	 * @return
+	 * 
+	 */
+	@GetMapping("/questions")
+	public String showQuestion(Model model, @RequestParam(name="pregunta", required=false) String preguntaJson) {
+	    // Obtén el objeto Question de donde sea que lo tengas en tu aplicación
+	    Questions pregunta = new Questions();
 
-        // Después de realizar la operación, redirige de nuevo a la misma página
-        return "redirect:/cuestionario"; // Redirige a la misma página
-    }
-    
-    // Controlador para manejar la solicitud POST
-    @PostMapping("/cuestionario")
-    public String dwIndex(Model model) {
-        // Lógica para actualizar el índice aquí
-		model.addAttribute("dwIndex", removeIndex());
+	    // Serializa el objeto Question a JSON
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    try {
+	        preguntaJson = objectMapper.writeValueAsString(pregunta);
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
 
-        // Después de realizar la operación, redirige de nuevo a la misma página
-        return "redirect:/cuestionario"; // Redirige a la misma página
-    }
-    
-    
+	    // Agrega el JSON de la pregunta al modelo
+	    model.addAttribute("preguntaJson", preguntaJson);
+
+	    return "questions";
+	}
     
 	
 	/**
