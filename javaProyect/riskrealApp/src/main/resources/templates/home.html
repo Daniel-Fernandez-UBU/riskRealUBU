@@ -7,11 +7,19 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
-        /* Estilo personalizado si es necesario */
+        .container-fluid {
+		    display: flex;
+		    flex-direction: column;
+		    min-height: 100vh;
+		}
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid bg-dark text-white">
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Home</a>
+        </nav>
         <h1 class="mt-5">Selecciona un archivo JSON:</h1>
         <form action="/quiz" method="get">
             <div class="form-group">
@@ -19,7 +27,7 @@
                     <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary">Acceder al cuestionario</button>
         </form>
     </div>
 

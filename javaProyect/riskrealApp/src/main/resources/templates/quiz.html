@@ -8,30 +8,32 @@
     <style>
 	    .scrollable {
 	        overflow-y: auto;
-	        height: 80vh; /* Ajusta esto al tamaño que prefieras */
+	        max-height: 80vh; 
 	    }
+	    .container-fluid {
+		    display: flex;
+		    flex-direction: column;
+		    min-height: 100vh;
+		}
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid bg-dark text-white">
         <!-- Barra de navegación -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="/">
-			  <i class="bi bi-house"></i>
-			  Home
-			</a>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Home</a>
         </nav>
 
         <!-- Título del cuestionario -->
         <h1 th:text="${cuestionario.getTitle()}" class="mt-4"></h1>
         
         <!-- Espacio en blanco para la descripción del cuestionario -->
-        <div class="mb-4">Espacio para incluir la descipción del cuestionario</div>
+        <div class="mb-4">Primer cuestionario de ejemplo</div>
 
         <div class="row">
             <!-- Lista vertical de preguntas -->
-            <div class="col-12 col-md-3 scrollable">
-                <ul class="nav flex-column nav-pills scrollable" id="questionTabs" role="tablist">
+            <div class="col-3 col-md-3 scrollable">
+                <ul class="nav flex-column nav-pills" id="questionTabs" role="tablist">
                     <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
                         <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="pill" th:href="'#question' + ${pregunta.getId()}" 
                             role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.getId() == 1}"></a>
@@ -40,7 +42,7 @@
             </div>
 
             <!-- Contenido de las preguntas -->
-            <div class="col-12 col-md-9">
+            <div class="col-9 col-md-9">
                 <div class="tab-content" id="questionContent">
                     <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
                         <h2 th:text="${pregunta.description}">Question 1</h2>
