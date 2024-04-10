@@ -8,13 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
+import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
 @Controller
+@SessionAttributes("preguntasRespondidas")
 public class QuizController {
 	
 	/**
@@ -32,6 +36,21 @@ public class QuizController {
 		model.addAttribute("cuestionario", cuestionario);
 		
 		return "quiz";
+	}
+	
+
+	@GetMapping("/quiz/saveUser")
+	public ModelAndView saveUser(Model model, @RequestParam("username") String username, HttpSession session) {
+		    // ... (Carga las preguntas del cuestionario)
+		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
+		if (userSelection == null) {
+			userSelection = new UserSelection();
+			userSelection.setUsername(username);
+			session.setAttribute("UserSelection", userSelection);
+		}
+		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
+		model.addAttribute("userSelection", userSelection);
+		return new ModelAndView("redirect:/quiz");
 	}
 	
 	/**

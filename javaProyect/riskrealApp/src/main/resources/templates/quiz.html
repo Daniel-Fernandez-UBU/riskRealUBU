@@ -45,13 +45,19 @@
             <div class="col-9 col-md-9">
                 <div class="tab-content" id="questionContent">
                     <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
-                        <h2 th:text="${pregunta.description}">Question 1</h2>
-                        <div th:each="respuesta : ${pregunta.getAnswers()}">
-                            <input type="radio" th:name="'question_' + ${preguntaIndex.index}" th:id="'respuesta_' + ${pregunta.getId()}" th:value="${respuesta.getValue()}">
-                            <label th:for="'respuesta_' + ${pregunta.id}" th:text="' ' + ${respuesta.text}"></label><br>
-                        </div>
+                        <h2 th:text="${pregunta.getDescription()}">Question 1</h2>
+						<form action="/quiz/saveAnswer" method="post">
+						  <input type="hidden" name="preguntaId" th:value="${pregunta.getId()}">
+						  <div th:each="respuesta : ${pregunta.getAnswers()}">
+						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getValue()}" th:checked="${respuesta.getText() != null && respuesta.getText().equals('Si')}">
+						    <label th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
+						  </div>
+						  <button type="button" onclick="nextQuestion()">Siguiente pregunta</button>
+						</form>
                     </div>
                 </div>
+                
+                
                 <!-- Botones de navegación -->
                 <div class="mt-3">
                     <button class="btn btn-primary mr-2" onclick="previousQuestion()">Anterior</button>
