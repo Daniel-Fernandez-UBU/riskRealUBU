@@ -55,7 +55,5 @@ public class Quiz {
 	public void setPreguntas(List<Questions> questions) {
 		this.questions = questions;
 	}
-
-
-
+	
 }
