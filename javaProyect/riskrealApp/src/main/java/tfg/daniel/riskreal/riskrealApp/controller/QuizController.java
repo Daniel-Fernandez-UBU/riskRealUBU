@@ -47,7 +47,11 @@ public class QuizController {
 			userSelection = new UserSelection();
 			userSelection.setUsername(username);
 			session.setAttribute("UserSelection", userSelection);
-		}
+		} else if (!userSelection.getUsername().equals(username)) {
+			userSelection = new UserSelection();
+			userSelection.setUsername(username);
+			session.setAttribute("UserSelection", userSelection);
+		} 
 		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
 		model.addAttribute("userSelection", userSelection);
 		return new ModelAndView("redirect:/quiz");

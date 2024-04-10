@@ -1,10 +1,10 @@
 package tfg.daniel.riskreal.riskrealApp.model;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class UserSelection {
 	
-	private List<String> answer;
+	private HashMap<Integer,String> answers;
 	private String username;
  
 	public String getUsername() {
@@ -13,11 +13,15 @@ public class UserSelection {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public List<String> getAnswer() {
-		return answer;
+	public HashMap<Integer,String> getAnswer() {
+		return answers;
 	}
-	public void setAnswer(List<String> answer) {
-		this.answer = answer;
+	public void setAnswer(Integer id, String value) {
+		this.answers.put(id, value);
+	}
+	
+	public String getAnswerText(int id) {
+		return this.answers.get(id);
 	}
 	
 }
