@@ -5,22 +5,15 @@ import java.util.HashMap;
 public class UserSelection {
 	
 	private HashMap<Integer,String> answers;
-	private String username;
- 
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public HashMap<Integer,String> getAnswer() {
+
+	public HashMap<Integer,String> getAnswers() {
 		return answers;
 	}
 	public void setAnswer(Integer id, String value) {
 		this.answers.put(id, value);
 	}
 	
-	public String getAnswerText(int id) {
+	public String getAnswer(int id) {
 		return this.answers.get(id);
 	}
 	

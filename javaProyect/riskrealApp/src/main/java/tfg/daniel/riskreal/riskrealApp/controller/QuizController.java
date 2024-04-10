@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,22 +38,22 @@ public class QuizController {
 	}
 	
 
-	@GetMapping("/quiz/saveUser")
-	public ModelAndView saveUser(Model model, @RequestParam("username") String username, HttpSession session) {
+	@GetMapping("/quiz/startSession")
+	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
 		    // ... (Carga las preguntas del cuestionario)
 		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
 		if (userSelection == null) {
 			userSelection = new UserSelection();
-			userSelection.setUsername(username);
-			session.setAttribute("UserSelection", userSelection);
-		} else if (!userSelection.getUsername().equals(username)) {
-			userSelection = new UserSelection();
-			userSelection.setUsername(username);
 			session.setAttribute("UserSelection", userSelection);
 		} 
 		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
-		model.addAttribute("userSelection", userSelection);
-		return new ModelAndView("redirect:/quiz");
+		model.addAttribute("userSelection", userSelection.getAnswers());
+		// Obtenemos el objeto del json.
+		Quiz cuestionario = getQuiz(archivo);
+		
+		// Lo cargamos en el modelo
+		model.addAttribute("cuestionario", cuestionario);
+		return "quiz";
 	}
 	
 	/**
