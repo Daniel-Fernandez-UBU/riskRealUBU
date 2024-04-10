@@ -3,57 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario</title>
+    <title>Quiz</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+	    .scrollable {
+	        overflow-y: auto;
+	        height: 80vh; /* Ajusta esto al tamaño que prefieras */
+	    }
+    </style>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/">
+			  <i class="bi bi-house"></i>
+			  Home
+			</a>
+        </nav>
+
+        <!-- Título del cuestionario -->
+        <h1 th:text="${cuestionario.getTitle()}" class="mt-4"></h1>
+        
+        <!-- Espacio en blanco para la descripción del cuestionario -->
+        <div class="mb-4">Espacio para incluir la descipción del cuestionario</div>
+
         <div class="row">
-            <div class="col-md-12 bg-light border p-3">
-                <h2>Cuestionario</h2>
-                <p>Aquí puedes escribir un comentario o instrucciones generales.</p>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center" th:each="pregunta : ${cuestionario.getQuestions()}">
-            <div class="col-md-1 bg-light border fixed-left">
-                <h3 class="p-3 d-flex justify-content-center">Preguntas</h3>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" th:id="'pregunta' + ${pregunta.getId()} + '-tab'" data-toggle="collapse" th:href="'#pregunta' + ${pregunta.getId()}" role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'active show' : 'collapsed'"></a>
+            <!-- Lista vertical de preguntas -->
+            <div class="col-12 col-md-3 scrollable">
+                <ul class="nav flex-column nav-pills scrollable" id="questionTabs" role="tablist">
+                    <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
+                        <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="pill" th:href="'#question' + ${pregunta.getId()}" 
+                            role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.getId() == 1}"></a>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-11 border fixed-right">
-            	<script th:inline="javascript">
-            		var preguntaJson = /*[[@{${pregunta != null ? #json.toJson(pregunta) : null}}]]*/ '{}';
-    			</script>
-                <iframe src="/questions?pregunta=[[${(preguntaJson)}]]" style="width:100%; height:300px;"></iframe> 
+
+            <!-- Contenido de las preguntas -->
+            <div class="col-12 col-md-9">
+                <div class="tab-content" id="questionContent">
+                    <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
+                        <h2 th:text="${pregunta.description}">Question 1</h2>
+                        <div th:each="respuesta : ${pregunta.getAnswers()}">
+                            <input type="radio" th:name="'question_' + ${preguntaIndex.index}" th:id="'respuesta_' + ${pregunta.getId()}" th:value="${respuesta.getValue()}">
+                            <label th:for="'respuesta_' + ${pregunta.id}" th:text="' ' + ${respuesta.text}"></label><br>
+                        </div>
+                    </div>
+                </div>
+                <!-- Botones de navegación -->
+                <div class="mt-3">
+                    <button class="btn btn-primary mr-2" onclick="previousQuestion()">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Siguiente</button>
+                </div>
             </div>
         </div>
-        <div class="mt-3 d-flex justify-content-center fixed-bottom">
-            <button class="btn btn-primary mr-2" onclick="preguntaAnterior()">Anterior</button>
-            <button class="btn btn-primary" onclick="preguntaSiguiente()">Siguiente</button>
-        </div>
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        var indicePreguntaActual = 0;
-        
-        function preguntaAnterior() {
-            if (indicePreguntaActual > 0) {
-                indicePreguntaActual--;
+        function previousQuestion() {
+            var activeTab = $('.nav-link.active');
+            var prevTab = activeTab.parent().prev().children('.nav-link');
+            if (prevTab.length > 0) {
+                prevTab.tab('show');
             }
         }
 
-        function preguntaSiguiente() {
-            if (indicePreguntaActual < preguntas.length - 1) {
-                indicePreguntaActual++;
+        function nextQuestion() {
+            var activeTab = $('.nav-link.active');
+            var nextTab = activeTab.parent().next().children('.nav-link');
+            if (nextTab.length > 0) {
+                nextTab.tab('show');
             }
         }
-
-
     </script>
 </body>
 </html>

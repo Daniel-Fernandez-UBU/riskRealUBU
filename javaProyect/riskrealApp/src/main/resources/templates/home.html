@@ -1,60 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire</title>
+    <title>Home</title>
+    <!-- Integra Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        /* Estilo personalizado si es necesario */
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Questionnaire</h1>
-        <ul class="nav nav-tabs" id="questionTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="question1-tab" data-toggle="tab" href="#question1" role="tab" aria-controls="question1" aria-selected="true">Question 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="question2-tab" data-toggle="tab" href="#question2" role="tab" aria-controls="question2" aria-selected="false">Question 2</a>
-            </li>
-            <!-- Add more question tabs as needed -->
-        </ul>
-        <div class="tab-content" id="questionContent">
-            <div class="tab-pane fade show active" id="question1" role="tabpanel" aria-labelledby="question1-tab">
-                <h2>Question 1</h2>
-                <p>This is the first question.</p>
-                <!-- Add input fields for the question -->
+        <h1 class="mt-5">Selecciona un archivo JSON:</h1>
+        <form action="/quiz" method="get">
+            <div class="form-group">
+                <select class="form-control" name="archivo">
+                    <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
+                </select>
             </div>
-            <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2-tab">
-                <h2>Question 2</h2>
-                <p>This is the second question.</p>
-                <!-- Add input fields for the question -->
-            </div>
-            <!-- Add more question tabs as needed -->
-        </div>
-        <button class="btn btn-primary" onclick="previousQuestion()">Previous</button>
-        <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
     </div>
 
+    <!-- Integra Bootstrap JS al final del body si necesitas componentes interactivos -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        function previousQuestion() {
-            var activeTab = $('.nav-link.active');
-            var prevTab = activeTab.parent().prev().children('.nav-link');
-            if (prevTab.length > 0) {
-                prevTab.tab('show');
-            }
-        }
-
-        function nextQuestion() {
-            var activeTab = $('.nav-link.active');
-            var nextTab = activeTab.parent().next().children('.nav-link');
-            if (nextTab.length > 0) {
-                nextTab.tab('show');
-            }
-        }
-    </script>
 </body>
 </html>
+
