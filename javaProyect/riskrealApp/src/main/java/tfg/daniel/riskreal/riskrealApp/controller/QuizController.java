@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -38,8 +39,8 @@ public class QuizController {
 	}
 	
 
-	@GetMapping("/quiz/startSession")
-	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
+	@GetMapping("/quiz/startQuiz")
+	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session, RedirectAttributes redirectAttributes) {
 		    // ... (Carga las preguntas del cuestionario)
 		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
 		if (userSelection == null) {
@@ -53,7 +54,8 @@ public class QuizController {
 		
 		// Lo cargamos en el modelo
 		model.addAttribute("cuestionario", cuestionario);
-		return "quiz";
+		redirectAttributes.addAttribute("archivo", archivo); // Redirect the RequestParam
+		return "redirect:/quiz";
 	}
 	
 	/**
