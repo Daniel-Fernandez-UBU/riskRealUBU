@@ -50,6 +50,11 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>5.3.0</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>3.13.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -59,4 +64,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+	  <repository>
+	    <id>github</id>
+	    <name>GitHub Daniel Fernández Apache Maven Packages</name>
+	    <url>https://maven.pkg.github.com/Daniel-Fernandez-UBU/riskRealUBU</url>
+	  </repository>
+	</distributionManagement>
 </project>
