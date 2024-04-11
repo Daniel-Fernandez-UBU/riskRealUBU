@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
+
 import java.util.ArrayList;
 
 @Controller
@@ -18,7 +21,7 @@ public class HomeController {
 	  
 	
     @GetMapping("/")
-    public String home(Model model) throws IOException {
+    public String home(Model model, HttpSession session) throws IOException {
         // Obtener la lista de archivos JSON en la carpeta ClassPathResource
         ClassPathResource resource = new ClassPathResource("");
         File file = resource.getFile();
@@ -29,6 +32,15 @@ public class HomeController {
                 jsonFiles.add(jsonFile.getName());
             }
         }
+		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
+		if (userSelection == null) {
+			System.out.println("Creando sesion por primera vez");
+			userSelection = new UserSelection();
+			session.setAttribute("UserSelection", userSelection);
+		} else {
+			System.out.println("La sesión ya estaba creada");
+			System.out.println("Id de sesión: " + session.getId());
+		}
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }

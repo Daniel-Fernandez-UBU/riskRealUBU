@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
+import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
 @Controller
+@SessionAttributes("preguntasRespondidas")
 public class QuizController {
 	
 	/**
@@ -31,6 +34,25 @@ public class QuizController {
 		// Lo cargamos en el modelo
 		model.addAttribute("cuestionario", cuestionario);
 		
+		return "quiz";
+	}
+	
+
+	@GetMapping("/quiz/startSession")
+	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
+		    // ... (Carga las preguntas del cuestionario)
+		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
+		if (userSelection == null) {
+			userSelection = new UserSelection();
+			session.setAttribute("UserSelection", userSelection);
+		} 
+		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
+		model.addAttribute("userSelection", userSelection.getAnswers());
+		// Obtenemos el objeto del json.
+		Quiz cuestionario = getQuiz(archivo);
+		
+		// Lo cargamos en el modelo
+		model.addAttribute("cuestionario", cuestionario);
 		return "quiz";
 	}
 	
