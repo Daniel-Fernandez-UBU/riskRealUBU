@@ -7,9 +7,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,12 +29,15 @@ public class QuizController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/quiz")
-	public String mostrarCuestionario(Model model, @RequestParam("archivo") String archivo) {
+	@RequestMapping(value = "/quiz", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mostrarCuestionario(Model model, HttpSession session) {
 		
-		// Obtenemos el objeto del json.
-		Quiz cuestionario = getQuiz(archivo);
-		
+		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
+		if (cuestionario == null) {
+			System.out.println("No se ha recibido el cuestionario en la session");
+			return "json";
+		}
+				
 		// Lo cargamos en el modelo
 		model.addAttribute("cuestionario", cuestionario);
 		
@@ -39,22 +45,25 @@ public class QuizController {
 	}
 	
 
-	@GetMapping("/quiz/startQuiz")
-	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session, RedirectAttributes redirectAttributes) {
+	@PostMapping("/quiz/startQuiz")
+	public String startQuiz(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
 		    // ... (Carga las preguntas del cuestionario)
-		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
+		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
+		
 		if (userSelection == null) {
-			userSelection = new UserSelection();
-			session.setAttribute("UserSelection", userSelection);
+			System.out.println("No había sesión creada, volvemos a la home");
+			return "redirect:/";
 		} 
-		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
-		model.addAttribute("userSelection", userSelection.getAnswers());
+
 		// Obtenemos el objeto del json.
 		Quiz cuestionario = getQuiz(archivo);
 		
+		// We charge the quiz in the session
+		session.setAttribute("quiz", cuestionario);
 		// Lo cargamos en el modelo
-		model.addAttribute("cuestionario", cuestionario);
-		redirectAttributes.addAttribute("archivo", archivo); // Redirect the RequestParam
+		//model.addAttribute("cuestionario", cuestionario);
+
+		//return "quiz";
 		return "redirect:/quiz";
 	}
 	

@@ -21,8 +21,28 @@
     <div class="container-fluid bg-dark text-white">
         <!-- Barra de navegación -->
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="#" onclick="mostrarAviso()">Home</a>
         </nav>
+        
+        <div class="modal fade border border-5" id="avisoModal" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content ">
+		      <div class="modal-header bg-info">
+		        <h5 class="modal-title" id="avisoModalLabel">¿Estás seguro de que deseas ir a la página de inicio?</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body bg-secondary border-danger border-5">
+		        En caso de confirmar perderás el progreso en el test actual.
+		      </div>
+		      <div class="modal-footer text-center bg-info justify-content-center">
+		        <button type="button" class="btn btn-danger border border-5" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-success border border-5" onclick="irAInicio()">Confirmar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
         <!-- Título del cuestionario -->
         <h1 th:text="${cuestionario.getTitle()}" class="mt-4"></h1>
@@ -87,6 +107,13 @@
             if (nextTab.length > 0) {
                 nextTab.tab('show');
             }
+        }
+        function mostrarAviso() {
+            $('#avisoModal').modal('show'); // Mostrar el modal de confirmación
+        }
+
+        function irAInicio() {
+            window.location.href = "/"; // Redirigir a la página de inicio
         }
     </script>
 </body>

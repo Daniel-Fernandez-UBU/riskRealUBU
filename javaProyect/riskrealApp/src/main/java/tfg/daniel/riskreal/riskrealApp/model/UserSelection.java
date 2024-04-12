@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 public class UserSelection {
 	
+	
+    public UserSelection() {
+        this.answers = new HashMap<>();
+    }
+	
 	private HashMap<Integer,String> answers;
 
 	public HashMap<Integer,String> getAnswers() {

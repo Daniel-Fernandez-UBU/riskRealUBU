@@ -21,7 +21,7 @@
             <a class="navbar-brand" href="/">Home</a>
         </nav>
         <h1 class="mt-5">Selecciona un archivo JSON:</h1>
-        <form action="/quiz/startQuiz" method="get">
+        <form action="/quiz/startQuiz" method="post">
             <div class="form-group">
                 <select class="form-control" name="archivo">
                     <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
