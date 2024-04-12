@@ -52,7 +52,7 @@
 
         <div class="row">
             <!-- Lista vertical de preguntas -->
-            <div class="col-3 col-md-3 scrollable">
+            <div class="col-2 col-md-2 scrollable">
                 <ul class="nav flex-column nav-pills" id="questionTabs" role="tablist">
                     <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
                         <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="pill" th:href="'#question' + ${pregunta.getId()}" 
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Contenido de las preguntas -->
-            <div class="col-9 col-md-9">
+            <div class="col-10 col-md-10">
                 <div class="tab-content" id="questionContent">
                     <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
                         <h2 th:text="${pregunta.getDescription()}">Question 1</h2>
