@@ -10,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+import jakarta.servlet.http.HttpSession;
+
+
 import java.util.ArrayList;
 
 @Controller
@@ -18,7 +22,7 @@ public class HomeController {
 	  
 	
     @GetMapping("/")
-    public String home(Model model) throws IOException {
+    public String home(Model model,  HttpSession session) throws IOException {
         // Obtener la lista de archivos JSON en la carpeta ClassPathResource
         ClassPathResource resource = new ClassPathResource("");
         File file = resource.getFile();
@@ -29,6 +33,10 @@ public class HomeController {
                 jsonFiles.add(jsonFile.getName());
             }
         }
+
+        // Create a new session for the user
+        session.invalidate();
+        
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }
