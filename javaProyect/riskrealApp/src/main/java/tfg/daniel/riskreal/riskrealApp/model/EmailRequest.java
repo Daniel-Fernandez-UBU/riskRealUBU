@@ -5,16 +5,6 @@ public class EmailRequest {
     private String subject;
     private String body;
 
-    // Constructor vacío necesario para la deserialización JSON
-    public EmailRequest() {
-    }
-
-    public EmailRequest(String to, String subject, String body) {
-        this.to = to;
-        this.subject = subject;
-        this.body = body;
-    }
-
     public String getTo() {
         return to;
     }
