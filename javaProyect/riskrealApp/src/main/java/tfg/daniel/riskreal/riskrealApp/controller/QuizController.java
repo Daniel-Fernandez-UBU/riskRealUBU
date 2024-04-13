@@ -2,11 +2,12 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,8 +38,11 @@ public class QuizController {
 			System.out.println("No se ha recibido el cuestionario en la session");
 			return "json";
 		}
-				
-		// Lo cargamos en el modelo
+		
+		// To let the html access "userselecion"
+		model.addAttribute("userselection", session.getAttribute("userSelection"));
+		
+		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
 		
 		return "quiz";
@@ -47,24 +51,27 @@ public class QuizController {
 
 	@PostMapping("/quiz/startQuiz")
 	public String startQuiz(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
-		    // ... (Carga las preguntas del cuestionario)
-		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
 		
-		if (userSelection == null) {
-			System.out.println("No había sesión creada, volvemos a la home");
-			return "redirect:/";
-		} 
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+        
+        // Just for test - to force a "No" y the second question.
+        userSelection.setAnswer(2, "No");
+        
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
 
-		// Obtenemos el objeto del json.
+		// We get full quiz from json file
 		Quiz cuestionario = getQuiz(archivo);
 		
-		// We charge the quiz in the session
+		// We put the quiz in the session
 		session.setAttribute("quiz", cuestionario);
-		// Lo cargamos en el modelo
-		//model.addAttribute("cuestionario", cuestionario);
+
+		// Just for test - to format the session creation time
+		Date creationTime = new Date(session.getCreationTime());
 		
-		// Test show of the session id
-		System.out.println("Fecha de creación de la sesión: " + session.getCreationTime());
+		// Just for test -  show of the session id
+		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
 		System.out.println("Id de sesión: " + session.getId());
 		
 		//return "quiz";
