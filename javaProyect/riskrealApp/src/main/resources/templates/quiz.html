@@ -24,7 +24,7 @@
             <a class="navbar-brand" href="#" onclick="mostrarAviso()">Home</a>
         </nav>
         
-        <div class="modal fade border border-5" id="avisoModal" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
+        <div class="modal fade border border-5" id="avisoSesion" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content ">
 		      <div class="modal-header bg-info">
@@ -69,7 +69,7 @@
 						<form action="/quiz/saveAnswer" method="post">
 						  <input type="hidden" name="preguntaId" th:value="${pregunta.getId()}">
 						  <div th:each="respuesta : ${pregunta.getAnswers()}">
-						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getValue()}" th:checked="${respuesta.getText() != null && respuesta.getText().equals('Si')}">
+						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getValue()}" th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}">
 						    <label th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
 						  </div>
 						  <button type="button" onclick="nextQuestion()">Siguiente pregunta</button>
@@ -109,12 +109,13 @@
             }
         }
         function mostrarAviso() {
-            $('#avisoModal').modal('show'); // Mostrar el modal de confirmación
+            $('#avisoSesion').modal('show'); // Mostrar el aviso con el cierre de la sesión actual
         }
 
         function irAInicio() {
             window.location.href = "/"; // Redirigir a la página de inicio
         }
+        
     </script>
 </body>
 </html>

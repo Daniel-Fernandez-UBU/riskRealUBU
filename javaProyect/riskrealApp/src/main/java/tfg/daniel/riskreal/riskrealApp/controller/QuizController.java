@@ -33,6 +33,7 @@ public class QuizController {
 	@RequestMapping(value = "/quiz", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mostrarCuestionario(Model model, HttpSession session) {
 		
+		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
 		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
 		if (cuestionario == null) {
 			System.out.println("No se ha recibido el cuestionario en la session");
@@ -40,10 +41,12 @@ public class QuizController {
 		}
 		
 		// To let the html access "userselecion"
-		model.addAttribute("userselection", session.getAttribute("userSelection"));
+		model.addAttribute("userselection", userSelection.getAnswers());
 		
 		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
+		
+		
 		
 		return "quiz";
 	}

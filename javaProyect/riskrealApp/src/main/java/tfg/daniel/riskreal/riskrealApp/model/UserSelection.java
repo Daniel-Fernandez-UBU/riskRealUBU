@@ -21,5 +21,5 @@ public class UserSelection {
 	public String getAnswer(int id) {
 		return this.answers.get(id);
 	}
-	
+		
 }
