@@ -62,7 +62,11 @@ public class QuizController {
 		session.setAttribute("quiz", cuestionario);
 		// Lo cargamos en el modelo
 		//model.addAttribute("cuestionario", cuestionario);
-
+		
+		// Test show of the session id
+		System.out.println("Fecha de creación de la sesión: " + session.getCreationTime());
+		System.out.println("Id de sesión: " + session.getId());
+		
 		//return "quiz";
 		return "redirect:/quiz";
 	}
