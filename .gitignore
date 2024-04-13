@@ -2,6 +2,10 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
 
 ### Eclipse ###
+
+# No subir la configuración del email.
+email.properties
+
 .metadata
 bin/
 tmp/
