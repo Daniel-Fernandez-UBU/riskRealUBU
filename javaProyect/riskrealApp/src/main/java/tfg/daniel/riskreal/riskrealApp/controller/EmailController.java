@@ -3,25 +3,26 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import tfg.daniel.riskreal.riskrealApp.model.EmailRequest;
-import tfg.daniel.riskreal.riskrealApp.model.MyEmailService;
+import tfg.daniel.riskreal.riskrealApp.services.IEmailService;
 
-@Controller
+@RestController
+@RequestMapping
 public class EmailController {
     
     @Autowired
-    private MyEmailService emailService;
+    private IEmailService emailService;
 
-    @PostMapping("/sendEmail")
-    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
+    @PostMapping("/send-email")
+    private ResponseEntity<String> sendEmail(@RequestBody EmailRequest email) {
         try {
-            emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getBody());
+            emailService.sendMail(email);
             return ResponseEntity.ok("Correo electrónico enviado correctamente.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo electrónico.");
