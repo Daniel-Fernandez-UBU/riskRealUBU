@@ -37,7 +37,8 @@ public class EmailServiceImpl implements IEmailService {
 			// helper.setText(email.getBody()); // Texto plano
 			
 			Context context = new Context(); 	
-			context.setVariable("message", email.getBody());
+			context.setVariable("body", email.getBody());
+			
 			// Nombre de la plantilla email.html
 			String contentHTML = templateEngine.process("email", context);
 			
