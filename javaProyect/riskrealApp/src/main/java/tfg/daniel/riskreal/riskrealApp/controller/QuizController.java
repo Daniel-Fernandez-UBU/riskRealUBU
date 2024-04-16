@@ -2,13 +2,18 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,35 +30,55 @@ public class QuizController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/quiz")
-	public String mostrarCuestionario(Model model, @RequestParam("archivo") String archivo) {
+	@RequestMapping(value = "/quiz", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mostrarCuestionario(Model model, HttpSession session) {
 		
-		// Obtenemos el objeto del json.
-		Quiz cuestionario = getQuiz(archivo);
+		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
+		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
+		if (cuestionario == null) {
+			System.out.println("No se ha recibido el cuestionario en la session");
+			return "json";
+		}
 		
-		// Lo cargamos en el modelo
+		// To let the html access "userselecion"
+		model.addAttribute("userselection", userSelection.getAnswers());
+		
+		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
+		
+		
 		
 		return "quiz";
 	}
 	
 
-	@GetMapping("/quiz/startSession")
-	public String saveUser(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
-		    // ... (Carga las preguntas del cuestionario)
-		UserSelection userSelection = (UserSelection) session.getAttribute("UserSelection");
-		if (userSelection == null) {
-			userSelection = new UserSelection();
-			session.setAttribute("UserSelection", userSelection);
-		} 
-		// ... (Agrega lógica para actualizar preguntasRespondidas según la selección del usuario)
-		model.addAttribute("userSelection", userSelection.getAnswers());
-		// Obtenemos el objeto del json.
+	@PostMapping("/quiz/startQuiz")
+	public String startQuiz(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
+		
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+        
+        // Just for test - to force a "No" y the second question.
+        userSelection.setAnswer(2, "No");
+        
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
+
+		// We get full quiz from json file
 		Quiz cuestionario = getQuiz(archivo);
 		
-		// Lo cargamos en el modelo
-		model.addAttribute("cuestionario", cuestionario);
-		return "quiz";
+		// We put the quiz in the session
+		session.setAttribute("quiz", cuestionario);
+
+		// Just for test - to format the session creation time
+		Date creationTime = new Date(session.getCreationTime());
+		
+		// Just for test -  show of the session id
+		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
+		System.out.println("Id de sesión: " + session.getId());
+		
+		//return "quiz";
+		return "redirect:/quiz";
 	}
 	
 	/**
