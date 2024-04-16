@@ -37,7 +37,7 @@ public class QuizController {
 		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
 		if (cuestionario == null) {
 			System.out.println("No se ha recibido el cuestionario en la session");
-			return "json";
+			return "home";
 		}
 		
 		// To let the html access "userselecion"
@@ -45,7 +45,6 @@ public class QuizController {
 		
 		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
-		
 		
 		
 		return "quiz";
