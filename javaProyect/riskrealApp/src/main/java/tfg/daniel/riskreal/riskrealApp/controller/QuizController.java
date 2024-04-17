@@ -46,8 +46,14 @@ public class QuizController {
 		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
 		
+		// Just for test - to format the session creation time
+		Date creationTime = new Date(session.getCreationTime());
+		// Just for test -  show of the session id
+		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
+		System.out.println("Id de sesión: " + session.getId());		
 		
-		return "quiz";
+		
+		return "/quiz";
 	}
 	
 
@@ -69,12 +75,9 @@ public class QuizController {
 		// We put the quiz in the session
 		session.setAttribute("quiz", cuestionario);
 
-		// Just for test - to format the session creation time
-		Date creationTime = new Date(session.getCreationTime());
+
 		
-		// Just for test -  show of the session id
-		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
-		System.out.println("Id de sesión: " + session.getId());
+
 		
 		//return "quiz";
 		return "redirect:/quiz";
