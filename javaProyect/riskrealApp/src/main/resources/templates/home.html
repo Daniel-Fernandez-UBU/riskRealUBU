@@ -21,6 +21,7 @@
         <!-- Barra de navegación -->
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Home</a>
+			<a th:href="@{/logout}">Cerrar sesión</a>
         </nav>
         <h1 class="mt-5">Selecciona un archivo JSON:</h1>
         <form action="/quiz/startQuiz" method="POST">

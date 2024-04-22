@@ -75,7 +75,7 @@ public class QuizController {
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();
-        
+                
         // We put the attribute to the session
         session.setAttribute("userSelection", userSelection);
 		
@@ -97,23 +97,23 @@ public class QuizController {
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
 		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
 		
-		if (estado.equalsIgnoreCase("Siguiente")) {
-			
-			int questionInt = Integer.parseInt(question);
-			int value = 0;
-			
-			for (Questions quest : cuestionario.getQuestions()) {
-				if (quest.getId() == questionInt) {
-					for (Answers ans : quest.getAnswers()) {
-						if (ans.getText().equals(text)) {
-							value = ans.getValue();
-						}
+		int questionInt = Integer.parseInt(question);
+		int value = 0;
+		
+		for (Questions quest : cuestionario.getQuestions()) {
+			if (quest.getId() == questionInt) {
+				for (Answers ans : quest.getAnswers()) {
+					if (ans.getText().equals(text)) {
+						value = ans.getValue();
 					}
 				}
 			}
-			
-			userSelection.setAnswerValue(questionInt, value);
-			userSelection.setAnswer(questionInt, text);
+		}
+		
+		userSelection.setAnswerValue(questionInt, value);
+		userSelection.setAnswer(questionInt, text);
+		
+		if (estado.equalsIgnoreCase("Siguiente")) {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
