@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.model.Answers;
+import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
@@ -30,55 +32,111 @@ public class QuizController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/quiz", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/quiz2", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mostrarCuestionario(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
 		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
 		if (cuestionario == null) {
 			System.out.println("No se ha recibido el cuestionario en la session");
-			return "json";
+			return "home";
 		}
+		
+		int preguntaActual = (Integer) session.getAttribute("preguntaActual");
 		
 		// To let the html access "userselecion"
 		model.addAttribute("userselection", userSelection.getAnswers());
 		
+		// To let the html access "answersvalues"
+		model.addAttribute("answersvalues", userSelection.getAnswersValues());
+		
 		// To let the html acces "cuestionario"
 		model.addAttribute("cuestionario", cuestionario);
 		
+		// To let the html access "preguntaActual"
+		model.addAttribute("preguntaActual", preguntaActual);
+		
+		// Just for test - to format the session creation time
+		Date creationTime = new Date(session.getCreationTime());
+		// Just for test -  show of the session id
+		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
+		System.out.println("Id de sesión: " + session.getId());		
 		
 		
-		return "quiz";
+		return "/quiz2";
 	}
 	
 
 	@PostMapping("/quiz/startQuiz")
 	public String startQuiz(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
 		
-		// New UserSelection object
-        UserSelection userSelection = new UserSelection();
-        
-        // Just for test - to force a "No" y the second question.
-        userSelection.setAnswer(2, "No");
-        
-        // We put the attribute to the session
-        session.setAttribute("userSelection", userSelection);
-
 		// We get full quiz from json file
 		Quiz cuestionario = getQuiz(archivo);
 		
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+                
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
+		
 		// We put the quiz in the session
 		session.setAttribute("quiz", cuestionario);
-
-		// Just for test - to format the session creation time
-		Date creationTime = new Date(session.getCreationTime());
 		
-		// Just for test -  show of the session id
-		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
-		System.out.println("Id de sesión: " + session.getId());
+		session.setAttribute("preguntaActual", 1);
 		
 		//return "quiz";
-		return "redirect:/quiz";
+		return "redirect:/quiz2";
+	}
+	
+	@PostMapping("/quiz/showResults")
+	public String startQuiz(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada") String text, 
+			HttpSession session, Model model) {
+		
+		System.out.println(estado);
+		
+		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
+		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
+		
+		int questionInt = Integer.parseInt(question);
+		int value = 0;
+		
+		for (Questions quest : cuestionario.getQuestions()) {
+			if (quest.getId() == questionInt) {
+				for (Answers ans : quest.getAnswers()) {
+					if (ans.getText().equals(text)) {
+						value = ans.getValue();
+					}
+				}
+			}
+		}
+		
+		userSelection.setAnswerValue(questionInt, value);
+		userSelection.setAnswer(questionInt, text);
+		
+		if (estado.equalsIgnoreCase("Siguiente")) {
+			
+			session.setAttribute("preguntaActual", questionInt+1);
+					
+			//return "quiz";
+			return "redirect:/quiz2";
+		} 
+		
+		int score = 0;
+		
+		for (Integer clave : userSelection.getAnswersValues().keySet()) {
+			score += userSelection.getAnswersValues().get(clave);
+			System.out.println("El valor de la pregunta: " + 
+					clave + 
+					" es: " + 
+					userSelection.getAnswersValues().get(clave));
+		}
+		
+		System.out.println("El score final es: " + score);
+		
+		// To let the html acces "cuestionario"
+		model.addAttribute("resultado", score);
+		
+		return "resultados";
 	}
 	
 	/**

@@ -1,0 +1,158 @@
+{	
+    "id": 1,
+    "title": "Habilidades Blandas",
+    "image": "principalHD.jpg",
+    "languaje": "SPA",
+    "questions": [
+      {
+        "id": 1,
+        "description": "Me familiarizo fácilmente con gente nueva",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      }
+    ]
+}
