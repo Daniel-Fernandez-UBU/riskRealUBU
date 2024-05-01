@@ -89,38 +89,36 @@ public class QuizController {
 	}
 	
 	@PostMapping("/quiz/showResults")
-	public String startQuiz(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada") String text, 
+	public String startQuiz(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
 			HttpSession session, Model model) {
 		
-		System.out.println(estado);
-		
+		// Parse the question id as int
+		int questionInt = Integer.parseInt(question);
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
 		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
 		
-		int questionInt = Integer.parseInt(question);
-		int value = 0;
-		
-		for (Questions quest : cuestionario.getQuestions()) {
-			if (quest.getId() == questionInt) {
-				for (Answers ans : quest.getAnswers()) {
-					if (ans.getText().equals(text)) {
-						value = ans.getValue();
-					}
-				}
-			}
+		if(text != null) {
+			saveScore(userSelection, cuestionario, questionInt, text);
 		}
 		
-		userSelection.setAnswerValue(questionInt, value);
-		userSelection.setAnswer(questionInt, text);
+		System.out.println(estado);
 		
-		if (estado.equalsIgnoreCase("Siguiente")) {
+		if (estado.equalsIgnoreCase("Next")) {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
 			//return "quiz";
 			return "redirect:/quiz2";
-		} 
+		}
 		
+		if (estado.equalsIgnoreCase("Prev")) {
+			
+			session.setAttribute("preguntaActual", questionInt-1);
+					
+			//return "quiz";
+			return "redirect:/quiz2";
+		}
+							
 		int score = 0;
 		
 		for (Integer clave : userSelection.getAnswersValues().keySet()) {
@@ -163,6 +161,24 @@ public class QuizController {
 		}
 		
 		return quiz;
+	}
+	
+	private void saveScore(UserSelection userSelection, Quiz cuestionario, int questionInt, String text) {
+		int value = 0;
+		
+		for (Questions quest : cuestionario.getQuestions()) {
+			if (quest.getId() == questionInt) {
+				for (Answers ans : quest.getAnswers()) {
+					if (ans.getText().equals(text)) {
+						value = ans.getValue();
+					}
+				}
+			}
+		}
+		
+		userSelection.setAnswerValue(questionInt, value);
+		userSelection.setAnswer(questionInt, text);
+		
 	}
 
 }

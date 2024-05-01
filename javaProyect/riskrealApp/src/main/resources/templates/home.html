@@ -20,8 +20,7 @@
 <body>
     <div class="container-fluid bg-dark text-white">
         <!-- Barra de navegación -->
-        <header th:insert="fragments/header :: main-header">
-        </header>
+        <header th:insert="~{fragments/header :: main-header}"></header>
         <h1 class="mt-5">Selecciona un archivo JSON:</h1>
         <form action="/quiz/startQuiz" method="POST">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
