@@ -1,3 +1,10 @@
+-- Select schema
+USE appRiskRealUbu;
+
+-- Delete Tables
+DROP TABLE Profiles;
+DROP TABLE Users;
+
 -- Create users table
 CREATE TABLE `Users` (
 	`username` varchar(100) NOT NULL,
@@ -10,7 +17,7 @@ CREATE TABLE `Users` (
 	`gender` varchar(50) NOT NULL,
     `age` varchar(50) NOT NULL,
 	PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Create profiles table
 CREATE TABLE `Profiles` (
@@ -20,7 +27,7 @@ CREATE TABLE `Profiles` (
 	CONSTRAINT `authorities_ibfk_2`
 	FOREIGN KEY (`username`)
 	REFERENCES `Users` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Insert some users
 INSERT INTO `Users` VALUES ('rmartico','{noop}raul123','UBU','professor','Raul','Marticorena','rmartico@ubu.es','male','33');
@@ -28,6 +35,6 @@ INSERT INTO `Users` VALUES ('dfb1001','{noop}daniel123','UBU','student','Daniel'
 INSERT INTO `Users` VALUES ('test01','{noop}test0123','UBU','student','Test','Tester','dfb1001@alu.ubu.es','female','33');
 
 -- Insert (assign roles) to ours users.
-INSERT INTO `Perfiles` VALUES ('rmartico','ADMIN');
-INSERT INTO `Perfiles` VALUES ('dfb1001','ADMIN');
-INSERT INTO `Perfiles` VALUES ('test01','CUSTOMER');
+INSERT INTO `Profiles` VALUES ('rmartico','ADMIN');
+INSERT INTO `Profiles` VALUES ('dfb1001','ADMIN');
+INSERT INTO `Profiles` VALUES ('test01','CUSTOMER');
