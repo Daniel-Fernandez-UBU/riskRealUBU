@@ -35,7 +35,7 @@ public class HomeController {
         }
 
         // Create a new session for the user
-        session.invalidate();
+        //session.invalidate();
         
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";

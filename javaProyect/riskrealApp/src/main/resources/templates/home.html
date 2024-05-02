@@ -5,6 +5,7 @@
     <title>Home</title>
     <!-- Integra Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
         .container-fluid {
@@ -13,15 +14,16 @@
 		    min-height: 100vh;
 		}
     </style>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 <body>
     <div class="container-fluid bg-dark text-white">
         <!-- Barra de navegación -->
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">Home</a>
-        </nav>
+        <header th:insert="~{fragments/header :: main-header}"></header>
         <h1 class="mt-5">Selecciona un archivo JSON:</h1>
-        <form action="/quiz/startQuiz" method="post">
+        <form action="/quiz/startQuiz" method="POST">
+        	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="form-group">
                 <select class="form-control" name="archivo">
                     <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
@@ -32,6 +34,7 @@
         <br><br>
 	    <h2>Enviar Correo Electrónico</h2>
 	    <form id="emailForm">
+
 	        <label for="to">Destinatario:</label>
 	        <input type="email" id="to" placeholder="Correo electrónico del destinatario" required><br><br>
 	
@@ -51,8 +54,14 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <script>
+	 	// Obtener el token CSRF del HTML
+	    var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
+	
+	    // Obtener el valor del encabezado CSRF del HTML
+	    var csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+	    
         document.getElementById("emailForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
@@ -69,7 +78,8 @@
             fetch('/send-email', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    [csrfHeader]: csrfToken
                 },
                 body: JSON.stringify(formData)
             })

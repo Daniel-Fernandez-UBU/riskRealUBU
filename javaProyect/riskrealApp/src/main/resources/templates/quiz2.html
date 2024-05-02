@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +20,7 @@
 <body>
     <div class="container-fluid bg-dark text-white">
         <!-- Barra de navegación -->
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#" onclick="mostrarAviso()">Home</a>
-        </nav>
-        
+		<header th:insert="~{fragments/header :: quiz-header}"></header>
         <div class="modal fade border border-5" id="avisoSesion" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content ">
@@ -43,6 +40,7 @@
 		    </div>
 		  </div>
 		</div>
+		
 
         <!-- Título del cuestionario -->
         <h1 th:text="${cuestionario.getTitle()}" class="mt-4"></h1>
@@ -51,30 +49,37 @@
         <div class="mb-4">Primer cuestionario de ejemplo</div>
 
         <div class="row">
-            <!-- Lista vertical de preguntas -->
+            <!-- Lista vertical de preguntas 
             <div class="col-2 col-md-2 scrollable">
                 <ul class="nav flex-column nav-pills" id="questionTabs" role="tablist">
                     <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
                         <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="pill" th:href="'#question' + ${pregunta.getId()}" 
-                            role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == 1} ? 'nav-link active' : 'nav-link'" aria-selected="${pregunta.getId() == 1}"></a>
+                            role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == preguntaActual} ? 'nav-link active' : 'nav-link'" 
+                            aria-selected="${pregunta.getId() == preguntaActual}"></a>
                     </li>
                 </ul>
             </div>
+            -->
 
             <!-- Contenido de las preguntas -->
             <div class="col-10 col-md-10">
                 <div class="tab-content" id="questionContent">
-                    <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == 1} ? 'tab-pane fade show active' : 'tab-pane fade'">
-                        <h2 th:text="${pregunta.getDescription()}">Question 1</h2>
+                    <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == preguntaActual} ? 'tab-pane fade show active' : 'tab-pane fade'">
+                        <h2 th:text="${pregunta.getDescription()}"></h2>
 						<form action="/quiz/showResults" method="post">
 						  <!--  For manage the security in POST  -->
 						  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						  <input type="hidden" th:name="pregunta" th:value="${pregunta.getId()}" />
 						  <div th:each="respuesta : ${pregunta.getAnswers()}">
-						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getValue()}" th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}">
+						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getText()}" 
+						    th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}" 
+						    required
+						    >
 						    <label th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
 						  </div>
-						  <button class="btn btn-primary mr-2" type="button" onclick="nextQuestion()">Siguiente pregunta</button>
-						  <button class="btn btn-primary" type="submit" onclick="nextQuestion()">Enviar resultados</button>
+						  <button class="btn btn-primary mr-2" type="submit" name="accion" th:value="prev" th:if="${preguntaActual > 1}"><--</button>
+						  <button class="btn btn-primary mr-2" type="submit" name="accion" th:value="next" th:if="${preguntaActual != cuestionario.getQuestions().size()}" >--></button>
+						  <button class="btn btn-primary" type="submit" name="accion" th:value="resultados" th:if="${preguntaActual == cuestionario.getQuestions().size()}">Enviar resultados</button>
 						</form>
                     </div>
                 </div>
@@ -117,7 +122,7 @@
         function irAInicio() {
             window.location.href = "/"; // Redirigir a la página de inicio
         }
-        
+
     </script>
 </body>
 </html>

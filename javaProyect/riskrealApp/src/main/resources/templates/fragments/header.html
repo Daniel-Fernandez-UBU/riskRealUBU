@@ -1,0 +1,58 @@
+<nav th:fragment="old-header" class="navbar navbar-light" style="background-color: #e3f2fd;">
+	<a class="navbar-brand" href="/">Home</a>
+	<a class="navbar-brand">Usuario</a>
+	<a class="navbar-brand" th:href="@{/logout}">Cerrar sesión</a>
+</nav>
+
+
+<nav th:fragment="main-header" class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">AppRiskReal UBU</a>
+  <a class="nav-link" href="/">Home</a>
+  <a class="nav-link" th:href="@{/login}">Login</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto dropdown dropleft">
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+	        	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+	        </svg>
+	    	<span th:text="${#authentication.name}"></span>
+	    </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<nav th:fragment="quiz-header" class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">AppRiskReal UBU</a>
+  <a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto dropdown dropleft">
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+	        	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+	        </svg>
+	    	<span th:text="${#authentication.name}"></span>
+	    </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
