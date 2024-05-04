@@ -8,34 +8,35 @@ email.properties
 
 # Archivos y directorios no necesarios de mysql
 
-#mysql/db/#ib_16384_0.dblwr
-#mysql/db/#ib_16384_1.dblwr
-#mysql/db/#innodb_redo/
-#mysql/db/#innodb_temp/
-#mysql/db/auto.cnf
-#mysql/db/binlog.000001
-#mysql/db/binlog.000002
-#mysql/db/binlog.000003
-#mysql/db/binlog.index
-mysql/db/ca-key.pem
-mysql/db/ca.pem
-mysql/db/client-cert.pem
-mysql/db/client-key.pem
-#mysql/db/ib_buffer_pool
-#mysql/db/ibdata1
-#mysql/db/ibtmp1
-#mysql/db/mysql.ibd
-mysql/db/mysql.sock
-#mysql/db/mysql/
-#mysql/db/mysql_upgrade_history
-#mysql/db/performance_schema/
-mysql/db/private_key.pem
-mysql/db/public_key.pem
-mysql/db/server-cert.pem
-mysql/db/server-key.pem
-#mysql/db/sys/
-#mysql/db/undo_001
-#mysql/db/undo_002
+mysql/dbdata/#ib_16384_0.dblwr
+mysql/dbdata/#ib_16384_1.dblwr
+#mysql/dbdata/#innodb_redo/
+#mysql/dbdata/#innodb_temp/
+mysql/dbdata/auto.cnf
+mysql/dbdata/binlog.000001
+mysql/dbdata/binlog.000002
+mysql/dbdata/binlog.000003
+mysql/dbdata/binlog.index
+mysql/dbdata/ca-key.pem
+mysql/dbdata/ca.pem
+mysql/dbdata/client-cert.pem
+mysql/dbdata/client-key.pem
+mysql/dbdata/ib_buffer_pool
+#mysql/dbdata/ibdata1
+#mysql/dbdata/ibtmp1
+#mysql/dbdata/mysql.ibd
+mysql/dbdata/mysql.sock
+#mysql/dbdata/mysql/
+mysql/dbdata/mysql_upgrade_history
+mysql/dbdata/performance_schema/
+mysql/dbdata/private_key.pem
+mysql/dbdata/public_key.pem
+mysql/dbdata/server-cert.pem
+mysql/dbdata/server-key.pem
+mysql/dbdata/sys/
+mysql/dbdata/undo_001
+mysql/dbdata/undo_002
+
 
 # Fin MySQL
 
