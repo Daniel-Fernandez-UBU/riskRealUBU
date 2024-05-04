@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -21,7 +21,13 @@
     <div class="container-fluid bg-dark text-white" >
         <!-- Barra de navegación -->
         <header th:insert="~{fragments/header :: main-header}"></header>
-        <h1 class="mt-5">Selecciona un Cuestionario:</h1>
+        <h1>Selecciona tu Idioma</h1>
+	    <ul>
+	        <li><a th:href="@{?lang=es}">Español</a></li>
+	        <li><a th:href="@{?lang=en}">Inglés</a></li>
+	        <!-- Agrega más enlaces para otros idiomas si es necesario -->
+	    </ul>
+        <h1 class="mt-5" th:text="#{quiz.select}"></h1>
         <form action="/quiz/startQuiz" method="POST">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="form-group">
