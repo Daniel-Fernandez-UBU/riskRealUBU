@@ -5,13 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.services.PropertiesService;
 
 
 import java.util.ArrayList;
@@ -19,8 +20,12 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
 	
-	  
 	
+	@Autowired
+	private PropertiesService propertiesService;
+	
+
+		
     @GetMapping("/")
     public String home(Model model,  HttpSession session) throws IOException {
         // Obtener la lista de archivos JSON en la carpeta ClassPathResource
@@ -33,13 +38,17 @@ public class HomeController {
                 jsonFiles.add(jsonFile.getName());
             }
         }
-
+        
+        propertiesService.addProperties("_es");
+                
         // Create a new session for the user
         //session.invalidate();
         
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }
+    
+
 	
 }
 

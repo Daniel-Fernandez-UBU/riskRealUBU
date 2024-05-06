@@ -7,7 +7,7 @@ import java.util.Date;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -136,6 +136,22 @@ public class QuizController {
 		
 		return "resultados";
 	}
+	
+    
+    @GetMapping("/loadQuiz")
+    public String loadQuiz(Model model, @RequestParam("archivo") String archivo,  HttpSession session) {
+    	
+    	    		
+    	// We get full quiz from json file
+    	Quiz cuestionario = getQuiz(archivo);
+    	
+    	
+    	
+
+        
+        //model.addAttribute("jsonFiles", jsonFiles);
+        return "home";
+    }
 	
 	/**
 	 * Method for get the full Quiz from json file.
