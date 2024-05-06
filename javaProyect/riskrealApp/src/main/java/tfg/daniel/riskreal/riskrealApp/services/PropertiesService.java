@@ -8,18 +8,22 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 @Service
+@PropertySource("classpath:custom.properties")
 public class PropertiesService {
 	
-	
+	@Value("${json.quiz.file.path.lang}")
+	private String jsonPath;
 	// Método para añadir nuevos valores según el idioma
     public void addProperties(String key, String value, String idioma) {
         // Ruta del archivo properties según el idioma
-    	String messagesBasename = "src/main/resources/i18n/messages";
-    	
-        String filePath = messagesBasename + idioma + ".properties";
+    	//String messagesBasename = "src/main/resources/i18n/messages";
+    	    	
+        String filePath = jsonPath + idioma + ".properties";
         
         System.out.println(filePath);
 
