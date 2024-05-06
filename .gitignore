@@ -12,6 +12,7 @@ mysql/dbdata/#ib_16384_0.dblwr
 mysql/dbdata/#ib_16384_1.dblwr
 #mysql/dbdata/#innodb_redo/
 #mysql/dbdata/#innodb_temp/
+mysql/dbdata/#innodb_temp/temp_*
 mysql/dbdata/auto.cnf
 mysql/dbdata/binlog.000001
 mysql/dbdata/binlog.000002
@@ -23,7 +24,7 @@ mysql/dbdata/client-cert.pem
 mysql/dbdata/client-key.pem
 mysql/dbdata/ib_buffer_pool
 #mysql/dbdata/ibdata1
-#mysql/dbdata/ibtmp1
+mysql/dbdata/ibtmp1
 #mysql/dbdata/mysql.ibd
 mysql/dbdata/mysql.sock
 #mysql/dbdata/mysql/
