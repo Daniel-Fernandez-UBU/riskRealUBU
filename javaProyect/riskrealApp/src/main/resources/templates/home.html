@@ -21,7 +21,7 @@
     <div class="container-fluid bg-dark text-white" >
         <!-- Barra de navegación -->
         <header th:insert="~{fragments/header :: main-header}"></header>
-        <h1>Selecciona tu Idioma</h1>
+        <h1 th:text="#{home.lang.select}"></h1>
 	    <ul>
 	        <li><a th:href="@{?lang=es}">Español</a></li>
 	        <li><a th:href="@{?lang=en}">Inglés</a></li>
@@ -29,7 +29,6 @@
 	        <!-- Agrega más enlaces para otros idiomas si es necesario -->
 	    </ul>
 		</ul>
-		<h2 class="mt-5" th:text="#{prueba}"></h2>
         <h1 class="mt-5" th:text="#{home.quiz.select}"></h1>
         <form action="/quiz/startQuiz" method="POST">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -51,19 +50,19 @@
 		    <button type="submit" class="btn btn-primary">Guarda Quiz en messages.properties</button>
 		</form>
         <br><br>
-	    <h2>Enviar Correo Electrónico</h2>
+	    <h2 th:text="#{home.sendEmail}">Enviar Correo Electrónico</h2>
 	    <form id="emailForm">
 
-	        <label for="to">Destinatario:</label>
-	        <input type="email" id="to" placeholder="Correo electrónico del destinatario" required><br><br>
+	        <label for="to" th:text="#{home.email.to}"></label>
+	        <input type="email" id="to"  required><br><br>
 	
-	        <label for="subject">Asunto:</label>
-	        <input type="text" id="subject" placeholder="Asunto" required><br><br>
+	        <label for="subject" th:text="#{home.email.subject}">Asunto:</label>
+	        <input type="text" id="subject"  required><br><br>
 	
-	        <label for="body">Mensaje:</label><br>
-	        <textarea id="body" placeholder="Cuerpo del mensaje" required></textarea><br><br>
+	        <label for="body" th:text="#{home.email.body}">Mensaje:</label><br>
+	        <textarea id="body"  required></textarea><br><br>
 	
-	        <button type="submit">Enviar correo electrónico</button>
+	        <button type="submit" th:value="#{home.sendEmail}" th:text="#{home.sendEmail}"></button>
 	    </form>
     </div>
     
