@@ -4,23 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PropertiesService {
 	
-	@Autowired
-    private Environment environment;
 	
 	// Método para añadir nuevos valores según el idioma
-    public void addProperties(String idioma) {
+    public void addProperties(String key, String value, String idioma) {
         // Ruta del archivo properties según el idioma
-    	String messagesBasename = environment.getProperty("spring.messages.basename");
+    	String messagesBasename = "src/main/resources/i18n/messages";
+    	
         String filePath = messagesBasename + idioma + ".properties";
+        
+        System.out.println(filePath);
 
         // Crear el archivo si no existe
         File file = new File(filePath);
@@ -39,32 +40,23 @@ public class PropertiesService {
         
 
 
-        try {
-            // Cargar el archivo existente
-            FileInputStream inputStream = new FileInputStream(file);
-            properties.load(inputStream);
-            
-            String key = "prueba";
-            
-            int intValue = Integer.parseInt(properties.getProperty(key));
-            
-            intValue += 1;
-            
-            String value = String.valueOf(intValue);
+        try (FileInputStream inputStream = new FileInputStream(filePath);
+                InputStreamReader reader = new InputStreamReader(inputStream, "UTF-8")) {
 
-            // Añadir nuevos valores según el idioma
-            properties.setProperty(key, value);
+               properties.load(reader);
 
+               // Añadir o actualizar el valor
+               properties.setProperty(key, value);
 
-            // Guardar los cambios en el archivo
-            FileOutputStream outputStream = new FileOutputStream(file);
-            properties.store(outputStream, "Nuevos valores añadidos");
-            outputStream.close();
+               try (FileOutputStream outputStream = new FileOutputStream(filePath);
+                   OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8")) {
 
-            System.out.println("Nuevos valores añadidos exitosamente para el idioma " + idioma + ".");
-        } catch (IOException e) {
-            System.err.println("Error al añadir nuevos valores: " + e.getMessage());
-        }
+                   properties.store(writer, "Nuevos valores añadidos");
+                   System.out.println("Nuevos valores añadidos exitosamente.");
+               }
+           } catch (IOException e) {
+               System.err.println("Error al añadir nuevos valores: " + e.getMessage());
+           }
     }
 
 }

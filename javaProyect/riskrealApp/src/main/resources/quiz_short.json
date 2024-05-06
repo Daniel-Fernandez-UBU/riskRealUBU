@@ -11,26 +11,31 @@
         "skill": 1,
         "answers": [
           {
+			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
             "image": "principalHD.jpg",
             "value": 1
           },
           {
+			"id": 2,
             "text": "2 – En desacuerdo",
             "image": "principalHD.jpg",
             "value": 2
           },
           {
+			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
             "image": "principalHD.jpg",
             "value": 3
           },
           {
+			"id": 4,
             "text": "4 – De acuerdo",
             "image": "principalHD.jpg",
             "value": 4
           },
           {
+			"id": 5,
             "text": "5 – Totalmente de acuerdo",
             "image": "principalHD.jpg",
             "value": 5
@@ -44,11 +49,13 @@
         "skill": 1,
         "answers": [
           {
+			"id": 1,
             "text": "Si",
             "image": "principalHD.jpg",
             "value": 1
           },
           {
+			"id": 3,
             "text": "No",
             "image": "principalHD.jpg",
             "value": 0
@@ -62,26 +69,31 @@
         "skill": 1,
         "answers": [
           {
+			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
             "image": "principalHD.jpg",
             "value": 1
           },
           {
+			"id": 2,
             "text": "2 – En desacuerdo",
             "image": "principalHD.jpg",
             "value": 2
           },
           {
+			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
             "image": "principalHD.jpg",
             "value": 3
           },
           {
+			"id": 4,
             "text": "4 – De acuerdo",
             "image": "principalHD.jpg",
             "value": 4
           },
           {
+			"id": 5,
             "text": "5 – Totalmente de acuerdo",
             "image": "principalHD.jpg",
             "value": 5
@@ -94,27 +106,32 @@
         "image": "paris.jpg",
         "skill": 1,
         "answers": [
-{
+		{
+			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
             "image": "principalHD.jpg",
             "value": 1
           },
           {
+			"id": 2,
             "text": "2 – En desacuerdo",
             "image": "principalHD.jpg",
             "value": 2
           },
           {
+			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
             "image": "principalHD.jpg",
             "value": 3
           },
           {
+			"id": 4,
             "text": "4 – De acuerdo",
             "image": "principalHD.jpg",
             "value": 4
           },
           {
+			"id": 5,
             "text": "5 – Totalmente de acuerdo",
             "image": "principalHD.jpg",
             "value": 5
@@ -128,26 +145,31 @@
         "skill": 1,
         "answers": [
 		{
+			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
             "image": "principalHD.jpg",
             "value": 1
           },
           {
+			"id": 2,
             "text": "2 – En desacuerdo",
             "image": "principalHD.jpg",
             "value": 2
           },
           {
+			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
             "image": "principalHD.jpg",
             "value": 3
           },
           {
+			"id": 4,
             "text": "4 – De acuerdo",
             "image": "principalHD.jpg",
             "value": 4
           },
           {
+			"id": 5,
             "text": "5 – Totalmente de acuerdo",
             "image": "principalHD.jpg",
             "value": 5

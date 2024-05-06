@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +23,15 @@ import tfg.daniel.riskreal.riskrealApp.model.Answers;
 import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
+import tfg.daniel.riskreal.riskrealApp.services.PropertiesService;
 
 @Controller
 @SessionAttributes("preguntasRespondidas")
 public class QuizController {
+	
+	@Autowired
+	private PropertiesService propertiesService;
+	
 	
 	/**
 	 * Página cuestionario.html
@@ -138,19 +144,44 @@ public class QuizController {
 	}
 	
     
-    @GetMapping("/loadQuiz")
+    @PostMapping("/loadQuiz")
     public String loadQuiz(Model model, @RequestParam("archivo") String archivo,  HttpSession session) {
     	
     	    		
     	// We get full quiz from json file
     	Quiz cuestionario = getQuiz(archivo);
     	
+    	// Just one for test
+    	String lang = "_es";
     	
+    	String base = "quiz.";
     	
+    	// Añadimos el cuestionario con su Id, titulo
+    	propertiesService.addProperties(base + cuestionario.getId() + ".id", String.valueOf(cuestionario.getId()), lang);
+    	propertiesService.addProperties(base + cuestionario.getId() + ".title", cuestionario.getTitle(), lang);
+    	
+    	String baseQuestion = base +  String.valueOf(cuestionario.getId()) + ".question.";
+    
+    	for (Questions question : cuestionario.getQuestions()) {
+    		// Add question id
+    		propertiesService.addProperties(baseQuestion + question.getId() + ".id", String.valueOf(question.getId()), lang);
+	    	// Add question text	
+    		propertiesService.addProperties(baseQuestion + question.getId() + ".text", question.getDescription(), lang);
+    		String baseAnswer = baseQuestion + String.valueOf(question.getId()) + ".answer.";
+    		for (Answers ans : question.getAnswers()) {
+    			// Add answer id
+    			propertiesService.addProperties(baseAnswer + ans.getId() + ".id", String.valueOf(ans.getId()), lang);
+    			// Add answer text
+    			propertiesService.addProperties(baseAnswer + ans.getId() + ".text", ans.getText(), lang);
+    			// Add answer value
+    			propertiesService.addProperties(baseAnswer + ans.getValue() + ".value", String.valueOf(ans.getValue()), lang);
+    		}
+    	}
 
+    	System.out.println("He pasado por aquí");
         
         //model.addAttribute("jsonFiles", jsonFiles);
-        return "home";
+        return "redirect:/";
     }
 	
 	/**

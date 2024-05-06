@@ -38,9 +38,7 @@ public class HomeController {
                 jsonFiles.add(jsonFile.getName());
             }
         }
-        
-        propertiesService.addProperties("_es");
-                
+                        
         // Create a new session for the user
         //session.invalidate();
         
