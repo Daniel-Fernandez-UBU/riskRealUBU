@@ -29,6 +29,7 @@ import tfg.daniel.riskreal.riskrealApp.model.Answers;
 import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
+import tfg.daniel.riskreal.riskrealApp.services.LangService;
 import tfg.daniel.riskreal.riskrealApp.services.PropertiesService;
 
 @Controller
@@ -38,6 +39,9 @@ public class QuizController {
 	
 	@Autowired
 	private PropertiesService propertiesService;
+	
+	@Autowired
+	private LangService langService;
 	
 	@Value("${json.quiz.file.path}")
 	private String jsonPath;
@@ -173,6 +177,7 @@ public class QuizController {
     	
     	String base = "quiz.";
     	
+    	/**
     	// Añadimos el cuestionario con su Id, titulo
     	propertiesService.addProperties(base + cuestionario.getId() + ".id", String.valueOf(cuestionario.getId()), lang);
     	propertiesService.addProperties(base + cuestionario.getId() + ".title", cuestionario.getTitle(), lang);
@@ -194,6 +199,9 @@ public class QuizController {
     			propertiesService.addProperties(baseAnswer + ans.getValue() + ".value", String.valueOf(ans.getValue()), lang);
     		}
     	}
+    	*/
+    	
+    	langService.showLangs();
 
     	System.out.println("He pasado por aquí");
         
@@ -203,6 +211,15 @@ public class QuizController {
     
     @PostMapping("/jsonQuiz")
     public String jsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo) {
+    	
+    	langService.showLangs();
+    	
+    	String[] langArray = langService.getLangs().split(",");
+    	
+    	System.out.println("Idiomas disponibles: ");
+    	for (String lang : langArray) {
+    		System.out.println(lang);
+    	}
     	
     	archivo =   jsonPath + "/" + archivo;
     	

@@ -41,8 +41,6 @@ public class PropertiesService {
 
         // Crear un nuevo objeto Properties
         Properties properties = new Properties();
-        
-
 
         try (FileInputStream inputStream = new FileInputStream(filePath);
                 InputStreamReader reader = new InputStreamReader(inputStream, "UTF-8")) {
