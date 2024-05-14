@@ -64,20 +64,7 @@
 		</form>
 		
         <br><br>
-	    <h2 th:text="#{home.sendEmail}">Enviar Correo Electrónico</h2>
-	    <form id="emailForm">
 
-	        <label for="to" th:text="#{home.email.to}"></label>
-	        <input type="email" id="to"  required><br><br>
-	
-	        <label for="subject" th:text="#{home.email.subject}">Asunto:</label>
-	        <input type="text" id="subject"  required><br><br>
-	
-	        <label for="body" th:text="#{home.email.body}">Mensaje:</label><br>
-	        <textarea id="body"  required></textarea><br><br>
-	
-	        <button type="submit" th:value="#{home.sendEmail}" th:text="#{home.sendEmail}"></button>
-	    </form>
     </div>
     
 
@@ -87,47 +74,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-    <script>
-	 	// Obtener el token CSRF del HTML
-	    var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
-	
-	    // Obtener el valor del encabezado CSRF del HTML
-	    var csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
-	    
-        document.getElementById("emailForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            var to = document.getElementById("to").value;
-            var subject = document.getElementById("subject").value;
-            var body = document.getElementById("body").value;
-
-            var formData = {
-                to: to,
-                subject: subject,
-                body: body
-            };
-
-            fetch('/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    [csrfHeader]: csrfToken
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Correo electrónico enviado correctamente.");
-                } else {
-                    alert("Error al enviar el correo electrónico.");
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("Error al enviar el correo electrónico.");
-            });
-        });
-    </script>
+    
     
 </body>
 </html>

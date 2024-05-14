@@ -21,17 +21,21 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/").permitAll()
+					.requestMatchers("/", "/resetPassword").permitAll()
+					//.requestMatchers("/resetPassword").permitAll()
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login
+						.loginPage("/login")
+						.failureUrl("/loginError")
 						.permitAll()
 						)
 				.logout(logout -> logout
 						.permitAll()
+						.logoutUrl("/logout")
 						.logoutSuccessUrl("/")
 						)
 				.build();

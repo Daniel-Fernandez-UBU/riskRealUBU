@@ -8,7 +8,6 @@
 <nav th:fragment="main-header" class="navbar navbar-expand navbar-light bg-light">
 	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
 	<a class="nav-link" href="/">Home</a>
-	<a class="nav-link" th:href="@{/login}">Login</a>
 	<ul class="navbar-nav ml-auto dropdown dropleft">
 	  <li class="nav-item">
 	    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -18,8 +17,9 @@
 	 	<span th:text="${#authentication.name}"></span>
 	 </a>
 	    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+	      <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
 	      <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-	      <li><a class="dropdown-item" th:href="@{/signup}">SignUp</a></li>
+	      <li><a class="dropdown-item" th:href="@{/signup}">New user?</a></li>
 	      <li><a class="dropdown-item" href="#">Profile</a></li>
 	      <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
 	    </ul>
@@ -39,7 +39,9 @@
 	 	<span th:text="${#authentication.name}"></span>
 	 </a>
 	    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+	      <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
 	      <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+	      <li><a class="dropdown-item" th:href="@{/signup}">New user?</a></li>
 	      <li><a class="dropdown-item" href="#">Profile</a></li>
 	      <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
 	    </ul>
