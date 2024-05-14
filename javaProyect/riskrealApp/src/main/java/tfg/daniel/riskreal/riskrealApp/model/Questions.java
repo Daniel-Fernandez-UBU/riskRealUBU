@@ -16,7 +16,7 @@ public class Questions {
 	
 	private int id;
 	private String description;
-	private String image;
+	private List<String> image;
 	private List<Answers> answers;
 	private int skill;
 	
@@ -39,10 +39,10 @@ public class Questions {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImage() {
-		return this.image;
+	public List<String> getImage() {
+		return image;
 	}
-	public void setImage(String image) {
+	public void setImage(List<String> image) {
 		this.image = image;
 	}
 	public List<Answers> getAnswers() {

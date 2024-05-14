@@ -11,7 +11,9 @@
       {
         "id": 1,
         "description": "Me familiarizo fácilmente con gente nueva",
-        "image": "paris.jpg",
+        "image": [
+			"paris.jpg"
+			],
         "skill": 1,
         "answers": [
           {
@@ -49,7 +51,9 @@
       {
         "id": 2,
         "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
-        "image": "paris.jpg",
+        "image": [
+			"paris.jpg"
+			],
         "skill": 1,
         "answers": [
           {
@@ -69,7 +73,9 @@
       {
         "id": 3,
         "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
-        "image": "paris.jpg",
+        "image": [
+			"paris.jpg"
+			],
         "skill": 1,
         "answers": [
           {
@@ -107,7 +113,9 @@
       {
         "id": 4,
         "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
-        "image": "paris.jpg",
+        "image": [
+			"paris.jpg"
+			],
         "skill": 1,
         "answers": [
 		{
@@ -145,7 +153,9 @@
       {
         "id": 5,
         "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
-        "image": "paris.jpg",
+        "image": [
+			"paris.jpg"
+			],
         "skill": 1,
         "answers": [
 		{
