@@ -1,8 +1,10 @@
 {
 	"id": 1,
 	"title": "Habilidades Blandas",
-	"image": "principalHD.jpg",
-	"languaje": "SPA",
+	"image": [
+		"principalHD.jpg"
+	],
+	"language": "SPA",
 	"description": "Descripción del cuestionario",
 	"type": 1,
 	"questions": [
