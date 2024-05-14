@@ -3,6 +3,8 @@
     "title": "Habilidades Blandas",
     "image": "principalHD.jpg",
     "languaje": "SPA",
+	"description": "Descripción del cuestionario",
+	"type":	1,
     "questions": [
       {
         "id": 1,
