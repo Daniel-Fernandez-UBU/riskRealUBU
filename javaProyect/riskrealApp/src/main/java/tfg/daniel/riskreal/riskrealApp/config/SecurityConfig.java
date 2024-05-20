@@ -28,7 +28,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/", "/resetPassword", "/register").permitAll()
+					.requestMatchers("/", "/resetPassword", "/register", "/register/done").permitAll()
 					//.requestMatchers("/resetPassword").permitAll()
 					.anyRequest().authenticated()
 				)
@@ -49,8 +49,8 @@ public class SecurityConfig {
     	
     	JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
     	
-    	users.setUsersByUsernameQuery("select username, password, status from Users u where username=?");
-    	users.setAuthoritiesByUsernameQuery("select username, profile from Profiles p where username=?");
+    	users.setUsersByUsernameQuery("select email, password, status from Users u where email=?");
+    	users.setAuthoritiesByUsernameQuery("select email, profile from Profiles p where email=?");
     	   	
     	return users;
     	
