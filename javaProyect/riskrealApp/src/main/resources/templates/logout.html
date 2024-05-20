@@ -11,7 +11,7 @@
   <body>
      <div class="container">
       <form class="form-signin" method="post" action="/logout">
-        <h2 class="form-signin-heading">Are you sure you want to log out?</h2>
+        <h2 class="form-signin-heading" th:text="#{logout.confirm}"></h2>
 		<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
 		<input type="hidden" name="lang" th:value="${lang}">
         <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{header.logout}"></button>

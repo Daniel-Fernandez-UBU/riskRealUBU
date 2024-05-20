@@ -11,9 +11,9 @@
   <body>
      <div class="container">
       <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading" th:text="#{login.text}"></h2>
         <p>
-        <div class="alert alert-danger" role="alert">Credenciales erróneas</div>
+        <div class="alert alert-danger" role="alert" th:text="#{login.error}"></div>
           <label for="username" class="sr-only">Username</label>
           <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
         </p>
@@ -22,8 +22,8 @@
           <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
 		<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a href="/resetPassword">Forgot Password?</a>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{header.login}"></button>
+        <a href="/resetPassword" th:text="#{login.forgot.password}"></a>
       </form>
 </div>
 </body>
