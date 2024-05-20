@@ -21,7 +21,7 @@
 
 <nav th:fragment="main-header" class="navbar navbar-expand navbar-light bg-light">
 	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
-	<a class="nav-link" href="/">Home</a>
+	<a class="nav-link" href="/" th:text="#{home.button}"></a>
     <ul class="navbar-nav ml-auto dropdown dropleft">
       <li class="nav-item">
       	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLangLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -82,6 +82,7 @@
     	</div>
 	  </li>
 	</ul>
+	
 </nav>
 
 <nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
@@ -105,4 +106,11 @@
 	  </li>
 	</ul>
 </nav>
+
+<div th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Añade aquí otros scripts necesarios -->
+</div>
 

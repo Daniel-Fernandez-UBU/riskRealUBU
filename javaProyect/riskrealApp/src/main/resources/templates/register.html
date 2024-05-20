@@ -3,49 +3,175 @@
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Easiest Way to Add Input Masks to Your Forms</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <title th:text="#{register.text}"></title>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
+    <style>
+	    *{
+	   box-sizing: border-box;
+	   font-family: "Merriweather Sans", sans-serif;
+	}
+	
+	body{
+	   background-color: #B0DBEE;
+	   
+	   #form{
+	      color: white;
+	      background-color: #009EDF;
+	      border-radius: 5px;
+	      
+	      width: 400px;
+	      padding: 40px;
+	      margin: 30px auto;
+	      
+	      -webkit-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+	      -moz-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+	      box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
+	      
+	      p{
+	         font-size: 0.9em;
+	      }
+	      
+	      button{
+	         width: 100%;
+	         text-align: center;
+	         color: white;
+	         margin-top: 20px;
+	         border: 1px solid rgba(0,0,0,0.4);
+	      }
+	      
+	      .form-group{
+	         margin: 15px auto;
+	           
+	         label{
+	            font-weight: bold;
+	            font-size: 0.9em;
+	         }
+	         
+			.input-group {
+			    display: flex;
+			    align-items: center; /* Alinea verticalmente los elementos */
+			}
+			
+			.input-group i {
+			    margin-right: 8px; /* Espacio entre el icono y el input */
+			}
+			
+			.input-group input {
+			    flex: 1; /* Para que el input ocupe el espacio disponible */
+			    padding: 2px;
+			    padding-left: 5px;
+	            width: 100%;
+	            border: none;
+	            border-radius: 0 5px 5px 0;
+			}
+			.input-group select {
+            	flex: 1; /* Para que el input ocupe el espacio disponible */
+			    padding: 2px;
+			    padding-left: 5px;
+	            width: 100%;
+	            border: none;
+	            border-radius: 0 5px 5px 0;
+        	}
+	      }
+	   }
+	}
+    </style>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 <body>
-    <div class="container-fluid">
-        <form>
-            <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Create Account</button>
-            </div>
-        </form>
-        <div class="social-media">
-            <h5>Sign up with social media</h5>
-            <div class="social-icons">
-                <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-                <a href="#"><i class="icon-social-google" title="Google"></i></a>
-                <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="assets/js/script.js"></script>
+	<header th:insert="~{fragments/header :: main-header}"></header>
+	<form id="form">
+		<h1 th:text="#{register.text}"></h1>
+	   	<div class="form-group">
+	      <label for="company" th:text="#{register.company}"></label>
+	      <br />
+	      <div class="input-group">
+	         <i class="fa fa-building" aria-hidden="true"></i>
+	         <input type="number" id="company" th:placeholder="#{register.company}" required/>
+	         </div>
+	    </div>
+	   	<div class="form-group">
+	      <label for="email" th:text="#{register.email}"></label>
+	      <br />
+	      <div class="input-group">
+	         <i class="fa fa-envelope" aria-hidden="true"></i>
+	         <input type="email" id="email" th:placeholder="#{register.email}" required/>
+	         </div>
+	    </div>
+		<div class="form-group">
+	      <label for="password" th:text="#{register.password}"></label>
+	      <br />
+	      <div class="input-group">
+	         <i class="fa fa-lock" aria-hidden="true"></i>
+	         <input type="password" id="password" th:placeholder="#{register.password}" required/>
+	         </div>
+	    </div>	
+	   	<div class="form-group">
+	      <label for="name" th:text="#{register.name}"></label>
+	      <br />
+	      <div class="input-group">
+	         <i class="fa fa-user-circle" aria-hidden="true"></i>
+	         <input type="text" id="name" th:placeholder="#{register.name}" required/>
+	         </div>
+	      </div>
+	   	<div class="form-group">
+	      <label for="lastname" th:text="#{register.lastname}"></label>
+	      <div class="input-group">
+	         <i class="fa fa-user-circle" aria-hidden="true"></i>
+	       	 <input type="text" id="lastname" th:placeholder="#{register.lastname}" required/>
+	      </div>
+	    </div>	   
+	    <div class="form-group">
+	      <label for="gender" th:text="#{register.gender}"></label>
+	      <br />
+	        <div class="input-group">
+	            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+	            <select id="gender" name="gender" required>
+	            	<option value="" disabled selected></option>
+	                <option value="1" th:text="#{register.gender.masc}"></option>
+	                <option value="2" th:text="#{register.gender.fem}"></option>
+	                <option value="3" th:text="#{register.gender.nobinary}"></option>
+	                <option value="4" th:text="#{register.gender.other}"></option>
+	            </select>
+	        </div>
+	      </div>  
+	    <div class="form-group">
+	      <label for="age" th:text="#{register.age}"></label>
+	      <br />
+	        <div class="input-group">
+	            <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+	            <select id="age" name="age" required>
+	            	<option value="" disabled selected></option>
+	                <option value="1" th:text="#{register.age.range1}"></option>
+					<option value="2" th:text="#{register.age.range2}"></option>
+					<option value="3" th:text="#{register.age.range3}"></option>
+					<option value="4" th:text="#{register.age.range4}"></option>
+					<option value="5" th:text="#{register.age.range5}"></option>
+					<option value="6" th:text="#{register.age.range6}"></option>
+	            </select>
+	        </div>
+	      </div>
+	    <div class="form-group">
+	      <label for="rol" th:text="#{register.rol}"></label>
+	      <br />
+	        <div class="input-group">
+	            <i class="fa fa-briefcase" aria-hidden="true"></i>
+	            <select id="rol" name="rol" required>
+	            	<option value="" disabled selected></option>
+	                <option value="1" th:text="#{register.rol.manager}"></option>
+	                <option value="2" th:text="#{register.rol.employee}"></option>
+	                <option value="3" th:text="#{register.rol.other}"></option>
+	            </select>
+	        </div>
+	      </div>
+	   	   
+	   <button type="submit" class="btn btn-default" th:text="#{header.singup}"></button>
+	</form>
+	<div th:insert="~{fragments/header :: scripts}"></div>
 </body>
 </html>
