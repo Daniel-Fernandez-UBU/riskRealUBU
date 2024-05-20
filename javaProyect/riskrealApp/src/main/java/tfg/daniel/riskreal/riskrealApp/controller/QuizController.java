@@ -8,12 +8,10 @@ import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,15 +28,12 @@ import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 import tfg.daniel.riskreal.riskrealApp.services.LangService;
-import tfg.daniel.riskreal.riskrealApp.services.PropertiesService;
 
 @Controller
 @SessionAttributes("preguntasRespondidas")
 @PropertySource("classpath:custom.properties")
 public class QuizController {
 	
-	@Autowired
-	private PropertiesService propertiesService;
 	
 	@Autowired
 	private LangService langService;

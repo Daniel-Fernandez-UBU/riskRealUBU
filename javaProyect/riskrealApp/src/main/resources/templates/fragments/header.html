@@ -9,20 +9,34 @@
 	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
 	<a class="nav-link" href="/">Home</a>
 	<ul class="navbar-nav ml-auto dropdown dropleft">
-	  <li class="nav-item">
-	    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	     	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	     </svg>
-	 	<span th:text="${#authentication.name}"></span>
-	 </a>
-	    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-	      <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
-	      <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-	      <li><a class="dropdown-item" th:href="@{/signup}">New user?</a></li>
-	      <li><a class="dropdown-item" href="#">Profile</a></li>
-	      <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
-	    </ul>
+	  <div sec:authorize="isAuthenticated()">
+	 	 <li class="nav-item">
+	    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+	     		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+	    	</svg>
+        	<span th:text="'Hola, ' + ${#authentication.name}"></span>
+        	</a>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+			  <li><a class="dropdown-item" th:href="@{/logout(lang=${#locale.language})}" th:text="#{header.logout}"></a></li>
+			  <li><a class="dropdown-item" href="#" th:text="#{header.profile}"></a></li>
+			</ul>
+    	 </li>
+       </div>
+	   <div sec:authorize="isAnonymous()">
+	   	<li class="nav-item">
+	    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+	     		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+	    	</svg>
+        	<span th:text="#{guest.name}"></span>
+        	</a>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+			  <li><a class="dropdown-item" th:href="@{/login}" th:text="#{header.login}"></a></li>
+			  <li><a class="dropdown-item" th:href="@{/signup}" th:text="#{header.singup}"></a></li>
+			</ul>
+    	 </li>
+    	</div>
 	  </li>
 	</ul>
 </nav>
@@ -36,8 +50,8 @@
 	     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
 	     	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
 	     </svg>
-	 	<span th:text="${#authentication.name}"></span>
-	 </a>
+	 	 <span th:text="${#authentication.name}"></span>
+	    </a>
 	    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 	      <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
 	      <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>

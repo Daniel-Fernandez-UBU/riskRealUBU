@@ -3,6 +3,7 @@ package tfg.daniel.riskreal.riskrealApp.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+	
+    @Autowired
+    private LogoutConfig logoutConfig;
+    
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
@@ -34,9 +38,8 @@ public class SecurityConfig {
 						.permitAll()
 						)
 				.logout(logout -> logout
-						.permitAll()
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/")
+						.logoutSuccessHandler(logoutConfig)
 						)
 				.build();
 	}
