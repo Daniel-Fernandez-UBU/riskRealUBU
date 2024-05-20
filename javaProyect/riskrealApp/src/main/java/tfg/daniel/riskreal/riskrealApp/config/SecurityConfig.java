@@ -31,7 +31,6 @@ public class SecurityConfig {
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/", "/resetPassword", "/register", "/register/done").permitAll()
-					//.requestMatchers("/resetPassword").permitAll()
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login

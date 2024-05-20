@@ -134,10 +134,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	            <i class="fa fa-venus-mars" aria-hidden="true"></i>
 	            <select id="gender" th:name="gender" required>
 	            	<option value="" disabled selected></option>
-	                <option th:value="#{register.gender.masc}" th:text="#{register.gender.masc}"></option>
-	                <option th:value="#{register.gender.fem}" th:text="#{register.gender.fem}"></option>
-	                <option th:value="#{register.gender.nobinary}" th:text="#{register.gender.nobinary}"></option>
-	                <option th:value="#{register.gender.other}" th:text="#{register.gender.other}"></option>
+	                <option value="male" th:text="#{register.gender.masc}"></option>
+	                <option value="female" th:text="#{register.gender.fem}"></option>
+	                <option value="no-binary" th:text="#{register.gender.nobinary}"></option>
+	                <option value="other" th:text="#{register.gender.other}"></option>
 	            </select>
 	        </div>
 	      </div>  
@@ -148,12 +148,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	            <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
 	            <select id="age" th:name="age" required>
 	            	<option value="" disabled selected></option>
-	                <option th:value="#{register.age.range1}" th:text="#{register.age.range1}"></option>
-					<option th:value="#{register.age.range2}" th:text="#{register.age.range2}"></option>
-					<option th:value="#{register.age.range3}" th:text="#{register.age.range3}"></option>
-					<option th:value="#{register.age.range4}" th:text="#{register.age.range4}"></option>
-					<option th:value="#{register.age.range5}" th:text="#{register.age.range5}"></option>
-					<option th:value="#{register.age.range6}" th:text="#{register.age.range6}"></option>
+	                <option value="18-25" th:text="#{register.age.range1}"></option>
+					<option value="26-35" th:text="#{register.age.range2}"></option>
+					<option value="36-45" th:text="#{register.age.range3}"></option>
+					<option value="46-55" th:text="#{register.age.range4}"></option>
+					<option value="56-65" th:text="#{register.age.range5}"></option>
+					<option value=">65" th:text="#{register.age.range6}"></option>
 	            </select>
 	        </div>
 	      </div>
@@ -164,9 +164,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	            <i class="fa fa-briefcase" aria-hidden="true"></i>
 	            <select id="rol" th:name="rol" required>
 	            	<option value="" disabled selected></option>
-	                <option th:value="#{register.rol.manager}" th:text="#{register.rol.manager}"></option>
-	                <option th:value="#{register.rol.employee}" th:text="#{register.rol.employee}"></option>
-	                <option th:value="#{register.rol.other}" th:text="#{register.rol.other}"></option>
+	                <option value="manager" th:text="#{register.rol.manager}"></option>
+	                <option value="employee" th:text="#{register.rol.employee}"></option>
+	                <option value="other" th:text="#{register.rol.other}"></option>
 	            </select>
 	        </div>
 	      </div>

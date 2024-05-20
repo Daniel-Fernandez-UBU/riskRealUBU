@@ -23,64 +23,9 @@
 	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
 	<a class="nav-link" href="/" th:text="#{home.button}"></a>
     <ul class="navbar-nav ml-auto dropdown dropleft">
-      <li class="nav-item">
-      	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLangLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-      	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewBox="0 0 16 16">
-			  <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21 21 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21 21 0 0 0 14 7.655V1.222z"/>
-			</svg>
-      	  	<span th:text="#{lang.select}"></span>
-      	  </a>
-	      <ul class="dropdown-menu" aria-labelledby="navbarDropdownLangLink">
-	         <li><a class="dropdown-item" th:href="@{?lang=es}">
-	         	<i class="fi fi-es"></i>
-	         	<span th:text="#{lang.spanish}"></span>
-	         </a></li>
-	         <li><a class="dropdown-item" th:href="@{?lang=en}">
-	         	<i class="fi fi-gb"></i>
-	         	<span th:text="#{lang.english}"></span>
-	         </a></li>
-	         <li><a class="dropdown-item" th:href="@{?lang=it}">
-	         	<i class="fi fi-it"></i>
-	         	<span th:text="#{lang.italian}"></span>
-	         </a></li>
-	         <li><a class="dropdown-item" th:href="@{?lang=fr}">
-	         	<i class="fi fi-fr"></i>
-	         	<span th:text="#{lang.french}"></span>
-	         </a></li>	         <li><a class="dropdown-item" th:href="@{?lang=pt}">
-	         	<i class="fi fi-pt"></i>
-	         	<span th:text="#{lang.portuguese}"></span>
-	         </a></li>
-	       </ul>
-	  </li>
-	  <div sec:authorize="isAuthenticated()">
-	 	 <li class="nav-item">
-	    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	     		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	    	</svg>
-        	<span th:text="'Hola, ' + ${#authentication.name}"></span>
-        	</a>
-			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-			  <li><a class="dropdown-item" th:href="@{/logout(lang=${#locale.language})}" th:text="#{header.logout}"></a></li>
-			  <li><a class="dropdown-item" href="#" th:text="#{header.profile}"></a></li>
-			</ul>
-    	 </li>
-       </div>
-	   <div sec:authorize="isAnonymous()">
-	   	<li class="nav-item">
-	    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	     		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	    	</svg>
-        	<span th:text="#{guest.name}"></span>
-        	</a>
-			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-			  <li><a class="dropdown-item" th:href="@{/login}" th:text="#{header.login}"></a></li>
-			  <li><a class="dropdown-item" href="/register" th:text="#{header.singup}"></a></li>
-			</ul>
-    	 </li>
-    	</div>
-	  </li>
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	  <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
 	</ul>
 	
 </nav>
@@ -88,22 +33,9 @@
 <nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
 	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
 	<a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
-	<ul class="navbar-nav ml-auto dropdown dropleft">
-	  <li class="nav-item">
-	    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	     	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	     </svg>
-	 	 <span th:text="${#authentication.name}"></span>
-	    </a>
-	    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-	      <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
-	      <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-	      <li><a class="dropdown-item" th:href="@{/signup}">New user?</a></li>
-	      <li><a class="dropdown-item" href="#">Profile</a></li>
-	      <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
-	    </ul>
-	  </li>
+    <ul class="navbar-nav ml-auto dropdown dropleft">
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
 	</ul>
 </nav>
 
