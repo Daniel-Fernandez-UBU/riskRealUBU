@@ -28,7 +28,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/", "/resetPassword").permitAll()
+					.requestMatchers("/", "/resetPassword", "/register").permitAll()
 					//.requestMatchers("/resetPassword").permitAll()
 					.anyRequest().authenticated()
 				)

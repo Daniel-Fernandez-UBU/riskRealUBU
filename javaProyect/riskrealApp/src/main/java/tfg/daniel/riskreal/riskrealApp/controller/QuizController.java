@@ -128,7 +128,6 @@ public class QuizController {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
-			//return "quiz";
 			return "redirect:/quiz2";
 		}
 		
@@ -136,7 +135,6 @@ public class QuizController {
 			
 			session.setAttribute("preguntaActual", questionInt-1);
 					
-			//return "quiz";
 			return "redirect:/quiz2";
 		}
 							
@@ -165,13 +163,7 @@ public class QuizController {
     	archivo =   jsonPath + "/" + archivo;
     	System.out.println(archivo);
     	// We get full quiz from json file
-    	Quiz cuestionario = getQuiz(archivo);
-    	
-    	// Just one for test
-    	String lang = "_es";
-    	
-    	String base = "quiz.";
-    	
+
     	/**
     	// Añadimos el cuestionario con su Id, titulo
     	propertiesService.addProperties(base + cuestionario.getId() + ".id", String.valueOf(cuestionario.getId()), lang);
