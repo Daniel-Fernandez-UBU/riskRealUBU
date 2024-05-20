@@ -22,7 +22,12 @@ public class EmailServiceImpl implements IEmailService {
 		this.templateEngine = templateEngine;
 	}
 	
-	// Metodo para enviar correo.
+	/**
+	 * Method sendMail.
+	 * 
+	 * Send a email.
+	 * 
+	 */
 	@Override
 	public void sendMail(EmailRequest email) throws MessagingException {
 		try {
@@ -30,20 +35,18 @@ public class EmailServiceImpl implements IEmailService {
 			MimeMessageHelper helper =
 					new MimeMessageHelper(message, 
 							true, "UTF-8");
-			// Propiedades desitinatario y asunto
+			// Subject and to properties
 			helper.setTo(email.getTo());
 			helper.setSubject(email.getSubject());
-			
-			// helper.setText(email.getBody()); // Texto plano
 			
 			Context context = new Context(); 	
 			context.setVariable("body", email.getBody());
 			
-			// Nombre de la plantilla email.html
+			// Email template
 			String contentHTML = templateEngine.process("email", context);
 			
-			// Enviamos las propiedades y añadimos la plantilla dle email
-			helper.setText(contentHTML, true); //True por lo del html
+			// We send the properties and the template
+			helper.setText(contentHTML, true); //True for using html
 			
 			javaMailSender.send(message);
 		} catch (Exception e) {
