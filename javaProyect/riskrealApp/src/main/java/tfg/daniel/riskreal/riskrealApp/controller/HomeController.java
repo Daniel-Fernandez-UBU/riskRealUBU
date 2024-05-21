@@ -4,7 +4,9 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.model.User;
+import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 
 import java.util.ArrayList;
 
@@ -24,6 +27,9 @@ public class HomeController {
 	
 	@Value("${json.quiz.file.path}")
 	private String jsonPath;
+	
+	@Autowired
+    private UserRepository userRepository; 
 
 		
     @GetMapping("/")
@@ -51,24 +57,33 @@ public class HomeController {
         
         // If the user have to change the password
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        System.out.println(authentication.getName());
-        System.out.println(authentication.getPrincipal().getClass());
-        
-        if (authentication != null && authentication.getName() != null) {
-             int status = 0;
-             String email = authentication.getName();
-             model.addAttribute("userStatus", status);
-             model.addAttribute("email", email);
-             return "changePassword";
+        if (changePasswordRequired(authentication)) {
+        	model.addAttribute("email", authentication.getName());
+        	return "changePassword";
         }
-
         
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }
     
-
+    
+    /**
+     * Method changePasswordRequired().
+     * @param authentication
+     * @return true o false
+     */
+    private boolean changePasswordRequired(Authentication authentication) {
+        if (authentication != null) {
+            Optional<User> userOpt = userRepository.findById(authentication.getName());
+            if (userOpt.isPresent()) {
+            	User user = userOpt.get();
+            	if (user.getStatus() == 2) {
+            		return true;
+            	}
+            }
+        }
+        return false;
+    }
 	
 }
 

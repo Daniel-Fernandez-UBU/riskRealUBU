@@ -106,8 +106,7 @@ public class RegisterController {
     }
     
     @PostMapping("/changePassword")
-    public String changePassword(@RequestParam("passwordAct") String passwordAct, @RequestParam("passwordNew") String passwordNew, 
-    		@RequestParam("email") String email) {
+    public String changePassword(@RequestParam("passwordNew") String passwordNew, @RequestParam("email") String email) {
     	
     	Optional<User> userOpt = userRepository.findById(email);
     	
