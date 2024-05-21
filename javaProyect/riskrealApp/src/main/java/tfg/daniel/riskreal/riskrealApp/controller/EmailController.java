@@ -1,32 +1,56 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
 
 import tfg.daniel.riskreal.riskrealApp.model.EmailRequest;
+import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.IEmailService;
+import tfg.daniel.riskreal.riskrealApp.model.User;
 
-@RestController
-@RequestMapping
+@Controller
 public class EmailController {
     
     @Autowired
     private IEmailService emailService;
+    
+    @Autowired
+    private UserRepository userRepository; 
 
+    
     @PostMapping("/send-email")
-    private ResponseEntity<String> sendEmail(@RequestBody EmailRequest email) {
+    private String sendEmailView(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("body") String body, HttpSession session) {
+        
         try {
-            emailService.sendMail(email);
-            return ResponseEntity.ok("Correo electrónico enviado correctamente.");
+            boolean exists = userRepository.existsById(to);
+            Optional<User> user = userRepository.findById(to);
+            System.out.println(user.toString());
+            
+            EmailRequest email = new EmailRequest();
+            email.setBody(body);
+            email.setSubject(subject);
+            email.setTo(to);
+            
+            if (exists) {
+                emailService.sendMail(email);
+                session.setAttribute("emailMessage", "Correo electrónico enviado correctamente.");
+            } else {
+            	session.setAttribute("emailMessage", "El usuario no está registrado en el sistema.");
+            	 
+            }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo electrónico.");
+        	session.setAttribute("emailMessage", "Error al enviar el correo electrónico.");
+        	return "redirect:/"; 
         }
-    }
+        
+        return "redirect:/";
+        
+   }
+
     
 }

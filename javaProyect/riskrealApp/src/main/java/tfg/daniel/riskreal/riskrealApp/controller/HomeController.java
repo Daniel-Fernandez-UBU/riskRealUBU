@@ -41,6 +41,12 @@ public class HomeController {
         // Create a new session for the user
         //session.invalidate();
         
+        if (session.getAttribute("emailMessage") != null) {
+            model.addAttribute("emailMessage", session.getAttribute("emailMessage"));
+            // Eliminar el mensaje de la sesión después de agregarlo al modelo
+            session.removeAttribute("emailMessage");
+        }
+
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }
