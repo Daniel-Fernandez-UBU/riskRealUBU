@@ -1,7 +1,9 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,12 +26,19 @@ public class EmailController {
 
     
     @PostMapping("/send-email")
-    private String sendEmailView(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("body") String body, HttpSession session) {
+    private String sendEmailView(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("body") String body, 
+    		HttpSession session) {
         
         try {
             boolean exists = userRepository.existsById(to);
             Optional<User> user = userRepository.findById(to);
             System.out.println(user.toString());
+            
+            // Generate a random password
+            String passRandom = RandomStringUtils.random(10, 65, 122, true, true, null, new SecureRandom());
+            System.out.println("RandomPassword es: " + passRandom);
+            
+            body = body + ":\n" + passRandom;
             
             EmailRequest email = new EmailRequest();
             email.setBody(body);
