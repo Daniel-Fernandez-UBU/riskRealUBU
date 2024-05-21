@@ -13,8 +13,15 @@ public class Answers {
 	private String text;
 	private String image;
 	private int value = 0; //Default value
+	private int id;
 	
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	//Getters and setters
 	public String getText() {
 		return text;
@@ -37,7 +44,7 @@ public class Answers {
 	}
 	@Override
 	public String toString() {
-		return "Answers [text=" + text + ", image=" + image + ", value=" + value + "]";
+		return "Answers [id= " + id + "text=" + text + ", image=" + image + ", value=" + value + "]";
 	}
 
 

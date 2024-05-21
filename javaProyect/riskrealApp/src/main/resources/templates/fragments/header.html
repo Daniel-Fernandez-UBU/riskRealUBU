@@ -5,54 +5,55 @@
 </nav>
 
 
-<nav th:fragment="main-header" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">AppRiskReal UBU</a>
-  <a class="nav-link" href="/">Home</a>
-  <a class="nav-link" th:href="@{/login}">Login</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+       <!--  <h1 th:text="#{home.lang.select}"></h1>
+	    <ul>
+	        <li><i class="fi fi-es"></i><a th:href="@{?lang=es}" th:text="#{lang.spanish}"></a></li>
+	        <li><i class="fi fi-gb"></i><a th:href="@{?lang=en}" th:text="#{lang.english}"></a></li>
+	        <li><i class="fi fi-fr"></i><a th:href="@{?lang=fr}" th:text="#{lang.french}"></a></li> 
+			<li><i class="fi fi-pt"></i><a th:href="@{?lang=pt}" th:text="#{lang.portuguese}"></a></li> 
+			<li><i class="fi fi-it"></i><a th:href="@{?lang=it}" th:text="#{lang.italian}"></a></li> 
+
+	    </ul>
+		<i class="fi fi-fr"></i> 
+		<i class="fi fi-pt"></i> 
+		<i class="fi fi-it"></i> 
+		-->
+
+<nav th:fragment="main-header" class="navbar navbar-expand navbar-light bg-light">
+	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
+	<a class="nav-link" href="/" th:text="#{home.button}"></a>
     <ul class="navbar-nav ml-auto dropdown dropleft">
-      <li class="nav-item">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	        	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	        </svg>
-	    	<span th:text="${#authentication.name}"></span>
-	    </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	  <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
+	</ul>
+	
 </nav>
 
-<nav th:fragment="quiz-header" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">AppRiskReal UBU</a>
-  <a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+<nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
+	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
+	<a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
     <ul class="navbar-nav ml-auto dropdown dropleft">
-      <li class="nav-item">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-	        	<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
-	        </svg>
-	    	<span th:text="${#authentication.name}"></span>
-	    </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item disabled" href="#">Who knows</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	</ul>
 </nav>
+
+<div th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Añade aquí otros scripts necesarios -->
+</div>
+
+<div th:fragment="emailMessage" th:if="${emailMessage}">
+    <!-- Mensaje de advertencia utilizando Bootstrap -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Información!</strong> <span th:text="${emailMessage}"></span>
+        <!-- Botón para cerrar el mensaje -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
 
