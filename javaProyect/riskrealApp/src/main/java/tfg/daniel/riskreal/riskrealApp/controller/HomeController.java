@@ -7,12 +7,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
-
+import tfg.daniel.riskreal.riskrealApp.model.User;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,22 @@ public class HomeController {
             // Eliminar el mensaje de la sesión después de agregarlo al modelo
             session.removeAttribute("emailMessage");
         }
+        
+        // If the user have to change the password
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        System.out.println(authentication.getName());
+        System.out.println(authentication.getPrincipal().getClass());
+        
+        if (authentication != null && authentication.getName() != null) {
+             int status = 0;
+             String email = authentication.getName();
+             model.addAttribute("userStatus", status);
+             model.addAttribute("email", email);
+             return "changePassword";
+        }
 
+        
         model.addAttribute("jsonFiles", jsonFiles);
         return "home";
     }

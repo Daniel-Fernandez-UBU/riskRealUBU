@@ -1,5 +1,7 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -45,7 +47,7 @@ public class RegisterController {
         user.setGender(gender);
         user.setRol(rol);
         user.setAge(age);
-        user.setStatus(true);
+        user.setStatus(1);
         userRepository.save(user);
         
         System.out.println(user.toString());
@@ -77,7 +79,7 @@ public class RegisterController {
         // Encode the plaintext password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Set status active by default
-        user.setStatus(true);
+        user.setStatus(1);
         //userRepository.save(user);
         
         System.out.println(user.toString());
@@ -101,5 +103,22 @@ public class RegisterController {
 
         // Return to home page for login
         return "redirect:/";
+    }
+    
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam("passwordAct") String passwordAct, @RequestParam("passwordNew") String passwordNew, 
+    		@RequestParam("email") String email) {
+    	
+    	Optional<User> userOpt = userRepository.findById(email);
+    	
+    	if (userOpt.isPresent()) {
+    		User user = userOpt.get();
+    		user.setPassword(passwordEncoder.encode(passwordNew));
+    		user.setStatus(1);
+    		userRepository.save(user);
+    	}
+    	
+    	return "redirect:/";
+    	
     }
 }

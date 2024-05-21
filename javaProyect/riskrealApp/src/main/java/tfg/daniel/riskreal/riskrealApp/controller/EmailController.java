@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
@@ -23,6 +24,9 @@ public class EmailController {
     
     @Autowired
     private UserRepository userRepository; 
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     
     @PostMapping("/send-email")
@@ -30,10 +34,11 @@ public class EmailController {
     		HttpSession session) {
         
         try {
-            boolean exists = userRepository.existsById(to);
-            Optional<User> user = userRepository.findById(to);
-            System.out.println(user.toString());
+
+            Optional<User> optUser = userRepository.findById(to);
+            System.out.println(optUser.toString());
             
+                        
             // Generate a random password
             String passRandom = RandomStringUtils.random(10, 65, 122, true, true, null, new SecureRandom());
             System.out.println("RandomPassword es: " + passRandom);
@@ -45,7 +50,12 @@ public class EmailController {
             email.setSubject(subject);
             email.setTo(to);
             
-            if (exists) {
+            if (optUser.isPresent()) {
+            	// Get the user object
+            	User user = optUser.get();
+            	user.setPassword(passwordEncoder.encode(passRandom));
+            	user.setStatus(2);
+            	userRepository.save(user);
                 emailService.sendMail(email);
                 session.setAttribute("emailMessage", "Correo electrónico enviado correctamente.");
             } else {

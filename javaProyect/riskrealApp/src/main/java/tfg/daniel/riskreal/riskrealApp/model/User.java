@@ -32,7 +32,7 @@ public class User {
     private String age;
 
     @Column(name = "status")
-    private boolean status;
+    private int status;
 
 	public String getPassword() {
 		return password;
@@ -98,11 +98,11 @@ public class User {
 		this.age = age;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
