@@ -3,6 +3,7 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +29,10 @@ import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.model.Answers;
 import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
+import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
+import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
+import tfg.daniel.riskreal.riskrealApp.services.CSVService;
 import tfg.daniel.riskreal.riskrealApp.services.LangService;
 
 @Controller
@@ -43,6 +49,12 @@ public class QuizController {
 	
 	@Value("${json.quiz.file.path.lang}")
 	private String jsonPathLang;
+	
+	@Autowired
+    private UserRepository userRepository; 
+	
+	@Autowired
+	private CSVService csvService;
 	
 	/**
 	 * Página cuestionario.html
@@ -137,7 +149,19 @@ public class QuizController {
 					
 			return "redirect:/quiz2";
 		}
-							
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		Optional<User> userOpt = userRepository.findById(authentication.getName());
+		
+		User user = new User();
+		
+		if (userOpt.isPresent()) {
+			user = userOpt.get();
+		}
+		
+		csvService.generateCSV(user, userSelection);
+		
 		int score = 0;
 		
 		for (Integer clave : userSelection.getAnswersValues().keySet()) {
@@ -313,5 +337,5 @@ public class QuizController {
 		userSelection.setAnswer(questionInt, text);
 		
 	}
-
+	
 }
