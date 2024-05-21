@@ -1,14 +1,18 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import tfg.daniel.riskreal.riskrealApp.model.User;
+
 
 @Controller
 public class LoginController {
+	
 	
     @GetMapping("/loginError")
     public String loginError() {

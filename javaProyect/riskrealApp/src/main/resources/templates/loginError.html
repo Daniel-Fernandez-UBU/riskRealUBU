@@ -6,14 +6,27 @@
     <meta name="author" content="">
     <title>Please sign in</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
+        <style>
+   	      form {
+         	width: 400px;
+	      	padding: 40px;
+	      	margin: 30px auto;
+	      }
+         container-fluid {
+		    display: flex;
+		    flex-direction: column;
+		    min-height: 100vh;
+		 }
+	 </style>
   </head>
   <body>
-     <div class="container">
+     <div class="container-fluid ">
+     <header th:insert="~{fragments/header :: main-header}"></header>
       <form class="form-signin" method="post" action="/login">
         <h2 class="form-signin-heading" th:text="#{login.text}"></h2>
-        <p>
         <div class="alert alert-danger" role="alert" th:text="#{login.error}"></div>
+        <p>
           <label for="username" class="sr-only">Username</label>
           <input type="text" id="email" name="username" class="form-control" placeholder="Username" required>
         </p>
@@ -26,6 +39,7 @@
         <a href="/resetPassword" th:text="#{login.forgot.password}"></a>
       </form>
 </div>
+	<div th:insert="~{fragments/header :: scripts}"></div>
 </body>
 </html>
 
