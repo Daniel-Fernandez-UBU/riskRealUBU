@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tfg.daniel.riskreal.riskrealApp.model.User;
+
 @Controller
 public class LoginController {
 	
@@ -14,7 +16,12 @@ public class LoginController {
     }
     
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+    	
+    	User user = new User();
+    	
+    	model.addAttribute("user", user);
+    	
         return "register";
     }
     

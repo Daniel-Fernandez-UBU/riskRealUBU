@@ -3,6 +3,7 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -64,6 +65,47 @@ public class RegisterController {
         userProfile.setUsername(email);
         userProfile.setProfile(profile);
         profileRepository.save(userProfile);
+        System.out.println(userProfile.toString());
+
+        // Redirigir a una página de éxito o hacer otra acción
+        return "redirect:/";
+    }
+    
+    @PostMapping("/register/done2")
+    public String saveUserProfile(@ModelAttribute("user") User user) {
+
+        // Crear y guardar la entidad User
+        //User user = new User();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        /**
+        user.setCompany(Integer.parseInt(company));
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setEmail(email);
+        user.setGender(gender);
+        user.setRol(rol);
+        user.setAge(age);
+        user.setStatus(true);
+        */
+        //userRepository.save(user);
+        
+        System.out.println(user.toString());
+        
+        String profile;
+        
+        if (user.getRol().equalsIgnoreCase("manager")) {
+        	profile = "ADMIN";
+        } else if (user.getRol().equalsIgnoreCase("employee")) {
+        	profile = "CUSTOMER";
+        } else {
+        	profile="GUEST";
+        }
+
+        // Crear y guardar la entidad Profile
+        Profile userProfile = new Profile();
+        userProfile.setUsername(user.getEmail());
+        userProfile.setProfile(profile);
+        //profileRepository.save(userProfile);
         System.out.println(userProfile.toString());
 
         // Redirigir a una página de éxito o hacer otra acción

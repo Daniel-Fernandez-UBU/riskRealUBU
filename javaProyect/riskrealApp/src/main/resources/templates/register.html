@@ -85,7 +85,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </head>
 <body>
 	<header th:insert="~{fragments/header :: main-header}"></header>
-	<form id="form" action="/register/done" method="POST">
+	<form id="form" th:action="@{/register/done2}" method="POST" th:object="${user}">
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<h1 th:text="#{register.text}"></h1>
 	   	<div class="form-group">
@@ -93,7 +93,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	      <div class="input-group">
 	         <i class="fa fa-building" aria-hidden="true"></i>
-	         <input type="text" id="company" th:name="company" th:placeholder="#{register.company}" required/>
+	         <input type="text" id="company" th:field="*{company}" th:placeholder="#{register.company}" required/>
 	         </div>
 	    </div>
 	   	<div class="form-group">
@@ -101,7 +101,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	      <div class="input-group">
 	         <i class="fa fa-envelope" aria-hidden="true"></i>
-	         <input type="email" id="email" th:name="email" th:placeholder="#{register.email}" required/>
+	         <input type="email" id="email" th:field="*{email}" th:placeholder="#{register.email}" required/>
 	         </div>
 	    </div>
 		<div class="form-group">
@@ -109,7 +109,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	      <div class="input-group">
 	         <i class="fa fa-lock" aria-hidden="true"></i>
-	         <input type="password" id="password" th:name="password"  th:placeholder="#{register.password}" required/>
+	         <input type="password" id="password" th:field="*{password}"  th:placeholder="#{register.password}" required/>
 	         </div>
 	    </div>	
 	   	<div class="form-group">
@@ -117,14 +117,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	      <div class="input-group">
 	         <i class="fa fa-user-circle" aria-hidden="true"></i>
-	         <input type="text" id="firstname" th:name="firstname"  th:placeholder="#{register.name}" required/>
+	         <input type="text" id="firstname" th:field="*{firstname}"  th:placeholder="#{register.name}" required/>
 	         </div>
 	      </div>
 	   	<div class="form-group">
 	      <label for="lastname" th:text="#{register.lastname}"></label>
 	      <div class="input-group">
 	         <i class="fa fa-user-circle" aria-hidden="true"></i>
-	       	 <input type="text" id="lastname" th:name="lastname"  th:placeholder="#{register.lastname}" required/>
+	       	 <input type="text" id="lastname" th:field="*{lastname}"  th:placeholder="#{register.lastname}" required/>
 	      </div>
 	    </div>	   
 	    <div class="form-group">
@@ -132,7 +132,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	        <div class="input-group">
 	            <i class="fa fa-venus-mars" aria-hidden="true"></i>
-	            <select id="gender" th:name="gender" required>
+	            <select id="gender" th:field="*{gender}" required>
 	            	<option value="" disabled selected></option>
 	                <option value="male" th:text="#{register.gender.masc}"></option>
 	                <option value="female" th:text="#{register.gender.fem}"></option>
@@ -146,7 +146,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	        <div class="input-group">
 	            <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
-	            <select id="age" th:name="age" required>
+	            <select id="age" th:field="*{age}" required>
 	            	<option value="" disabled selected></option>
 	                <option value="18-25" th:text="#{register.age.range1}"></option>
 					<option value="26-35" th:text="#{register.age.range2}"></option>
@@ -162,7 +162,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      <br />
 	        <div class="input-group">
 	            <i class="fa fa-briefcase" aria-hidden="true"></i>
-	            <select id="rol" th:name="rol" required>
+	            <select id="rol" th:field="*{rol}" required>
 	            	<option value="" disabled selected></option>
 	                <option value="manager" th:text="#{register.rol.manager}"></option>
 	                <option value="employee" th:text="#{register.rol.employee}"></option>
