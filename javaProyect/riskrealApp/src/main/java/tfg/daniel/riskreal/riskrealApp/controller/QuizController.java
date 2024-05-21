@@ -288,10 +288,18 @@ public class QuizController {
 		return quiz;
 	}
 	
-	private void saveScore(UserSelection userSelection, Quiz cuestionario, int questionInt, String text) {
+	/**
+	 * Method saveScore().
+	 * 
+	 * @param userSelection
+	 * @param quiz
+	 * @param questionInt
+	 * @param text
+	 */
+	private void saveScore(UserSelection userSelection, Quiz quiz, int questionInt, String text) {
 		int value = 0;
 		
-		for (Questions quest : cuestionario.getQuestions()) {
+		for (Questions quest : quiz.getQuestions()) {
 			if (quest.getId() == questionInt) {
 				for (Answers ans : quest.getAnswers()) {
 					if (ans.getText().equals(text)) {

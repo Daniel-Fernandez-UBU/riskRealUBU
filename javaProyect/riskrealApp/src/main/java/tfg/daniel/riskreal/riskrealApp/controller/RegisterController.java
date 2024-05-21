@@ -74,19 +74,10 @@ public class RegisterController {
     @PostMapping("/register/done2")
     public String saveUserProfile(@ModelAttribute("user") User user) {
 
-        // Crear y guardar la entidad User
-        //User user = new User();
+        // Encode the plaintext password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        /**
-        user.setCompany(Integer.parseInt(company));
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setEmail(email);
-        user.setGender(gender);
-        user.setRol(rol);
-        user.setAge(age);
+        // Set status active by default
         user.setStatus(true);
-        */
         //userRepository.save(user);
         
         System.out.println(user.toString());
@@ -101,14 +92,14 @@ public class RegisterController {
         	profile="GUEST";
         }
 
-        // Crear y guardar la entidad Profile
+        // Create a save profile
         Profile userProfile = new Profile();
         userProfile.setUsername(user.getEmail());
         userProfile.setProfile(profile);
         //profileRepository.save(userProfile);
         System.out.println(userProfile.toString());
 
-        // Redirigir a una página de éxito o hacer otra acción
+        // Return to home page for login
         return "redirect:/";
     }
 }
