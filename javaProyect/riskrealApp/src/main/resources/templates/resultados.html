@@ -13,12 +13,13 @@
     <body>
     
      <!-- Barra de navegación -->
-     <nav class="navbar navbar-dark bg-dark">
-         <a class="navbar-brand" href="/">Home</a>
+     <nav th:insert="~{fragments/header :: main-header}">
      </nav>
     
-    <h1>Tienes los resultados completos en consola</h1>
+    <h1>Tienes los resultados completos en el CSV</h1>
     <h3 th:text="'Resultado final: ' + ${resultado}"></h3>
   	</body>
+  	
+  	<a href="/csv/download">Download as CSV</a>
     
 </head>
