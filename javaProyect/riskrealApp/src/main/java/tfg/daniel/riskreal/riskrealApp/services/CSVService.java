@@ -31,8 +31,10 @@ public class CSVService {
 	 */
     public ResponseEntity<String> generateCSV(User user, UserSelection userSelection){
 		File file = new File(csvPath);
+		int score = 0;
 		
         if (!file.exists()) {
+        	System.out.println("El archivo no existe");
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -40,20 +42,31 @@ public class CSVService {
                 return new ResponseEntity<>("Error al crear el archivo CSV", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
+        
+        int userSize = 3;
+        int size = userSelection.getAnswers().size();
+        int indexRecord = userSize;
+        
+        String[] record = new String[size + userSize + 1];
+        
+        // Add user information to the record
+        record[0] = user.getGender();
+        record[1] = user.getAge();
+        record[2] = user.getRol();
+        
+        // Add the answers values selected to the record
+        for (Integer clave : userSelection.getAnswersValues().keySet()) {
+        	record[indexRecord] = userSelection.getAnswersValues().get(clave).toString();
+        	score += userSelection.getAnswersValues().get(clave);
+        	indexRecord += 1;
+        }
 		
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(csvPath))) {
-
-            String[] header = {"Nombre", "Edad", "Ciudad"};
-            csvWriter.writeNext(header);
-
-            String[] record1 = {"Juan", "30", "Madrid"};
-            csvWriter.writeNext(record1);
-
-            String[] record2 = {"Ana", "25", "Barcelona"};
-            csvWriter.writeNext(record2);
-
-            String[] record3 = {"Luis", "28", "Valencia"};
-            csvWriter.writeNext(record3);
+        // Add the score
+        record[indexRecord] = String.valueOf(score);
+        
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(csvPath, true))) {
+        	
+            csvWriter.writeNext(record);
 
             return new ResponseEntity<>("CSV creado exitosamente en: " + csvPath, HttpStatus.OK);
         } catch (IOException e) {

@@ -160,6 +160,7 @@ public class QuizController {
 			user = userOpt.get();
 		}
 		
+		// Generate CSV
 		csvService.generateCSV(user, userSelection);
 		
 		int score = 0;
@@ -176,6 +177,9 @@ public class QuizController {
 		
 		// To let the html acces "cuestionario"
 		model.addAttribute("resultado", score);
+		
+		// Download CSV
+		csvService.downloadCSV();
 		
 		return "resultados";
 	}
