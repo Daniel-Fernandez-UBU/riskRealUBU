@@ -332,7 +332,7 @@ A continuación se detalla de forma breve el material hardware que se ha tenido 
 	\item	Licencia Windows 11 pro: Incluida en el precio del portátil
 \end{itemize}
 
-Debido a que las empresas se deducen el IVA, los costes 
+Debido a que las empresas se deducen el IVA, este no se incluye en el cálculo del coste.
 
 \tablaSmallSinColores{Coste de recursos}{l c c}{costerecursos}
 { \multicolumn{1}{l}{\textbf{Concepto}} & \textbf{Coste}\\}{ 
@@ -344,7 +344,9 @@ S.O. Windows 11 Pro & - € \\
 \textbf{Total}  & \textbf{1.130,86 €}\\
 } 
 
+\subsubsection{Costes Total}
 
+La siguiente tabla recoge el coste total que supondría a la empresa la realización del proyecto.
 \tablaSmallSinColores{Coste Total}{l c c}{costetotall}
 { \multicolumn{1}{l}{\textbf{Concepto}} & \textbf{Coste}\\}{ 
 Coste de personal & 16.615,00 € \\
@@ -353,7 +355,39 @@ Coste de material  & 1.130,86 € \\
 \textbf{Total}  & \textbf{17.745,86 €}\\
 } 
 
+\subsubsection{Beneficios}
+La obtención de beneficio con el producto software se realizaría de la siguiente forma.
+
+\begin{enumerate}
+	\item Venta como servicio de pago mensual por cuestionario: Se ofrece el acceso a la plataforma y se tiene que abonar una cuota mensual de 5€ por cuestionario que se incluya, con 1 usuario administrador y 10 usuarios normales de base. Se pagaría un suplemento de 5€ por cada usuario administrador necesario y otros 5€ por cada paquete de 10 usuarios normales extra.
+	\item Solución \textit{standalone} con soporte y actualizaciones: Se ofrecería un docker en el que estaría corriendo la aplicación y se tendrían diferentes tarifas en nivel del soporte y actualizaciones que se contratase.
+\end{enumerate}
 
 \subsection{Viabilidad legal}
 
+Esta sección tratará sobre el tema de la licencia, tanto del \textit{software} como de la documentación.
+
+Se han recopilado las siguientes tecnologías junto con la licencia que aplica en cada una:
+
+\begin{itemize}
+	\item Spring Boot, Spring Data JPA, Spring Security, Spring Web, Thymeleaf: \textbf{Apache License 2.0}
+	\item Docker Engine: \textbf{Apache License 2.0}
+	\item Eclipse IDE:  \textbf{Eclipse Public License 2.0}
+	\item Bootstrap:  \textbf{MIT License}
+	\item MySQL:  \textbf{GNU General Public License (GPL) 2.0}
+\end{itemize}
+
+Del listado anterior, la licencia más restrictiva es la GPL de MySQL, por lo tanto, para la distribución del software se podrían dar 2 escenarios:
+
+\begin{enumerate}
+	\item Ofrecer la aplicación sin la parte de MySQL y establecerlo como requisito para funcionar pero sin incluirlo.
+	\item Ofrecer la aplicación como un todo, con MySQL integrado.
+\end{enumerate}
+
+%URL https://es.wikipedia.org/wiki/Licencia_MIT
+En el primer caso, se podría optar por una licencia MIT , que es la más permisiva y engloba a todas las demás. 
+%URL https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+El uso de esta licencia permitiría que cualquiera pueda añadir mejoras o modificar el código de la aplicación.
+
+En el segundo caso, se optaría por la licencia GPL 2.0, teniendo en cuenta que cualquier otra versión de la aplicación también sería considerado software libre.
 
