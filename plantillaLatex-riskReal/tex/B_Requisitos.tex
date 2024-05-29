@@ -2,6 +2,58 @@
 
 \section{Introducción}
 
+En este anexo se recoge la especificación de requisitos de la aplicación web que se ha desarrollado.
+
+Este documento tiene el objetivo doble de servir de \textit{contrato} con el cliente y como base de documentación para el análisis de la aplicación.
+
+\section{Objetivos generales}
+
+El proyecto tiene los siguientes objetivos generales:
+
+\begin{itemize}
+	\item Desarrollar una aplicación web que permita la realización de cuestionarios para evaluar \textit{Soft Skills}.
+	\item Permitir la carga de usuarios tanto desde una carpeta del sistema como desde la interfaz web.
+	\item Almacenar los resultados de los cuestionarios de forma anónima con fines estadísticos para los creadores.
+	\item La descarga completa de los resultados en un documento correctamente estructurado y que sea sencillo de modelar.
+	\item La aplicación web tiene que tener un diseño \textit{responsive} que extienda su funcionalidad a diferentes dispositivos.
+	\item La aplicación tiene que tener ser multi-idioma, para poder llegar a más usuarios.
+\end{itemize}
+
+\section{Catálogo de requisitos}
+
+Se van a enumerar los requisitos separándolos en dos categorías: requisitos funcionales y no funcionales.
+
+\subsection{Requisitos funcionales}
+\begin{itemize}
+	\item \textbf{RF-1 Gestión de cuestionarios}: La aplicación web tiene que ser capaz de gestionar cuestionarios.
+	\begin{itemize}
+		\item \textbf{RF-1.1 Carga de cuestionario}: Se tienen que poder cargar nuevos cuestionarios en la aplicación web.
+		\item \textbf{RF-1.2 Realización de cuestionario}: Los usuarios deben poder realizar los cuestionarios disponibles.
+	\end{itemize}
+	\item \textbf{RF-2 Gestión de usuarios}: La aplicación web tiene que ser capaz de gestionar usuarios.
+		\begin{itemize}
+		\item \textbf{RF-2.1 Registro de usuario}: Los usuarios deben poder registrarse en la aplicación.
+		\item \textbf{RF-2.2 Modificación de datos}: Los usuarios deben poder editar sus datos.
+		\item \textbf{RF-2.3 Eliminación de usuario}: Los usuarios tienen que poder darse de baja en la aplicación.
+	\end{itemize}
+	\item \textbf{RF-3 Gestión de resultados}: La apicación web tiene que permitir la gestión de los resultados obtenidos.
+		\begin{itemize}
+		\item \textbf{RF-3.1 Almacenamiento de resultados}: Los resultados se tienen que almacenar de forma persistente en la aplicación.
+		\item \textbf{RF-3.2 Descarga de resultados}: Los resultatos se tienen que poder descargar de la aplicación.
+	\end{itemize}
+	\item \textbf{RF-4 Diseño internacional}: La aplicación web tiene que ser capaz de adaptarse a varios idiomas.
+		\begin{itemize}
+		\item \textbf{RF-4.1 Selección de idioma}: La aplicación debe permitir la selección del idioma.
+		\item \textbf{RF-4.2 Idioma de los cuestionarios}: La aplicación debe permitir la carga de cuestionarios en varios idiomas.
+	\end{itemize}
+	\item \textbf{RF-5 Diseño responsable}: La aplicación tiene que ser capaz de adaptarse a diferentes dispositivos.
+\end{itemize}
+
+
+
+\section{Especificación de requisitos}
+
+
 Una muestra de cómo podría ser una tabla de casos de uso:
 
 % Caso de Uso 1 -> Consultar Experimentos.
@@ -30,11 +82,5 @@ Una muestra de cómo podría ser una tabla de casos de uso:
 	\end{tabularx}
 	\caption{CU-1 Nombre del caso de uso.}
 \end{table}
-
-\section{Objetivos generales}
-
-\section{Catálogo de requisitos}
-
-\section{Especificación de requisitos}
 
 
