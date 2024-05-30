@@ -80,9 +80,10 @@ public class RegisterController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Set status active by default
         user.setStatus(1);
-        //userRepository.save(user);
+        userRepository.save(user);
         
         System.out.println(user.toString());
+        System.out.println("Usuario guardado");
         
         String profile;
         
@@ -98,7 +99,7 @@ public class RegisterController {
         Profile userProfile = new Profile();
         userProfile.setUsername(user.getEmail());
         userProfile.setProfile(profile);
-        //profileRepository.save(userProfile);
+        profileRepository.save(userProfile);
         System.out.println(userProfile.toString());
 
         // Return to home page for login

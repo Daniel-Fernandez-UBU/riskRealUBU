@@ -3,15 +3,6 @@
 \section{Introducción}
 
 \section{Diseño de datos}
-Apoyo de la página:  https://www.gnu.org/licenses/gpl-faq.es.html#GPLPlugins
-
-Para indicad que al usar solo una función que proporciona el docker apertium-apy, la de traducción, y no haber integrado esto dentro de mi aplicación, solo se le envía texto y él lo devuelve traducido, se estima que la aplicación y apertium no pueden considerarse como un programa combinado.
-"¿Cuándo un programa y sus accesorios se consideran un solo programa combinado? (#GPLPlugins)
-Depende del modo en que el programa principal invoque sus accesorios. Si lo hace utilizando fork y exec y entre ellos se establece una íntima comunicación, compartiendo o enviando de un lado a otro complejas estructuras de datos, eso puede hacer de ellos un solo programa combinado. Si el programa principal utiliza fork y exec para invocar los accesorios y entre ellos no se establece una íntima comunicación, los accesorios son programas independientes.
-
-Si el programa principal enlaza dinámicamente con los accesorios, se producen recíprocas llamadas a funciones y comparten estructuras de datos, consideramos que forman un único programa combinado que debe contemplarse como una ampliación de ambos: programa principal y accesorios. Si el programa principal enlaza dinámicamente con los accesorios, pero la comunicación entre ellos se limita a invocar la función 'principal' del accesorio con algunas opciones y esperar su retorno, estamos ante un caso límite.
-
-Utilizar memoria compartida para la comunicación con estructuras de datos complejas es más o menos equivalente al enlazado dinámico"
 
 \section{Diseño procedimental}
 

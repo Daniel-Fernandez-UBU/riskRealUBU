@@ -9,6 +9,7 @@
 \usepackage{microtype}
 \usepackage{placeins}
 
+%\usepackage{longtable}
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
@@ -19,6 +20,14 @@
 \hypersetup{
 	allcolors = {red}
 }
+
+% Más subseción
+% Definición de \subsubsubsection
+\newcommand{\subsubsubsection}[1]{
+  \noindent\textbf{\quad #1}% Imprime el número de la sección y el título en negrita
+  \par
+}
+
 
 % Ecuaciones
 \usepackage{amsmath}

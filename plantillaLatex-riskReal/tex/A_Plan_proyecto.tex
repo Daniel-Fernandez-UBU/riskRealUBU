@@ -2,12 +2,392 @@
 
 \section{Introducción}
 
+La fase de planificación es parte fundamental y necesaria en todos los proyectos.
+
+Esta fase sive para ir evaluando la viabilidad del proyecto a lo largo de su vida, pudiendo prevenir o adelantarse a posibles inconvenientes que surgan durante la fase de desarrollo.
+Tener medidas de forma correcta las tareas que se van realizando y su implicación en el total del proyecto es fundamental para un desarrollo sostenible, tanto económica como temporalmente.
+
+Se ha decidido dividir esta fase en dos etapas:
+
+\begin{itemize}
+	\item
+	Planificación temporal.
+	\item
+	Estudio de viabilidad.
+\end{itemize}
+
+La planificación temporal tratará sobre la gestión y aprovechamiento del tiempo, así como la división del proyecto en pequeños hitos, siguiendo una metodología ágil.
+
+El estudio de viabilidad se descompone a su vez en:
+
+\begin{itemize}
+	\item
+	Viabilidad económica: Inversión necesaria para acometer el proyecto y posible obtención de beneficios.
+	\item
+	Viabilidad legal: Todos los programas software conyevan unas implicaciones legales.
+\end{itemize}
+
 \section{Planificación temporal}
+
+Para llevar a cabo una correcta planificación temporal se gestionado el proyecto siguiendo la metodología ágil que plantea Scrum, (poner enlace y bibliografía a Scrum) de forma "reducida" ya que el equipo de desarrolladores solo ha tenido un integrante, y las labores de "Scrum Master" y "Product Owner" han recaído en el tutor del TFG, el Sr. Raúl Marticorena.
+
+Para el seguimiento del desarrollo incremental del proyecto software se ha divido la planificación en una serie de Sprints (enlace y referencia).
+
+Para la visualización de los sprint se tenía intención de incluir los gráficos de "Burndown" pero debido a que han sido unos sprint vivos, donde se han inco incluyendo o desglosando tareas más genéricas en partes más específicas, se ha decidido utilizar los gráficos "Burnup" que representan de forma más real el número total de tareas completadas en cada sprint.
+
+\subsection{Reunión de Kick-off}
+\textit{Del 12/02/2024 - 1 hora}
+
+La reunión de kick-off fue la toma de contacto con el proyecto, donde se trataron los aspectos básicos y se definieron varias herramientas para el desarrollo del mismo.
+
+Temas tratados durante el Kick-off:
+\begin{itemize}
+	\item
+	Análisis iniciald e la página de risk.real.eu.
+	\item
+	Borradores con la estrucutra de los cuestionarios.
+	\item
+	Valorar la carga de los cuestionarios en bases de datos o en ficheros de tipo json.
+	\item
+	Definición básica del proyecto:
+	\begin{enumerate}
+		\item
+		Web que lea los cuestionarios.
+		\item
+		Usuarios separados por sesiones.
+		\item
+		Creación de cuestionarios desde la web.
+	\end{enumerate}
+	\item
+	Diseño responsive: Permite el renderizado para otros dispositivos.
+	\item
+	Documentación y gestión adecuada del proyecto.
+	\item
+	Uso de Spring Boot.
+	\item
+	Github o ZenHub para la gestión de tareas.
+\end{itemize}
+
+
+\subsection{Sprint 1 - Base del proyecto}
+\textit{Del 27/02/2024 al 11/03/2024 - 20 horas}
+
+Se estima una dedicación total de 20 horas de trabajo.
+Se cumple con la estimación inicial de horas para completar todas las tareas.
+
+Temas tratados durante el Sprint:
+
+\begin{itemize}
+	\item
+	Uso e integración de zube.io con GitHub.
+	\item
+	Registro en https://app.riskreal.eu/ para analizar la parte "privada" de la aplicación.
+	\item
+	Schema json:
+	\begin{itemize}
+		\item
+		Posibilidad de imagen en cada respuesta
+		\item
+		Atributo idioma en el cuestionario
+	\end{itemize}
+	Empezar a valorar y tener en cuenta la posibilidad de cuestionarios "Multi-idioma".
+	\item
+	Investigar sobre Thumeleaf y Spring Tools.
+	\item
+	Cargar un json de prueba en la app.
+	\item
+	Representación en una web del json.
+	\item
+	Posible estructura de directorios de la aplicación.
+	\item
+	Abordar la generación dinámica del contenido respecto al json.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+\imagen{Sprint1_issues}{Sprint 1 - Base del proyecto - Tareas}
+
+Gráfico de Burnup del sprint:
+\imagen{Sprint1_burnup}{Sprint 1 - Base del proyecto - Gráfico}
+
+
+\subsection{Sprint 2 - Evolución del prototipo}
+\textit{Del 11/03/2024 al 25/03/2024 - 20 horas}
+
+Se estima una dedicación total de 20 horas de trabajo.
+Se cumple con la estimación inicial de horas para completar todas las tareas.
+
+Temas tratados durante el Sprint:
+
+\begin{itemize}
+	\item
+	Inclusión de más preguntas y respuestas en el cuestionario.
+	\item
+	Tratar las preguntas como independientes en la web (permitir transición entre preguntas).
+	\item
+	Recoger y mostrar valoraciones al terminar el cuestionario.
+	\item
+	Concepto de sesión web, para que no se mezclen datos de 2 usuarios.
+	\item
+	Primer acercamiento a un framework de estilo, bootstrap o similar.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+\imagen{Sprint2_issues}{Sprint 2 - Evolución del prototipo - Tareas}
+
+Gráfico de Burnup del sprint:
+\imagen{Sprint2_burnup}{Sprint 2 - Evolución del prototipo - Gráfico}
+
+
+\subsection{Sprint 3 - Evolución del prototipo 2}
+\textit{Del 25/03/2024 al 24/04/2024 - 60 horas}
+
+Se estima una dedicación total de 20 horas de trabajo.
+Tras encontrar problemas diversos problemas a la hora de integrar la seguridad de Spring Security "referencia" en la app, no solo no se cumple con la planificación inicial sino que se extiende el mismo spring dos semanas más, ampliando la carga de trabajo con más tareas y teniendo que emplear finalmente 60 horas de trabajo para cumplir con casi todas las tareas.
+La tarea que queda pendiente se solucionará en el sprint 5.
+
+Temas tratados durante el Sprint:
+\begin{itemize}
+	\item
+	Independizar las sesiones de los usuarios.
+	\item
+	Integración de la seguridad en la aplicación.
+	\item
+	Integrar la funcionalidad de envío de correo electrónico desde la web.
+	\item
+	Enviar la información del cuestionario con el método POST para que no vayan los datos en claro.
+	\item
+	Internacionalización de los distintos menús de la app web.
+	\item
+	Integración de framework CSS para utilizar un diseño "responsive" en la web.
+	\item
+	Recoger datos de puntuación de las preguntas.
+	\item
+	Mostrar un score tras finalizar el cuestionario.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+\imagen{Sprint3_issues}{Sprint 3 - Evolución del prototipo 2 - Tareas}
+
+Gráfico de Burnup del sprint:
+\imagen{Sprint3_burnup}{Sprint 3 - Evolución del prototipo 2 - Gráfico}
+
+
+\subsection{Sprint 4 - Evolución y finalización de la parte del cuestionario}
+\textit{Del 24/04/2024 al 06/05/2024 - 23 horas}
+
+Se estima una duración inicial de 20 horas de trabajo, aunque finalmente se emplean 23 horas para cumplir con 4 de las 6 tareas previstas.
+La tarea de implementar el registro de usuarios a través de una base de datos llevó más tiempo del esperado, de ahí la necesidad de horas adicionales y el no poder cumplir con todas las tareas previstas.
+Las 2 tareas pendientes se completarán en el sprint 5.
+
+Temas tratados durante el Sprint:
+\begin{itemize}
+	\item
+	Gestión de usuarios y roles.
+	\item
+	Mostrar información del usuario logueado.
+	\item
+	Creación de un formulario de registro de usuarios.
+	\item
+	Almacenar los datos de score en un fichero, para futuros análisis.
+	\item
+	Introducción al uso de roles para acceder a distintas partes de la aplicación.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+\imagen{Sprint4_issues}{Sprint 4 - Evolución y finalización de la parte del cuestionario - Tareas}
+
+Gráfico de Burnup del sprint:
+\imagen{Sprint4_burnup}{Sprint 4 - Evolución y finalización de la parte del cuestionario - Gráfico}
+
+\subsection{Sprint 5 - Evolución y finalización de la parte del cuestionario 2}
+\textit{Del 06/05/2024 al 22/05/2024 - 40 horas}
+
+Se estima una dedicación total de 40 horas de trabajo.
+Se cumple con la estimación inicial de horas para completar todas las tareas.
+En este sprint se han completado las tareas que quedaron pendientes del sprint 3 y 4, por eso la carga de trabajo y de horas ha sido mayor que en los anteriores.
+
+Temas tratados durante el Sprint:
+
+\begin{itemize}
+	\item
+	Investigar sitio para alojar un test de la aplicación --> https://www.heroku.com/.
+	Guardar el score por pregunta y el total.
+	\item
+	Descarga de resultados en CSV.
+	\item
+	Array de imágenes en las preguntas.
+	\item
+	Diseño de datos bbdd y json. Código de la aplicación.
+	\item
+	Revisar información para incluir en el arquitectónico.
+	\item
+	Revisar diagramas para incluir en el diseño procedimental.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+\imagen{Sprint5_issues}{Sprint 5 - Evolución y finalización de la parte del cuestionario 2 - Tareas}
+
+Gráfico de Burnup del sprint:
+\imagen{Sprint5_burnup}{Sprint 5 - Base del proyecto - Gráfico}
+
+\subsection{Sprint 6 - Carga de cuestionarios y documentación}
+\textit{Del 22/05/2024 al 30/05/2024 - 25 horas}
+
+Temas tratados durante el Sprint:
+\begin{itemize}
+	\item
+	Carga de cuestionarios desde una carpeta definida en configuración.
+	\item
+	Carga de cuestionarios de forma "viva" desde la propia web de la aplicación.
+	\item
+	Completar la memoria del proyecto.
+	\item
+	Completar los anexos del proyecto.
+	\item
+	Documentar de forma adecuada y en inglés el código de java.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+% \imagen{Sprint6_issues}{Sprint 6 - Carga de cuestionarios y documentación - Tareas}
+
+Gráfico de Burnup del sprint:
+% \imagen{Sprint6_burnup}{Sprint 6 - Carga de cuestionarios y documentación - Gráfico}
+
+
+\subsection{Sprint 7 - }
+\textit{Del 30/05/2024 al 03/06/2024 - 20 horas}
+
+Temas tratados durante el Sprint:
+\begin{itemize}
+	\item
+	Lista de tareas.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+% \imagen{Sprint7_issues}{Sprint 7 -  - Tareas}
+
+Gráfico de Burnup del sprint:
+% \imagen{Sprint7_burnup}{Sprint 7 -  - Gráfico}
+
+
+\subsection{Sprint 8 - }
+\textit{Del 03/05/2024 al 10/06/2024 - 30 horas}
+
+Temas tratados durante el Sprint:
+\begin{itemize}
+	\item
+	Lista de tareas.
+\end{itemize}
+
+Tareas tratadas cerradas a lo largo del sprint:
+% \imagen{Sprint8_issues}{Sprint 8 -  - Tareas}
+
+Gráfico de Burnup del sprint:
+% \imagen{Sprint8_burnup}{Sprint 8 -  - Gráfico}
 
 \section{Estudio de viabilidad}
 
 \subsection{Viabilidad económica}
 
+A lo largo de este apartado se van a simular los costes/beneficios del proyecto, si hubiese sido llevado a cabo en una empresa real.
+
+\subsubsection{Costes}
+Los costes se han desglosado en dos categorías:
+\begin{itemize}
+	\item	Costes de personal
+	\item	Costes de recursos
+\end{itemize}
+
+\subsubsubsection{Costes de personal}
+Se ha simulado la contratación de un programador web durante los 5 meses que ha durado el proyecto.
+
+En la siguiente tabla se desglosan los datos de retenciones "referencia" y tributación de la empresa a la seguridad social "referencia" para hacer la estimación.
+%URL calculo nómina https://www.billin.net/calculadora-contratar-trabajador/
+
+%URL IRPF https://cincodias.elpais.com/herramientas/calculadora-irpf/
+
+%URL Cotización Régimen General seguridad social: https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/10721/10957/583#580.
+
+\tablaSmallSinColores{Coste de personal}{l c c}{costepersonal}
+{ \multicolumn{1}{l}{\textbf{Concepto}} & \textbf{Coste}\\}{ 
+Salario mensual bruto & 2.000,00 € \\
+Retención IRPF (13,55\%) & 217,00 € \\
+Seguridad social (36,25\%) & 1.450,00 € \\
+Salario mensual neto & 1.602,00 € \\
+Coste total para la empresa & 3.323,00 €\\
+\midrule
+\textbf{Total 5 meses}  & \textbf{16.615,00 €}\\
+} 
+\subsubsubsection{Costes de recursos}
+Solo se ha tenido en cuenta el material necesario para el nuevo empleado, no se considera ni el alquiler del espacio, ni el acceso a internet ni el mobiliario, ya que gracias al trabajo híbrido (presencial + teletrabajo) todo esto no ha supuesto ningún gasto adicional para la empresa.
+
+A continuación se detalla de forma breve el material hardware que se ha tenido en cuenta:
+\begin{itemize}
+	% https://www.dell.com/es-es/shop/laptops/nuevo-inspiron-14-plus/spd/inspiron-14-7440-laptop/cn74702
+	\item Ordenador portátil: Dell Inspiron 14 Plus 1.098,99 € - 908,26 € sin IVA
+	%https://www.pccomponentes.com/dell-s-series-s2721hs-27-led-ips-fullhd-freesync
+	\item	Monitor adicional: Dell S Series S2721HS 27" LED IPS FullHD  229,36€  - 189,55 € SIN IVA
+	%https://www.pccomponentes.com/logitech-mk235-combo-teclado-y-raton-inalambrico
+	\item	Combo teclado y ratón: Logitech MK235 39,99 € - 33,05€ SIN IVA
+	\item	Licencia Windows 11 pro: Incluida en el precio del portátil
+\end{itemize}
+
+Debido a que las empresas se deducen el IVA, este no se incluye en el cálculo del coste.
+
+\tablaSmallSinColores{Coste de recursos}{l c c}{costerecursos}
+{ \multicolumn{1}{l}{\textbf{Concepto}} & \textbf{Coste}\\}{ 
+Ordenador portátil & 908,26 € \\
+Monitor adicional  & 189,55 € \\
+Combo teclado y ratón & 33,05€ \\
+S.O. Windows 11 Pro & - € \\
+\midrule
+\textbf{Total}  & \textbf{1.130,86 €}\\
+} 
+
+\subsubsection{Costes Total}
+
+La siguiente tabla recoge el coste total que supondría a la empresa la realización del proyecto.
+\tablaSmallSinColores{Coste Total}{l c c}{costetotall}
+{ \multicolumn{1}{l}{\textbf{Concepto}} & \textbf{Coste}\\}{ 
+Coste de personal & 16.615,00 € \\
+Coste de material  & 1.130,86 € \\
+\midrule
+\textbf{Total}  & \textbf{17.745,86 €}\\
+} 
+
+\subsubsection{Beneficios}
+La obtención de beneficio con el producto software se realizaría de la siguiente forma.
+
+\begin{enumerate}
+	\item Venta como servicio de pago mensual por cuestionario: Se ofrece el acceso a la plataforma y se tiene que abonar una cuota mensual de 5€ por cuestionario que se incluya, con 1 usuario administrador y 10 usuarios normales de base. Se pagaría un suplemento de 5€ por cada usuario administrador necesario y otros 5€ por cada paquete de 10 usuarios normales extra.
+	\item Solución \textit{standalone} con soporte y actualizaciones: Se ofrecería un docker en el que estaría corriendo la aplicación y se tendrían diferentes tarifas en nivel del soporte y actualizaciones que se contratase.
+\end{enumerate}
+
 \subsection{Viabilidad legal}
 
+Esta sección tratará sobre el tema de la licencia, tanto del \textit{software} como de la documentación.
+
+Se han recopilado las siguientes tecnologías junto con la licencia que aplica en cada una:
+
+\begin{itemize}
+	\item Spring Boot, Spring Data JPA, Spring Security, Spring Web, Thymeleaf: \textbf{Apache License 2.0}
+	\item Docker Engine: \textbf{Apache License 2.0}
+	\item Eclipse IDE:  \textbf{Eclipse Public License 2.0}
+	\item Bootstrap:  \textbf{MIT License}
+	\item MySQL:  \textbf{GNU General Public License (GPL) 2.0}
+\end{itemize}
+
+Del listado anterior, la licencia más restrictiva es la GPL de MySQL, por lo tanto, para la distribución del software se podrían dar 2 escenarios:
+
+\begin{enumerate}
+	\item Ofrecer la aplicación sin la parte de MySQL y establecerlo como requisito para funcionar pero sin incluirlo.
+	\item Ofrecer la aplicación como un todo, con MySQL integrado.
+\end{enumerate}
+
+%URL https://es.wikipedia.org/wiki/Licencia_MIT
+En el primer caso, se podría optar por una licencia MIT , que es la más permisiva y engloba a todas las demás. 
+%URL https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+El uso de esta licencia permitiría que cualquiera pueda añadir mejoras o modificar el código de la aplicación.
+
+En el segundo caso, se optaría por la licencia GPL 2.0, teniendo en cuenta que cualquier otra versión de la aplicación también sería considerado software libre.
 
