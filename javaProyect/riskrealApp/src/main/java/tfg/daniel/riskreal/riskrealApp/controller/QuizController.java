@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
-import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.core.io.Resource;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +29,6 @@ import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.CSVService;
-import tfg.daniel.riskreal.riskrealApp.services.LangService;
 
 @Controller
 @SessionAttributes("preguntasRespondidas")
@@ -41,8 +36,6 @@ import tfg.daniel.riskreal.riskrealApp.services.LangService;
 public class QuizController {
 	
 	
-	@Autowired
-	private LangService langService;
 	
 	@Value("${json.quiz.file.path}")
 	private String jsonPath;
@@ -101,7 +94,7 @@ public class QuizController {
 		
 		
 		// Get file
-		archivo =   jsonPath + "/" + archivo;
+		archivo =   jsonPathLang + "/" + archivo;
 		
 		// We get full quiz from json file
 		Quiz cuestionario = getQuiz(archivo);
@@ -184,7 +177,7 @@ public class QuizController {
 		return "resultados";
 	}
 	
-    
+    /**
     @PostMapping("/loadQuiz")
     public String loadQuiz(Model model, @RequestParam("archivo") String archivo,  HttpSession session) {
     	
@@ -214,7 +207,7 @@ public class QuizController {
     			propertiesService.addProperties(baseAnswer + ans.getValue() + ".value", String.valueOf(ans.getValue()), lang);
     		}
     	}
-    	*/
+    	
     	
     	langService.showLangs();
 
@@ -223,72 +216,9 @@ public class QuizController {
         //model.addAttribute("jsonFiles", jsonFiles);
         return "redirect:/";
     }
-    
-    @PostMapping("/jsonQuiz")
-    public String jsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo) {
-    	
-    	langService.showLangs();
-    	
-    	String[] langArray = langService.getLangs().split(",");
-    	
-    	System.out.println("Idiomas disponibles: ");
-    	for (String lang : langArray) {
-    		System.out.println(lang);
-    	}
-    	
-    	archivo =   jsonPath + "/" + archivo;
-    	
-    	String lang = "_es";
-    	
-    	System.out.println("Archivo que se pasa a getQuiz: " + archivo);
-    	Quiz cuestionario = getQuiz(archivo);
-    	
-    	ObjectMapper mapper = new ObjectMapper();
-    	
-    	File json = new File(jsonPathLang + "_" + cuestionario.getId() + lang + ".json");
-    	   	
-    	try {
-    		if (!json.exists()) {
-                json.createNewFile();
-                System.out.println("Archivo creado: " + json.getAbsolutePath());
-    		}
-			mapper.writeValue(json, cuestionario);
-			System.out.println("Creado el json: " + json.getAbsolutePath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
 
-        return "redirect:/";
-    }
+	*/
     
-    @PostMapping("/testQuiz")
-    public String testQuiz(Model model,  HttpSession session) {
-    	
-    	String archivo =   jsonPathLang + "_es.properties";
-    	
-    	System.out.println(archivo);
-    	// We get full quiz from json file
-    	
-    	File file = new File(archivo);
-    	
-    	Resource resource = new FileSystemResource(file);
-    	
-    	try {
-			Properties props = PropertiesLoaderUtils.loadProperties(resource);
-			
-			System.out.println(props.entrySet());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-    	System.out.println("He pasado por aquí");
-        
-        //model.addAttribute("jsonFiles", jsonFiles);
-        return "redirect:/";
-    }
 	
 	/**
 	 * Method for get the full Quiz from json file.
