@@ -37,22 +37,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <button type="submit" class="btn btn-primary">Acceder al cuestionario</button>
             <br>
         </form>
-				
-		<form action="/jsonQuiz" method="POST">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			<div class="form-group">
-			   <select class="form-control" name="archivo">
-			        <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
-			    </select>
-			</div>
-		    <button type="submit" class="btn btn-primary">Parsea un json definido y lo guarda en otra ruta</button>
-		</form>
-		
-        <br><br>
-
     </div>
     
-
     <div th:insert="~{fragments/header :: scripts}"></div>
     
     

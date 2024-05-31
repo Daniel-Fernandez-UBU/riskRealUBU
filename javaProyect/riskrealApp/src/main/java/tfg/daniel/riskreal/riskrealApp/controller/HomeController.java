@@ -3,6 +3,7 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,17 +20,17 @@ import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 
-import java.util.ArrayList;
 
 @Controller
 @PropertySource("classpath:custom.properties")
 public class HomeController {
 	
-	@Value("${json.quiz.file.path}")
-	private String jsonPath;
-	
 	@Autowired
     private UserRepository userRepository; 
+	
+	
+	@Value("${json.quiz.file.path.lang}")
+	private String jsonPathLang;
 
 		
     @GetMapping("/")
@@ -37,7 +38,18 @@ public class HomeController {
         // Obtener la lista de archivos JSON en la carpeta ClassPathResource
         //ClassPathResource resource = new ClassPathResource("");
         //File file = resource.getFile();
-    	File file = new File(jsonPath);
+
+                        
+        // Create a new session for the user
+        //session.invalidate();
+        /**
+        if (session.getAttribute("emailMessage") != null) {
+            model.addAttribute("emailMessage", session.getAttribute("emailMessage"));
+            // Eliminar el mensaje de la sesión después de agregarlo al modelo
+            session.removeAttribute("emailMessage");
+        }*/
+    	
+    	File file = new File(jsonPathLang);
         File[] files = file.listFiles();
         List<String> jsonFiles = new ArrayList<>();
         for (File jsonFile : files) {
@@ -45,15 +57,8 @@ public class HomeController {
                 jsonFiles.add(jsonFile.getName());
             }
         }
-                        
-        // Create a new session for the user
-        //session.invalidate();
-        
-        if (session.getAttribute("emailMessage") != null) {
-            model.addAttribute("emailMessage", session.getAttribute("emailMessage"));
-            // Eliminar el mensaje de la sesión después de agregarlo al modelo
-            session.removeAttribute("emailMessage");
-        }
+		
+        model.addAttribute("jsonFiles", jsonFiles);
         
         // If the user have to change the password
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -61,8 +66,7 @@ public class HomeController {
         	model.addAttribute("email", authentication.getName());
         	return "changePassword";
         }
-        
-        model.addAttribute("jsonFiles", jsonFiles);
+       
         return "home";
     }
     
