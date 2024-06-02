@@ -19,7 +19,10 @@ import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
-// TODO: Auto-generated Javadoc
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
+
 /**
  * Class CSVService.
  * 
@@ -39,7 +42,7 @@ public class CSVService {
 	private String csvPath;
 	
 	/**  Class constant reportSize. */
-	private final int reportSize = 3;
+	private final int reportSize = 6;
 	
 	/**
 	 * Inits the class.
@@ -54,11 +57,12 @@ public class CSVService {
 	 * 
 	 * This method save the score information in a csv, and create it if the file not exists.
 	 *
+	 * @param id the id
 	 * @param user the user
 	 * @param userSelection the user selection
 	 * @return OK or ERROR - if there is any problem with the csv file.
 	 */
-    public ResponseEntity<String> generateCSV(User user, UserSelection userSelection){
+    public ResponseEntity<String> generateCSV(String id, User user, UserSelection userSelection){
 		File file = new File(csvPath);
 		int score = 0;
 		
@@ -78,9 +82,12 @@ public class CSVService {
         String[] record = new String[size + reportSize + 1];
         
         // Add user information to the record
-        record[0] = user.getGender();
-        record[1] = user.getAge();
-        record[2] = user.getRol();
+        record[0] = getDateTime();
+        record[1] = id;
+        record[2] = user.getEmail();
+        record[3] = user.getGender();
+        record[4] = user.getAge();
+        record[5] = user.getRol();
         
         // Add the answers values selected to the record
         for (Integer clave : userSelection.getAnswersValues().keySet()) {
@@ -120,6 +127,26 @@ public class CSVService {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+	}
+	
+	/**
+	 * Gets the date time.
+	 *
+	 * @return the date time
+	 */
+	private String getDateTime() {
+		String currentTime = null;
+		
+        // Get Current Time in UTC
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+
+        // Define a datetimeformat
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss 'UTC'");
+
+        // Convert datetime to string with the format
+        currentTime = now.format(formatter);
+        
+        return currentTime;
 	}
 
 }

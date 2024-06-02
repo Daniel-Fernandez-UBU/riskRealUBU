@@ -158,10 +158,13 @@ public class QuizController {
 		// Parse the question id as int
 		int questionInt = Integer.parseInt(question);
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
-		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
+		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		String gender = (String) session.getAttribute("gender");
+		String age = (String) session.getAttribute("age");
+		String rol = (String) session.getAttribute("rol");
 		
 		if(text != null) {
-			saveScore(userSelection, cuestionario, questionInt, text);
+			saveScore(userSelection, quiz, questionInt, text);
 		}
 		
 		System.out.println(estado);
@@ -188,22 +191,21 @@ public class QuizController {
 		
 		if (userOpt.isPresent()) {
 			user = userOpt.get();
+		} else { // For not registered users
+			user.setEmail("guest");
+			user.setGender(gender);
+			user.setRol(rol);
+			user.setAge(age);
 		}
 		
 		// Generate CSV
-		csvService.generateCSV(user, userSelection);
+		csvService.generateCSV(String.valueOf(quiz.getId()), user, userSelection);
 		
 		int score = 0;
 		
 		for (Integer clave : userSelection.getAnswersValues().keySet()) {
 			score += userSelection.getAnswersValues().get(clave);
-			System.out.println("El valor de la pregunta: " + 
-					clave + 
-					" es: " + 
-					userSelection.getAnswersValues().get(clave));
 		}
-		
-		System.out.println("El score final es: " + score);
 		
 		// To let the html acces "cuestionario"
 		model.addAttribute("resultado", score);
