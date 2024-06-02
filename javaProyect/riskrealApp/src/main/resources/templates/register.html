@@ -85,7 +85,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </head>
 <body>
 	<header th:insert="~{fragments/header :: main-header}"></header>
-	<form id="form" th:action="@{/register/done2}" method="POST" th:object="${user}">
+	<form id="form" th:action="@{/register/done}" method="POST" th:object="${user}">
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<h1 th:text="#{register.text}"></h1>
 	   	<div class="form-group">
