@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
@@ -32,13 +33,23 @@ public class jsonController {
 	private CustomConfig customConfig;
 	
 	/** Class attribute jsonPath. */
-	private String jsonPath = customConfig.getJsonFilePath();
+	private String jsonPath;
 	
 	/** Class attribute jsonPathLang. */
-	private String jsonPathLang = customConfig.getQuizFilePath();
+	private String jsonPathLang;
 	
 	/** Class attribute langService. */
-	private String langService = customConfig.getLangAvailables();
+	private String langService;
+	
+	/**
+	 * Inits the class.
+	 */
+	@PostConstruct
+	public void init() {
+	    this.jsonPathLang = customConfig.getQuizFilePath();
+	    this.jsonPath = customConfig.getJsonFilePath();
+	    this.langService = customConfig.getLangAvailables();
+	}
 	
 	@GetMapping("/json/view")
 	public String jsonList(Model model) {

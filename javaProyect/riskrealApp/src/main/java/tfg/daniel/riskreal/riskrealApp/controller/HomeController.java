@@ -8,47 +8,56 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 
 
+/**
+ * Class HomeController.
+ *  
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ * 
+ */
 @Controller
-@PropertySource("classpath:custom.properties")
 public class HomeController {
 	
+	/** The user repository. */
 	@Autowired
     private UserRepository userRepository; 
 	
+	/** The custom config. */
+	@Autowired
+	private CustomConfig customConfig;
 	
-	@Value("${json.quiz.file.path.lang}")
-	private String jsonPathLang;
+	/** The json path lang. */
+	private String jsonPathLang;;
+	
+	@PostConstruct
+	public void init() {
+	    this.jsonPathLang = customConfig.getQuizFilePath();
+	}
 
 		
+    /**
+     * Home.
+     *
+     * @param model the model
+     * @param session the session
+     * @return the string
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     @GetMapping("/")
     public String home(Model model,  HttpSession session) throws IOException {
-        // Obtener la lista de archivos JSON en la carpeta ClassPathResource
-        //ClassPathResource resource = new ClassPathResource("");
-        //File file = resource.getFile();
-
-                        
-        // Create a new session for the user
-        //session.invalidate();
-        /**
-        if (session.getAttribute("emailMessage") != null) {
-            model.addAttribute("emailMessage", session.getAttribute("emailMessage"));
-            // Eliminar el mensaje de la sesión después de agregarlo al modelo
-            session.removeAttribute("emailMessage");
-        }*/
-    	
     	File file = new File(jsonPathLang);
         File[] files = file.listFiles();
         List<String> jsonFiles = new ArrayList<>();
@@ -73,7 +82,8 @@ public class HomeController {
     
     /**
      * Method changePasswordRequired().
-     * @param authentication
+     *
+     * @param authentication the authentication
      * @return true o false
      */
     private boolean changePasswordRequired(Authentication authentication) {

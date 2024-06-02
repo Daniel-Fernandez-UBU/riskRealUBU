@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Answers;
 import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
@@ -30,29 +30,48 @@ import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.CSVService;
 
+
+/**
+ * Class QuizController.
+ * 
+ * Class that have all the methods related with the quiz.
+ * 
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ * 
+ */
 @Controller
 @SessionAttributes("preguntasRespondidas")
-@PropertySource("classpath:custom.properties")
 public class QuizController {
 	
-	
-	
-	@Value("${json.quiz.file.path}")
-	private String jsonPath;
-	
-	@Value("${json.quiz.file.path.lang}")
+	@Autowired
+	private CustomConfig customConfig;
+		
+	/** The json path lang. */
 	private String jsonPathLang;
 	
+	/** The user repository. */
 	@Autowired
     private UserRepository userRepository; 
 	
+	/** The csv service. */
 	@Autowired
 	private CSVService csvService;
 	
 	/**
+	 * Inits the class.
+	 */
+	@PostConstruct
+	public void init() {
+	    this.jsonPathLang = customConfig.getQuizFilePath();
+	}
+	
+	/**
 	 * Página cuestionario.html
-	 * @param model
-	 * @return
+	 *
+	 * @param model the model
+	 * @param session the session
+	 * @return the string
 	 */
 	@RequestMapping(value = "/quiz2", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mostrarCuestionario(Model model, HttpSession session) {
@@ -89,6 +108,14 @@ public class QuizController {
 	}
 	
 
+	/**
+	 * Start quiz.
+	 *
+	 * @param model the model
+	 * @param archivo the archivo
+	 * @param session the session
+	 * @return the string
+	 */
 	@PostMapping("/quiz/startQuiz")
 	public String startQuiz(Model model, @RequestParam("archivo") String archivo, HttpSession session) {
 		
@@ -114,8 +141,18 @@ public class QuizController {
 		return "redirect:/quiz2";
 	}
 	
+	/**
+	 * Start quiz.
+	 *
+	 * @param estado the estado
+	 * @param question the question
+	 * @param text the text
+	 * @param session the session
+	 * @param model the model
+	 * @return the string
+	 */
 	@PostMapping("/quiz/showResults")
-	public String startQuiz(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
+	public String showResults(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
 			HttpSession session, Model model) {
 		
 		// Parse the question id as int
@@ -176,54 +213,12 @@ public class QuizController {
 		
 		return "resultados";
 	}
-	
-    /**
-    @PostMapping("/loadQuiz")
-    public String loadQuiz(Model model, @RequestParam("archivo") String archivo,  HttpSession session) {
-    	
-    	archivo =   jsonPath + "/" + archivo;
-    	System.out.println(archivo);
-    	// We get full quiz from json file
-
-    	/**
-    	// Añadimos el cuestionario con su Id, titulo
-    	propertiesService.addProperties(base + cuestionario.getId() + ".id", String.valueOf(cuestionario.getId()), lang);
-    	propertiesService.addProperties(base + cuestionario.getId() + ".title", cuestionario.getTitle(), lang);
-    	
-    	String baseQuestion = base +  String.valueOf(cuestionario.getId()) + ".question.";
-    
-    	for (Questions question : cuestionario.getQuestions()) {
-    		// Add question id
-    		propertiesService.addProperties(baseQuestion + question.getId() + ".id", String.valueOf(question.getId()), lang);
-	    	// Add question text	
-    		propertiesService.addProperties(baseQuestion + question.getId() + ".text", question.getDescription(), lang);
-    		String baseAnswer = baseQuestion + String.valueOf(question.getId()) + ".answer.";
-    		for (Answers ans : question.getAnswers()) {
-    			// Add answer id
-    			propertiesService.addProperties(baseAnswer + ans.getId() + ".id", String.valueOf(ans.getId()), lang);
-    			// Add answer text
-    			propertiesService.addProperties(baseAnswer + ans.getId() + ".text", ans.getText(), lang);
-    			// Add answer value
-    			propertiesService.addProperties(baseAnswer + ans.getValue() + ".value", String.valueOf(ans.getValue()), lang);
-    		}
-    	}
-    	
-    	
-    	langService.showLangs();
-
-    	System.out.println("He pasado por aquí");
-        
-        //model.addAttribute("jsonFiles", jsonFiles);
-        return "redirect:/";
-    }
-
-	*/
-    
+	    
 	
 	/**
 	 * Method for get the full Quiz from json file.
 	 * @param String jsonQuiz - full json path
-	 * @return
+	 * @return quiz object
 	 */
 	private Quiz getQuiz(String jsonQuiz) {
 		// create Object Mapper
@@ -248,11 +243,11 @@ public class QuizController {
 	
 	/**
 	 * Method saveScore().
-	 * 
-	 * @param userSelection
-	 * @param quiz
-	 * @param questionInt
-	 * @param text
+	 *
+	 * @param userSelection the user selection
+	 * @param quiz the quiz
+	 * @param questionInt the question int
+	 * @param text the text
 	 */
 	private void saveScore(UserSelection userSelection, Quiz quiz, int questionInt, String text) {
 		int value = 0;

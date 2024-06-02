@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,77 +16,61 @@ import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.ProfileRepository;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 
+/**
+ * Class RegisterController.
+ * 
+ * Controller that have all the methods related to the registration in the app.
+ * 
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ */
 @Controller
 public class RegisterController {
 
+    /** The user repository. */
     @Autowired
     private UserRepository userRepository;
 
+    /** The profile repository. */
     @Autowired
     private ProfileRepository profileRepository;
     
+    /** The password encoder. */
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @PostMapping("/register/done")
-    public String registrarUsuario(
-            @RequestParam String password,
-            @RequestParam String company,
-            @RequestParam String rol,
-            @RequestParam String firstname,
-            @RequestParam String lastname,
-            @RequestParam String email,
-            @RequestParam String gender,
-            @RequestParam String age) {
-
-        // Crear y guardar la entidad User
-        User user = new User();
-        user.setPassword(passwordEncoder.encode(password));
-        user.setCompany(Integer.parseInt(company));
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setEmail(email);
-        user.setGender(gender);
-        user.setRol(rol);
-        user.setAge(age);
-        user.setStatus(1);
-        userRepository.save(user);
-        
-        System.out.println(user.toString());
-        
-        String profile;
-        
-        if (rol.equalsIgnoreCase("manager")) {
-        	profile = "ADMIN";
-        } else if (rol.equalsIgnoreCase("employee")) {
-        	profile = "CUSTOMER";
-        } else {
-        	profile="GUEST";
-        }
-
-        // Crear y guardar la entidad Profile
-        Profile userProfile = new Profile();
-        userProfile.setUsername(email);
-        userProfile.setProfile(profile);
-        profileRepository.save(userProfile);
-        System.out.println(userProfile.toString());
-
-        // Redirigir a una página de éxito o hacer otra acción
-        return "redirect:/";
+    
+    /**
+     * Register.
+     *
+     * @param model the model
+     * @return the string
+     */
+    @GetMapping("/register")
+    public String register(Model model) {
+    	
+    	User user = new User();
+    	
+    	model.addAttribute("user", user);
+    	
+        return "register";
     }
     
-    @PostMapping("/register/done2")
+    /**
+     * Save user profile.
+     *
+     * @param user the user
+     * @return the string
+     */
+    @PostMapping("/register/done")
     public String saveUserProfile(@ModelAttribute("user") User user) {
 
-        // Encode the plaintext password
+        // Encode the plain text password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Set status active by default
         user.setStatus(1);
+        // Save the user in the db.
         userRepository.save(user);
-        
-        System.out.println(user.toString());
-        System.out.println("Usuario guardado");
-        
+                
         String profile;
         
         if (user.getRol().equalsIgnoreCase("manager")) {
@@ -95,17 +81,24 @@ public class RegisterController {
         	profile="GUEST";
         }
 
-        // Create a save profile
+        // Save profile in the db.
         Profile userProfile = new Profile();
         userProfile.setUsername(user.getEmail());
         userProfile.setProfile(profile);
         profileRepository.save(userProfile);
         System.out.println(userProfile.toString());
 
-        // Return to home page for login
-        return "redirect:/";
+        // Return to login page
+        return "redirect:/login";
     }
     
+    /**
+     * Change password.
+     *
+     * @param passwordNew the password new
+     * @param email the email
+     * @return the string
+     */
     @PostMapping("/changePassword")
     public String changePassword(@RequestParam("passwordNew") String passwordNew, @RequestParam("email") String email) {
     	
