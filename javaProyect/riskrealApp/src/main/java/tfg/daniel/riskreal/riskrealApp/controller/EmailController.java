@@ -13,14 +13,14 @@ import org.springframework.stereotype.Controller;
 
 import tfg.daniel.riskreal.riskrealApp.model.EmailRequest;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
-import tfg.daniel.riskreal.riskrealApp.services.IEmailService;
+import tfg.daniel.riskreal.riskrealApp.services.EmailService;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 
 @Controller
 public class EmailController {
     
     @Autowired
-    private IEmailService emailService;
+    private EmailService emailService;
     
     @Autowired
     private UserRepository userRepository; 

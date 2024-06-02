@@ -1,4 +1,4 @@
-package tfg.daniel.riskreal.riskrealApp.impl;
+package tfg.daniel.riskreal.riskrealApp.services;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,15 +9,15 @@ import org.thymeleaf.context.Context;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import tfg.daniel.riskreal.riskrealApp.model.EmailRequest;
-import tfg.daniel.riskreal.riskrealApp.services.IEmailService;
 
 @Service
-public class EmailServiceImpl implements IEmailService {
+public class EmailService {
+	
 	
 	private final JavaMailSender javaMailSender;	
 	private final TemplateEngine templateEngine;
 	
-	public EmailServiceImpl(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
+	public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
 		this.javaMailSender = javaMailSender;
 		this.templateEngine = templateEngine;
 	}
@@ -28,7 +28,6 @@ public class EmailServiceImpl implements IEmailService {
 	 * Send a email.
 	 * 
 	 */
-	@Override
 	public void sendMail(EmailRequest email) throws MessagingException {
 		try {
 			MimeMessage message = this.javaMailSender.createMimeMessage();
@@ -55,3 +54,4 @@ public class EmailServiceImpl implements IEmailService {
 	}
 	
 }
+
