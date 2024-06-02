@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,39 +14,56 @@ import org.springframework.stereotype.Service;
 
 import com.opencsv.CSVWriter;
 
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
+/**
+ * Class CSVService.
+ * 
+ * This class have the methods related with the csv files, the creation and the download.
+ * @author Daniel Fernández Barrientos
+ * @version 1.0
+ * 
+ */
 @Service
-@PropertySource("classpath:custom.properties")
 public class CSVService {
 
-	@Value("${csv.score.path}")
-	private String csvPath;
+	/** Injection CustomConfig class. */
+	@Autowired
+	private CustomConfig customConfig;
+
+	/** Class attribute csvPath. */
+	private String csvPath = customConfig.getCsvScorePath();
+	
+	/** Class constant reportSize */
+	private final int reportSize = 3;
 	
 	/**
+	 * Method generateCSV.
 	 * 
-	 * @return
+	 * This method save the score information in a csv, and create it if the file not exists.
+	 * 
+	 * @return OK or ERROR - if there is any problem with the csv file.
 	 */
     public ResponseEntity<String> generateCSV(User user, UserSelection userSelection){
 		File file = new File(csvPath);
 		int score = 0;
 		
         if (!file.exists()) {
-        	System.out.println("El archivo no existe");
+        	System.out.println("File not exists.");
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                return new ResponseEntity<>("Error al crear el archivo CSV", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Error creating csv.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-        
-        int userSize = 3;
+
         int size = userSelection.getAnswers().size();
-        int indexRecord = userSize;
+        int indexRecord = reportSize;
         
-        String[] record = new String[size + userSize + 1];
+        String[] record = new String[size + reportSize + 1];
         
         // Add user information to the record
         record[0] = user.getGender();
@@ -68,16 +84,19 @@ public class CSVService {
         	
             csvWriter.writeNext(record);
 
-            return new ResponseEntity<>("CSV creado exitosamente en: " + csvPath, HttpStatus.OK);
+            return new ResponseEntity<>("CSV successfully created in: " + csvPath, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity<>("Error al crear el CSV", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error while creating csv.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
 	
 	/**
+	 * Method downloadCSV.
 	 * 
-	 * @return
+	 * Method that download the csv score file from the app to the user file system.
+	 * 
+	 * @return OK or NotFound - if the file exist or not.
 	 */
 	public ResponseEntity<Resource> downloadCSV() {
         File file = new File(csvPath);

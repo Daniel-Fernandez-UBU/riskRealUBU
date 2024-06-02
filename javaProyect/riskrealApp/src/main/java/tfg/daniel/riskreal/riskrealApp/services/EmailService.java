@@ -10,13 +10,31 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import tfg.daniel.riskreal.riskrealApp.model.EmailRequest;
 
+/**
+ * 
+ * Class EmailService.
+ * 
+ * Class that define the email service.
+ * This class uses a html template as "body" for sender emails.
+ * 
+ * @author Daniel Fernández Barrientos
+ * @version 1.0
+ * 
+ */
 @Service
 public class EmailService {
 	
-	
-	private final JavaMailSender javaMailSender;	
+	/** JavaMailSender class attribute */
+	private final JavaMailSender javaMailSender;
+	/** TemplateEngine class attribute */
 	private final TemplateEngine templateEngine;
 	
+	/**
+	 * Class constructor.
+	 * 
+	 * @param javaMailSender
+	 * @param templateEngine
+	 */
 	public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
 		this.javaMailSender = javaMailSender;
 		this.templateEngine = templateEngine;
