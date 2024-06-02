@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 
 import com.opencsv.CSVWriter;
 
+import jakarta.annotation.PostConstruct;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class CSVService.
  * 
@@ -34,16 +36,26 @@ public class CSVService {
 	private CustomConfig customConfig;
 
 	/** Class attribute csvPath. */
-	private String csvPath = customConfig.getCsvScorePath();
+	private String csvPath;
 	
-	/** Class constant reportSize */
+	/**  Class constant reportSize. */
 	private final int reportSize = 3;
+	
+	/**
+	 * Inits the class.
+	 */
+	@PostConstruct
+	public void init() {
+	    this.csvPath = customConfig.getCsvScorePath();
+	}
 	
 	/**
 	 * Method generateCSV.
 	 * 
 	 * This method save the score information in a csv, and create it if the file not exists.
-	 * 
+	 *
+	 * @param user the user
+	 * @param userSelection the user selection
 	 * @return OK or ERROR - if there is any problem with the csv file.
 	 */
     public ResponseEntity<String> generateCSV(User user, UserSelection userSelection){
