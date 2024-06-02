@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +20,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
-import tfg.daniel.riskreal.riskrealApp.services.LangService;
+
 
 @Controller
-@PropertySource("classpath:custom.properties")
 public class jsonController {
 	
-	@Value("${json.quiz.file.path}")
-	private String jsonPath;
+	/** Injected CustomConfig class */
+	@Autowired 
+	private CustomConfig customConfig;
 	
-	@Value("${json.quiz.file.path.lang}")
-	private String jsonPathLang;
+	/** Class attribute jsonPath. */
+	private String jsonPath = customConfig.getJsonFilePath();
 	
-	@Autowired
-	private LangService langService;
+	/** Class attribute jsonPathLang. */
+	private String jsonPathLang = customConfig.getQuizFilePath();
+	
+	/** Class attribute langService. */
+	private String langService = customConfig.getLangAvailables();
 	
 	@GetMapping("/json/view")
 	public String jsonList(Model model) {
@@ -82,10 +84,8 @@ public class jsonController {
 	
     @PostMapping("/json/generateQuiz")
     public String saveJsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo) {
-    	
-    	langService.showLangs();
-    	
-    	String[] langArray = langService.getLangs().split(",");
+    	    	
+    	String[] langArray = langService.split(",");
     	
     	System.out.println("Idiomas disponibles: ");
     	for (String lang : langArray) {
@@ -99,7 +99,7 @@ public class jsonController {
     	
     	String lang = cuestionario.getlanguage();
     	
-    	if (langService.getLangs().contains(lang)){
+    	if (langService.contains(lang)){
     		System.out.println("Lenguaje encontrado en custom.properties: " + lang);
     	}
     	

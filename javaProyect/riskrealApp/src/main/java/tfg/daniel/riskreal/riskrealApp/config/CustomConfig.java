@@ -31,4 +31,36 @@ public class CustomConfig {
 	@Value("${languages.availables}")
 	private String langAvailables;
 
+	/**
+	 * Getter getJsonFilePath.
+	 * @return
+	 */
+	public String getJsonFilePath() {
+		return jsonFilePath;
+	}
+
+	/**
+	 * Getter getQuizFilePath.
+	 * @return
+	 */
+	public String getQuizFilePath() {
+		return quizFilePath;
+	}
+
+	/**
+	 * Getter getCsvScorePath.
+	 * @return
+	 */
+	public String getCsvScorePath() {
+		return csvScorePath;
+	}
+
+	/**
+	 * Getter getLangAvailables.
+	 * @return
+	 */
+	public String getLangAvailables() {
+		return langAvailables;
+	}
+	
 }
