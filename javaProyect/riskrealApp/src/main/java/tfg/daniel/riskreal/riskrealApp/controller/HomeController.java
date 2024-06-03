@@ -75,6 +75,10 @@ public class HomeController {
         	model.addAttribute("email", authentication.getName());
         	return "changePassword";
         }
+        
+        System.out.println(checkAuthenticated(authentication));
+        
+        model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
        
         return "home";
     }
@@ -94,6 +98,22 @@ public class HomeController {
             	if (user.getStatus() == 2) {
             		return true;
             	}
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Method checkAuthenticated.
+     * 
+     * @param authentication
+     * @return
+     */
+    private boolean checkAuthenticated(Authentication authentication) {
+        if (authentication != null) {
+            Optional<User> userOpt = userRepository.findById(authentication.getName());
+            if (userOpt.isPresent()) {
+            	return true;
             }
         }
         return false;
