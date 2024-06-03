@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
+    <style>
+	    .scrollable {
+	        overflow-y: auto;
+	        max-height: 80vh; 
+	    }
+	    .container-fluid {
+		    display: flex;
+		    flex-direction: column;
+		    min-height: 100vh;
+		}
+    </style>
+</head>
+<body>
+    <div class="container-fluid bg-dark text-white">
+        <!-- Barra de navegación -->
+		<header th:insert="~{fragments/header :: quiz-header}"></header>
+        <div class="modal fade border border-5" id="avisoSesion" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content ">
+		      <div class="modal-header bg-info">
+		        <h5 class="modal-title" id="avisoModalLabel">¿Estás seguro de que deseas ir a la página de inicio?</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body bg-secondary border-danger border-5">
+		        En caso de confirmar perderás el progreso en el test actual.
+		      </div>
+		      <div class="modal-footer text-center bg-info justify-content-center">
+		        <button type="button" class="btn btn-danger border border-5" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-success border border-5" onclick="irAInicio()">Confirmar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+
+        <!-- Título del cuestionario -->
+        <h1 th:text="${cuestionario.getTitle()}" class="mt-4"></h1>
+        
+        <!-- Espacio en blanco para la descripción del cuestionario -->
+        <div class="mb-4">Primer cuestionario de ejemplo</div>
+
+        <div class="row">
+            <!-- Lista vertical de preguntas 
+            <div class="col-2 col-md-2 scrollable">
+                <ul class="nav flex-column nav-pills" id="questionTabs" role="tablist">
+                    <li class="nav-item" th:each="pregunta : ${cuestionario.getQuestions()}">
+                        <a class="nav-link" th:id="'question' + ${pregunta.getId()} + '-tab'" data-toggle="pill" th:href="'#question' + ${pregunta.getId()}" 
+                            role="tab" th:text="'P'+${pregunta.getId()}" th:class="${pregunta.getId() == preguntaActual} ? 'nav-link active' : 'nav-link'" 
+                            aria-selected="${pregunta.getId() == preguntaActual}"></a>
+                    </li>
+                </ul>
+            </div>
+            -->
+
+            <!-- Contenido de las preguntas -->
+            <div class="col-10 col-md-10">
+                <div class="tab-content" id="questionContent">
+                    <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == preguntaActual} ? 'tab-pane fade show active' : 'tab-pane fade'">
+                        <h2 th:text="${pregunta.getDescription()}"></h2>
+						<form action="/quiz/showResults" method="post">
+						  <!--  For manage the security in POST  -->
+						  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						  <input type="hidden" th:name="pregunta" th:value="${pregunta.getId()}" />
+						  <div th:each="respuesta : ${pregunta.getAnswers()}">
+						    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getText()}" 
+						    th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}" 
+						    required
+						    >
+						    <label th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
+						  </div>
+						  <button class="btn btn-primary mr-2" type="submit" name="accion" th:value="prev" th:if="${preguntaActual > 1}"><--</button>
+						  <button class="btn btn-primary mr-2" type="submit" name="accion" th:value="next" th:if="${preguntaActual != cuestionario.getQuestions().size()}" >--></button>
+						  <button class="btn btn-primary" type="submit" name="accion" th:value="resultados" th:if="${preguntaActual == cuestionario.getQuestions().size()}">Enviar resultados</button>
+						</form>
+                    </div>
+                </div>
+                
+                
+                <!-- Botones de navegación 
+                <div class="mt-3">
+                    <button class="btn btn-primary mr-2" onclick="previousQuestion()">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Siguiente</button>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    
+    <div th:insert="~{fragments/header :: scripts}"></div>
+    
+
+    <script>
+        function previousQuestion() {
+            var activeTab = $('.nav-link.active');
+            var prevTab = activeTab.parent().prev().children('.nav-link');
+            if (prevTab.length > 0) {
+                prevTab.tab('show');
+            }
+        }
+
+        function nextQuestion() {
+            var activeTab = $('.nav-link.active');
+            var nextTab = activeTab.parent().next().children('.nav-link');
+            if (nextTab.length > 0) {
+                nextTab.tab('show');
+            }
+        }
+        function mostrarAviso() {
+            $('#avisoSesion').modal('show'); // Mostrar el aviso con el cierre de la sesión actual
+        }
+
+        function irAInicio() {
+            window.location.href = "/"; // Redirigir a la página de inicio
+        }
+
+    </script>
+</body>
+</html>
