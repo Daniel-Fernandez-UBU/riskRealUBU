@@ -14,10 +14,7 @@ mysql/dbdata/#ib_16384_1.dblwr
 #mysql/dbdata/#innodb_temp/
 mysql/dbdata/#innodb_temp/temp_*
 mysql/dbdata/auto.cnf
-mysql/dbdata/binlog.000001
-mysql/dbdata/binlog.000002
-mysql/dbdata/binlog.000003
-mysql/dbdata/binlog.index
+mysql/dbdata/binlog.*
 mysql/dbdata/ca-key.pem
 mysql/dbdata/ca.pem
 mysql/dbdata/client-cert.pem
