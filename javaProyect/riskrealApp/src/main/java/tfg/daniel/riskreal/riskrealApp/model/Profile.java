@@ -24,10 +24,10 @@ public class Profile {
     @Column(name = "profile", length = 70)
     private String profile;
 
-    /** The user. */
+    /** The user. 
     @ManyToOne
     @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false)
-    private User user;
+    private User user; */
 
 	/**
 	 * Gets the email.

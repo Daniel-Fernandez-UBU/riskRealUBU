@@ -3,6 +3,8 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,6 +95,57 @@ public class RegisterController {
     }
     
     /**
+     * Update user profile.
+     *
+     * @param user the user
+     * @return the string
+     */
+    @PostMapping("/update/done")
+    public String updateUserProfile(@ModelAttribute("user") User user) {
+    	
+    	    	
+    	User currentUser = null;
+        // Encode the plain text password
+    	
+    	if (user.getPassword().isBlank()) {
+        	
+            Optional<User> userOpt = userRepository.findById(user.getEmail());
+            if (userOpt.isPresent()) {
+            	currentUser = userOpt.get();
+            } 
+            
+            user.setPassword(currentUser.getPassword());
+            
+    	} else {
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	}
+    	
+        // Set status active by default
+        user.setStatus(1);
+        // Update the user in the db.
+        userRepository.save(user);
+                
+        String profile;
+        
+        if (user.getRol().equalsIgnoreCase("manager")) {
+        	profile = "ADMIN";
+        } else if (user.getRol().equalsIgnoreCase("employee")) {
+        	profile = "CUSTOMER";
+        } else {
+        	profile="GUEST";
+        }
+
+        // Update profile in the db.
+        Profile userProfile = new Profile();
+        userProfile.setUsername(user.getEmail());
+        userProfile.setProfile(profile);
+        profileRepository.save(userProfile);
+
+        // Return to login page
+        return "redirect:/user/profile";
+    }
+    
+    /**
      * Change password.
      *
      * @param passwordNew the password new
@@ -113,5 +166,25 @@ public class RegisterController {
     	
     	return "redirect:/";
     	
+    }
+    /**
+     * Method userProfile.
+     * 
+     * @param model
+     * 
+     * @return profile view
+     */
+    @GetMapping("/user/profile")
+    public String userProfile(Model model) {
+    	User user = null;
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> userOpt = userRepository.findById(authentication.getName());
+        if (userOpt.isPresent()) {
+        	user = userOpt.get();
+        } 
+        
+        model.addAttribute("user", user);        
+                
+    	return "profile";
     }
 }
