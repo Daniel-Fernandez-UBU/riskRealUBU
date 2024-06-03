@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tfg.daniel.riskreal.riskrealApp.RiskrealAppApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.061 s -- in tfg.daniel.riskreal.riskrealApp.RiskrealAppApplicationTests

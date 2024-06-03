@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
+        <style>
+   	      form {
+         	width: 400px;
+	      	padding: 40px;
+	      	margin: 30px auto;
+	      }
+         container-fluid {
+		    display: flex;
+		    flex-direction: column;
+		    min-height: 100vh;
+		 }
+	 </style>
+  </head>
+  <body>
+     <div class="container-fluid ">
+     <header th:insert="~{fragments/header :: main-header}"></header>
+      <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading" th:text="#{login.text}"></h2>
+        <div class="alert alert-danger" role="alert" th:text="#{login.error}"></div>
+        <p>
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" id="email" name="username" class="form-control" placeholder="Username" required>
+        </p>
+        <p>
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+		<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{header.login}"></button>
+        <a href="/resetPassword" th:text="#{login.forgot.password}"></a>
+      </form>
+</div>
+	<div th:insert="~{fragments/header :: scripts}"></div>
+</body>
+</html>
+
+

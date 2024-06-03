@@ -1,0 +1,59 @@
+<nav th:fragment="old-header" class="navbar navbar-light" style="background-color: #e3f2fd;">
+	<a class="navbar-brand" href="/">Home</a>
+	<a class="navbar-brand">Usuario</a>
+	<a class="navbar-brand" th:href="@{/logout}">Cerrar sesión</a>
+</nav>
+
+
+       <!--  <h1 th:text="#{home.lang.select}"></h1>
+	    <ul>
+	        <li><i class="fi fi-es"></i><a th:href="@{?lang=es}" th:text="#{lang.spanish}"></a></li>
+	        <li><i class="fi fi-gb"></i><a th:href="@{?lang=en}" th:text="#{lang.english}"></a></li>
+	        <li><i class="fi fi-fr"></i><a th:href="@{?lang=fr}" th:text="#{lang.french}"></a></li> 
+			<li><i class="fi fi-pt"></i><a th:href="@{?lang=pt}" th:text="#{lang.portuguese}"></a></li> 
+			<li><i class="fi fi-it"></i><a th:href="@{?lang=it}" th:text="#{lang.italian}"></a></li> 
+
+	    </ul>
+		<i class="fi fi-fr"></i> 
+		<i class="fi fi-pt"></i> 
+		<i class="fi fi-it"></i> 
+		-->
+
+<nav th:fragment="main-header" class="navbar navbar-expand navbar-light bg-light">
+	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
+	<a class="nav-link" href="/" th:text="#{home.button}"></a>
+    <ul class="navbar-nav ml-auto dropdown dropleft">
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	  <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
+	</ul>
+	
+</nav>
+
+<nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
+	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
+	<a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
+    <ul class="navbar-nav ml-auto dropdown dropleft">
+	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	</ul>
+</nav>
+
+<div th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Añade aquí otros scripts necesarios -->
+</div>
+
+<div th:fragment="emailMessage" th:if="${emailMessage}">
+    <!-- Mensaje de advertencia utilizando Bootstrap -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Información!</strong> <span th:text="${emailMessage}"></span>
+        <!-- Botón para cerrar el mensaje -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+

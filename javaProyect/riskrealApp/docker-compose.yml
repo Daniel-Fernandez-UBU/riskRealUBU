@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: appRiskRealUbu
+      MYSQL_ROOT_PASSWORD: rootroot
+    ports:
+      - '3306:3306'
+    volumes:
+      - ../../mysql/dbdata:/var/lib/mysql
