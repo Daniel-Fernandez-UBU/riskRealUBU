@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+    <!-- Integra Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    
+    <body>
+    
+     <!-- Barra de navegación -->
+     <nav th:insert="~{fragments/header :: main-header}">
+     </nav>
+    
+    <h1>Tienes los resultados completos en el CSV</h1>
+    <h3 th:text="'Resultado final: ' + ${resultado}"></h3>
+  	</body>
+  	
+  	<a href="/csv/download">Download as CSV</a>
+    
+</head>
