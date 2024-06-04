@@ -7,6 +7,7 @@
 # email.properties
 
 */target/classes/
+*mysql.sock
 
 # Archivos y directorios no necesarios de mysql
 mysql/dbdata_old/
