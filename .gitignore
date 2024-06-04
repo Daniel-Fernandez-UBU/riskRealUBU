@@ -6,6 +6,8 @@
 # No subir la configuración del email.
 # email.properties
 
+*/target/classes/
+
 # Archivos y directorios no necesarios de mysql
 
 mysql/dbdata/#ib_16384_0.dblwr
