@@ -16,7 +16,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	     	</a>
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 		  <li><a class="dropdown-item" th:href="@{/login}" th:text="#{header.login}"></a></li>
-		  <li><a class="dropdown-item" href="/register" th:text="#{header.singup}"></a></li>
+		  <li><a class="dropdown-item" th:href="@{/register/form}" th:text="#{header.singup}"></a></li>
 		</ul>
  	 </li>
 </div>
@@ -31,7 +31,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
        	</a>
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 		  <li><a class="dropdown-item" th:href="@{/logout(lang=${#locale.language})}" th:text="#{header.logout}"></a></li>
-		  <li><a class="dropdown-item" th:href="@{/json/view}" text="Cargar Cuestionarios">Cargar Cuestionarios</a></li>
+		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/json/view}" th:text="#{header.loadQuiz}"></a></li>
+		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/csv/download}" th:text="#{header.download}"></a> </li>
 		  <li><a class="dropdown-item" th:href="@{/user/profile}" th:text="#{header.profile}"></a></li>
 		</ul>
    	 </li>
