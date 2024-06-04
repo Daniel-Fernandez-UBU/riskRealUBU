@@ -1,0 +1,7 @@
+https://www.docker.com/blog/kickstart-your-spring-boot-application-development/
+
+https://spring.io/guides/topicals/spring-boot-docker
+
+https://www.baeldung.com/dockerizing-spring-boot-application
+
+https://anywhere.epam.com/en/blog/how-to-dockerize-spring-boot-application
