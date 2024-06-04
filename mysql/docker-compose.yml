@@ -1,11 +1,37 @@
-version: '3.1'
 services:
   db:
     image: mysql
+    container_name: mysql-db-1
     restart: always
     environment:
+      MYSQL_DATABASE: appRiskRealUbu
       MYSQL_ROOT_PASSWORD: rootroot
     ports:
       - '3306:3306'
     volumes:
       - ./dbdata:/var/lib/mysql
+    networks:
+      - spring-riskreal-app
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    image: dani-riskreal-app:v1
+    ports:
+      - '8088:8088'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db-1:3306/appRiskRealUbu
+      SPRING_DATASOURCE_PASSWORD: rootroot
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    networks:
+      - spring-riskreal-app
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  spring-riskreal-app:
+
