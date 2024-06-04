@@ -1,0 +1,928 @@
+{	
+    "id": 1,
+    "title": "Habilidades Blandas",
+	"image": [
+		"principalHD.jpg"
+		],
+    "language": "SPA",
+	"description": "Descripción del cuestionario",
+	"type": 1,
+    "questions": [
+      {
+        "id": 1,
+        "description": "Me familiarizo fácilmente con gente nueva",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "description": "Puedo realizar las tareas asignadas, incluso cuando los resultados iniciales difiern de los planeados.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "description": "Otros casi nunca comentan que creo tener la razón todo el tiempo.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "description": "Mi conjunto de habilidades creativas me ayuda a resolver problemas.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "description": "Me resulta relativamente fácil expresar mis ideas, incluso cuando difieren de las que sostienen quienes me rodean.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "description": "Creo que un problema se puede resolver de varias formas.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "description": "Me gusta entrar en los detalles de un tema en particular.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "description": "Pido directamente lo que necesito de los demás.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "description": "Me gusta ser innovador en mis métodos o procedimientos.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		{
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "description": "Cuando me comparo con los demás, se me da mejor afrontar el cambio.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "description": "Prefiero no limitarme a cosas que ya sé.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "description": "¿Recibe ayuda y apoyo de sus compañeros para ejecutar sus tareas?",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "description": "¿Tu trabajo tiene objetivos claramente marcados?",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "description": "Existe un ambiente saludable entre usted y sus compañer@s?",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "description": "Para hacer bien mi trabajo, debo ser “un poco psicólogo” con los clientes, a fin de entender mejor su estado de ánimo.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+          {
+            "text": "Si",
+            "image": "principalHD.jpg",
+            "value": 10
+          },
+          {
+            "text": "No",
+            "image": "principalHD.jpg",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "description": "Nada es más emocionante que ver materializarse mis ideas.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "description": "Me motivo cuando las tareas que se me asignan están orientadas a objetivos.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "description": "Tengo curiosidad por encontrar la solución a un problema.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "description": "En caso de conflicto con otra persona, puedo discutir el tema de una manera racional y sin emociones.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "description": "Puedo identificar fácilmente rutas alternativas a una solución.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "description": "Estoy constantemente buscando formas alternativas de mejorar mi vida.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "description": "Siempre tiendo a avanzar hacia una discusión directa del problema en cuestión.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "description": "Me gusta la idea del cambio.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "description": "Cuando estoy en compañía de quienes me rodean, prefiero hablar de emociones, en lugar de coas cotidianas.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "description": "Estoy dispuesto a probar cualquier cosa, al menos una vez.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": 30,
+        "description": "Es fácil para mí comprender las emociones de mis compañer@s en el lugar de trabajo.",
+        "image": "paris.jpg",
+        "skill": 1,
+        "answers": [
+		 {
+            "text": "1 - Totalmente en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 1
+          },
+          {
+            "text": "2 – En desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 2
+          },
+          {
+            "text": "3 – Ni de acuerdo ni en desacuerdo",
+            "image": "principalHD.jpg",
+            "value": 3
+          },
+          {
+            "text": "4 – De acuerdo",
+            "image": "principalHD.jpg",
+            "value": 4
+          },
+          {
+            "text": "5 – Totalmente de acuerdo",
+            "image": "principalHD.jpg",
+            "value": 5
+          }
+        ]
+      }
+    ]
+}
+
