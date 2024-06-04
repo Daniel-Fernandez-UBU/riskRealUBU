@@ -19,12 +19,12 @@ services:
       retries: 5
 
   backend:
-    image: dani-riskreal-app:v1
+    image: riskrealapp:v2
     ports:
       - '8088:8088'
     volumes:
-      - ./javaProyect/jsonFiles:/workspace
-      - ./javaProyect/csvFiles:/workspace
+      - ../javaProyect/jsonFiles:/opt
+      - ../javaProyect/csvFiles:/opt
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/appRiskRealUbu
       SPRING_DATASOURCE_PASSWORD: rootroot
