@@ -22,8 +22,11 @@ services:
     image: dani-riskreal-app:v1
     ports:
       - '8088:8088'
+    volumes:
+      - ./javaProyect/jsonFiles:/workspace
+      - ./javaProyect/csvFiles:/workspace
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db-1:3306/appRiskRealUbu
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/appRiskRealUbu
       SPRING_DATASOURCE_PASSWORD: rootroot
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     networks:

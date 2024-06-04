@@ -9,7 +9,7 @@
 */target/classes/
 
 # Archivos y directorios no necesarios de mysql
-
+mysql/dbdata_old/
 mysql/dbdata/#ib_16384_0.dblwr
 mysql/dbdata/#ib_16384_1.dblwr
 #mysql/dbdata/#innodb_redo/
