@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+
 /**
  * Class CustomConfig.
  * 
@@ -22,26 +23,44 @@ public class CustomConfig {
 	@Value("${json.quiz.file.path}")
 	private String jsonFilePath;
 	
+	/** The quiz file path. */
 	@Value("${json.quiz.file.path.lang}")
 	private String quizFilePath;
 	
+	/** The quiz image path. */
+	@Value("${json.quiz.images.path}")
+	private String quizImagePath;
+	
+	/** The csv score path. */
 	@Value("${csv.score.path}")
 	private String csvScorePath;
 	
+	/** The lang availables. */
 	@Value("${languages.availables}")
 	private String langAvailables;
 
 	/**
 	 * Getter getJsonFilePath.
-	 * @return
+	 *
+	 * @return the json file path
 	 */
 	public String getJsonFilePath() {
 		return jsonFilePath;
 	}
+	
+	/**
+	 * Getter getQuizImagePath.
+	 *
+	 * @return the quiz image path
+	 */
+	public String getQuizImagePath() {
+		return quizImagePath;
+	}
 
 	/**
 	 * Getter getQuizFilePath.
-	 * @return
+	 *
+	 * @return the quiz file path
 	 */
 	public String getQuizFilePath() {
 		return quizFilePath;
@@ -49,7 +68,8 @@ public class CustomConfig {
 
 	/**
 	 * Getter getCsvScorePath.
-	 * @return
+	 *
+	 * @return the csv score path
 	 */
 	public String getCsvScorePath() {
 		return csvScorePath;
@@ -57,7 +77,8 @@ public class CustomConfig {
 
 	/**
 	 * Getter getLangAvailables.
-	 * @return
+	 *
+	 * @return the lang availables
 	 */
 	public String getLangAvailables() {
 		return langAvailables;
