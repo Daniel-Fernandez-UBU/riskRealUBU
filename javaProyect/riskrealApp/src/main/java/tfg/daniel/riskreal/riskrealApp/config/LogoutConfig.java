@@ -10,9 +10,25 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+/**
+ * Class LogoutCofing.
+ * 
+ * Class that override the logout config to get the lang info related.
+ * 
+ * @author Daniel Fernández Barrientos
+ * @version 1.0
+ * 
+ */
 @Component
 public class LogoutConfig implements LogoutSuccessHandler  {
 
+	/**
+	 * Method onLogoutSuccess.
+	 * 
+	 * Method that override the default method with the custom configuration.
+	 * 
+	 */
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {

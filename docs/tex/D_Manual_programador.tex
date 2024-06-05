@@ -1,0 +1,170 @@
+\apendice{Documentación técnica de programación}
+
+\section{Introducción}
+
+En el anexo actual se va a describir toda la documentación técnica, así como la estructura de directorios que se ha seguido para almacenar el proyecto completo.
+Una de las partes más importantes es la sección de \textit{Manual del Programador} ya que en ella se describen los pasos necesarios para instalar el entorno de desarrollo. 
+
+\section{Estructura de directorios}
+
+El repositorio del proyecto está formado por los siguientes directorios:
+
+\section{Manual del programador}
+
+El manual del programador es la guía \textit{paso a paso} de las diferentes herramientas, configuraciones y peculiaridades que se deben seguir para poder montar el entorno de desarrollo, trabajar con el código fuente o recompilar una nueva versión de la aplicación.
+
+Las imágenes que se pueden ver en los siguientes pasos han sido tomadas desde un portátil con el sistema operativo Windows 11 y con las versiones aquí indicadas de las diferentes aplicaciones, por lo tanto, en distintas versiones el contenido o la ubicación de algunas opciones pueden estar en diferentes apartados.
+
+\subsection{Herramientas necesarias}
+
+Para poder desplegar el entorno de desarrollo se necesita instalar las siguientes aplicaciones:
+
+\begin{itemize}
+	\item Java SE JDK 17.
+	\item Docker.
+	\item Git.
+	\item Spring Tools 4 for Eclipse.
+\end{itemize}
+
+A contunación, se explica cómo instalar y configurar cada uno de ellos de forma correcta.
+
+\subsection{Java SE JDK 17}
+
+Es el lenguaje de programación utilizado para la realización de la aplicación web.
+Se debe acceder al siguiente enlace \cite{web:JavaJDK}, seleccionar el sistema operativo y arquitectura correspondiente y seguir el asistente de instalación.
+
+\subsection{Docker}
+
+En el momento actual en el que se encuentra la informática y el interés por la optimización de recursos, Docker se ha posicionado como la plataforma principal de \textit{microservicios}.
+
+Docker Desktop se puede descargar desde el enlace \cite{web:dockerDesktop}. Tiene versión para windows, linux y mac, por lo que hay que elegir el sistema operativo correcto y seguir los pasos del asistente de instalación.
+
+Una vez instalado, la aplicación sería similar a la siguiente:
+\imagen{dockerDesktopMain}{Pantalla principal de Docker Desktop.}
+
+Podemos cerrar la aplicación sin problema porque se queda en ejecución en segundo plano, pero para confirmarlo, podemos abrir \textit{el símbolo del sistema - cmd} o una consola de powershell y ejecutar el comando \textbf{docker version}, donde deberíamos obtener una imagen similar a la siguiente:
+\imagen{dockerVersion}{Versión de docker en ejecución desde CMD de Windows.}
+
+Lo importante de la imagen anterior es que aparezca la información de \textbf{Server: Docker Desktop}, si no apareciese, abrir la aplicación de Docker Desktop y comprobar que ahora si tenemos la información del servidor.
+
+\subsection{Git}
+
+Git es la herramienta que nos permite recuperar todo el proyecto desde el repositorio web \cite{github:proyect}. 
+Nos descargamos Git desde el siguiente enlace \cite{web:git}.
+Seleccionamos la versión que se corresponda con nuestro sistema operativo y seguimos los pasos del asistente de instalación.
+
+Una vez instalado, vamos a utilizar la herramienta \textbf{Git Bash}
+\imagen{gitBash}{Aplicación Git Bash.}
+
+Navegamos por los directorios hasta el directorio en el que queramos replicar el proyecto y a continuación, escribimos \textit{git clone https://github.com/Daniel-Fernandez-UBU/riskRealUBU}
+\imagen{gitClone}{Comando Git Clone.}
+
+\subsection{Spring Tools 4 for Eclipse}
+
+\textit{Spring Tools 4 for Eclipse} es la herramienta desde la que se ha construido el proyecto de Spring al completo. 
+
+Se puede obtener desde el siguiente enlace \cite{web:springtoolssuite}
+\imagen{springTools4forEclipse}{Web de descarga de Spring Tools 4.}
+
+En el caso de Windows, el fichero descargado es un \textit{.jar}. 
+
+\begin{enumerate}
+	\item Hacemos doble click sobre el fichero .jar descargado, para que se inicie la extracción automática del contenido.
+	\item En la carpeta en la que esté el fichero .jar se generará una nueva carpeta con nombre \textbf{sts-4.22.1.RELEASE}, o similar, dependiendo de la versión de la aplicación en el momento de la descarga.
+	\item Movemos esa carpeta a la ubicación que nos interese, pues el programa de Spring Tools es \textit{portable}.
+	\item Accedemos a la carpeta y ejecutamos \textbf{SpringToolSuite4.exe}
+\end{enumerate}
+
+Tras unos instantes en los que aparece la siguiente ventana:
+\imagen{springToolsStart}{Spring Tools Suite 4 inicio.}
+
+Nos pedirá que indiquemos la ubicación de nuestro espacio de trabajo, donde se guardarán por defecto todos los proyectos que creemos desde la aplicación.
+\imagen{springToolsWork}{Spring Tools Suite 4 espacio de trabajo.}
+
+Tras indicar nuestra ubicación preferida, pulsamos en \textit{Launch}.
+
+Tras unos instantes en los que carga la aplicación, se nos abre la aplicación:
+
+\imagen{springToolsIDE}{Spring Tools Suite 4 - IDE.}
+
+Antes de importar el proyecto, vamos a instalar algunos plugins que pueden resultar de utilidad.
+
+El proceso para la instalación de los plugins es el mismo, solo cambia el plugin a buscar.
+
+Pasos a seguir para la instalación de cualquier plugin:
+\begin{enumerate}
+	\item Pulsamos en \textit{Help} --> \textit{Eclipse Marketplace\dots}
+	\item Introducimos el nombre del plugin que queremos buscar.
+	\item Pulsamos en \textit{Go} o le damos al \textit{Intro} en el teclado.
+	\item Pulsamos en \textit{Install}.
+	\item Seguimos los pasos, aceptando las diferentes ventanas de confiirmación que nos aparecen.
+	\item Tras terminarse la instalación del plugin, nos pide reiniciar Spring Tools Suite 4. \textbf{Consejo: Instalar todos los plugins y al final reiniciar la aplicación}
+\end{enumerate}
+
+\subsubsection{Thymeleaf}
+
+Siguiendo los pasos anteriores, obtendríamos la siguiente ventana, donde ya solo quedaría darle a \textit{Install} y seguir los pasos del asistente de instalación.
+\imagen{pluginThymeleaf}{Instalación del plugin de Thymeleaf en Spring Tools Suite.}
+
+\subsubsection{Eclipse Web Developer}
+
+Instalamos la versión \textit{Eclipse Enterprise Java and Web Developer Tools 3.33} que incluye los editores de html, json y css entre otros.
+\imagen{pluginEnterpriseJava}{Instalación del plugin de Eclipse Enterprise Java and Web en Spring Tools Suite.}
+
+Seleccionamos las características que vamos a instalar:
+\imagen{pluginEnterpriseJavaFeatures}{Selección de características de Eclipse Enterprise Java and Web en Spring Tools Suite.}
+
+
+\subsubsection{Eclipse Docker Tooling}
+
+Este plugin viene instalado por defecto en la última versión disponible de Spring Tools 4 for Eclipse, pero si no apareciese en la sección de \textit{Installed} en \textit{Eclipse Marketplace}, también sería necesario instalarlo.
+
+\imagen{pluginDocker}{Plugin de Docker en Spring Tools Suite.}
+
+
+\subsubsection{Importación de nuestro proyecto}
+
+Una vez hayamos finalizado con la instalación de los plugins anteriores, procederemos a importar nuestro proyecto.
+
+En primer lugar seleccionamos \textbf{File --> Import\dots}
+
+\imagen{fileImport}{Importar proyecto en Spring Tool Suite.}
+
+En la nueva ventana que se muestra, navegamos hasta \textbf{Maven --> Existing Maven Projects --> Next}.
+
+\imagen{importMaven}{Importación de proyecto Maven en Spring Tool Suite.}
+
+A contunuación, nos pedirá que busquemos la ruta donde tenemos el proyecto que queremos importar. \textbf{Tenemos que ir a la ruta sobre la que hayamos ejecutado el \textit{git clone} del paso previo}.
+
+Accedemos a la ruta donde hemos hecho el clon del repositorio de Git, y dentro de la carpeta del proyecto, \textit{riskRealUBU}, accedemos a \textit{javaProyect --> riskRealApp}.
+
+Si hemos seleccionado la ruta adecuada, deberá quedar de esta forma la importación, habiendo reconocido el fichero \textbf{pom.xml} de nuestro proyecto y a la espera de que pulsemos en \textit{Finish}.
+
+\imagen{browseProject}{Ruta del proyecto indicada en Spring Tool Suite.}
+
+Tras unos instantes, ya nos aparecería el proyecto correctamente cargado en nuestra aplicación.
+
+\imagen{proyectImported}{Proyecto importado en Spring Tools Suite.}
+
+\subsubsection{Iniciando la aplicación}
+
+Tras haber completado correctamente todos los pasos anteriores, y teniendo \textit{Docker Server} funcionando, desde Spring Tools Suite podemos ejecutar la aplicación.
+
+\textbf{Los puertos por defecto que usa son: 3306 para mysql y 8088 para la aplicación web, sería recomendable no tener ninguno de los 2 en uso, para el correcto despliegue de la aplicación sin necesidad de tener que cambiar opciones de configuración en \textit{application.properties}.}
+
+En la parte inferior izquierda de la interfaz de Spring Tool, tendremos \textit{Boot Dashboard} y si desplegamos \textit{local} nos aparecerá nuestra aplicación \textbf{riskrealApp}
+
+Seleccionamos nuestra aplicación y pulsamos en el icono que tenemos justo encima con un \textit{cuadrado rojo y triángulo verde} para iniciarla.
+
+\imagen{startApp}{Iniciar la aplicación en Spring Tools Suite.}
+
+Tras iniciar la aplicación, si es la primera vez tardará un poco más porque tiene que descargarse de docker la imagen de MySQL, debería quedarse en un estado similar a este:
+
+\imagen{appStarted}{Aplicación iniciada en Spring Tools Suite.}
+
+
+Ya tenemos nuestro entorno de desarrollo configurado, con nuestra aplicación iniciada y accesible para poder probarla desde \url{http://localhost:8088}.
+
+
+
+\section{Pruebas del sistema}

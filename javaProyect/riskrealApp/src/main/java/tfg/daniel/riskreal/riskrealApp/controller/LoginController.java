@@ -7,33 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import tfg.daniel.riskreal.riskrealApp.model.User;
-
-
+/**
+ * Class LoginController.
+ * 
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ * 
+ */
 @Controller
 public class LoginController {
 	
 	
+    /**
+     * Login error.
+     *
+     * @return the string
+     */
     @GetMapping("/loginError")
     public String loginError() {
         return "loginError";
     }
     
-    @GetMapping("/register")
-    public String register(Model model) {
-    	
-    	User user = new User();
-    	
-    	model.addAttribute("user", user);
-    	
-        return "register";
-    }
-    
+    /**
+     * Login.
+     *
+     * @return the string
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
     
+    /**
+     * Logout.
+     *
+     * @param lang the lang
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/logout")
     public String logout(@RequestParam(name = "lang", required = false) String lang, Model model) {
         if (lang != null && !lang.isEmpty()) {
@@ -42,6 +53,11 @@ public class LoginController {
         return "logout"; 
     }
     
+    /**
+     * Reset password.
+     *
+     * @return the string
+     */
     @GetMapping("/resetPassword")
     public String resetPassword() {
     	return "/resetPassword";
