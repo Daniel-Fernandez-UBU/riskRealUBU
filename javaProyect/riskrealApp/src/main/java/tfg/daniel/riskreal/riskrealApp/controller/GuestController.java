@@ -1,7 +1,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Date;
 import java.util.Optional;
 
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
@@ -27,12 +24,18 @@ import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.CSVService;
+import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
 @Controller
 public class GuestController {
 	
+	/** Injected CustomConfig class */
 	@Autowired
 	private CustomConfig customConfig;
+	
+	/** Injected JsonService class */
+	@Autowired
+	private JsonService jsonService;
 		
 	/** The json path lang. */
 	private String jsonPathLang;
@@ -74,7 +77,7 @@ public class GuestController {
 		file = jsonPathLang + "/" + file;
 		
 		// We get full quiz from json file
-		Quiz cuestionario = getQuiz(file);
+		Quiz cuestionario = jsonService.getJsonQuiz(file);
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();
@@ -205,31 +208,6 @@ public class GuestController {
 		return "guest/anonymousresults";
 	}
 	
-	/**
-	 * Method for get the full Quiz from json file.
-	 * @param String jsonQuiz - full json path
-	 * @return quiz object
-	 */
-	private Quiz getQuiz(String jsonQuiz) {
-		// create Object Mapper
-		ObjectMapper mapper = new ObjectMapper();
-		
-		Quiz quiz = null;
-
-		// read JSON file and map/convert to java POJO
-		try {
-			
-			//ClassPathResource staticDataResource = new ClassPathResource(jsonQuiz);
-			File json = new File(jsonQuiz);
-			quiz = mapper.readValue(json, Quiz.class);
-		    
-
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		return quiz;
-	}
 	
 	/**
 	 * Method saveScore().

@@ -23,6 +23,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
+import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
 
 @Controller
@@ -31,6 +32,10 @@ public class jsonController {
 	/** Injected CustomConfig class */
 	@Autowired 
 	private CustomConfig customConfig;
+	
+	/** Injected JsonService class */
+	@Autowired
+	private JsonService jsonService;
 	
 	/** Class attribute jsonPath. */
 	private String jsonPath;
@@ -111,8 +116,8 @@ public class jsonController {
     	
     	archivo =   jsonPath + "/" + archivo;
     	    	
-    	System.out.println("Archivo que se pasa a getQuiz: " + archivo);
-    	Quiz cuestionario = getQuiz(archivo);
+    	System.out.println("File sended to getQuiz: " + archivo);
+    	Quiz cuestionario = jsonService.getJsonQuiz(archivo);
     	
     	String lang = cuestionario.getlanguage();
     	
@@ -142,30 +147,5 @@ public class jsonController {
         return "redirect:/json/view";
     }
     
-	/**
-	 * Method for get the full Quiz from json file.
-	 * @param String jsonQuiz - full json path
-	 * @return
-	 */
-	private Quiz getQuiz(String jsonQuiz) {
-		// create Object Mapper
-		ObjectMapper mapper = new ObjectMapper();
-		
-		Quiz quiz = null;
-
-		// read JSON file and map/convert to java POJO
-		try {
-			
-			//ClassPathResource staticDataResource = new ClassPathResource(jsonQuiz);
-			File json = new File(jsonQuiz);
-			quiz = mapper.readValue(json, Quiz.class);
-		    
-
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		return quiz;
-	}
 
 }
