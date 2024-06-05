@@ -2,6 +2,8 @@ package tfg.daniel.riskreal.riskrealApp.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
@@ -95,6 +97,25 @@ public class JsonService {
 		
 		return quiz;
 		
+	}
+	
+	/**
+	 * Method getJsonFiles.
+	 * 
+	 * Method that from a file, get all the json files in the path
+	 * @param file
+	 * @return List<String> jsonFiles
+	 * 
+	 */
+	public List<String> getJsonFiles(File file){
+		List<String> jsonFiles = new ArrayList<>();
+    	File[] files = file.listFiles();
+        for (File jsonFile : files) {
+            if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
+                jsonFiles.add(jsonFile.getName());
+            }
+        }
+        return jsonFiles;
 	}
 	
 

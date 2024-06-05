@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
+import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
 
 /**
@@ -33,6 +34,10 @@ public class HomeController {
 	/** The user repository. */
 	@Autowired
     private UserRepository userRepository; 
+	
+	/** Injected JsonService class */
+	@Autowired
+	private JsonService jsonService;
 	
 	/** The custom config. */
 	@Autowired
@@ -62,12 +67,9 @@ public class HomeController {
         
         // We control that the path exists and that there are json files on it
         if (file.exists()) {
-        	File[] files = file.listFiles();
-            for (File jsonFile : files) {
-                if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
-                    jsonFiles.add(jsonFile.getName());
-                }
-            }
+            // We control that the path exists and that there are json files on it
+            jsonFiles = jsonService.getJsonFiles(file);
+
             if (!jsonFiles.isEmpty()) {
                 model.addAttribute("jsonFiles", jsonFiles);
             }

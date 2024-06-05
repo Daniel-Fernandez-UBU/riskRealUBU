@@ -64,12 +64,7 @@ public class jsonController {
         
         // We control that the path exists and that there are json files on it
         if (file.exists()) {
-        	File[] files = file.listFiles();
-            for (File jsonFile : files) {
-                if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
-                    jsonFiles.add(jsonFile.getName());
-                }
-            }
+        	jsonFiles = jsonService.getJsonFiles(file);
             if (!jsonFiles.isEmpty()) {
                 model.addAttribute("jsonFiles", jsonFiles);
             }
