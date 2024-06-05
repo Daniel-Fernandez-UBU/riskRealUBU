@@ -2,9 +2,164 @@
 
 \section{Introducción}
 
+Este manual detalla todos los pasos necesarios para poder instalar en cualquier plataforma la aplicación. Se definirán los requisitos previos que tiene que tener los usuarios así como un manual de uso de la propia página web.
+
 \section{Requisitos de usuarios}
 
+La aplicación utiliza la tecnología de docker para funcionar, con todas sus ventajas y un pequeño inconveniente:
+
+\begin{itemize}
+	\item \textbf{Necesitas tener docker instalado en el equipo en el que vayas a desplegar la aplicación.}
+\end{itemize}
+
+Los requisitos indisipensables para poder utilizar la aplicación son los siguientes:
+
+\begin{enumerate}
+	\item Instalar la plataforma de docker \cite{web:dockerDesktop} y docker compose \cite{web:dockercompose}.
+	\begin{itemize}
+		\item Windows: Docker Desktop.
+		\item Linux: Instalar Docker y Docker Compose, ya sea con Docker Desktop o desde el repositorio de la versión de linux correspondiente.
+		\item Mac: Docker Desktop.
+	\end{itemize}
+	\item Disponer de un navegador web.
+	\item Disponer de un programa para descomprimir ficheros \textit{.zip} o \textit{.tar.gz}.
+\end{enumerate}
+
 \section{Instalación}
+
+\subsection{Descarga del código}
+
+La descarga del código se realiza desde esta página: \url{https://github.com/Daniel-Fernandez-UBU/riskRealUBU/releases}
+
+\imagen{instalacionReleases}{Página de selección de release}
+
+Lo recomendable es siempre utilizar la última versión, ya que tendrá el mayor número de funcionalidades y el menor número de errores.
+
+De la imagen anterior se puede ver que tenemos la posibilidad de descargar tres posibles ficheros:
+
+\begin{itemize}
+	\item Source code: Comprimido en dos formatos distintintos: Contiene el código completo del proyecto.
+	\item Install.zip: Contiene la carpeta de instalación, la única que vamos a necesitar para poner a funcionar nuestra aplicación.
+\end{itemize}
+
+\textit{Nota: Si has descargado Source code, tras descomprimirlo y acceder a la carpeta del proyecto, tendrás una carpeta install, que es donde está la parte que importa para la instalación de la aplicación.}
+
+\subsection{Contenido de la carpeta install}
+
+La estructura de la carpeta es la siguiente:
+
+\imagen{installTree}{Contenido y esctructura de la carpeta install.}
+
+\subsubsection{Fichero docker-compose.yml}
+
+Es el fichero más importante de esta carpeta, el único que realmente se necesitaría para instalar nuestra aplicación y en el que está toda la configuración importante de la misma, por ese motivo se ha decidido hacer una pequeña introduccion del contenido del fichero, para entender el motivo de cada línea y para que cada usuario pueda configurarlo a su gusto.
+
+El contenido del fichero es el siguiente:
+\imagen{dockerComposeYML}{Contenido del fichero docker-compose.yml}
+
+A continuación, explicamos cada una de sus líneas:
+\begin{itemize}
+	\item services: --> Etiqueta que se utiliza para definir los servicios o dockers que se van a crear.
+	\begin{itemize}
+		\item db: --> Servicio para el docker que contiene la base de datos.
+		\begin{itemize}
+			\item image: mysql --> Imagen de la base de datos que se va a utilizar.
+			\item container\_name: riskreal-db-1 --> Nombre del docker que se va a crear.
+			\item restart: always --> Reinicia el docker si se genera un error.
+			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
+			\begin{itemize}
+				\item MYSQL\_DATABASE: appRiskRealUbu --> Nombre de la base de datos que se va a crear.
+				\item MYSQL\_ROOT\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
+			\end{itemize}
+			\item expose: --> Puertos internos que se van a abrir, para que el resto de contenedores de la misma red puedan acceder.
+			\begin{itemize}
+				\item - '3306' --> Se habilita el puerto 3306 para acceder a este docker por la red interna.
+			\end{itemize}
+			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
+			\begin{itemize}
+				\item '30306:3306' --> Permite el acceso a la base de datos desde el puerto 30306.
+			\end{itemize}
+			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
+			\begin{itemize}
+				\item ./dbdata:/var/lib/mysql --> Se utiliza la carpeta local dbdata para almacenar la base de datos completa. Si dbdata tuviese una base de datos MySQL, el docker la utilizaría al iniciar.
+			\end{itemize}
+			\item networks: --> Define la red interna del docker.
+			\begin{itemize}
+				\item - riskreal-network --> Nombre de la red interna.
+			\end{itemize}
+			\item healtcheck: --> Comprobación adicional para saber cuando ha terminado de levantar la base de datos en el docker.
+			\begin{itemize}
+				\item test: --> Se lanza un ping con mysqladmin a localhost para saber cuando ha iniciado la base de datos.
+				\item interval: 30s --> Define el intervalo de tiempo en el que se comprueba el estado.
+				\item timeout: 10s --> Indica el intervalo de tiempo que espera antes de indicar que no hay respuesta del servidor.
+				\item retries: 5 --> Número de veces que lo reintenta antes de indicar que el docker no ha iniciado correctamente.
+			\end{itemize}
+		\end{itemize}
+		\item webapp: --> Servicio para el docker que contiene la aplicación web.
+		\begin{itemize}
+			\item image: ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp:v1 --> Imagen de docker que se usará. Imagen propia de la Spring Boot App.
+			\item container\_name: riskreal-webapp-1 --> Nombre del docker que se va a crear.
+			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
+				\begin{itemize}
+				 	\item JSON\_QUIZ\_FILE\_PATH: /opt/jsonFiles --> Ruta en la que se guardan los json con los cuestionarios que se quieren cargar en la aplicación.
+					\item JSON\_QUIZ\_FILE\_PATH\_LANG: /opt/jsonFiles/lang --> Ruta en la que se guardarán los cuestionarios ya cargados en la aplicación.
+					\item CSV\_SCORE\_PATH: /opt/csvFiles/scores.csv --> Ruta y nombre del fichero de resultados que se rellenará conforme se vayan realizando cuestionarios.
+					 \item SPRING\_DATASOURCE\_URL: jdbc:mysql://db:3306/appRiskRealUbu --> Dirección de la base de datos.
+					 \item SPRING\_DATASOURCE\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
+					 \item SPRING\_DATASOURCE\_DRIVER\_CLASS\_NAME: com.mysql.cj.jdbc.Driver --> Driver de conexión a la base de datos.
+					 \item SERVER\_PORT: 8088 --> Puerto en el que se publicará la aplicación.
+				\end{itemize}
+			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
+			\begin{itemize}
+				\item '8088:8088' --> Redirecciona el puerto 8088 del servidor anfitrión al puerto 8088 interno del docker, en el que se ha publicado la aplicación.
+			\end{itemize}
+			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
+			\begin{itemize}
+				\item ./appFiles:/opt --> Se utiliza para indicar la ruta de los cuestionarios que queremos cargar, los ya almacenados y el fichero de resultados.
+			\end{itemize}
+			\item networks: --> Define la red interna del docker.
+			\begin{itemize}
+				\item - riskreal-network --> Nombre de la red interna.
+			\end{itemize}
+			\item depends\_on: --> Se definen los servicios de los que depende el inicio de este docker.
+			\begin{itemize}
+				\item db: --> Servicio del que depende.
+				\item condition: service\_healthy --> Necesita que se haya iniciado de forma correcta la base de datos para iniciar el docker.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\item neworks: --> Sección en la que se definen las redes.
+	\begin{itemize}
+		\item riskreal-network: --> Nombre de la red definida.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Instalación de la aplicación}
+
+Desde la línea de comandos, navegamos hasta acceder a la carpeta install y estar al mismo nivel que \textit{docker-compose.yml, dbdata y appFiles}.
+
+\subsubsection{Instalación supervisada}
+
+Escribimos \textbf{docker compose up} y empezamos a ver cómo se lanzan las aplicaciones paso a paso. Si es la primera vez, tiene que hacer una descarga de las imágenes al repositorio de imágenes de docker, por lo que es normal que lleve algo más de tiempo.
+\imagen{dockerComposeUP}{Comando para la instalación.}
+
+En la siguiente imagen se ve el resultado de una ejecución correcta:
+\imagen{dockerComposeRunning}{Aplicación funcionando.}
+
+Desde otra consola de símbolo del sistema o desde Docker Desktop, podemos ver nuestros docker funcionando:
+\imagen{dockerWorking}{Dockers en ejecución.}
+
+Para parar la ejecución y eliminar los docker, pulsamos \textit{Ctrl + C} y escribimos \textit{docker compose down} en la ventana del símbolo del sistema en la que los teníamos en ejecución.
+\imagen{dockerStop}{Parada de los docker lanzados.}
+
+\subsubsection{Instalación desatendida}
+
+El proceso es el mismo que en el paso anterior, con la diferencia de que esta vez no vamos a ver cómo se van lanzando los contenedores, pero con la ventaja de que vamos a poder cerrar la ventana del símbolo del sistema y van a seguir en ejecución.
+
+Escribimos \textbf{docker compose up -d} y comprobamos con \textit{docker ps} cuando se han levantado nuestros dockers:
+\imagen{dockerComposeUPD}{Comando para la instalación desatendida.}
+
+Si queremos parar la aplicación podemos lanzar el comando \textit{docker compose down} explicado en la sección anterior, pero tenemos que lanzarlo estando a la altura de nuestro fichero \textit{docker-compose.yml} para que funcione.
 
 \section{Manual del usuario}
 
