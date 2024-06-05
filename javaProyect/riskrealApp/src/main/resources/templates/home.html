@@ -27,14 +27,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <header th:insert="~{fragments/header :: main-header}"></header>
         <div th:insert="~{fragments/header :: emailMessage}"></div>
         <h1 class="mt-5" th:text="#{home.quiz.select}"></h1>
-        <form th:action="${isAuthenticated} ? '/quiz/startQuiz' : '/anonymous/data'" method="POST">
+        <h2 th:unless="${jsonFiles}" class="mt-5" th:text="#{home.quiz.empty}"></h2>
+        <form th:if="${jsonFiles}" th:action="${isAuthenticated} ? '/quiz/startQuiz' : '/anonymous/data'" method="POST">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="form-group">
                 <select class="form-control" name="archivo">
                     <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Acceder al cuestionario</button>
+            <button type="submit" class="btn btn-primary" th:text="#{home.quiz.button}"></button>
             <br>
         </form>
     </div>

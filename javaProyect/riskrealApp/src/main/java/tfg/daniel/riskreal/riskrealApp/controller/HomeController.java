@@ -2,7 +2,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,17 +56,22 @@ public class HomeController {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     @GetMapping("/")
-    public String home(Model model,  HttpSession session) throws IOException {
+    public String home(Model model,  HttpSession session) {
     	File file = new File(jsonPathLang);
-        File[] files = file.listFiles();
         List<String> jsonFiles = new ArrayList<>();
-        for (File jsonFile : files) {
-            if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
-                jsonFiles.add(jsonFile.getName());
+        
+        // We control that the path exists and that there are json files on it
+        if (file.exists()) {
+        	File[] files = file.listFiles();
+            for (File jsonFile : files) {
+                if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
+                    jsonFiles.add(jsonFile.getName());
+                }
+            }
+            if (!jsonFiles.isEmpty()) {
+                model.addAttribute("jsonFiles", jsonFiles);
             }
         }
-		
-        model.addAttribute("jsonFiles", jsonFiles);
         
         // If the user have to change the password
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

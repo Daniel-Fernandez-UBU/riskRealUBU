@@ -55,15 +55,21 @@ public class jsonController {
 	public String jsonList(Model model) {
 		
     	File file = new File(jsonPath);
-        File[] files = file.listFiles();
         List<String> jsonFiles = new ArrayList<>();
-        for (File jsonFile : files) {
-            if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
-                jsonFiles.add(jsonFile.getName());
+        
+        // We control that the path exists and that there are json files on it
+        if (file.exists()) {
+        	File[] files = file.listFiles();
+            for (File jsonFile : files) {
+                if (jsonFile.isFile() && jsonFile.getName().endsWith(".json")) {
+                    jsonFiles.add(jsonFile.getName());
+                }
+            }
+            if (!jsonFiles.isEmpty()) {
+                model.addAttribute("jsonFiles", jsonFiles);
             }
         }
-		
-        model.addAttribute("jsonFiles", jsonFiles);
+
 		return "loadQuiz";
 	}
 	
@@ -77,7 +83,7 @@ public class jsonController {
         }
 
         try {
-            // Obtén el nombre original del archivo
+            // Get the original file name
             byte[] bytes = file.getBytes();
             Path path = Paths.get(jsonPath + "/manual_" + file.getOriginalFilename());
             Files.write(path, bytes);
@@ -123,10 +129,10 @@ public class jsonController {
     		if (!json.exists()) {
                 json.createNewFile();
                 System.out.println("Archivo creado: " + json.getAbsolutePath());
+    			mapper.writeValue(json, cuestionario);
+    			System.out.println("Json del cuestionario añadido: " + json.getAbsolutePath());
+    			jsonOld.delete();
     		}
-			mapper.writeValue(json, cuestionario);
-			System.out.println("Json del cuestionario añadido: " + json.getAbsolutePath());
-			jsonOld.delete();
 
 		} catch (IOException e) {
 			e.printStackTrace();
