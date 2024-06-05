@@ -66,6 +66,13 @@ public class RegisterController {
     @PostMapping("/register/done")
     public String saveUserProfile(@ModelAttribute("user") User user, Model model) {
 
+    	// If the user is already registered, return login with info message
+    	if (userRepository.existsById(user.getEmail())) {
+    		model.addAttribute("type", "primary");
+            model.addAttribute("show", true);
+            return "/login";
+    	}
+    	
         // Encode the plain text password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Set status active by default
@@ -90,6 +97,7 @@ public class RegisterController {
         profileRepository.save(userProfile);
         System.out.println(userProfile.toString());
         
+        model.addAttribute("type", "success");
         model.addAttribute("show", true);
 
         // Return to login page
