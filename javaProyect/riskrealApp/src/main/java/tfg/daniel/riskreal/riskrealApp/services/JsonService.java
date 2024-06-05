@@ -1,6 +1,8 @@
 package tfg.daniel.riskreal.riskrealApp.services;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +58,11 @@ public class JsonService {
 		
 		try {
 			
-			JSONObject jsonSchema = new JSONObject(new JSONTokener(schemaFile.toURI().toString()));
-			JSONObject jsonQuiz = new JSONObject(new JSONTokener(quizFile.toURI().toString()));
+			String schemaContent = readFileContent(schemaFile);
+			String jsonContent = readFileContent(quizFile);
+			
+			JSONObject jsonSchema = new JSONObject(new JSONTokener(schemaContent));
+			JSONObject jsonQuiz = new JSONObject(new JSONTokener(jsonContent));
 			
 	        // Validate JSON
 	        Schema schema = SchemaLoader.load(jsonSchema);
@@ -65,7 +70,7 @@ public class JsonService {
 	        
 	        return true;
 			
-		}  catch (org.everit.json.schema.ValidationException e) {
+		}  catch (org.everit.json.schema.ValidationException | IOException e) {
 	        System.err.println("JSON Validation Error: " + e.getMessage());
 	    }
         
@@ -117,6 +122,14 @@ public class JsonService {
         }
         return jsonFiles;
 	}
+	
+    private static String readFileContent(File file) throws IOException {
+        InputStream inputStream = new FileInputStream(file);
+        byte[] buffer = new byte[(int) file.length()];
+        inputStream.read(buffer);
+        inputStream.close();
+        return new String(buffer, "UTF-8");
+    }
 	
 
 }

@@ -77,22 +77,44 @@ public class jsonController {
     public String uploadJson(@RequestParam("file") MultipartFile file,
                              RedirectAttributes redirectAttributes) {
 
+    	redirectAttributes.addFlashAttribute("filedeleted", "");
+    	// We check that file is not empty
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
+            redirectAttributes.addFlashAttribute("message", "file.error");
+            redirectAttributes.addFlashAttribute("type", "primary");
+            return "redirect:/json/view";
         }
+        
+        // We check that is a json file
+        if (!file.getOriginalFilename().endsWith(".json")) {
+        	redirectAttributes.addFlashAttribute("message", "json.error");
+        	redirectAttributes.addFlashAttribute("type", "primary");
+        	return "redirect:/json/view";
+        }
+
 
         try {
             // Get the original file name
             byte[] bytes = file.getBytes();
             Path path = Paths.get(jsonPath + "/manual_" + file.getOriginalFilename());
             Files.write(path, bytes);
+            
+            File jsonFile = new File(jsonPath + "/manual_" + file.getOriginalFilename());
+            
+            // If json don't have a good schema
+            if (!jsonService.checkQuizSchema(jsonFile)) {
+            	jsonFile.delete();
+                redirectAttributes.addFlashAttribute("message", "schema.error");
+                redirectAttributes.addFlashAttribute("filedeleted", file.getOriginalFilename());
+                redirectAttributes.addFlashAttribute("type", "danger");
+                return "redirect:/json/view";
+            }
 
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+            redirectAttributes.addFlashAttribute("message","file.uploaded");
+            redirectAttributes.addFlashAttribute("type", "success");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("uploadJson exception: " + e.toString());
         }
 
         return "redirect:/json/view";
@@ -100,44 +122,57 @@ public class jsonController {
 	
 	
     @PostMapping("/json/generateQuiz")
-    public String saveJsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo) {
-    	    	
+    public String saveJsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo
+    		,RedirectAttributes redirectAttributes) {
+
+    	archivo = jsonPath + "/" + archivo;
+    	File jsonOld = new File(archivo);
+    	redirectAttributes.addFlashAttribute("filedeleted", "");
+    	
+        // If json don't have a valid schema
+        if (!jsonService.checkQuizSchema(jsonOld)) {
+            redirectAttributes.addFlashAttribute("message", "schema.error");
+            redirectAttributes.addFlashAttribute("filedeleted", archivo);
+            redirectAttributes.addFlashAttribute("type", "danger");
+            return "redirect:/json/view";
+        }
+    	   	
     	String[] langArray = langService.split(",");
     	
     	System.out.println("Idiomas disponibles: ");
     	for (String lang : langArray) {
     		System.out.println(lang);
     	}
-    	
-    	archivo =   jsonPath + "/" + archivo;
-    	    	
+    	   	    	
     	System.out.println("File sended to getQuiz: " + archivo);
     	Quiz cuestionario = jsonService.getJsonQuiz(archivo);
     	
     	String lang = cuestionario.getlanguage();
+    	
+    	File json = new File(jsonPathLang + "/" + lang + "_quiz_" + cuestionario.getId() + ".json");
     	
     	if (langService.contains(lang)){
     		System.out.println("Lenguaje encontrado en custom.properties: " + lang);
     	}
     	
     	ObjectMapper mapper = new ObjectMapper();
-    	
-    	File json = new File(jsonPathLang + "/" + lang + "_quiz_" + cuestionario.getId() + ".json");
-    	File jsonOld = new File(archivo);
-    	   	
+
     	try {
     		if (!json.exists()) {
                 json.createNewFile();
-                System.out.println("Archivo creado: " + json.getAbsolutePath());
-    			mapper.writeValue(json, cuestionario);
-    			System.out.println("Json del cuestionario añadido: " + json.getAbsolutePath());
-    			jsonOld.delete();
-    		}
+                System.out.println("File created: " + json.getAbsolutePath());
+
+    		} 
+			mapper.writeValue(json, cuestionario);
+			System.out.println("Json quiz added: " + json.getAbsolutePath());
+			jsonOld.delete();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("saveJsonQuiz exception: " + e.toString());
 		}
     	
+        redirectAttributes.addFlashAttribute("message","generated");
+        redirectAttributes.addFlashAttribute("type", "success");
 
         return "redirect:/json/view";
     }

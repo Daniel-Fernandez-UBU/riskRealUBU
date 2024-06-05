@@ -26,6 +26,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <!-- Barra de navegación -->
         <header th:insert="~{fragments/header :: main-header}"></header>
         <div th:insert="~{fragments/header :: emailMessage}"></div>
+        <div th:if="${message}" th:class="'alert alert-' + ${type}" role="alert" th:text="#{'load.quiz.' + ${message}} + ${filedeleted}"></div>
         <h1 class="mt-5" >Cuestionario que quieres generar:</h1>
         <h2 th:unless="${jsonFiles}" class="mt-5" th:text="#{load.quiz.empty}"></h2>				
 		<form th:if="${jsonFiles}"  action="/json/generateQuiz" method="POST">
