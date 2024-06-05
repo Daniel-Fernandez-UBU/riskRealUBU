@@ -45,11 +45,13 @@ public class SecurityConfig {
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/", "/resetPassword*", "/send*", "/anonymous/*", "/register/*").permitAll()
+					.requestMatchers("/json/*").hasAuthority("ADMIN")
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login
 						.loginPage("/login")
 						.failureUrl("/loginError")
+						.defaultSuccessUrl("/", true)
 						.permitAll()
 						)
 				.logout(logout -> logout
@@ -75,7 +77,7 @@ public class SecurityConfig {
     	
     	users.setUsersByUsernameQuery("select email, password, status from Users u where email=?");
     	users.setAuthoritiesByUsernameQuery("select email, profile from Profiles p where email=?");
-    	   	
+        	   	
     	return users;
     	
     }

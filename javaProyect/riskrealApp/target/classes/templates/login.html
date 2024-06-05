@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text=#{login.title}></title>
+    <title th:text="#{login.title}"></title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
-    <style>
+        <style>
    	      form {
          	width: 400px;
 	      	padding: 40px;
@@ -25,18 +23,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
      <header th:insert="~{fragments/header :: main-header}"></header>
       <form class="form-signin" method="post" action="/login">
         <h2 class="form-signin-heading" th:text="#{login.text}"></h2>
+        <div th:if="${show}" th:class="'alert alert-' + ${type}" role="alert" th:text="#{'register.' + ${type}}"></div>
         <p>
-          <label for="username" class="sr-only" th:text=#{register.email}></label>
-          <input type="email" id="username" name="username" class="form-control" placeholder="username" required>
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" id="email" name="username" class="form-control" placeholder="Username" required>
         </p>
         <p>
-          <label for="password" class="sr-only" th:text=#{register.password}></label>
+          <label for="password" class="sr-only">Password</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
 		<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
         <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{header.login}"></button>
       </form>
-	</div>
+</div>
 	<div th:insert="~{fragments/header :: scripts}"></div>
 </body>
 </html>
