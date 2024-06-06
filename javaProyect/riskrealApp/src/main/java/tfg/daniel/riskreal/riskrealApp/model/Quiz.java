@@ -4,6 +4,7 @@ package tfg.daniel.riskreal.riskrealApp.model;
 import java.util.List;
 
 
+
 /**
  * Class Quiz.
  * 
@@ -45,6 +46,16 @@ public class Quiz {
 	public List<String> getImage() {
 		return image;
 	}
+	
+	/**
+	 * Gets the first image.
+	 *
+	 * @return the first image
+	 */
+	public String getFirstImage() {
+		return image.get(0);
+	}
+	
 	
 	/**
 	 * Sets the image.
@@ -162,5 +173,13 @@ public class Quiz {
 	public void setlanguage(String language) {
 		this.language = language;
 	}
+
+	@Override
+	public String toString() {
+		return "Quiz [id=" + id + ", title=" + title + ", image=" + image + ", language=" + language + ", description="
+				+ description + ", type=" + type + ", questions=" + questions + "]";
+	}
+	
+	
 
 }

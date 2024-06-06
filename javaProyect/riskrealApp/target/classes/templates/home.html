@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <!-- Integra Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
-    
-    
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <style>
-        .container-fluid {
-		    display: flex;
-		    flex-direction: column;
-		    min-height: 100vh;
-		}
-    </style>
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-</head>
+<head th:insert="~{fragments/resources :: head}"></head>
 <body>
-    <div class="container-fluid bg-dark text-white" >
-        <!-- Barra de navegación -->
-        <header th:insert="~{fragments/header :: main-header}"></header>
-        <div th:insert="~{fragments/header :: emailMessage}"></div>
-        <h1 class="mt-5" th:text="#{home.quiz.select}"></h1>
-        <h2 th:unless="${jsonFiles}" class="mt-5" th:text="#{home.quiz.empty}"></h2>
-        <form th:if="${jsonFiles}" th:action="${isAuthenticated} ? '/descriptionQuiz' : '/anonymous/data'" method="POST">
-        	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="form-group">
-                <select class="form-control" name="archivo">
-                    <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
-                </select>
+<header th:insert="~{fragments/header :: new-header}"></header>
+<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-12 mb-10">
+              <div class="d-flex align-items-center flex-column">
+               	<h1 class="fw-normal" th:text="#{home.description}"></h1>
+               	<h1 class="fw-normal" th:text="#{home.quiz.select}"></h1>
+		        <h2 th:unless="${quizList}" class="mt-5" th:text="#{home.quiz.empty}"></h2>
+		        <div th:each="quiz : ${quizList}">
+				    <form th:action="${isAuthenticated} ? '/descriptionQuiz' : '/anonymousData'" th:object="${quiz}" method="POST">
+				        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				        <input type="hidden" name="archivo" th:value="${file}" />
+				        <div class="col-md-4">
+				            <div class="card card-span h-100 text-white">
+				            	 <!--  <img class="img-fluid" src="~/../images/principalHD.png" width="790" alt="..." />  -->
+				               <img class="img-fluid" th:src="${quiz.getFirstImage()}" width="790" alt="..." /> 
+				                <div class="card-img-overlay d-flex flex-center">
+				                    <button type="submit" class="btn btn-lg btn-light" th:text="${quiz.getTitle()}"></button>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary" th:text="#{home.quiz.button}"></button>
-            <br>
-        </form>
-    </div>
+          </div>
+        </div>
+      </section>
     
-    <div th:insert="~{fragments/header :: scripts}"></div>
+    <div th:insert="~{fragments/resources :: scripts}"></div>
     
     
 </body>

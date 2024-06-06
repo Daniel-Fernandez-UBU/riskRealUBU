@@ -4,30 +4,26 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
+import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 
 
 /**
@@ -54,7 +50,7 @@ public class HomeController {
 	
 	/** The json path lang. */
 	private String jsonPathLang;;
-	
+		
 	@PostConstruct
 	public void init() {
 	    this.jsonPathLang = customConfig.getQuizFilePath();
@@ -71,27 +67,49 @@ public class HomeController {
      */
     @GetMapping("/")
     public String home(Model model,  HttpSession session) {
+    	
+    	String currentLang = "";
     	File file = new File(jsonPathLang);
         List<String> jsonFiles = new ArrayList<>();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (session.getAttribute("session.current.locale") == null) {
+        	currentLang = Locale.getDefault().toString().split("_")[0];
+        } else {
+        	currentLang = session.getAttribute("sessionLocale").toString();
+        }
+
+        List<Quiz> quizList = new ArrayList<>();
+        List<String> imagesList = new ArrayList<>();
+        Quiz quiz = null;
         
         // We control that the path exists and that there are json files on it
-        if (file.exists()) {
+        if (file.exists() && checkAuthenticated(authentication)) {
             // We control that the path exists and that there are json files on it
             jsonFiles = jsonService.getJsonFiles(file);
 
             if (!jsonFiles.isEmpty()) {
                 model.addAttribute("jsonFiles", jsonFiles);
             }
+        } else {
+        	String testJson = customConfig.getTestQuiz() + currentLang + ".json";
+        	jsonFiles.add(testJson);
+        	quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
+        	for (String image : quiz.getImage()) {
+        		imagesList.add(customConfig.getQuizImagePath() + image);
+        	}
+        	quiz.setImage(imagesList);
+        	quizList.add(quiz);
+        	model.addAttribute("quizList", quizList);
         }
         
         // If the user have to change the password
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
         if (changePasswordRequired(authentication)) {
         	model.addAttribute("email", authentication.getName());
         	return "changePassword";
         }
         
-        System.out.println(checkAuthenticated(authentication));
         
         model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
        
@@ -99,28 +117,11 @@ public class HomeController {
     }
     
     @PostMapping("/descriptionQuiz")
-    public String description(Model model) {
-    	model.addAttribute("lang", "es");
+    public String description() {
         return "/quiz/description";
     }
     
-    @GetMapping("/dynamic/{filename}")
-    public ResponseEntity<byte[]> serveAsset(@PathVariable String filename) {
-        try {
-            Resource resource = new ClassPathResource("static/" + filename);
-            if (resource.exists()) {
-                byte[] data = resource.getInputStream().readAllBytes();
-                return ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                        .body(data);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-        
+ 
     
     /**
      * Method changePasswordRequired().

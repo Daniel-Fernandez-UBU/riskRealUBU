@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,10 +57,11 @@ public class GuestController {
 	    this.jsonPathLang = customConfig.getQuizFilePath();
 	}
 	
-	@PostMapping("/anonymous/data")
-	public String setGuestData(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
+	@PostMapping("/anonymousData")
+	public String setGuestData(@ModelAttribute("quiz") Quiz quiz, Model model, @RequestParam("archivo") String formFile, HttpSession session) {
 		
     	User user = new User();
+    	System.out.println(quiz.toString());
     	
     	model.addAttribute("user", user);
 		       

@@ -2,38 +2,7 @@
 <html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>prueba | Landing, Ecommerce &amp; Business Templatee</title>
-
-
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-
-
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link href="assets/css/theme.css" rel="stylesheet" />
-
-  </head>
-
+  <head th:insert="~{fragments/resources :: head}"></head>
 
   <body>
 
@@ -41,21 +10,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="/"><img class="d-inline-block" src="assets/img/gallery/logo.png" alt="logo" /><span class="text-1000 fs-0 fw-bold ms-2">Majestic</span></a>
-          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#header">Men</a></li>
-            </ul>
-            <form class="d-flex"><a class="text-1000" href="#!">
-                <svg class="feather feather-user me-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg></a></form>
-          </div>
-        </div>
-      </nav>
+	  <header th:insert="~{fragments/header :: new-header}"></header>
       <section class="py-11 bg-light-gradient border-bottom border-white border-5">
         <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;">
         </div>
@@ -65,8 +20,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="row flex-center">
             <div class="col-12 mb-10">
               <div class="d-flex align-items-center flex-column">
-                <h1 class="fw-normal"> With an outstanding style, only for you</h1>
-                <h1 class="fs-4 fs-lg-8 fs-md-6 fw-bold">Exclusively designed for you</h1>
+               	<h1 class="fw-normal" th:text="#{home.quiz.select}"></h1>
+		        <h2 th:unless="${jsonFiles}" class="fs-4 fs-lg-8 fs-md-6 fw-bold" th:text="#{home.quiz.empty}"></h2>
+		        <form th:if="${jsonFiles}" th:action="${isAuthenticated} ? '/descriptionQuiz' : '/anonymous/data'" method="POST">
+		        	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		            <div class="form-group">
+		                <select class="form-control" name="archivo">
+		                    <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
+		                </select>
+		            </div>
+		            <button type="submit" class="btn btn-primary" th:text="#{home.quiz.button}"></button>
+		            <br>
+		        </form>
               </div>
             </div>
           </div>
@@ -80,12 +45,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         <div class="container">
           <div class="row g-0">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="card card-span h-100 text-white"> <img class="img-fluid" src="assets/img/gallery/her.png" width="790" alt="..." />
                 <div class="card-img-overlay d-flex flex-center"> <a class="btn btn-lg btn-light" href="#!">For Her</a></div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <div class="card card-span h-100 text-white"> <img class="img-fluid" src="assets/img/gallery/him.png" width="790" alt="..." />
+                <div class="card-img-overlay d-flex flex-center"> <a class="btn btn-lg btn-light" href="#!">For Him </a></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-span h-100 text-white"> <img class="img-fluid" src="assets/img/gallery/him.png" width="790" alt="..." />
+                <div class="card-img-overlay d-flex flex-center"> <a class="btn btn-lg btn-light" href="#!">For Him </a></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-span h-100 text-white"> <img class="img-fluid" src="assets/img/gallery/him.png" width="790" alt="..." />
+                <div class="card-img-overlay d-flex flex-center"> <a class="btn btn-lg btn-light" href="#!">For Him </a></div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="card card-span h-100 text-white"> <img class="img-fluid" src="assets/img/gallery/him.png" width="790" alt="..." />
                 <div class="card-img-overlay d-flex flex-center"> <a class="btn btn-lg btn-light" href="#!">For Him </a></div>
               </div>
@@ -195,6 +175,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       feather.replace();
     </script>
     <script src="assets/js/theme.js"></script>
+    <div th:insert="~{fragments/header :: scripts}"></div>
 
     
   </body>

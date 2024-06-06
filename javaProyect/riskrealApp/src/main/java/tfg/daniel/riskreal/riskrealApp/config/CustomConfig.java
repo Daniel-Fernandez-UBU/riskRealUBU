@@ -57,6 +57,10 @@ public class CustomConfig {
 	/** The file json schema. */
 	private File fileSchema;
 	
+	/** The quiz test file. */
+	@Value("${test.quiz}")
+	private String testQuiz;
+	
     /**
      * Method init
      * 
@@ -102,6 +106,15 @@ public class CustomConfig {
             }
         }
     }
+    
+	/**
+	 * Getter getTestQuiz.
+	 *
+	 * @return the test quiz prefix
+	 */
+	public String getTestQuiz() {
+		return testQuiz;
+	}
 
 	/**
 	 * Getter getJsonFilePath.
