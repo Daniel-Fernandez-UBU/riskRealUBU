@@ -4,7 +4,7 @@ package tfg.daniel.riskreal.riskrealApp.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -68,6 +68,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model,  HttpSession session) {
     	
+    	HashMap<String, Quiz> jsonQuiz = new HashMap<>();
     	String currentLang = "";
     	File file = new File(jsonPathLang);
         List<String> jsonFiles = new ArrayList<>();
@@ -76,7 +77,7 @@ public class HomeController {
         if (session.getAttribute("session.current.locale") == null) {
         	currentLang = Locale.getDefault().toString().split("_")[0];
         } else {
-        	currentLang = session.getAttribute("sessionLocale").toString();
+        	currentLang = session.getAttribute("session.current.locale").toString();
         }
 
         List<Quiz> quizList = new ArrayList<>();
@@ -89,18 +90,36 @@ public class HomeController {
             jsonFiles = jsonService.getJsonFiles(file);
 
             if (!jsonFiles.isEmpty()) {
+            	for (String jsonQ : jsonFiles) {
+            		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + jsonQ);
+                	for (String image : quiz.getImage()) {
+                		imagesList.add(customConfig.getQuizImagePath() + image);
+                	}
+                	quiz.setImage(imagesList);
+                	jsonQuiz.put(jsonQ, quiz);
+            	}
                 model.addAttribute("jsonFiles", jsonFiles);
+                model.addAttribute("jsonQuiz", jsonQuiz);
             }
         } else {
         	String testJson = customConfig.getTestQuiz() + currentLang + ".json";
         	jsonFiles.add(testJson);
-        	quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
-        	for (String image : quiz.getImage()) {
-        		imagesList.add(customConfig.getQuizImagePath() + image);
+        	File testFile = new File(jsonPathLang + "/" + testJson);
+        	if (testFile.exists()) {
+        		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
+            	for (String image : quiz.getImage()) {
+            		imagesList.add(customConfig.getQuizImagePath() + image);
+            	}
+            	quiz.setImage(imagesList);
+            	quizList.add(quiz);
+            	jsonQuiz.put(testJson, quiz);
+            	
+            	model.addAttribute("quizList", quizList);
+            	model.addAttribute("jsonQuiz", jsonQuiz);
         	}
-        	quiz.setImage(imagesList);
-        	quizList.add(quiz);
-        	model.addAttribute("quizList", quizList);
+        	
+        	
+        	
         }
         
         // If the user have to change the password
@@ -112,6 +131,10 @@ public class HomeController {
         
         
         model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
+        
+        Quiz responseQuiz = new Quiz();
+    	
+    	model.addAttribute("responseQuiz", responseQuiz);
        
         return "home";
     }

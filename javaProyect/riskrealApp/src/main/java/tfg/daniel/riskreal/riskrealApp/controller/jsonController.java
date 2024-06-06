@@ -147,7 +147,7 @@ public class jsonController {
     	System.out.println("File sended to getQuiz: " + archivo);
     	Quiz cuestionario = jsonService.getJsonQuiz(archivo);
     	
-    	String lang = cuestionario.getlanguage();
+    	String lang = cuestionario.getLanguage();
     	
     	File json = new File(jsonPathLang + "/" + lang + "_quiz_" + cuestionario.getId() + ".json");
     	

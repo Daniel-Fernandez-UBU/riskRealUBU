@@ -161,7 +161,7 @@ public class Quiz {
 	 *
 	 * @return the language
 	 */
-	public String getlanguage() {
+	public String getLanguage() {
 		return language;
 	}
 	
@@ -170,7 +170,7 @@ public class Quiz {
 	 *
 	 * @param language the new language
 	 */
-	public void setlanguage(String language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 

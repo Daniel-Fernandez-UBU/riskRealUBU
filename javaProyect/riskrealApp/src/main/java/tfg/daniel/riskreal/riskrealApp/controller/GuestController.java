@@ -58,15 +58,16 @@ public class GuestController {
 	}
 	
 	@PostMapping("/anonymousData")
-	public String setGuestData(@ModelAttribute("quiz") Quiz quiz, Model model, @RequestParam("archivo") String formFile, HttpSession session) {
+	public String setGuestData(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
 		
     	User user = new User();
-    	System.out.println(quiz.toString());
     	
     	model.addAttribute("user", user);
 		       
         // We put the attribute to the session
         session.setAttribute("file", formFile);
+        
+        System.out.println(formFile);
 				
 		return "guest/anonymousdata";
 	}
