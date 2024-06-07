@@ -21,12 +21,13 @@ services:
       retries: 5
 
   webapp:
-    image: ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp:v1
+    image: ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp
     container_name: riskreal-webapp-1
     environment:
       JSON_QUIZ_FILE_PATH: /opt/jsonFiles
       JSON_QUIZ_FILE_PATH_LANG: /opt/jsonFiles/lang
       CSV_SCORE_PATH: /opt/csvFiles/scores.csv
+      JSON_QUIZ_IMAGES_PATH: /opt/images/
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/appRiskRealUbu
       SPRING_DATASOURCE_PASSWORD: rootroot
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
