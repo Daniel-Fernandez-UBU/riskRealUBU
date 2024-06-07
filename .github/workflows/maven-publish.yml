@@ -16,9 +16,6 @@ jobs:
       packages: write
 
     steps:
-    - name: List directory contents
-      run: ls -R
-      
     - uses: actions/checkout@v3
 
     - name: Set up JDK 17
@@ -29,7 +26,9 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Maven
+    - name: List Directories
+      run: ls -lr
+    - name: Build with Mave
       run: mvn -B package --file javaProyect/riskrealApp/pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
