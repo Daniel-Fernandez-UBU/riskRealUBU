@@ -167,7 +167,7 @@ public class GuestController {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
-			return "redirect:/anonymous/startQuiz";
+			return "redirect:/anonymousStartQuiz";
 		}
 		
 		if (estado.equalsIgnoreCase("Prev")) {
