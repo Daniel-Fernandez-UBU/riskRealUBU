@@ -16,25 +16,38 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                	<h1 class="fw-normal" th:text="#{home.description}"></h1>
                	<h1 class="fw-normal" th:text="#{home.quiz.select}"></h1>
 		        <h2 th:unless="${jsonQuiz}" class="mt-5" th:text="#{home.quiz.empty}"></h2>
-		        <div th:each="entry : ${jsonQuiz}">
-				    <form th:action="${isAuthenticated} ? '/descriptionQuiz' : '/anonymousData'" method="POST">
-				        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-				        <input type="hidden" name="archivo" th:value="${entry.key}" />
-				        <div class="col-md-4">
-				            <div class="card card-span h-100 text-white">
-				            	 <!--  <img class="img-fluid" src="~/../images/principalHD.png" width="790" alt="..." />  -->
-				               <img class="img-fluid" th:src="${entry.value.getFirstImage()}" width="790" alt="..." /> 
-				                <div class="card-img-overlay d-flex flex-center">
-				                    <button type="submit" class="btn btn-lg btn-light" th:text="${entry.value.getTitle()}"></button>
-				                </div>
-				            </div>
-				        </div>
-				    </form>
-				</div>
+			   </div>
               </div>
             </div>
           </div>
+      </section>
+      
+            <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="py-0" id="header" style="margin-top: -23rem !important;">
+
+        <div class="container">
+          <div class="row g-0">
+            <div class="container">
+  			  <div class="row g-2">
+	        	<div class="col-md-3" th:each="entry : ${jsonQuiz}">
+					    <form th:action="${isAuthenticated} ? '/quizStartQuiz' : '/anonymousData'" method="POST">
+					        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					        <input type="hidden" name="archivo" th:value="${entry.key}" />
+					            <div class="card card-span text-white">
+					               <img class="img-fluid" th:src="${entry.value.getFirstImage()}" width="490" alt="..." /> 
+					                <div class="card-img-overlay d-flex flex-center">
+					                    <button type="submit" class="btn btn-lg btn-light" th:text="${entry.value.getTitle()}"></button>
+					                </div>
+					            </div>
+					     </form>
+					  </div>
+					</div>
+				</div>
+          </div>
         </div>
+        <!-- end of .container-->
+
       </section>
     
     <div th:insert="~{fragments/resources :: scripts}"></div>

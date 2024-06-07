@@ -118,7 +118,7 @@ public class QuizController {
 	 * @param session the session
 	 * @return the string
 	 */
-	@PostMapping("/quiz/startQuiz")
+	@PostMapping("/quizStartQuiz")
 	public String startQuiz(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
 		
 		String file;

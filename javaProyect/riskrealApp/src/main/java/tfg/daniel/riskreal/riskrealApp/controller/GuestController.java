@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,7 +71,7 @@ public class GuestController {
 		return "guest/anonymousdata";
 	}
 	
-	@PostMapping("/anonymous/quiz")
+	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
 			@RequestParam("age") String age, @RequestParam("rol") String rol) {
 			
@@ -98,11 +97,11 @@ public class GuestController {
 		session.setAttribute("gender", gender);
 		
 		session.setAttribute("preguntaActual", 1);
-		return "redirect:/anonymous/startQuiz";
+		return "redirect:/anonymousStartQuiz";
 	}
 	
 	
-	@RequestMapping(value = "/anonymous/startQuiz", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/anonymousStartQuiz", method = { RequestMethod.GET, RequestMethod.POST })
 	public String showGuestQuiz(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
@@ -146,7 +145,7 @@ public class GuestController {
 	 * @param model the model
 	 * @return the string
 	 */
-	@PostMapping("/anonymous/showResults")
+	@PostMapping("/anonymousShowResults")
 	public String showResults(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
 			HttpSession session, Model model) {
 		
@@ -175,7 +174,7 @@ public class GuestController {
 			
 			session.setAttribute("preguntaActual", questionInt-1);
 					
-			return "redirect:/anonymous/startQuiz";
+			return "redirect:/anonymousStartQuiz";
 		}
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
