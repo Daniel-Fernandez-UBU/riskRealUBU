@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
@@ -68,38 +67,30 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model,  HttpSession session) {
     	
+    	// To store filename and quiz object
     	HashMap<String, Quiz> jsonQuiz = new HashMap<>();
     	String currentLang = "";
     	File file = new File(jsonPathLang);
         List<String> jsonFiles = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+        
+        // To check if have selected language or not
         if (session.getAttribute("session.current.locale") == null) {
         	currentLang = Locale.getDefault().toString().split("_")[0];
         } else {
         	currentLang = session.getAttribute("session.current.locale").toString();
         }
 
-        List<Quiz> quizList = new ArrayList<>();
-        List<String> imagesList = new ArrayList<>();
         Quiz quiz = null;
         
         // We control that the path exists and that there are json files on it
         if (file.exists() && checkAuthenticated(authentication)) {
-            // We control that the path exists and that there are json files on it
             jsonFiles = jsonService.getJsonFiles(file);
-
             if (!jsonFiles.isEmpty()) {
             	for (String jsonQ : jsonFiles) {
             		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + jsonQ);
-                	for (String image : quiz.getImage()) {
-                		imagesList.add(customConfig.getQuizImagePath() + image);
-                	}
-                	quiz.setImage(imagesList);
                 	jsonQuiz.put(jsonQ, quiz);
             	}
-                model.addAttribute("jsonFiles", jsonFiles);
-                model.addAttribute("jsonQuiz", jsonQuiz);
             }
         } else {
         	String testJson = customConfig.getTestQuiz() + currentLang + ".json";
@@ -107,44 +98,23 @@ public class HomeController {
         	File testFile = new File(jsonPathLang + "/" + testJson);
         	if (testFile.exists()) {
         		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
-            	for (String image : quiz.getImage()) {
-            		imagesList.add(customConfig.getQuizImagePath() + image);
-            	}
-            	quiz.setImage(imagesList);
-            	quizList.add(quiz);
             	jsonQuiz.put(testJson, quiz);
-            	
-            	model.addAttribute("quizList", quizList);
-            	model.addAttribute("jsonQuiz", jsonQuiz);
-        	}
-        	
-        	
-        	
+        	}   	
         }
         
         // If the user have to change the password
-        
         if (changePasswordRequired(authentication)) {
         	model.addAttribute("email", authentication.getName());
         	return "changePassword";
         }
         
-        
+        session.setAttribute("jsonQuiz", jsonQuiz);
+        model.addAttribute("jsonFiles", jsonFiles);
+        model.addAttribute("jsonQuiz", jsonQuiz);
         model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
-        
-        Quiz responseQuiz = new Quiz();
-    	
-    	model.addAttribute("responseQuiz", responseQuiz);
        
         return "home";
     }
-    
-    @PostMapping("/descriptionQuiz")
-    public String description() {
-        return "/quiz/description";
-    }
-    
- 
     
     /**
      * Method changePasswordRequired().

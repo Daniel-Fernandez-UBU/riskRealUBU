@@ -95,12 +95,30 @@ public class JsonService {
 			File json = new File(jsonQuiz);
 			quiz = mapper.readValue(json, Quiz.class);
 		    
+			// Get the images normalized
+			quiz.setImage(normalizeImages(quiz.getImage()));
 
 		} catch (IOException e) {
 			System.err.println("JSON Quiz generator error: " + e.getMessage());
 		}
 		
 		return quiz;
+		
+	}
+	
+	/**
+	 * Method normalizeImages.
+	 * @param imageList
+	 * @return image list normalized
+	 */
+	private List<String> normalizeImages(List<String> imageList){
+		List<String> normImages = new ArrayList<>();
+		
+    	for (String image : imageList) {
+    		normImages.add(customConfig.getQuizImagePath() + image);
+    	}
+	
+		return normImages;
 		
 	}
 	

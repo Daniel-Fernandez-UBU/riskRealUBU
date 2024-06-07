@@ -71,6 +71,42 @@ public class GuestController {
 		return "guest/anonymousdata";
 	}
 	
+	/**
+	 * Method getGuestDescrption.
+	 * @param model
+	 * @param formFile
+	 * @param session
+	 * @return
+	 */
+	@PostMapping("/anonymousDescription")
+	public String getGuestDescription(Model model, HttpSession session, @RequestParam("gender") String gender,
+			@RequestParam("age") String age, @RequestParam("rol") String rol) {
+		
+		String file = (String) session.getAttribute("file");
+		file = jsonPathLang + "/" + file;
+		
+		// We get full quiz from json file
+		Quiz quiz = jsonService.getJsonQuiz(file);
+		
+		System.out.println(quiz.toString());
+		
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+                
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
+		
+		session.setAttribute("quiz", quiz);
+		session.setAttribute("age", age);
+		session.setAttribute("rol", rol);
+		session.setAttribute("gender", gender);
+		session.setAttribute("preguntaActual", 1);
+		
+		model.addAttribute("quiz", quiz);
+				
+		return "guest/anonymousdescription";
+	}
+	
 	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
 			@RequestParam("age") String age, @RequestParam("rol") String rol) {

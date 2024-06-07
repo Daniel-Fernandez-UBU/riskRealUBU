@@ -23,7 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		  <div class="row g-2 flex-center">
        		<div class="col-md-6">
        			<div class="d-flex align-items-center flex-column justify-content-center text-center"> 
-					<form id="form" action="/anonymousQuiz" method="POST" th:object="${user}">
+					<form id="form" action="/anonymousDescription" method="POST" th:object="${user}">
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					    <div class="form-group">
 					      <label for="gender" th:text="#{register.gender}"></label>
