@@ -67,7 +67,7 @@
                 <div class="tab-content" id="questionContent">
                     <div th:each="pregunta, preguntaIndex : ${cuestionario.getQuestions()}" class="tab-pane fade" th:id="'question' + ${pregunta.getId()}" role="tabpanel" aria-labelledby="'question' + ${pregunta.getId()} + '-tab'" th:class="${pregunta.getId() == preguntaActual} ? 'tab-pane fade show active' : 'tab-pane fade'">
                         <h2 th:text="${pregunta.getDescription()}"></h2>
-						<form action="/anonymous/showResults" method="post">
+						<form action="/anonymousShowResults" method="post">
 						  <!--  For manage the security in POST  -->
 						  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 						  <input type="hidden" th:name="pregunta" th:value="${pregunta.getId()}" />
