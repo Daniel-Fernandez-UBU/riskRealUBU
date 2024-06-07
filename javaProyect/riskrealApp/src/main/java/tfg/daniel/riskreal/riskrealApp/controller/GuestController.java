@@ -1,7 +1,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Date;
 import java.util.Optional;
 
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
@@ -27,12 +24,18 @@ import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.CSVService;
+import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
 @Controller
 public class GuestController {
 	
+	/** Injected CustomConfig class */
 	@Autowired
 	private CustomConfig customConfig;
+	
+	/** Injected JsonService class */
+	@Autowired
+	private JsonService jsonService;
 		
 	/** The json path lang. */
 	private String jsonPathLang;
@@ -53,7 +56,7 @@ public class GuestController {
 	    this.jsonPathLang = customConfig.getQuizFilePath();
 	}
 	
-	@PostMapping("/anonymous/data")
+	@PostMapping("/anonymousData")
 	public String setGuestData(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
 		
     	User user = new User();
@@ -62,11 +65,13 @@ public class GuestController {
 		       
         // We put the attribute to the session
         session.setAttribute("file", formFile);
+        
+        System.out.println(formFile);
 				
 		return "guest/anonymousdata";
 	}
 	
-	@PostMapping("/anonymous/quiz")
+	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
 			@RequestParam("age") String age, @RequestParam("rol") String rol) {
 			
@@ -74,7 +79,7 @@ public class GuestController {
 		file = jsonPathLang + "/" + file;
 		
 		// We get full quiz from json file
-		Quiz cuestionario = getQuiz(file);
+		Quiz cuestionario = jsonService.getJsonQuiz(file);
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();
@@ -92,11 +97,11 @@ public class GuestController {
 		session.setAttribute("gender", gender);
 		
 		session.setAttribute("preguntaActual", 1);
-		return "redirect:/anonymous/startQuiz";
+		return "redirect:/anonymousStartQuiz";
 	}
 	
 	
-	@RequestMapping(value = "/anonymous/startQuiz", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/anonymousStartQuiz", method = { RequestMethod.GET, RequestMethod.POST })
 	public String showGuestQuiz(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
@@ -140,7 +145,7 @@ public class GuestController {
 	 * @param model the model
 	 * @return the string
 	 */
-	@PostMapping("/anonymous/showResults")
+	@PostMapping("/anonymousShowResults")
 	public String showResults(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
 			HttpSession session, Model model) {
 		
@@ -169,7 +174,7 @@ public class GuestController {
 			
 			session.setAttribute("preguntaActual", questionInt-1);
 					
-			return "redirect:/anonymous/startQuiz";
+			return "redirect:/anonymousStartQuiz";
 		}
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -205,31 +210,6 @@ public class GuestController {
 		return "guest/anonymousresults";
 	}
 	
-	/**
-	 * Method for get the full Quiz from json file.
-	 * @param String jsonQuiz - full json path
-	 * @return quiz object
-	 */
-	private Quiz getQuiz(String jsonQuiz) {
-		// create Object Mapper
-		ObjectMapper mapper = new ObjectMapper();
-		
-		Quiz quiz = null;
-
-		// read JSON file and map/convert to java POJO
-		try {
-			
-			//ClassPathResource staticDataResource = new ClassPathResource(jsonQuiz);
-			File json = new File(jsonQuiz);
-			quiz = mapper.readValue(json, Quiz.class);
-		    
-
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		return quiz;
-	}
 	
 	/**
 	 * Method saveScore().

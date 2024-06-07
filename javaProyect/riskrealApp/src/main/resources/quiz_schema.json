@@ -1,0 +1,204 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1717604831.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"id",
+		"title",
+		"image",
+		"language",
+		"description",
+		"type",
+		"questions"
+	],
+	"properties": {
+		"id": {
+			"$id": "#root/id", 
+			"title": "Id", 
+			"type": "integer",
+			"examples": [
+				1
+			],
+			"default": 0
+		},
+		"title": {
+			"$id": "#root/title", 
+			"title": "Title", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Habilidades Blandas"
+			],
+			"pattern": "^.*$"
+		},
+		"image": {
+			"$id": "#root/image", 
+			"title": "Image", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/image/items", 
+				"title": "Items", 
+				"type": "string",
+				"default": "",
+				"examples": [
+					"principalHD.jpg"
+				],
+				"pattern": "^.*$"
+			}
+		},
+		"language": {
+			"$id": "#root/language", 
+			"title": "Language", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"es"
+			],
+			"pattern": "^.*$"
+		},
+		"description": {
+			"$id": "#root/description", 
+			"title": "Description", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Descripción del cuestionario"
+			],
+			"pattern": "^.*$"
+		},
+		"type": {
+			"$id": "#root/type", 
+			"title": "Type", 
+			"type": "integer",
+			"examples": [
+				1
+			],
+			"default": 0
+		},
+		"questions": {
+			"$id": "#root/questions", 
+			"title": "Questions", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/questions/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"id",
+					"description",
+					"image",
+					"answers",
+					"skill"
+				],
+				"properties": {
+					"id": {
+						"$id": "#root/questions/items/id", 
+						"title": "Id", 
+						"type": "integer",
+						"examples": [
+							1
+						],
+						"default": 0
+					},
+					"description": {
+						"$id": "#root/questions/items/description", 
+						"title": "Description", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Me familiarizo fácilmente con gente nueva"
+						],
+						"pattern": "^.*$"
+					},
+					"image": {
+						"$id": "#root/questions/items/image", 
+						"title": "Image", 
+						"type": "array",
+						"default": [],
+						"items":{
+							"$id": "#root/questions/items/image/items", 
+							"title": "Items", 
+							"type": "string",
+							"default": "",
+							"examples": [
+								"paris.jpg"
+							],
+							"pattern": "^.*$"
+						}
+					},
+					"answers": {
+						"$id": "#root/questions/items/answers", 
+						"title": "Answers", 
+						"type": "array",
+						"default": [],
+						"items":{
+							"$id": "#root/questions/items/answers/items", 
+							"title": "Items", 
+							"type": "object",
+							"required": [
+								"text",
+								"value",
+								"id"
+							],
+							"properties": {
+								"text": {
+									"$id": "#root/questions/items/answers/items/text", 
+									"title": "Text", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"1 - Totalmente en desacuerdo"
+									],
+									"pattern": "^.*$"
+								},
+								"image": {
+									"$id": "#root/questions/items/answers/items/image", 
+									"title": "Image", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"principalHD.jpg"
+									],
+									"pattern": "^.*$"
+								},
+								"value": {
+									"$id": "#root/questions/items/answers/items/value", 
+									"title": "Value", 
+									"type": "integer",
+									"examples": [
+										1
+									],
+									"default": 0
+								},
+								"id": {
+									"$id": "#root/questions/items/answers/items/id", 
+									"title": "Id", 
+									"type": "integer",
+									"examples": [
+										1
+									],
+									"default": 0
+								}
+							}
+						}
+
+					},
+					"skill": {
+						"$id": "#root/questions/items/skill", 
+						"title": "Skill", 
+						"type": "integer",
+						"examples": [
+							1
+						],
+						"default": 0
+					}
+				}
+			}
+
+		}
+	}
+}

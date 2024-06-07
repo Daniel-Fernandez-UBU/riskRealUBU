@@ -5,6 +5,8 @@
 </nav>
 
 
+
+
        <!--  <h1 th:text="#{home.lang.select}"></h1>
 	    <ul>
 	        <li><i class="fi fi-es"></i><a th:href="@{?lang=es}" th:text="#{lang.spanish}"></a></li>
@@ -28,6 +30,19 @@
 	  <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
 	</ul>
 	
+</nav>
+
+<nav th:fragment="new-header" class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+  <div class="container"><a class="navbar-brand d-inline-flex" href="/"><img class="d-inline-block" src="assets/img/gallery/logo.png" alt="logo" /><span class="text-1000 fs-0 fw-bold ms-2">RiskRealApp</span></a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+      <ul class="navbar-nav dropleft ms-auto">
+       	<li th:insert="~{fragments/navoptions :: langOptions}"></li>
+	    <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
+	    <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
