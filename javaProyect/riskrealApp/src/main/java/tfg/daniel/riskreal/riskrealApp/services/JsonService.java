@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
+import tfg.daniel.riskreal.riskrealApp.model.Answers;
+import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 
 /**
@@ -97,6 +99,7 @@ public class JsonService {
 		    
 			// Get the images normalized
 			quiz.setImage(normalizeImages(quiz.getImage()));
+			quiz.setQuestions(normalizeQuestions(quiz.getQuestions()));
 
 		} catch (IOException e) {
 			System.err.println("JSON Quiz generator error: " + e.getMessage());
@@ -121,6 +124,40 @@ public class JsonService {
 		return normImages;
 		
 	}
+	
+	/**
+	 * Method normalizeQuestions.
+	 * @param questionsList
+	 * @return questions normalized
+	 */
+	private List<Questions> normalizeQuestions(List<Questions> questionsList){
+		List<Questions> normalized = new ArrayList<>();
+		
+    	for (Questions quest : questionsList) {
+    		quest.setImage(normalizeImages(quest.getImage())); 
+    		quest.setAnswers(normalizeAnswers(quest.getAnswers()));
+    		normalized.add(quest);
+    	}
+		return normalized;
+		
+	}
+	
+	/**
+	 * Method normalizeAnswers.
+	 * @param answersList
+	 * @return Answers normalized
+	 */
+	private List<Answers> normalizeAnswers(List<Answers> answersList){
+		List<Answers> normalized = new ArrayList<>();
+		
+    	for (Answers ans : answersList) {
+    		ans.setImage(customConfig.getQuizImagePath() + ans.getImage()); 
+    		normalized.add(ans);
+    	}
+		return normalized;
+		
+	}
+	
 	
 	/**
 	 * Method getJsonFiles.

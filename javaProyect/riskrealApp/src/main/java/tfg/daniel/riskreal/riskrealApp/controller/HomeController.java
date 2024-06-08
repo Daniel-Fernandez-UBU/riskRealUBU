@@ -91,6 +91,7 @@ public class HomeController {
             		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + jsonQ);
                 	jsonQuiz.put(jsonQ, quiz);
             	}
+                session.setAttribute("jsonQuiz", jsonQuiz);
             }
         } else {
         	String testJson = customConfig.getTestQuiz() + currentLang + ".json";
@@ -99,7 +100,9 @@ public class HomeController {
         	if (testFile.exists()) {
         		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
             	jsonQuiz.put(testJson, quiz);
-        	}   	
+        	}  
+            session.setAttribute("jsonQuiz", jsonQuiz);
+
         }
         
         // If the user have to change the password
@@ -108,10 +111,10 @@ public class HomeController {
         	return "changePassword";
         }
         
-        session.setAttribute("jsonQuiz", jsonQuiz);
+
+        model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
         model.addAttribute("jsonFiles", jsonFiles);
         model.addAttribute("jsonQuiz", jsonQuiz);
-        model.addAttribute("isAuthenticated", checkAuthenticated(authentication));
        
         return "home";
     }
