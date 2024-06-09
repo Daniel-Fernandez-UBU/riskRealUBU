@@ -214,7 +214,7 @@ public class QuizController {
 		// Download CSV
 		csvService.downloadCSV();
 		
-		return "resultados";
+		return "results";
 	}
 	    
 	

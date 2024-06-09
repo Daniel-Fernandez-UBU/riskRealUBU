@@ -1,5 +1,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Profile;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.ProfileRepository;
@@ -41,6 +43,11 @@ public class RegisterController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
+    /** The custom config. */
+    @Autowired
+    private  CustomConfig customConfig;
+    
+    
     /**
      * Register.
      *
@@ -54,7 +61,7 @@ public class RegisterController {
     	
     	model.addAttribute("user", user);
     	
-        return "register";
+        return "/users/register";
     }
     
     /**
@@ -172,6 +179,48 @@ public class RegisterController {
         
         model.addAttribute("user", user);        
                 
-    	return "profile";
+    	return "/users/profile";
+    }
+	    
+	/**
+	 * Method roleManagement.
+	 * 
+	 * @param model
+	 * @return role management view
+	 * 
+	 */
+    @GetMapping("/profileManagement")
+    public String ProfileManagement(Model model) {
+    	
+    	model.addAttribute("profileList", profileRepository.findAll());
+    	model.addAttribute("adminuser", customConfig.getAdmin());
+        return "/admin/profilemanagement";
+    }
+    
+	/**
+	 * Method roleManagement.
+	 * 
+	 * @param model
+	 * @return role management view
+	 * 
+	 */
+    @PostMapping("/updateProfile")
+    public String updateProfileManagement(@RequestParam("newProfile") String newProfile, @RequestParam("email") String email) {
+    	
+    	String[] listEmail = email.split(",");
+    	String[] listProfile = newProfile.split(",");
+    	    	
+    	int size = listEmail.length;
+    	
+    	// Update all the profiles.
+    	for (int i = 0; i < size; i++) {
+        	Profile profile = new Profile();
+        	profile.setUsername(listEmail[i]);
+        	profile.setProfile(listProfile[i]);
+
+        	// Update the profile in the database
+        	profileRepository.save(profile);
+    	}   	
+        return "redirect:/profileManagement";
     }
 }

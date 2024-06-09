@@ -108,7 +108,7 @@ public class HomeController {
         // If the user have to change the password
         if (changePasswordRequired(authentication)) {
         	model.addAttribute("email", authentication.getName());
-        	return "changePassword";
+        	return "/users/changePassword";
         }
         
 

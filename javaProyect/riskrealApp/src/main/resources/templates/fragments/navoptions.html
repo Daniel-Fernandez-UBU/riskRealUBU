@@ -30,10 +30,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
        	<span th:text="'Hola, ' + ${#authentication.name}"></span>
        	</a>
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+		  <li><a class="dropdown-item" th:href="@{/user/profile}" th:text="#{header.profile}"></a></li>
 		  <li><a class="dropdown-item" th:href="@{/logout(lang=${#locale.language})}" th:text="#{header.logout}"></a></li>
 		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/json/view}" th:text="#{header.loadQuiz}"></a></li>
 		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/csv/download}" th:text="#{header.download}"></a> </li>
-		  <li><a class="dropdown-item" th:href="@{/user/profile}" th:text="#{header.profile}"></a></li>
+		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/profileManagement}" th:text="#{header.role.management}"></a> </li>
 		</ul>
    	 </li>
 </div>

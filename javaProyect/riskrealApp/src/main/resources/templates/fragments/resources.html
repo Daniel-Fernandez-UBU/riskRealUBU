@@ -19,6 +19,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	      feather.replace();
 	    </script>
 	    <script src="assets/js/theme.js"></script>
+	    <script>
+			function updateBackgroundColor(selectElement) {
+			    // Obtener el índice de la opción seleccionada actualmente
+			    var selectedIndex = selectElement.selectedIndex;
+			    
+			    // Obtener el valor de la opción seleccionada actualmente
+			    var selectedValue = selectElement.options[selectedIndex].value;
+			    
+			    // Obtener el valor predeterminado de la opción
+			    var defaultValue = selectElement.options[selectedIndex].defaultSelected;
+			    
+			    // Si el valor seleccionado es igual al valor predeterminado, restablecer el color de fondo
+			    if (selectedValue == defaultValue) {
+			        selectElement.style.backgroundColor = '';
+			    } else {
+			        // Si no, establecer el color de fondo en amarillo
+			        selectElement.style.backgroundColor = 'yellow';
+			    }
+			}
+		</script>
 	</div>
 	
 	<div th:fragment="head">

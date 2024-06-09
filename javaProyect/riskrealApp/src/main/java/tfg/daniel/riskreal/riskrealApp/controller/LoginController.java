@@ -60,7 +60,7 @@ public class LoginController {
      */
     @GetMapping("/resetPassword")
     public String resetPassword() {
-    	return "/resetPassword";
+    	return "/users/resetPassword";
     }
 
 }

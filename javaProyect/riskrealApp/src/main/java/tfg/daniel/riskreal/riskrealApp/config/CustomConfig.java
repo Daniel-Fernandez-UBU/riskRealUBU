@@ -9,8 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.annotation.PostConstruct;
+import tfg.daniel.riskreal.riskrealApp.model.Profile;
+import tfg.daniel.riskreal.riskrealApp.model.User;
+import tfg.daniel.riskreal.riskrealApp.repository.ProfileRepository;
+import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 
 
 /**
@@ -27,9 +32,22 @@ import jakarta.annotation.PostConstruct;
 @PropertySource("classpath:custom.properties")
 public class CustomConfig {
 	
+	/** The resource loader. */
 	@Autowired
 	private ResourceLoader resourceLoader;
-		
+	
+    /** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
+    
+    /** The profile repository. */
+    @Autowired
+    private ProfileRepository profileRepository;
+    
+    /** The password encoder. */
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+			
 	/** String email properties from email.properties file.  */
 	@Value("${json.quiz.file.path}")
 	private String jsonFilePath;
@@ -61,6 +79,14 @@ public class CustomConfig {
 	@Value("${test.quiz}")
 	private String testQuiz;
 	
+	/** The admin default username. */
+	@Value("${admin.username}")
+	private String admin;
+	
+	/** The admin default password. */
+	@Value("${admin.password}")
+	private String pass;
+	
     /**
      * Method init
      * 
@@ -86,6 +112,11 @@ public class CustomConfig {
         } else {
         	fileSchema = new File(jsonSchema);
         }
+        
+        if (!userRepository.existsById(admin)) {
+        	insertAdminUser();
+        }
+        
     }
 
     /**
@@ -107,6 +138,54 @@ public class CustomConfig {
         }
     }
     
+    /**
+     * Method insertAdminUser.
+     * 
+     * Insert the admin user in the database if this not exists.
+     * 
+     */
+    private void insertAdminUser() {
+    	
+    	User adminUser = new User();
+    	adminUser.setEmail(admin);
+    	adminUser.setAge("admin");
+    	adminUser.setCompany(99999);
+    	adminUser.setFirstname("admin");
+    	adminUser.setLastname("riskreal");
+    	adminUser.setGender("admin");
+    	adminUser.setPassword(passwordEncoder.encode(pass));
+    	adminUser.setRol("admin");
+    	adminUser.setStatus(2); // Force change password the first login
+    	
+    	// Insert user in the database
+    	userRepository.save(adminUser); 
+    	
+    	Profile adminProfile = new Profile();
+    	adminProfile.setUsername(admin);
+    	adminProfile.setProfile("ADMIN");
+    	
+    	// Insert profile in the database
+    	profileRepository.save(adminProfile); 
+    	
+    }
+    
+    
+    /**
+     * Getter getAdmin.
+     * @return admin username
+     */
+	public String getAdmin() {
+		return admin;
+	}
+
+	/**
+	 * Getter getPass.
+	 * @return admin pass
+	 */
+	public String getPass() {
+		return pass;
+	}
+
 	/**
 	 * Getter getTestQuiz.
 	 *
