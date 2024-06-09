@@ -80,16 +80,9 @@ public class RegisterController {
         // Save the user in the db.
         userRepository.save(user);
                 
-        String profile;
-        
-        if (user.getRol().equalsIgnoreCase("manager")) {
-        	profile = "ADMIN";
-        } else if (user.getRol().equalsIgnoreCase("employee")) {
-        	profile = "CUSTOMER";
-        } else {
-        	profile="GUEST";
-        }
-
+        // Default user role for all the registered users.
+        String profile = "USER";
+ 
         // Save profile in the db.
         Profile userProfile = new Profile();
         userProfile.setUsername(user.getEmail());
@@ -135,22 +128,6 @@ public class RegisterController {
         // Update the user in the db.
         userRepository.save(user);
                 
-        String profile;
-        
-        if (user.getRol().equalsIgnoreCase("manager")) {
-        	profile = "ADMIN";
-        } else if (user.getRol().equalsIgnoreCase("employee")) {
-        	profile = "CUSTOMER";
-        } else {
-        	profile="GUEST";
-        }
-
-        // Update profile in the db.
-        Profile userProfile = new Profile();
-        userProfile.setUsername(user.getEmail());
-        userProfile.setProfile(profile);
-        profileRepository.save(userProfile);
-
         // Return to login page
         return "redirect:/user/profile";
     }
