@@ -65,13 +65,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					            </select>
 					        </div>
 					      </div>
-					   <button type="submit" class="btn btn-lg btn-primary btn-md btn-sm" th:text="#{quiz.start.button}"></button>
+					   <button type="submit" class="btn btn-lg btn-primary btn-md btn-sm btn-block" th:text="#{quiz.start.button}"></button>
 					</form>
 				</div>
               </div>
             </div>
             </div>
       </section>
+      
+      <div th:insert="~{fragments/resources :: scripts}"></div>
       
 </body>
 </html>

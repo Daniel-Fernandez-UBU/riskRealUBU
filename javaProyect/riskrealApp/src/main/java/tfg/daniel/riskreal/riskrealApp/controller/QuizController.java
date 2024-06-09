@@ -79,8 +79,8 @@ public class QuizController {
 	public String mostrarCuestionario(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
-		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
-		if (cuestionario == null) {
+		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		if (quiz == null) {
 			System.out.println("No se ha recibido el cuestionario en la session");
 			return "home";
 		}
@@ -94,7 +94,7 @@ public class QuizController {
 		model.addAttribute("answersvalues", userSelection.getAnswersValues());
 		
 		// To let the html acces "cuestionario"
-		model.addAttribute("cuestionario", cuestionario);
+		model.addAttribute("quiz", quiz);
 		
 		// To let the html access "preguntaActual"
 		model.addAttribute("preguntaActual", preguntaActual);
@@ -152,7 +152,7 @@ public class QuizController {
 	 * @param model the model
 	 * @return the string
 	 */
-	@PostMapping("/quiz/showResults")
+	@PostMapping("/quizShowResults")
 	public String showResults(@RequestParam(value="accion") String estado, @RequestParam(value="pregunta") String question, @RequestParam(value="respuestaSeleccionada", required = false) String text, 
 			HttpSession session, Model model) {
 		

@@ -63,35 +63,35 @@ public class EmailController {
         
         try {
 
-            Optional<User> optUser = userRepository.findById(to);
-            System.out.println(optUser.toString());
-            
+            Optional<User> optUser = userRepository.findById(to);            
                         
             // Generate a random password
             String passRandom = RandomStringUtils.random(10, 65, 122, true, true, null, new SecureRandom());
-            System.out.println("RandomPassword es: " + passRandom);
             
             body = body + ":\n" + passRandom;
             
             EmailRequest email = new EmailRequest();
             email.setBody(body);
             email.setSubject(subject);
-            email.setTo(to);
+            email.setTo(to);    
             
-            if (optUser.isPresent()) {
+            if (userRepository.existsById(to)) {
             	// Get the user object
             	User user = optUser.get();
             	user.setPassword(passwordEncoder.encode(passRandom));
             	user.setStatus(2);
             	userRepository.save(user);
                 emailService.sendMail(email);
-                session.setAttribute("emailMessage", messageSource.getMessage("email.ok", null, locale));
+                session.setAttribute("emailMessage", messageSource.getMessage("email.success", null, locale));
+                session.setAttribute("type", "success");
             } else {
-            	session.setAttribute("emailMessage", messageSource.getMessage("email.not.registered", null, locale));
+            	session.setAttribute("emailMessage", messageSource.getMessage("user.not.registered", null, locale));
+            	session.setAttribute("type", "info");
             	 
             }
         } catch (Exception e) {
         	session.setAttribute("emailMessage", messageSource.getMessage("email.error", null, locale));
+        	session.setAttribute("type", "danger");
         }
         
         return "redirect:/";

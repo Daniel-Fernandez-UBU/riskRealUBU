@@ -168,7 +168,7 @@ public class RegisterController {
      * 
      * @return profile view
      */
-    @GetMapping("/user/profile")
+    @GetMapping("/userProfile")
     public String userProfile(Model model) {
     	User user = null;
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

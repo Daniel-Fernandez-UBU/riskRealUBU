@@ -80,6 +80,13 @@ public class HomeController {
         } else {
         	currentLang = session.getAttribute("session.current.locale").toString();
         }
+        
+        if (session.getAttribute("emailMessage") != null) {
+        	model.addAttribute("emailMessage", session.getAttribute("emailMessage"));
+        	model.addAttribute("type", (String) session.getAttribute("type"));
+        	session.removeAttribute("emailMessage");
+        	session.removeAttribute("type");
+        }
 
         Quiz quiz = null;
         

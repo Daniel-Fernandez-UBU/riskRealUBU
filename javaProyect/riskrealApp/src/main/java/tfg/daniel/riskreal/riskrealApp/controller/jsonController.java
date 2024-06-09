@@ -56,7 +56,7 @@ public class jsonController {
 	    this.langService = customConfig.getLangAvailables();
 	}
 	
-	@GetMapping("/json/view")
+	@GetMapping("/jsonView")
 	public String jsonList(Model model) {
 		
     	File file = new File(jsonPath);
@@ -82,14 +82,14 @@ public class jsonController {
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "file.error");
             redirectAttributes.addFlashAttribute("type", "primary");
-            return "redirect:/json/view";
+            return "redirect:/jsonView";
         }
         
         // We check that is a json file
         if (!file.getOriginalFilename().endsWith(".json")) {
         	redirectAttributes.addFlashAttribute("message", "json.error");
         	redirectAttributes.addFlashAttribute("type", "primary");
-        	return "redirect:/json/view";
+        	return "redirect:/jsonView";
         }
 
 
@@ -107,7 +107,7 @@ public class jsonController {
                 redirectAttributes.addFlashAttribute("message", "schema.error");
                 redirectAttributes.addFlashAttribute("filedeleted", file.getOriginalFilename());
                 redirectAttributes.addFlashAttribute("type", "danger");
-                return "redirect:/json/view";
+                return "redirect:/jsonView";
             }
 
             redirectAttributes.addFlashAttribute("message","file.uploaded");
@@ -117,7 +117,7 @@ public class jsonController {
             System.err.println("uploadJson exception: " + e.toString());
         }
 
-        return "redirect:/json/view";
+        return "redirect:/jsonView";
     }
 	
 	

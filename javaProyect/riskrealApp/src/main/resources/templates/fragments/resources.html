@@ -39,6 +39,35 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			    }
 			}
 		</script>
+		<script>
+	        function previousQuestion() {
+	            var activeTab = $('.nav-link.active');
+	            var prevTab = activeTab.parent().prev().children('.nav-link');
+	            if (prevTab.length > 0) {
+	                prevTab.tab('show');
+	            }
+	        }
+	
+	        function nextQuestion() {
+	            var activeTab = $('.nav-link.active');
+	            var nextTab = activeTab.parent().next().children('.nav-link');
+	            if (nextTab.length > 0) {
+	                nextTab.tab('show');
+	            }
+	        }
+	        function showAdvise() {
+	            $('#avisoSesion').modal('show'); // Mostrar el aviso con el cierre de la sesión actual
+	        }
+	        
+	        function closeAdvise() {
+	            $('#avisoSesion').modal('hide'); // Mostrar el aviso con el cierre de la sesión actual
+	        }
+	
+	        function toHome() {
+	            window.location.href = "/"; // Redirigir a la página de inicio
+	        }
+
+    	</script>
 	</div>
 	
 	<div th:fragment="head">
