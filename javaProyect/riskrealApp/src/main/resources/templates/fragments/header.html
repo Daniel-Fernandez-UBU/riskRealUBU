@@ -1,37 +1,3 @@
-<nav th:fragment="old-header" class="navbar navbar-light" style="background-color: #e3f2fd;">
-	<a class="navbar-brand" href="/">Home</a>
-	<a class="navbar-brand">Usuario</a>
-	<a class="navbar-brand" th:href="@{/logout}">Cerrar sesión</a>
-</nav>
-
-
-
-
-       <!--  <h1 th:text="#{home.lang.select}"></h1>
-	    <ul>
-	        <li><i class="fi fi-es"></i><a th:href="@{?lang=es}" th:text="#{lang.spanish}"></a></li>
-	        <li><i class="fi fi-gb"></i><a th:href="@{?lang=en}" th:text="#{lang.english}"></a></li>
-	        <li><i class="fi fi-fr"></i><a th:href="@{?lang=fr}" th:text="#{lang.french}"></a></li> 
-			<li><i class="fi fi-pt"></i><a th:href="@{?lang=pt}" th:text="#{lang.portuguese}"></a></li> 
-			<li><i class="fi fi-it"></i><a th:href="@{?lang=it}" th:text="#{lang.italian}"></a></li> 
-
-	    </ul>
-		<i class="fi fi-fr"></i> 
-		<i class="fi fi-pt"></i> 
-		<i class="fi fi-it"></i> 
-		-->
-
-<nav th:fragment="main-header" class="navbar navbar-expand navbar-light bg-light">
-	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
-	<a class="nav-link" href="/" th:text="#{home.button}"></a>
-    <ul class="navbar-nav ml-auto dropdown dropleft">
-	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
-	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
-	  <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
-	</ul>
-	
-</nav>
-
 <nav th:fragment="new-header" class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
   <div class="container"><a class="navbar-brand d-inline-flex" href="/"><img class="d-inline-block" src="assets/img/gallery/logo.png" alt="logo" /><span class="text-1000 fs-0 fw-bold ms-2">RiskRealApp</span></a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -45,14 +11,23 @@
   </div>
 </nav>
 
-<nav th:fragment="quiz-header" class="navbar navbar-expand navbar-light bg-light">
-	<a class="navbar-brand" href="#">AppRiskReal UBU</a>
-	<a class="nav-link" href="#" onclick="mostrarAviso()">Home</a>
-    <ul class="navbar-nav ml-auto dropdown dropleft">
-	  <li th:insert="~{fragments/navoptions :: langOptions}"></li>
-	  <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
-	</ul>
+<nav th:fragment="new-quiz-header" class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+  <div class="container">
+  	<a class="navbar-brand d-inline-flex" onclick="showAdvise()" href="#">
+  		<img class="d-inline-block" src="assets/img/gallery/logo.png" alt="logo" />	
+  		<span class="text-1000 fs-0 fw-bold ms-2">RiskRealApp</span>
+  	</a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+      <ul class="navbar-nav dropleft ms-auto">
+	    <div th:insert="~{fragments/navoptions :: isAuthenticatedQuiz}"></div>
+	    <div th:insert="~{fragments/navoptions :: isAnonymousQuiz}"></div>
+      </ul>
+    </div>
+  </div>
 </nav>
+
+
 
 <div th:fragment="scripts">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -61,14 +36,27 @@
     <!-- Añade aquí otros scripts necesarios -->
 </div>
 
-<div th:fragment="emailMessage" th:if="${emailMessage}">
-    <!-- Mensaje de advertencia utilizando Bootstrap -->
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Información!</strong> <span th:text="${emailMessage}"></span>
-        <!-- Botón para cerrar el mensaje -->
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<div th:fragment="emailMessage"  th:if="${emailMessage}">
+    <div class="row">
+        <div class="col-12">
+        	<div th:class="'alert-dismissible fade show fw-bold w-100 alert alert-' + ${type}" style="text-align: center;" role="alert">
+            	<span th:text="${emailMessage}" style="text-align: center;"></span>
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		        </button>
+          </div>
+    </div>
+</div>
+
+<div th:fragment="quizMessage"  th:if="${message}">
+    <div class="row">
+        <div class="col-12">
+        	<div th:class="'alert-dismissible fade show fw-bold w-100 alert alert-' + ${type}" style="text-align: center;" role="alert">
+            	<span th:text="#{'load.quiz.' + ${message}} + ${filedeleted}" style="text-align: center;"></span>
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		        </button>
+          </div>
     </div>
 </div>
 

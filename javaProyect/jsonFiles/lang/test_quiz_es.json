@@ -12,38 +12,38 @@
         "id": 1,
         "description": "Me familiarizo fácilmente con gente nueva",
         "image": [
-			"paris.jpg"
+			"principalHD.png"
 			],
         "skill": 1,
         "answers": [
           {
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -52,20 +52,20 @@
         "id": 2,
         "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
         "image": [
-			"paris.jpg"
+			"principalHD.png"
 			],
         "skill": 1,
         "answers": [
           {
 			"id": 1,
             "text": "Si",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 3,
             "text": "No",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 0
           }
         ]
@@ -74,38 +74,38 @@
         "id": 3,
         "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
         "image": [
-			"paris.jpg"
+			"principalHD.png"
 			],
         "skill": 1,
         "answers": [
           {
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -114,38 +114,38 @@
         "id": 4,
         "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
         "image": [
-			"paris.jpg"
+			"principalHD.png"
 			],
         "skill": 1,
         "answers": [
 		{
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -154,38 +154,38 @@
         "id": 5,
         "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
         "image": [
-			"paris.jpg"
+			"principalHD.png"
 			],
         "skill": 1,
         "answers": [
 		{
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]

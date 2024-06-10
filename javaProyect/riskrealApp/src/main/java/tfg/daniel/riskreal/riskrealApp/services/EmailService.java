@@ -60,7 +60,7 @@ public class EmailService {
 			context.setVariable("body", email.getBody());
 			
 			// Email template
-			String contentHTML = templateEngine.process("email", context);
+			String contentHTML = templateEngine.process("/users/email", context);
 			
 			// We send the properties and the template
 			helper.setText(contentHTML, true); //True for using html

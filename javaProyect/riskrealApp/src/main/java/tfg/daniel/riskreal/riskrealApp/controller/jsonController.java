@@ -56,7 +56,7 @@ public class jsonController {
 	    this.langService = customConfig.getLangAvailables();
 	}
 	
-	@GetMapping("/json/view")
+	@GetMapping("/jsonView")
 	public String jsonList(Model model) {
 		
     	File file = new File(jsonPath);
@@ -70,7 +70,7 @@ public class jsonController {
             }
         }
 
-		return "loadQuiz";
+		return "/quiz/loadQuiz";
 	}
 	
     @PostMapping("/json/upload")
@@ -82,14 +82,14 @@ public class jsonController {
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "file.error");
             redirectAttributes.addFlashAttribute("type", "primary");
-            return "redirect:/json/view";
+            return "redirect:/jsonView";
         }
         
         // We check that is a json file
         if (!file.getOriginalFilename().endsWith(".json")) {
         	redirectAttributes.addFlashAttribute("message", "json.error");
         	redirectAttributes.addFlashAttribute("type", "primary");
-        	return "redirect:/json/view";
+        	return "redirect:/jsonView";
         }
 
 
@@ -107,7 +107,7 @@ public class jsonController {
                 redirectAttributes.addFlashAttribute("message", "schema.error");
                 redirectAttributes.addFlashAttribute("filedeleted", file.getOriginalFilename());
                 redirectAttributes.addFlashAttribute("type", "danger");
-                return "redirect:/json/view";
+                return "redirect:/jsonView";
             }
 
             redirectAttributes.addFlashAttribute("message","file.uploaded");
@@ -117,7 +117,7 @@ public class jsonController {
             System.err.println("uploadJson exception: " + e.toString());
         }
 
-        return "redirect:/json/view";
+        return "redirect:/jsonView";
     }
 	
 	
@@ -145,11 +145,11 @@ public class jsonController {
     	}
     	   	    	
     	System.out.println("File sended to getQuiz: " + archivo);
-    	Quiz cuestionario = jsonService.getJsonQuiz(archivo);
+    	Quiz cuestionario = jsonService.getJsonQuiz(archivo, false);
     	
     	String lang = cuestionario.getLanguage();
     	
-    	File json = new File(jsonPathLang + "/" + lang + "_quiz_" + cuestionario.getId() + ".json");
+    	File json = new File(jsonPathLang + "/quiz_" + cuestionario.getId() + "_" + lang + ".json");
     	
     	if (langService.contains(lang)){
     		System.out.println("Lenguaje encontrado en custom.properties: " + lang);
@@ -174,7 +174,7 @@ public class jsonController {
         redirectAttributes.addFlashAttribute("message","generated");
         redirectAttributes.addFlashAttribute("type", "success");
 
-        return "redirect:/json/view";
+        return "redirect:/jsonView";
     }
     
 

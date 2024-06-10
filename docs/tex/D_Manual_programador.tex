@@ -39,6 +39,8 @@ En el momento actual en el que se encuentra la informática y el interés por la
 
 Docker Desktop se puede descargar desde el enlace \cite{web:dockerDesktop}. Tiene versión para windows, linux y mac, por lo que hay que elegir el sistema operativo correcto y seguir los pasos del asistente de instalación.
 
+\textbf{La instalación exige un reinicio del equipo}, que se recomienda hacer en este punto para poder seguir con el resto del manual de forma secuencial.
+
 Una vez instalado, la aplicación sería similar a la siguiente:
 \imagen{dockerDesktopMain}{Pantalla principal de Docker Desktop.}
 
@@ -70,6 +72,9 @@ En el caso de Windows, el fichero descargado es un \textit{.jar}.
 
 \begin{enumerate}
 	\item Hacemos doble click sobre el fichero .jar descargado, para que se inicie la extracción automática del contenido.
+	\begin{itemize}
+		\item Si lo anterior no funciona, se tiene que realizar \textit{java -jar ``nombre-archivo-jar.jar''} para que se inicie.
+	\end{itemize}
 	\item En la carpeta en la que esté el fichero .jar se generará una nueva carpeta con nombre \textbf{sts-4.22.1.RELEASE}, o similar, dependiendo de la versión de la aplicación en el momento de la descarga.
 	\item Movemos esa carpeta a la ubicación que nos interese, pues el programa de Spring Tools es \textit{portable}.
 	\item Accedemos a la carpeta y ejecutamos \textbf{SpringToolSuite4.exe}
@@ -97,7 +102,7 @@ Pasos a seguir para la instalación de cualquier plugin:
 	\item Introducimos el nombre del plugin que queremos buscar.
 	\item Pulsamos en \textit{Go} o le damos al \textit{Intro} en el teclado.
 	\item Pulsamos en \textit{Install}.
-	\item Seguimos los pasos, aceptando las diferentes ventanas de confiirmación que nos aparecen.
+	\item Seguimos los pasos, aceptando las diferentes ventanas de confirmación que nos aparecen.
 	\item Tras terminarse la instalación del plugin, nos pide reiniciar Spring Tools Suite 4. \textbf{Consejo: Instalar todos los plugins y al final reiniciar la aplicación}
 \end{enumerate}
 
@@ -134,9 +139,9 @@ En la nueva ventana que se muestra, navegamos hasta \textbf{Maven --> Existing M
 
 \imagen{importMaven}{Importación de proyecto Maven en Spring Tool Suite.}
 
-A contunuación, nos pedirá que busquemos la ruta donde tenemos el proyecto que queremos importar. \textbf{Tenemos que ir a la ruta sobre la que hayamos ejecutado el \textit{git clone} del paso previo}.
+A continuación, nos pedirá que busquemos la ruta donde tenemos el proyecto que queremos importar. \textbf{Tenemos que ir a la ruta sobre la que hayamos ejecutado el \textit{git clone} del paso previo}.
 
-Accedemos a la ruta donde hemos hecho el clon del repositorio de Git, y dentro de la carpeta del proyecto, \textit{riskRealUBU}, accedemos a \textit{javaProyect --> riskRealApp}.
+Accedemos a la ruta donde hemos hecho el clon del repositorio de Git, y dentro de la carpeta del proyecto, \textit{riskRealUBU}, accedemos a \textit{java --> riskRealApp}.
 
 Si hemos seleccionado la ruta adecuada, deberá quedar de esta forma la importación, habiendo reconocido el fichero \textbf{pom.xml} de nuestro proyecto y a la espera de que pulsemos en \textit{Finish}.
 

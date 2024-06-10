@@ -1,136 +1,80 @@
 <!DOCTYPE html>
 <html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="#{anonymousdata.title}"></title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" rel="stylesheet"/>
-    <style>
-	    *{
-	   box-sizing: border-box;
-	   font-family: "Merriweather Sans", sans-serif;
-	}
-	
-	body{
-	   background-color: #B0DBEE;
-	   
-	   #form{
-	      color: white;
-	      background-color: #009EDF;
-	      border-radius: 5px;
-	      
-	      width: 400px;
-	      padding: 40px;
-	      margin: 30px auto;
-	      
-	      -webkit-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
-	      -moz-box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
-	      box-shadow: -1px 3px 18px 0px rgba(0,0,0,0.75);
-	      
-	      p{
-	         font-size: 0.9em;
-	      }
-	      
-	      button{
-	         width: 100%;
-	         text-align: center;
-	         color: white;
-	         margin-top: 20px;
-	         border: 1px solid rgba(0,0,0,0.4);
-	      }
-	      
-	      .form-group{
-	         margin: 15px auto;
-	           
-	         label{
-	            font-weight: bold;
-	            font-size: 0.9em;
-	         }
-	         
-			.input-group {
-			    display: flex;
-			    align-items: center; 
-			}
-			
-			.input-group i {
-			    margin-right: 8px; 
-			}
-			
-			.input-group input {
-			    flex: 1; 
-			    padding: 2px;
-			    padding-left: 5px;
-	            width: 100%;
-	            border: none;
-	            border-radius: 0 5px 5px 0;
-			}
-			.input-group select {
-            	flex: 1; 
-			    padding: 2px;
-			    padding-left: 5px;
-	            width: 100%;
-	            border: none;
-	            border-radius: 0 5px 5px 0;
-        	}
-	      }
-	   }
-	}
-    </style>
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<head th:insert="~{fragments/resources :: head}">
 </head>
 <body>
-	<header th:insert="~{fragments/header :: main-header}"></header>
-	<form id="form" action="/anonymousQuiz" method="POST" th:object="${user}">
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		<h1 >Necesitamos saber algunos datos...</h1>  
-	    <div class="form-group">
-	      <label for="gender" th:text="#{register.gender}"></label>
-	      <br />
-	        <div class="input-group">
-	            <i class="fa fa-venus-mars" aria-hidden="true"></i>
-	            <select id="gender" th:field="*{gender}" required>
-	                <option value="male" th:text="#{register.gender.masc}" th:selected="${user.getGender()} == 'male'"></option>
-	                <option value="female" th:text="#{register.gender.fem}" th:selected="${user.getGender()} == 'female'"></option>
-	                <option value="no-binary" th:text="#{register.gender.nobinary}" th:selected="${user.getGender()} == 'no-binary'"></option>
-	                <option value="other" th:text="#{register.gender.other}" th:selected="${user.getGender()} == 'other'"></option>
-	            </select>
-	        </div>
-	      </div>  
-	    <div class="form-group">
-	      <label for="age" th:text="#{register.age}"></label>
-	      <br />
-	        <div class="input-group">
-	            <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
-	            <select id="age" th:field="*{age}" required>
-	                <option value="18-25" th:text="#{register.age.range1}" th:selected="${user.getAge()} == '18-25'"></option>
-					<option value="26-35" th:text="#{register.age.range2}" th:selected="${user.getAge()} == '26-35'"></option>
-					<option value="36-45" th:text="#{register.age.range3}" th:selected="${user.getAge()} == '36-45'"></option>
-					<option value="46-55" th:text="#{register.age.range4}" th:selected="${user.getAge()} == '46-55'"></option>
-					<option value="56-65" th:text="#{register.age.range5}" th:selected="${user.getAge()} == '56-65'"></option>
-					<option value=">65" th:text="#{register.age.range6}" th:selected="${user.getAge()} == '>65'"></option>
-	            </select>
-	        </div>
-	      </div>
-	    <div class="form-group">
-	      <label for="rol" th:text="#{register.rol}"></label>
-	      <br />
-	        <div class="input-group">
-	            <i class="fa fa-briefcase" aria-hidden="true"></i>
-	            <select id="rol" th:field="*{rol}" required>
-	                <option value="manager" th:text="#{register.rol.manager}" th:selected="${user.getRol()} == 'manager'"></option>
-	                <option value="employee" th:text="#{register.rol.employee}" th:selected="${user.getRol()} == 'employee'"></option>
-	                <option value="other" th:text="#{register.rol.other}" th:selected="${user.getRol()} == 'other'"></option>
-	            </select>
-	        </div>
-	      </div>
-	   	   
-	   <button type="submit" class="btn btn-default" th:text="#{quiz.start.button}"></button>
-	</form>
-	<div th:insert="~{fragments/header :: scripts}"></div>
+<header th:insert="~{fragments/header :: new-header}"></header>
+	<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;"></div>
+        <!--/.bg-holder-->
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-12 mb-10">
+              <div class="d-flex align-items-center flex-column">
+              	<h1 class="fw-bold" th:text="#{anonymous.data.title}"></h1>  
+				</div>
+              </div>
+            </div>
+          </div>
+      </section>
+      
+      <section class="py-0" id="header" style="margin-top: -23rem !important;">
+        <div class="container">
+		  <div class="row g-2 flex-center">
+       		<div class="col-md-6">
+       			<div class="d-flex align-items-center flex-column justify-content-center text-center"> 
+					<form id="form" action="/anonymousDescription" method="POST" th:object="${user}">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					    <div class="form-group">
+					      <label for="gender" th:text="#{register.gender}"></label>
+					      <br />
+					        <div class="input-group">
+					            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+					            <select class="form-control w-50"  id="gender" th:field="*{gender}" required>
+					                <option value="male" th:text="#{register.gender.masc}" th:selected="${user.getGender()} == 'male'"></option>
+					                <option value="female" th:text="#{register.gender.fem}" th:selected="${user.getGender()} == 'female'"></option>
+					                <option value="no-binary" th:text="#{register.gender.nobinary}" th:selected="${user.getGender()} == 'no-binary'"></option>
+					                <option value="other" th:text="#{register.gender.other}" th:selected="${user.getGender()} == 'other'"></option>
+					            </select>
+					        </div>
+					      </div>  
+					    <div class="form-group">
+					      <label for="age" th:text="#{register.age}"></label>
+					      <br />
+					        <div class="input-group">
+					            <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+					            <select class="form-control" id="age" th:field="*{age}" required>
+					                <option value="18-25" th:text="#{register.age.range1}" th:selected="${user.getAge()} == '18-25'"></option>
+									<option value="26-35" th:text="#{register.age.range2}" th:selected="${user.getAge()} == '26-35'"></option>
+									<option value="36-45" th:text="#{register.age.range3}" th:selected="${user.getAge()} == '36-45'"></option>
+									<option value="46-55" th:text="#{register.age.range4}" th:selected="${user.getAge()} == '46-55'"></option>
+									<option value="56-65" th:text="#{register.age.range5}" th:selected="${user.getAge()} == '56-65'"></option>
+									<option value=">65" th:text="#{register.age.range6}" th:selected="${user.getAge()} == '>65'"></option>
+					            </select>
+					        </div>
+					      </div>
+					    <div class="form-group">
+					      <label for="rol" th:text="#{register.rol}"></label>
+					      <br />
+					        <div class="input-group">
+					            <i class="fa fa-briefcase" aria-hidden="true"></i>
+					            <select  class="form-control" id="rol" th:field="*{rol}" required>
+					                <option value="manager" th:text="#{register.rol.manager}" th:selected="${user.getRol()} == 'manager'"></option>
+					                <option value="employee" th:text="#{register.rol.employee}" th:selected="${user.getRol()} == 'employee'"></option>
+					                <option value="other" th:text="#{register.rol.other}" th:selected="${user.getRol()} == 'other'"></option>
+					            </select>
+					        </div>
+					      </div>
+					   <button type="submit" class="btn btn-lg btn-primary btn-md btn-sm btn-block" th:text="#{quiz.start.button}"></button>
+					</form>
+				</div>
+              </div>
+              <div th:insert="~{fragments/resources :: end}"></div>
+            </div>
+            </div>
+      </section>
+      <div th:insert="~{fragments/resources :: scripts}"></div>
+      
 </body>
 </html>
