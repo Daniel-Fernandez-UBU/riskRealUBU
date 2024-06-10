@@ -9,6 +9,27 @@ Una de las partes más importantes es la sección de \textit{Manual del Programa
 
 El repositorio del proyecto está formado por los siguientes directorios:
 
+\begin{itemize}
+	\item \textbf{/}: Contiene el archivo README, la copia de la licencia y el comprimido riskteal.zip, con la versión corta para la instalación de la aplicación.
+	\item \textbf{/docs}: Contiene la memoria y anexos en formato .pdf y .tex y la bibliografía en formato .bib.
+	\item \textbf{/docs/tex}: Contiene lo diferentes archivos.tex que se han utilizado en la generación de los anexos y la memoria.
+	\item \textbf{/docs/img}: Contiene las imágenes utilizadas en la construcción de los anexos y la memoria.
+	\item \textbf{/docs/javadoc}: Contiene la documentación de la aplicación en formato javadoc.
+	\item \textbf{/riskreal}: Contiene el docker-compose.yml que se utiliza para la instalación de la aplicación así como las carpetas \textbf{dbdata} y \textbf{appFiles} necesarias para el proceso.
+	\item \textbf{/java}: Contiene las carpetas necesarias para el funcionamiento del entorno de desarrollo de la aplicación, así como todo el código completo del proyecto.
+	\item \textbf{/java/csvFiles}: Carpeta donde se guarda el score.csv con los resultados de los cuestionarios.
+	\item \textbf{/java/images}: Carpeta donde se guardan las imágenes de los cuestionarios.
+	\item \textbf{/java/jsonFiles}: Carpeta que contiene los cuestionarios pendientes de generar.
+	\item \textbf{/java/jsonFiles/lang}: Carpeta que contiene los cuestionarios ya generados en la aplicación.
+	\item \textbf{/java/mysql}: Carpeta que contiene la carpeta \textbf{dbdata}, que se utiliza como ubicación de persistencia de la base de datos del entorno de desarollo.
+	\item \textbf{/java/riskrealApp}: Carpeta que contiene el proyecto de maven y Spring Boot completo de la aplicación.
+	\item \textbf{/java/riskrealApp/src/main}: Contiene todas las clases principales de java necesarias para que funcione la aplicación.
+	\item \textbf{/java/riskrealApp/src/resources}: Contiene los archivos de configuración de la aplicación y el fichero quiz\_schema.json, con la estructura que deben seguir todos los json que se vayan a cargar.
+	\item \textbf{/java/riskrealApp/src/resources/i18n}: Contiene los archivos de internacionalización de la aplicación.
+	\item \textbf{/java/riskrealApp/src/resources/templates}:  Contiene las plantillas html necesarias para que funcione cada menú de la aplicación.
+	\item \textbf{/java/riskrealApp/src/resources/static}: Contiene los ficheros de personalización para que se muestren las páginas web en un formato correcto. 
+\end{itemize}
+
 \section{Manual del programador}
 
 El manual del programador es la guía \textit{paso a paso} de las diferentes herramientas, configuraciones y peculiaridades que se deben seguir para poder montar el entorno de desarrollo, trabajar con el código fuente o recompilar una nueva versión de la aplicación.
@@ -170,6 +191,139 @@ Tras iniciar la aplicación, si es la primera vez tardará un poco más porque t
 
 Ya tenemos nuestro entorno de desarrollo configurado, con nuestra aplicación iniciada y accesible para poder probarla desde \url{http://localhost:8088}.
 
+\section{Compilación, Generación de una nueva imagen, y Docker Compose}
 
+\subsection{Compilación}
+
+Para compilar el proyecto y generar una nueva imágen de docker de nuestra aplicación, tenemos que realizar los siguientes pasos:
+
+\begin{enumerate}
+	\item Ejecutar desde Spring Tools Suite 4: Botón derecho del ratón en el nombre del proyecto --> Run as\dots --> Maven build\dots --> Escribimos \textbf{spring-boot:build-image}
+	\item Una vez termine ya tenemos la imagen cargada en docker --> Se puede comprobar con \textbf{docker images} desde el símbolo del sistema o en la aplicación de Docker Desktop.
+\end{enumerate}
+
+\subsection{Generación de una nueva imagen}
+
+Tras lo anterior, podemos subir la imagen a nuestro repositorio de github de forma muy sencilla siguiendo estos pasos:
+
+\begin{enumerate}
+	\item Renombramos la imagen de docker siguiendo el patrón: \textbf{ghcr.io/<username de github>/<repositorio>/<nombre de imagen>:<version>} (la versión es opcional).
+ 	\item Por ejemplo: \textbf{docker image tag riskrealapp:latest ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp}
+ 	\item Crear un \textbf{Access Token (classic)} en nuestro perfíl de GitHub --> Settings --> Developer Settings (Está abajo del todo)
+ 	\item Iniciar sesión en la terminal (o línea de comandos) desde donde vayamos a hacer el push con el comando:
+ 	\item \textbf{echo <token> | docker login ghcr.io -u USERNAME --password-stdin}
+ 	\item Hacer pull de nuestra imagen al repositorio:
+ 	\item \textbf{docker push ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp}. Al no poner la versión, utiliza \textit{latest} por defecto.
+	\item Si hemos vinculado el repositorio de \textbf{package} con nuestro repositorio, ya al acceder vemos que hay una nueva imagen.
+\end{enumerate}
+
+\subsection{Fichero docker-compose.yml}
+
+Es el fichero más importante de cara a lanzar una nueva versión de la aplicación, por ese motivo se ha decidido hacer una pequeña introduccion del contenido del fichero, para entender el motivo de cada línea y para que cada programador pueda configurarlo a su gusto.
+
+El contenido del fichero es el siguiente:
+\imagen{dockerComposeYML}{Contenido del fichero docker-compose.yml}
+
+A continuación, explicamos cada una de sus líneas:
+\begin{itemize}
+	\item services: --> Etiqueta que se utiliza para definir los servicios o dockers que se van a crear.
+	\begin{itemize}
+		\item db: --> Servicio para el docker que contiene la base de datos.
+		\begin{itemize}
+			\item image: mysql --> Imagen de la base de datos que se va a utilizar.
+			\item container\_name: riskreal-db-1 --> Nombre del docker que se va a crear.
+			\item restart: always --> Reinicia el docker si se genera un error.
+			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
+			\begin{itemize}
+				\item MYSQL\_DATABASE: appRiskRealUbu --> Nombre de la base de datos que se va a crear.
+				\item MYSQL\_ROOT\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
+			\end{itemize}
+			\item expose: --> Puertos internos que se van a abrir, para que el resto de contenedores de la misma red puedan acceder.
+			\begin{itemize}
+				\item - '3306' --> Se habilita el puerto 3306 para acceder a este docker por la red interna.
+			\end{itemize}
+			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
+			\begin{itemize}
+				\item '30306:3306' --> Permite el acceso a la base de datos desde el puerto 30306.
+			\end{itemize}
+			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
+			\begin{itemize}
+				\item ./dbdata:/var/lib/mysql --> Se utiliza la carpeta local dbdata para almacenar la base de datos completa. Si dbdata tuviese una base de datos MySQL, el docker la utilizaría al iniciar.
+			\end{itemize}
+			\item networks: --> Define la red interna del docker.
+			\begin{itemize}
+				\item - riskreal-network --> Nombre de la red interna.
+			\end{itemize}
+			\item healtcheck: --> Comprobación adicional para saber cuando ha terminado de levantar la base de datos en el docker.
+			\begin{itemize}
+				\item test: --> Se lanza un ping con mysqladmin a localhost para saber cuando ha iniciado la base de datos.
+				\item interval: 30s --> Define el intervalo de tiempo en el que se comprueba el estado.
+				\item timeout: 10s --> Indica el intervalo de tiempo que espera antes de indicar que no hay respuesta del servidor.
+				\item retries: 5 --> Número de veces que lo reintenta antes de indicar que el docker no ha iniciado correctamente.
+			\end{itemize}
+		\end{itemize}
+		\item webapp: --> Servicio para el docker que contiene la aplicación web.
+		\begin{itemize}
+			\item image: ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp:v1 --> Imagen de docker que se usará. Imagen propia de la Spring Boot App.
+			\item container\_name: riskreal-webapp-1 --> Nombre del docker que se va a crear.
+			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
+				\begin{itemize}
+				 	\item JSON\_QUIZ\_FILE\_PATH: /opt/jsonFiles --> Ruta en la que se guardan los json con los cuestionarios que se quieren cargar en la aplicación.
+					\item JSON\_QUIZ\_FILE\_PATH\_LANG: /opt/jsonFiles/lang --> Ruta en la que se guardarán los cuestionarios ya cargados en la aplicación.
+					\item CSV\_SCORE\_PATH: /opt/csvFiles/scores.csv --> 
+- Ruta y nombre del fichero de resultados que se rellenará conforme se vayan realizando cuestionarios.
+					 \item SPRING\_DATASOURCE\_URL: \\ jdbc:mysql://db:3306/appRiskRealUbu --> Dirección de la base de datos. 
+					 \item SPRING\_DATASOURCE\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
+					 \item SPRING\_DATASOURCE\_DRIVER\_CLASS\_NAME: \\com.mysql.cj.jdbc.Driver --> Driver de conexión a la base de datos.
+					 \item SERVER\_PORT: 8088 --> Puerto en el que se publicará la aplicación.
+				 	 \item ADMIN\_USERNAME: admin@riskreal.com --> Usuario administrador por defecto.
+				 	 \item ADMIN\_PASSWORD: admin --> Contraseña por defecto del usuario administrador.
+  				 	 \item TEST\_QUIZ: test\_quiz\_ --> Nombre por defecto de los archivo json de test para usuarios anónimos.
+				\end{itemize}
+			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
+			\begin{itemize}
+				\item '8088:8088' --> Redirecciona el puerto 8088 del servidor anfitrión al puerto 8088 interno del docker, en el que se ha publicado la aplicación.
+			\end{itemize}
+			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
+			\begin{itemize}
+				\item ./appFiles:/opt --> Se utiliza para indicar la ruta de los cuestionarios que queremos cargar, los ya almacenados y el fichero de resultados.
+				\item ./appFiles/images:/workspace/BOOT-INF/classes/static/images --> \\Se utiliza para indicar la ruta donde tenemos las imágenes de los cuestionarios.
+			\end{itemize}
+			\item networks: --> Define la red interna del docker.
+			\begin{itemize}
+				\item - riskreal-network --> Nombre de la red interna.
+			\end{itemize}
+			\item depends\_on: --> Se definen los servicios de los que depende el inicio de este docker.
+			\begin{itemize}
+				\item db: --> Servicio del que depende.
+				\item condition: service\_healthy --> Necesita que se haya iniciado de forma correcta la base de datos para iniciar el docker.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\item neworks: --> Sección en la que se definen las redes.
+	\begin{itemize}
+		\item riskreal-network: --> Nombre de la red definida.
+	\end{itemize}
+\end{itemize}
 
 \section{Pruebas del sistema}
+
+Al tratarse de una aplicación web, no ha requerido el uso y/o desarrollo de una batería de pruebas.
+
+La mayoría de las funcionalidades se basan en el registro o modificación de datos de usuarios, donde los propios campos de los html tienen las restricciones necesarias para que se cumpla con lo esperado.
+
+Las únicas funcionalidades que podrían requerir de pruebas serían:
+
+\begin{itemize}
+	\item La carga de un archivo json desde el sistema de archivos a la aplicación.
+	\begin{itemize}
+		\item Si no se selcciona un archivo json la aplicación te avisa y no deja cargarlo.
+		\item Si se selecciona un archivo json pero su estructura es incorrecta, no lo carga y avisa.
+	\end{itemize}
+	\item El envío de un correo electrónico de recuperación de contraseñas.
+	\begin{itemize}
+		\item Si el correo electrónico introducido está en la base de datos, se envía el email.
+		\item Si no lo está, se informa indicando que no es correcto.
+		\item Si ha sucedido algún error que no permita enviar el correo, se informa indicando de esta situación: Solo podría darse si hubiese problemas con el servidor de correo o la cuenta utilizada para el envío.
+	\end{itemize}
+\end{itemize}
