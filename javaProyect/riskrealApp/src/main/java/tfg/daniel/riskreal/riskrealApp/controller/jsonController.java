@@ -145,11 +145,11 @@ public class jsonController {
     	}
     	   	    	
     	System.out.println("File sended to getQuiz: " + archivo);
-    	Quiz cuestionario = jsonService.getJsonQuiz(archivo);
+    	Quiz cuestionario = jsonService.getJsonQuiz(archivo, false);
     	
     	String lang = cuestionario.getLanguage();
     	
-    	File json = new File(jsonPathLang + "/" + lang + "_quiz_" + cuestionario.getId() + ".json");
+    	File json = new File(jsonPathLang + "/quiz_" + cuestionario.getId() + "_" + lang + ".json");
     	
     	if (langService.contains(lang)){
     		System.out.println("Lenguaje encontrado en custom.properties: " + lang);
@@ -174,7 +174,7 @@ public class jsonController {
         redirectAttributes.addFlashAttribute("message","generated");
         redirectAttributes.addFlashAttribute("type", "success");
 
-        return "redirect:/json/view";
+        return "redirect:/jsonView";
     }
     
 

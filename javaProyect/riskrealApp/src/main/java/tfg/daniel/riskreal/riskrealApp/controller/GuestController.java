@@ -86,7 +86,7 @@ public class GuestController {
 		file = jsonPathLang + "/" + file;
 		
 		// We get full quiz from json file
-		Quiz quiz = jsonService.getJsonQuiz(file);
+		Quiz quiz = jsonService.getJsonQuiz(file, true);
 		
 		System.out.println(quiz.toString());
 		
@@ -115,7 +115,7 @@ public class GuestController {
 		file = jsonPathLang + "/" + file;
 		
 		// We get full quiz from json file
-		Quiz quiz = jsonService.getJsonQuiz(file);
+		Quiz quiz = jsonService.getJsonQuiz(file, true);
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();

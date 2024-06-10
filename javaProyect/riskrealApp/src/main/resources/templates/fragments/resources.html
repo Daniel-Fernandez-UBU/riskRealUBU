@@ -131,6 +131,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     </div>
 </div>
 
+<div th:fragment="onequestion" class="col-12 text-center">
+    <div class="d-flex justify-content-center">
+		  <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" >Previous</button>
+		  <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" >Next</button>
+		  <button  class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" >Enviar resultados</button>
+    </div>
+</div>
+
+
 <div th:fragment="warning" class="modal fade border border-5" id="avisoSesion" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
  <div class="modal-dialog modal-dialog-centered" role="document">
    <div class="modal-content ">

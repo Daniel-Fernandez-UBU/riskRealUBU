@@ -84,7 +84,7 @@ public class JsonService {
 	 * @param String jsonQuiz - full json path
 	 * @return
 	 */
-	public Quiz getJsonQuiz(String jsonQuiz) {
+	public Quiz getJsonQuiz(String jsonQuiz, boolean value) {
 		
 		// create Object Mapper
 		ObjectMapper mapper = new ObjectMapper();
@@ -98,8 +98,11 @@ public class JsonService {
 			quiz = mapper.readValue(json, Quiz.class);
 		    
 			// Get the images normalized
-			quiz.setImage(normalizeImages(quiz.getImage()));
-			quiz.setQuestions(normalizeQuestions(quiz.getQuestions()));
+			if (value) {
+				quiz.setImage(normalizeImages(quiz.getImage()));
+				quiz.setQuestions(normalizeQuestions(quiz.getQuestions()));
+			}
+
 
 		} catch (IOException e) {
 			System.err.println("JSON Quiz generator error: " + e.getMessage());

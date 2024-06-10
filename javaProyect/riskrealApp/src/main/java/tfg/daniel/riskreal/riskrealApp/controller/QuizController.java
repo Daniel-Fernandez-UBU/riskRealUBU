@@ -81,7 +81,7 @@ public class QuizController {
 		file = jsonPathLang + "/" + formFile;
 		
 		// We get full quiz from json file
-		Quiz quiz = jsonService.getJsonQuiz(file);
+		Quiz quiz = jsonService.getJsonQuiz(file, true);
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();

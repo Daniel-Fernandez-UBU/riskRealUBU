@@ -95,8 +95,10 @@ public class HomeController {
             jsonFiles = jsonService.getJsonFiles(file);
             if (!jsonFiles.isEmpty()) {
             	for (String jsonQ : jsonFiles) {
-            		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + jsonQ);
-                	jsonQuiz.put(jsonQ, quiz);
+            		if (jsonQ.endsWith(currentLang + ".json")) {
+                		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + jsonQ, true);
+                    	jsonQuiz.put(jsonQ, quiz);
+            		}
             	}
                 session.setAttribute("jsonQuiz", jsonQuiz);
             }
@@ -105,7 +107,7 @@ public class HomeController {
         	jsonFiles.add(testJson);
         	File testFile = new File(jsonPathLang + "/" + testJson);
         	if (testFile.exists()) {
-        		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson);
+        		quiz = jsonService.getJsonQuiz(jsonPathLang + "/" + testJson, true);
             	jsonQuiz.put(testJson, quiz);
         	}  
             session.setAttribute("jsonQuiz", jsonQuiz);

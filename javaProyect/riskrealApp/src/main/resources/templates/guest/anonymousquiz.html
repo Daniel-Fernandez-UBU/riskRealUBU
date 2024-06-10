@@ -40,7 +40,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						    th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}" 
 						    required
 						    >
-						    <label class="fs-2 fs-sm-2" th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
+						    <label class="fs-1 fs-sm-1" th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
 						  </div>
 						  </div>
 						 <div class="col-md-3">
@@ -48,9 +48,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				               <img class="img-fluid" th:src="${pregunta.getImage().get(0)}"  style="max-width: 100%;" alt="..." /> 
 				            </div>
 						 </div>
- 						 <div th:if="${preguntaActual < 2}" th:insert="~{fragments/resources :: firstquestion}"></div>
+ 						 <div th:if="${preguntaActual == 1} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: firstquestion}"></div>
 						 <div th:if="${preguntaActual > 1} and ${preguntaActual < quiz.getQuestions().size()}" th:insert="~{fragments/resources :: continuequestion}"></div>
-						 <div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: lastquestion}"></div>
+						 <div th:if="${preguntaActual == quiz.getQuestions().size()} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: lastquestion}"></div>
+						 <div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: onequestion}"></div>
 						 </div>
 						</form>
 						</div>

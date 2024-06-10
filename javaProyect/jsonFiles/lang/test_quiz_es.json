@@ -19,31 +19,31 @@
           {
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -59,13 +59,13 @@
           {
 			"id": 1,
             "text": "Si",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 3,
             "text": "No",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 0
           }
         ]
@@ -81,31 +81,31 @@
           {
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -121,31 +121,31 @@
 		{
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]
@@ -161,31 +161,31 @@
 		{
 			"id": 1,
             "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
             "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": 3,
             "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 3
           },
           {
 			"id": 4,
             "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 4
           },
           {
 			"id": 5,
             "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
+            "image": "principalHD.png",
             "value": 5
           }
         ]

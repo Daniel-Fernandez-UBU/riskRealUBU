@@ -14,7 +14,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="row flex-center">
             <div class="col-12 mb-10">
               <div class="d-flex align-items-center flex-column">
-               	<h1 class="fw-bold" th:text="#{rol.management.title}"></h1>
+               	<h1 class="fw-bold" th:text="#{header.role.management}"></h1>
 			   </div>
               </div>
             </div>
@@ -35,8 +35,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <thead>
                         <tr>
                             <th th:text="#{rol.management.email}"></th>
-                            <th th:text="#{rol.management.profile}">Rol Actual</th>
-                            <th th:text="#{rol.management.profile.new}">Nuevo Rol</th>
+                            <th th:text="#{rol.management.profile}"></th>
+                            <th th:text="#{rol.management.profile.new}"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     </tbody>
                 </table>
                	<div class="d-flex justify-content-center mt-3">
-                        <button type="submit" form="mainForm" class="btn btn-success btn-lg btn-md btn-sm">Actualizar</button>
+                        <button type="submit" form="mainForm" class="btn btn-success btn-lg btn-md btn-sm" th:text="#{rol.management.button}"></button>
                 </div>
             </div>
             <div th:insert="~{fragments/resources :: end}"></div>
