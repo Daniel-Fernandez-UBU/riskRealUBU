@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="~{fragments/resources :: head}"></head>
+<body>
+<header th:insert="~{fragments/header :: new-header}"></header>
+
+	<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;"></div>
+        <!--/.bg-holder-->
+        <div th:insert="~{fragments/header :: quizMessage}"></div>
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-12 mb-10">
+              <div class="d-flex align-items-center flex-column">
+				</div>
+              </div>
+            </div>
+          </div>
+      </section>
+
+<section class="py-0" id="header" style="margin-top: -29rem !important;">
+        <div class="container">
+		  <div class="row g-2 flex-center">
+       		<div class="col-md-6">
+       			<div class="d-flex align-items-center flex-column justify-content-center text-center"> 
+       				<h1 class="fw-bold" th:text="#{load.quiz.title}"></h1>  
+			        <h1 class="mt-5" th:text="#{load.quiz.available}"></h1>
+			        <h2 th:unless="${jsonFiles}" class="mt-5" th:text="#{load.quiz.empty}"></h2>				
+					<form th:if="${jsonFiles}"  action="/json/generateQuiz" method="POST">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<div class="form-group">
+						   <select class="form-control" name="archivo">
+						        <option th:each="file : ${jsonFiles}" th:value="${file}" th:text="${file}"></option>
+						    </select>
+						</div>
+						<div class="form-group">
+					    	<button type="submit" class="btn btn-primary" th:text="#{load.quiz.button}"></button>
+					    </div>
+					</form>
+					
+			        <br><br>
+			        
+			        <h1 th:text="#{load.quiz.upload}"></h1>
+			        <br>
+				    <form method="post" enctype="multipart/form-data" th:action="@{/json/upload}">
+				        <input type="file" name="file" />
+				        <button type="submit" th:text="#{load.quiz.button.upload}"></button>
+				    </form>
+				</div>
+              </div>
+              <div th:insert="~{fragments/resources :: end}"></div>
+            </div>
+            </div>
+      </section>
+
+    <div th:insert="~{fragments/resources :: scripts}"></div>
+    
+    
+</body>
+</html>
