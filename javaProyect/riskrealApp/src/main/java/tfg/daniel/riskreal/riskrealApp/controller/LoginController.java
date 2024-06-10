@@ -25,7 +25,7 @@ public class LoginController {
      */
     @GetMapping("/loginError")
     public String loginError() {
-        return "loginError";
+        return "/users/loginError";
     }
     
     /**
@@ -35,7 +35,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/users/login";
     }
     
     /**
@@ -50,7 +50,7 @@ public class LoginController {
         if (lang != null && !lang.isEmpty()) {
             model.addAttribute("lang", lang);
         } 
-        return "logout"; 
+        return "/users/logout"; 
     }
     
     /**
@@ -60,7 +60,7 @@ public class LoginController {
      */
     @GetMapping("/resetPassword")
     public String resetPassword() {
-    	return "/resetPassword";
+    	return "/users/resetPassword";
     }
 
 }

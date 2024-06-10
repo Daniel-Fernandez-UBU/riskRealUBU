@@ -46,16 +46,7 @@ public class Quiz {
 	public List<String> getImage() {
 		return image;
 	}
-	
-	/**
-	 * Gets the first image.
-	 *
-	 * @return the first image
-	 */
-	public String getFirstImage() {
-		return image.get(0);
-	}
-	
+		
 	
 	/**
 	 * Sets the image.

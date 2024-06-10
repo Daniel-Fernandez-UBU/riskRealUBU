@@ -16,10 +16,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	     	</a>
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 		  <li><a class="dropdown-item" th:href="@{/login}" th:text="#{header.login}"></a></li>
-		  <li><a class="dropdown-item" th:href="@{/register/form}" th:text="#{header.singup}"></a></li>
+		  <li><a class="dropdown-item" th:href="@{/registerForm}" th:text="#{header.singup}"></a></li>
 		</ul>
  	 </li>
 </div>
+
+<div th:fragment="isAnonymousQuiz" sec:authorize="isAnonymous()">
+ 	<li class="nav-item">
+	  	<a class="nav-link" href="#">
+	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+	   		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+	  	</svg>
+	     	<span th:text="#{guest.name}"></span>
+	     	</a>
+ 	 </li>
+</div>
+
 
 <div th:fragment="isAuthenticated" sec:authorize="isAuthenticated()">
  	 <li class="nav-item">
@@ -30,11 +42,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
        	<span th:text="'Hola, ' + ${#authentication.name}"></span>
        	</a>
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+		  <li><a class="dropdown-item" th:href="@{/userProfile}" th:text="#{header.profile}"></a></li>
 		  <li><a class="dropdown-item" th:href="@{/logout(lang=${#locale.language})}" th:text="#{header.logout}"></a></li>
-		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/json/view}" th:text="#{header.loadQuiz}"></a></li>
+		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/jsonView}" th:text="#{header.loadQuiz}"></a></li>
 		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/csv/download}" th:text="#{header.download}"></a> </li>
-		  <li><a class="dropdown-item" th:href="@{/user/profile}" th:text="#{header.profile}"></a></li>
+		  <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/profileManagement}" th:text="#{header.role.management}"></a> </li>
 		</ul>
+   	 </li>
+</div>
+
+<div th:fragment="isAuthenticatedQuiz" sec:authorize="isAuthenticated()">
+ 	 <li class="nav-item">
+    	<a class="nav-link" href="#">
+    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+     		<path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 2a5 5 0 0 0-4.995 4.783L3 15h10l-.005-.217A5 5 0 0 0 8 10z"/>
+    	</svg>
+       	<span th:text="'Hola, ' + ${#authentication.name}"></span>
+       	</a>
    	 </li>
 </div>
 

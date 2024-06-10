@@ -1,0 +1,52 @@
+{	
+    "id": 1,
+    "title": "Soft Skills",
+	"image": [
+		"principalHD.png"
+		],
+    "language": "en",
+	"description": "Description of the questionnaire",
+	"type": 1,
+    "questions": [
+      {
+        "id": 1,
+        "description": "I get acquainted easily with new people",
+        "image": [
+			"principalHD.png"
+			],
+        "skill": 1,
+        "answers": [
+          {
+			"id": 1,
+            "text": "1 - Strongly disagree",
+            "image": "principalHD.png",
+            "value": 1
+          },
+          {
+			"id": 2,
+            "text": "2 - Disagree",
+            "image": "principalHD.png",
+            "value": 2
+          },
+          {
+			"id": "3",
+            "text": "3 - Neither agree nor disagree",
+            "image": "principalHD.png",
+            "value": 3
+          },
+          {
+			"id": "4",
+            "text": "4 - OK",
+            "image": "principalHD.png",
+            "value": 4
+          },
+          {
+			"id": 5,
+            "text": "5 - Strongly agree",
+            "image": "principalHD.png",
+            "value": 5
+          }
+        ]
+      }
+    ]
+}

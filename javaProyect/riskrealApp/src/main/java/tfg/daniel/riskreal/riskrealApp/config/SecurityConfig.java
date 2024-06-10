@@ -44,9 +44,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/", "/resetPassword", "/send", "/anonymous**", "/vendors/**", "/guest**",
-							"/src/**", "/gulp/**", "/images/**", "/assets/**", "/register/**").permitAll()
-					.requestMatchers("/json/*").hasAuthority("ADMIN")
+					.requestMatchers("/", "/resetPassword", "/send-email", "/changePassword", "/anonymous**", "/vendors/**", "/guest**",
+							"/src/**", "/gulp/**", "/images/**", "/assets/**", "/register**").permitAll()
+					.requestMatchers("/json**", "/profileManagement", "/updateProfile", "/csv/download").hasAuthority("ADMIN")
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login

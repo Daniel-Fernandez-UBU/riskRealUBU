@@ -1,5 +1,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
 import tfg.daniel.riskreal.riskrealApp.model.Profile;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.repository.ProfileRepository;
@@ -41,20 +43,25 @@ public class RegisterController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
+    /** The custom config. */
+    @Autowired
+    private  CustomConfig customConfig;
+    
+    
     /**
      * Register.
      *
      * @param model the model
      * @return the string
      */
-    @GetMapping("/register/form")
+    @GetMapping("/registerForm")
     public String register(Model model) {
     	
     	User user = new User();
     	
     	model.addAttribute("user", user);
     	
-        return "register";
+        return "/users/register";
     }
     
     /**
@@ -63,7 +70,7 @@ public class RegisterController {
      * @param user the user
      * @return the string
      */
-    @PostMapping("/register/done")
+    @PostMapping("/registerDone")
     public String saveUserProfile(@ModelAttribute("user") User user, Model model) {
 
     	// If the user is already registered, return login with info message
@@ -80,16 +87,9 @@ public class RegisterController {
         // Save the user in the db.
         userRepository.save(user);
                 
-        String profile;
-        
-        if (user.getRol().equalsIgnoreCase("manager")) {
-        	profile = "ADMIN";
-        } else if (user.getRol().equalsIgnoreCase("employee")) {
-        	profile = "CUSTOMER";
-        } else {
-        	profile="GUEST";
-        }
-
+        // Default user role for all the registered users.
+        String profile = "USER";
+ 
         // Save profile in the db.
         Profile userProfile = new Profile();
         userProfile.setUsername(user.getEmail());
@@ -101,7 +101,7 @@ public class RegisterController {
         model.addAttribute("show", true);
 
         // Return to login page
-        return "/login";
+        return "/users/login";
     }
     
     /**
@@ -135,22 +135,6 @@ public class RegisterController {
         // Update the user in the db.
         userRepository.save(user);
                 
-        String profile;
-        
-        if (user.getRol().equalsIgnoreCase("manager")) {
-        	profile = "ADMIN";
-        } else if (user.getRol().equalsIgnoreCase("employee")) {
-        	profile = "CUSTOMER";
-        } else {
-        	profile="GUEST";
-        }
-
-        // Update profile in the db.
-        Profile userProfile = new Profile();
-        userProfile.setUsername(user.getEmail());
-        userProfile.setProfile(profile);
-        profileRepository.save(userProfile);
-
         // Return to login page
         return "redirect:/user/profile";
     }
@@ -184,7 +168,7 @@ public class RegisterController {
      * 
      * @return profile view
      */
-    @GetMapping("/user/profile")
+    @GetMapping("/userProfile")
     public String userProfile(Model model) {
     	User user = null;
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -195,6 +179,48 @@ public class RegisterController {
         
         model.addAttribute("user", user);        
                 
-    	return "profile";
+    	return "/users/profile";
+    }
+	    
+	/**
+	 * Method roleManagement.
+	 * 
+	 * @param model
+	 * @return role management view
+	 * 
+	 */
+    @GetMapping("/profileManagement")
+    public String ProfileManagement(Model model) {
+    	
+    	model.addAttribute("profileList", profileRepository.findAll());
+    	model.addAttribute("adminuser", customConfig.getAdmin());
+        return "/admin/profilemanagement";
+    }
+    
+	/**
+	 * Method roleManagement.
+	 * 
+	 * @param model
+	 * @return role management view
+	 * 
+	 */
+    @PostMapping("/updateProfile")
+    public String updateProfileManagement(@RequestParam("newProfile") String newProfile, @RequestParam("email") String email) {
+    	
+    	String[] listEmail = email.split(",");
+    	String[] listProfile = newProfile.split(",");
+    	    	
+    	int size = listEmail.length;
+    	
+    	// Update all the profiles.
+    	for (int i = 0; i < size; i++) {
+        	Profile profile = new Profile();
+        	profile.setUsername(listEmail[i]);
+        	profile.setProfile(listProfile[i]);
+
+        	// Update the profile in the database
+        	profileRepository.save(profile);
+    	}   	
+        return "redirect:/profileManagement";
     }
 }

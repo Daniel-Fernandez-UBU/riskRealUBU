@@ -71,6 +71,42 @@ public class GuestController {
 		return "guest/anonymousdata";
 	}
 	
+	/**
+	 * Method getGuestDescrption.
+	 * @param model
+	 * @param formFile
+	 * @param session
+	 * @return
+	 */
+	@PostMapping("/anonymousDescription")
+	public String getGuestDescription(Model model, HttpSession session, @RequestParam("gender") String gender,
+			@RequestParam("age") String age, @RequestParam("rol") String rol) {
+		
+		String file = (String) session.getAttribute("file");
+		file = jsonPathLang + "/" + file;
+		
+		// We get full quiz from json file
+		Quiz quiz = jsonService.getJsonQuiz(file, true);
+		
+		System.out.println(quiz.toString());
+		
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+                
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
+		
+		session.setAttribute("quiz", quiz);
+		session.setAttribute("age", age);
+		session.setAttribute("rol", rol);
+		session.setAttribute("gender", gender);
+		session.setAttribute("preguntaActual", 1);
+		
+		model.addAttribute("quiz", quiz);
+				
+		return "guest/anonymousdescription";
+	}
+	
 	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
 			@RequestParam("age") String age, @RequestParam("rol") String rol) {
@@ -79,7 +115,7 @@ public class GuestController {
 		file = jsonPathLang + "/" + file;
 		
 		// We get full quiz from json file
-		Quiz cuestionario = jsonService.getJsonQuiz(file);
+		Quiz quiz = jsonService.getJsonQuiz(file, true);
 		
 		// New UserSelection object
         UserSelection userSelection = new UserSelection();
@@ -88,7 +124,7 @@ public class GuestController {
         session.setAttribute("userSelection", userSelection);
 		
 		// We put the quiz in the session
-		session.setAttribute("quiz", cuestionario);
+		session.setAttribute("quiz", quiz);
 		// We put the quiz in the session
 		session.setAttribute("age", age);
 		// We put the quiz in the session
@@ -105,8 +141,8 @@ public class GuestController {
 	public String showGuestQuiz(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
-		Quiz cuestionario = (Quiz) session.getAttribute("quiz");
-		if (cuestionario == null) {
+		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		if (quiz == null) {
 			System.out.println("No se ha recibido el cuestionario en la session");
 			return "home";
 		}
@@ -120,7 +156,7 @@ public class GuestController {
 		model.addAttribute("answersvalues", userSelection.getAnswersValues());
 		
 		// To let the html acces "cuestionario"
-		model.addAttribute("cuestionario", cuestionario);
+		model.addAttribute("quiz", quiz);
 		
 		// To let the html access "preguntaActual"
 		model.addAttribute("preguntaActual", preguntaActual);
@@ -167,7 +203,7 @@ public class GuestController {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
-			return "redirect:/anonymous/startQuiz";
+			return "redirect:/anonymousStartQuiz";
 		}
 		
 		if (estado.equalsIgnoreCase("Prev")) {

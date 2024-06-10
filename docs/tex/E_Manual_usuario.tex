@@ -12,7 +12,7 @@ La aplicación utiliza la tecnología de docker para funcionar, con todas sus ve
 	\item \textbf{Necesitas tener docker instalado en el equipo en el que vayas a desplegar la aplicación.}
 \end{itemize}
 
-Los requisitos indisipensables para poder utilizar la aplicación son los siguientes:
+Los requisitos indispensables para poder utilizar la aplicación son los siguientes:
 
 \begin{enumerate}
 	\item Instalar la plataforma de docker \cite{web:dockerDesktop} y docker compose \cite{web:dockercompose}.
@@ -48,7 +48,7 @@ De la imagen anterior se puede ver que tenemos la posibilidad de descargar tres 
 
 La estructura de la carpeta es la siguiente:
 
-\imagen{installTree}{Contenido y esctructura de la carpeta install.}
+\imagen{installTree}{Contenido y estructura de la carpeta install.}
 
 \subsubsection{Fichero docker-compose.yml}
 
@@ -103,10 +103,11 @@ A continuación, explicamos cada una de sus líneas:
 				\begin{itemize}
 				 	\item JSON\_QUIZ\_FILE\_PATH: /opt/jsonFiles --> Ruta en la que se guardan los json con los cuestionarios que se quieren cargar en la aplicación.
 					\item JSON\_QUIZ\_FILE\_PATH\_LANG: /opt/jsonFiles/lang --> Ruta en la que se guardarán los cuestionarios ya cargados en la aplicación.
-					\item CSV\_SCORE\_PATH: /opt/csvFiles/scores.csv --> Ruta y nombre del fichero de resultados que se rellenará conforme se vayan realizando cuestionarios.
-					 \item SPRING\_DATASOURCE\_URL: jdbc:mysql://db:3306/appRiskRealUbu --> Dirección de la base de datos.
+					\item CSV\_SCORE\_PATH: /opt/csvFiles/scores.csv --> 
+- Ruta y nombre del fichero de resultados que se rellenará conforme se vayan realizando cuestionarios.
+					 \item SPRING\_DATASOURCE\_URL: \\ jdbc:mysql://db:3306/appRiskRealUbu --> Dirección de la base de datos. 
 					 \item SPRING\_DATASOURCE\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
-					 \item SPRING\_DATASOURCE\_DRIVER\_CLASS\_NAME: com.mysql.cj.jdbc.Driver --> Driver de conexión a la base de datos.
+					 \item SPRING\_DATASOURCE\_DRIVER\_CLASS\_NAME: \\com.mysql.cj.jdbc.Driver --> Driver de conexión a la base de datos.
 					 \item SERVER\_PORT: 8088 --> Puerto en el que se publicará la aplicación.
 				\end{itemize}
 			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
