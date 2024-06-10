@@ -21,20 +21,20 @@ El proyecto tiene los siguientes objetivos generales:
 
 \section{Catálogo de requisitos}
 
-Se van a enumerar los requisitos separándolos en dos categorías: requisitos funcionales y no funcionales.
+Se van a enumerar los requisitos separándolos en dos categorías: requisitos funcionales y no funcionales \cite{web:requisitos}.
 
 \subsection{Requisitos funcionales}
 \begin{itemize}
 	\item \textbf{RF-1 Gestión de cuestionarios}: La aplicación web tiene que ser capaz de gestionar cuestionarios.
 	\begin{itemize}
 		\item \textbf{RF-1.1 Carga de cuestionario}: Se tienen que poder cargar nuevos cuestionarios en la aplicación web.
-		\item \textbf{RF-1.2 Realización de cuestionario}: Los usuarios deben poder realizar los cuestionarios disponibles.
+		\item \textbf{RF-1.2 Generación de cuestionario}: El administrador debe poder generar cuestionarios a partir de los archivos json cargados.
+		\item \textbf{RF-1.3 Realización de cuestionario}: Los usuarios deben poder realizar los cuestionarios disponibles.
 	\end{itemize}
 	\item \textbf{RF-2 Gestión de usuarios}: La aplicación web tiene que ser capaz de gestionar usuarios.
 		\begin{itemize}
 		\item \textbf{RF-2.1 Registro de usuario}: Los usuarios deben poder registrarse en la aplicación.
 		\item \textbf{RF-2.2 Modificación de datos}: Los usuarios deben poder editar sus datos.
-		\item \textbf{RF-2.3 Eliminación de usuario}: Los usuarios tienen que poder darse de baja en la aplicación.
 	\end{itemize}
 	\item \textbf{RF-3 Gestión de resultados}: La apicación web tiene que permitir la gestión de los resultados obtenidos.
 		\begin{itemize}
@@ -46,41 +46,283 @@ Se van a enumerar los requisitos separándolos en dos categorías: requisitos fu
 		\item \textbf{RF-4.1 Selección de idioma}: La aplicación debe permitir la selección del idioma.
 		\item \textbf{RF-4.2 Idioma de los cuestionarios}: La aplicación debe permitir la carga de cuestionarios en varios idiomas.
 	\end{itemize}
-	\item \textbf{RF-5 Diseño responsable}: La aplicación tiene que ser capaz de adaptarse a diferentes dispositivos.
 \end{itemize}
 
-
+\subsection{Requisitos no funcionales}
+\begin{itemize}
+	\item \textbf{RNF-1 Usabilidad}: La aplicación debe ser intuitiva, con una curva de aprendizaje baja.
+	\item \textbf{RNF-2 Rendimiento}: La aplicación web tiene que tener unos tiempo de carga y respuesta bajos.
+	\item \textbf{RNF-3 Escalabilidad}: La aplicación web tiene que poder funcionar en cualquier navegador, y permitir añadir funcionalidades de forma sencilla.
+	\item \textbf{RNF-4 Portabilidad}: La aplicación web tiene que adaptarse a diferentes dispositivos.
+	\item \textbf{RNF-5 Internacionalizaicón}: La aplicación web tiene que estar preparada para soportar varios idiomas.
+	\item \textbf{RNF-6 Seguridad}: La aplicación web debe gestionar los accesos y datos sensibles de forma adecuada.
+\end{itemize}
 
 \section{Especificación de requisitos}
 
+Esta sección va a incluir el diagrama de casos de uso y la explicación de cada uno.
 
-Una muestra de cómo podría ser una tabla de casos de uso:
+\begin{landscape}
+\subsection{Diagrama de casos de uso}
+\imagenAncho{diagramaCasosUso}{Diagrama de casos de uso.}{1.35}
+\end{landscape}
 
-% Caso de Uso 1 -> Consultar Experimentos.
+\subsection{Actores}
+
+Pueden interactuar con el sistema 3 actores diferentes:
+
+\begin{itemize}
+	\item Usuario invitado: Usuario que accede a la página de forma anómina, y puede probar los cuestionarios de ejemplo o registrarse.  
+	\item Usuario registrado: Usuario que accede a la página e inicia sesión. Puede ver su perfíl y modificarlo o realizar los cuestionarios disponibles.
+	\item Administrador: Usuario administrador que puede gestionar roles de los usuarios registrados, descargarse los resultados completos de todos los cuestionarios realizados, cargar y generar más cuestionarios, o realizar alguno de los cuestionarios disponibles.
+\end{itemize}
+
 \begin{table}[p]
 	\centering
 	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
 		\toprule
-		\textbf{CU-1}    & \textbf{Ejemplo de caso de uso}\\
+		\textbf{CU-01}    & \textbf{Cargar Cuestionarios}\\
 		\toprule
 		\textbf{Versión}              & 1.0    \\
-		\textbf{Autor}                & Alumno \\
-		\textbf{Requisitos asociados} & RF-xx, RF-xx \\
-		\textbf{Descripción}          & La descripción del CU \\
-		\textbf{Precondición}         & Precondiciones (podría haber más de una) \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.1 \\
+		\textbf{Descripción}          & Permite al administrador cargar nuevos cuestionarios. \\
+		\textbf{Precondición}         & La aplicacion se encuentra levantada, y ha iniciado sesión un usuario administrador. \\
 		\textbf{Acciones}             &
 		\begin{enumerate}
 			\def\labelenumi{\arabic{enumi}.}
 			\tightlist
-			\item Pasos del CU
-			\item Pasos del CU (añadir tantos como sean necesarios)
+			\item El usuario administrador inicia sesión.
+			\item Accede al apartador de carga de cuestionarios.
+			\item Selecciona un archivo json con una estructura válida y lo carga en la aplicación.
 		\end{enumerate}\\
-		\textbf{Postcondición}        & Postcondiciones (podría haber más de una) \\
-		\textbf{Excepciones}          & Excepciones \\
-		\textbf{Importancia}          & Alta o Media o Baja... \\
+		\textbf{Postcondición}        & El nuevo archivo json se encuentra disponible para generar un nuevo cuestionario. \\
+		\textbf{Excepciones}          & Error si el archivo seleccionado no es un json o si su estructura no es la esperada. \\
+		\textbf{Importancia}          & Alta. \\
 		\bottomrule
 	\end{tabularx}
-	\caption{CU-1 Nombre del caso de uso.}
+	\caption{CU-01 Cargar Cuestionarios.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-02}    & \textbf{Generar Cuestionarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.2 \\
+		\textbf{Descripción}          & Permite al administrador generar nuevos cuestionarios. \\
+		\textbf{Precondición}         & La aplicacion se encuentra levantada, ha iniciado sesión un usuario administrador y hay cuestionarios pendientes de generar. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item El usuario administrador inicia sesión.
+			\item Accede al apartador de carga de cuestionarios.
+			\item Selecciona uno de los archivos json cargados y genera un nuevo cuestionario.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Hay un nuevo cuestionario disponible en la aplicación.. \\
+		\textbf{Excepciones}          & Error si el archivo json utilizado no tiene una estructura correcta. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-02 Generar Cuestionarios.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-03}    & \textbf{Realizar Cuestionario}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-1.3, RF-3, RF-3.1 \\
+		\textbf{Descripción}          & Permite a cualquier usuario realizar cuestionarios. \\
+		\textbf{Precondición}         & La aplicacion se encuentra levantada y hay cuestionarios disponibles en el idioma seleccionado. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un usuario accede a la página web.
+			\item Selecciona su idioma o mantiene el por defecto.
+			\item Accede a uno de los cuestionarios que se le presentan.
+			\item Contesta a las preguntas y llega hasta el final, donde termina el cuestionario.
+			\item Ve una página con el resultado obtenido.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Se ha incluido una línea nueva en el csv de resultados. \\
+		\textbf{Excepciones}          & Alguna de las imágenes del cuestionario no está presente. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-03 Realizar Cuestionario.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-04}    & \textbf{Registro de Usuarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-2, RF-2.1 \\
+		\textbf{Descripción}          & Permite a cualquier usuario registrarse en la aplicación web. \\
+		\textbf{Precondición}         & La aplicacion se encuentra levantada junto con la base de datos. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un usuario accede a la página web.
+			\item Selecciona el registro.
+			\item Completa el formulario y se registra.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Se ha añadido un nuevo usuario a la aplicación. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-04 Registro de Usuarios.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-05}    & \textbf{Iniciar Sesión en la web}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-2 \\
+		\textbf{Descripción}          & Los usuarios registrados pueden iniciar sesión. \\
+		\textbf{Precondición}         & La aplicacion se encuentra levantada y el usuario está registrado. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un usuario accede a la página web.
+			\item Selecciona la opción de iniciar sesión.
+			\item Introduce sus datos de usuario.
+			\item Si son correctos, accede a la parte privada de la aplicación.
+			\item Si no lo son, se permiten más intentos o la posibilidad de recibir un correo con una contraseña nueva de un solo uso.
+			\item Se obliga al cambio tras introducir la contraseña recibida por correo.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Puede acceder a todos los cuestionarios disponibles y ver o actualizar su perfíl. \\
+		\textbf{Excepciones}          & Usuario o contraseña incorrectos. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-05 Iniciar Sesión en la web.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-6}    & \textbf{Modificar datos del perfíl}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-2, RF-2.2 \\
+		\textbf{Descripción}          & Permite a cualquier usuario identificado modificar su perfíl. \\
+		\textbf{Precondición}         & El usuario ha iniciado sesión. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un usuario inicia sesión en la página web.
+			\item Accede a su perfíl.
+			\item Modifica los datos que sean erróneos (el nombre de usuario no permite edición).
+			\item Pulsa en actualizar y se muestra el perfíl actualizado.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Se han actualizado sus datos de perfíl. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-06 Modificar datos del perfíl.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-07}    & \textbf{Gestión de Roles}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-2, RF-2.2 \\
+		\textbf{Descripción}          & Permite a un administrador actualizar el rol en la aplicación de otros usuarios. \\
+		\textbf{Precondición}         & La aplicación está levantada y hay usuarios registrados en la base de datos. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un administrador inicia sesión en la web.
+			\item Selecciona la opción de gestión de roles.
+			\item Modifica el perfíl de seguridad de los usuarios que considere.
+			\item Pulsa en actualizar y se muestran de nuevos los perfiles actualizados.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Se ha actualizado el perfíl de seguridad de los usuarios correspondientes. \\
+		\textbf{Importancia}          & Media. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-07. Gestión de Roles.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-08}    & \textbf{Descarga de Resultados}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-3, RF-3.2 \\
+		\textbf{Descripción}          & Permite a un administrador descargarse todos los resultados de los cuestionarios que se han realizado. \\
+		\textbf{Precondición}         & La aplicación se encuentra levantada y ha iniciado sesión un administrador. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un administrador accede a la web.
+			\item Selecciona la opción de descarga de resultados.
+			\item Se descarga un csv con todos los resultados disponibles.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Se ha descargado un csv en el equipo del usuario administrador. \\
+		\textbf{Excepciones}          & Si no se ha realizado ningún cuestionario, el csv estará vacío. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-08 Descarga de Resultados.}
+\end{table}
+
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-09}    & \textbf{Selección de Idioma}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Daniel Fernández Barrientos \\
+		\textbf{Requisitos asociados} & RF-4, RF-4.1. RF-4.2 \\
+		\textbf{Descripción}          & Permite realizar cuestionarios o ver la aplicación en diferentes idiomas. \\
+		\textbf{Precondición}         & La aplicación se encuentra levantada y hay cuestionarios generados en varios idiomas. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Un usuario accede a la página web.
+			\item Selecciona su idioma o mantiene el por defecto.
+			\item Los menús de la web aparecen en el idioma seleccionado.
+			\item Los cuestionarios aparecen en el idioma seleccionado.
+		\end{enumerate}\\
+		\textbf{Postcondición}        & La aplicación se muestra en el idioma seleccionado y le actualiza la lista de cuestionarios disponibles. \\
+		\textbf{Excepciones}          & No hay cuestionarios diponibles en algún idioma. \\
+		\textbf{Importancia}          & Alta. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-09 Selección de Idioma.}
 \end{table}
 
 
