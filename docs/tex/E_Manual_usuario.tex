@@ -128,19 +128,20 @@ Si accedes a tu perfíl, podrás ver todos los datos que acabas de incluir, edit
 
 Si decides iniciar uno de los cuestionarios disponibles desde la página de inicio, te saldrá una pantalla similar a esta:
 
-\imagen{appIniCuest}{Pantalla de inicio de la aplicación web.}
+\imagen{appDesCuestionario}{Pantalla de descripción del cuestionario.}
+
 
 Donde verás la imágen princiapl del cuestionario junto con una descripción del mismo. Finalmente podrás darle a iniciar cuando consideres.
 
 Tras iniciar el cuestionario, tendrá un formato similar al de esta imagen:
 
-\imagen{appDesCuestionario}{Pantalla de descripción del cuestionario.}
+\imagen{appIniCuest}{Pantalla de inicio de la aplicación web.}
 
 Con las opciones a la izquierda, la imagen relacionada con la pregunta a la derecha y debajo 3 botones: Anterior, Siguiente o Enviar resultados.
 
 Los botones, según avances, en las preguntas, se irán habilitando, para que puedas retroceder sin problema en cualquier momento, lo único indispensables es que si quieres cambiar de pregunta debes seleccionar alguna respuesta antes de poder hacerlo. Lo mismo sucede al enviar resultados, por lo que todas las preguntas deben haber sido seleccionadas.
 
-Al llegar a la última pregunta y pulsar en "Enviar Resultados", te saldrá una nueva pantalla, con el resultado que has obtenido en el test:
+Al llegar a la última pregunta y pulsar en ``Enviar Resultados'', te saldrá una nueva pantalla, con el resultado que has obtenido en el test:
 
 \imagen{appResultado}{Pantalla de resultado del cuestionario.}
 
@@ -154,7 +155,7 @@ Por último, si has iniciado sesión con un usuario administrador, tendrás acce
 
 Vamos a comentar cada una de ellas:
 
-Al seleccionar en la opción de "Cargar Cuestionario" accedemos a la siguiente pantalla, desde la que podemos o bien cargar un nuevo json desde el disco duro de nuestro equipo:
+Al seleccionar en la opción de ``Cargar Cuestionario'' accedemos a la siguiente pantalla, desde la que podemos o bien cargar un nuevo json desde el disco duro de nuestro equipo:
 
 \imagen{appCargarJSON}{Pantalla de carga de archivos json.}
 
@@ -162,7 +163,9 @@ O bien generar un cuestionario utilizando un json previamente cargado:
 
 \imagen{appGenerarCuestionario}{Pantalla de generación de cuestionarios.}
 
-La opción de "Descargar resultados" la tenemos disponible desde cualquier parte de la web, excepto mientras se está realizando un cuestionario, y tras pulsar en ella, se nos descarga de forma automática un archivo \textbf{score.csv} con los datos de todos los cuestionarios que se han realizado.
+La opción de ``Descargar resultados'' la tenemos disponible desde cualquier parte de la web, excepto mientras se está realizando un cuestionario, y tras pulsar en ella, se nos descarga de forma automática un archivo \textit{score.csv} con los datos de todos los cuestionarios que se han realizado.
+
+\imagen{appDescargaResultados}{Pantalla tras pulsar en descargar resultados.}
 
 El usuario administrador, desde la opción de Gestión de Roles, puede modificar los permisos sobre la aplicación de otros usuarios, y convertirlos también en administrador:
 
@@ -170,6 +173,29 @@ El usuario administrador, desde la opción de Gestión de Roles, puede modificar
 
 El rol del usuario administrador no es modificable en ningún caso.
 
-Si cuando intentas iniciar sesión introduces una contraseña errónea.
+Si al intentar iniciar sesión, te equivocas en la contraseña, te saldrá una nueva ventana donde puedes probar de nuevo o restarurarla:
+\imagen{appLoginError}{Pantalla inicio de sesión erróneo.}
+
+
+Si pulsas en \textit{Recuperar contraseña} se abre una nueva ventana donde se te pide el el correo electrónico.
+\imagen{appPassRecovery}{Pantalla inicio de recuperación de contraseña.}
+
+Si el correo introducido es correcto y el usuario está registrado en la base de datos de la aplicación, pasados unos segundos le llegará un correo a su buzón y la aplicación te devolverá a la página de inicio.
+
+El correo de recuperación que se recibe es similar a este:
+\imagen{appEmailReceived}{Correo con la nueva contraseña de un solo uso.}
+
+Tras iniciar sesión con la contraseña que has recibido, te pedirá que la cambies:
+\imagen{appCambioPass}{Pantalla cambio de contraseña.}
+
+Después de cambiarla, volverás a la página de inicio con la sesión iniciada.
+
+\clearpage
+Por último, si deseas salir de aplicación, al pulsar en ``Cerrar Sesión'' te pedirá confirmación antes de hacerse efectivo:
+
+\imagen{appCerrarSesion}{Pantalla de cierre de sesión.}
+
+
+
 
 

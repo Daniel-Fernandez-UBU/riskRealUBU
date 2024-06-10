@@ -13,6 +13,8 @@ El proyecto tiene los siguientes objetivos generales:
 \begin{itemize}
 	\item Desarrollar una aplicación web que permita la realización de cuestionarios para evaluar \textit{Soft Skills}.
 	\item Permitir la carga de usuarios tanto desde una carpeta del sistema como desde la interfaz web.
+	\item Los cuestionarios se tienen que poder cargar de forma dinámica en la aplicación.
+	\item Los cuestionarios tienen que ser configurables a través de un editor.
 	\item Almacenar los resultados de los cuestionarios de forma anónima con fines estadísticos para los creadores.
 	\item La descarga completa de los resultados en un documento correctamente estructurado y que sea sencillo de modelar.
 	\item La aplicación web tiene que tener un diseño \textit{responsive} que extienda su funcionalidad a diferentes dispositivos.
@@ -220,27 +222,27 @@ Pueden interactuar con el sistema 3 actores diferentes:
 	\centering
 	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
 		\toprule
-		\textbf{CU-6}    & \textbf{Modificar datos del perfíl}\\
+		\textbf{CU-6}    & \textbf{Modificar datos del perfil}\\
 		\toprule
 		\textbf{Versión}              & 1.0    \\
 		\textbf{Autor}                & Daniel Fernández Barrientos \\
 		\textbf{Requisitos asociados} & RF-2, RF-2.2 \\
-		\textbf{Descripción}          & Permite a cualquier usuario identificado modificar su perfíl. \\
+		\textbf{Descripción}          & Permite a cualquier usuario identificado modificar su perfil. \\
 		\textbf{Precondición}         & El usuario ha iniciado sesión. \\
 		\textbf{Acciones}             &
 		\begin{enumerate}
 			\def\labelenumi{\arabic{enumi}.}
 			\tightlist
 			\item Un usuario inicia sesión en la página web.
-			\item Accede a su perfíl.
+			\item Accede a su perfil.
 			\item Modifica los datos que sean erróneos (el nombre de usuario no permite edición).
-			\item Pulsa en actualizar y se muestra el perfíl actualizado.
+			\item Pulsa en actualizar y se muestra el perfil actualizado.
 		\end{enumerate}\\
-		\textbf{Postcondición}        & Se han actualizado sus datos de perfíl. \\
+		\textbf{Postcondición}        & Se han actualizado sus datos de perfil. \\
 		\textbf{Importancia}          & Alta. \\
 		\bottomrule
 	\end{tabularx}
-	\caption{CU-06 Modificar datos del perfíl.}
+	\caption{CU-06 Modificar datos del perfil.}
 \end{table}
 
 \begin{table}[p]
@@ -263,7 +265,7 @@ Pueden interactuar con el sistema 3 actores diferentes:
 			\item Modifica el perfíl de seguridad de los usuarios que considere.
 			\item Pulsa en actualizar y se muestran de nuevos los perfiles actualizados.
 		\end{enumerate}\\
-		\textbf{Postcondición}        & Se ha actualizado el perfíl de seguridad de los usuarios correspondientes. \\
+		\textbf{Postcondición}        & Se ha actualizado el perfil de seguridad de los usuarios correspondientes. \\
 		\textbf{Importancia}          & Media. \\
 		\bottomrule
 	\end{tabularx}

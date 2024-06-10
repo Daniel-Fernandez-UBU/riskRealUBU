@@ -174,9 +174,9 @@ Tras unos instantes, ya nos aparecería el proyecto correctamente cargado en nue
 
 \subsubsection{Iniciando la aplicación}
 
-Tras haber completado correctamente todos los pasos anteriores, y teniendo \textit{Docker Server} funcionando, desde Spring Tools Suite podemos ejecutar la aplicación.
+Tras haber completado correctamente todos los pasos anteriores, y teniendo \textit{Docker Server} funcionando, desde \textit{Spring Tools Suite} podemos ejecutar la aplicación.
 
-\textbf{Los puertos por defecto que usa son: 3306 para mysql y 8088 para la aplicación web, sería recomendable no tener ninguno de los 2 en uso, para el correcto despliegue de la aplicación sin necesidad de tener que cambiar opciones de configuración en \textit{application.properties}.}
+Los puertos por defecto que usa son: 3306 para \textit{mysql} y 8088 para la aplicación web, sería recomendable no tener ninguno de los 2 en uso, para el correcto despliegue de la aplicación sin necesidad de tener que cambiar opciones de configuración en \textit{application.properties}.
 
 En la parte inferior izquierda de la interfaz de Spring Tool, tendremos \textit{Boot Dashboard} y si desplegamos \textit{local} nos aparecerá nuestra aplicación \textbf{riskrealApp}
 
@@ -209,7 +209,7 @@ Tras lo anterior, podemos subir la imagen a nuestro repositorio de github de for
 \begin{enumerate}
 	\item Renombramos la imagen de docker siguiendo el patrón: \textbf{ghcr.io/<username de github>/<repositorio>/<nombre de imagen>:<version>} (la versión es opcional).
  	\item Por ejemplo: \textbf{docker image tag riskrealapp:latest ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp}
- 	\item Crear un \textbf{Access Token (classic)} en nuestro perfíl de GitHub --> Settings --> Developer Settings (Está abajo del todo)
+ 	\item Crear un \textbf{Access Token (classic)} en nuestro perfil de GitHub --> Settings --> Developer Settings (Está abajo del todo)
  	\item Iniciar sesión en la terminal (o línea de comandos) desde donde vayamos a hacer el push con el comando:
  	\item \textbf{echo <token> | docker login ghcr.io -u USERNAME --password-stdin}
  	\item Hacer pull de nuestra imagen al repositorio:
@@ -310,7 +310,7 @@ A continuación, explicamos cada una de sus líneas:
 
 Al tratarse de una aplicación web, no ha requerido el uso y/o desarrollo de una batería de pruebas.
 
-La mayoría de las funcionalidades se basan en el registro o modificación de datos de usuarios, donde los propios campos de los html tienen las restricciones necesarias para que se cumpla con lo esperado.
+La mayoría de las funcionalidades se basan en el registro o modificación de datos de usuarios, donde los propios campos de los ficheros \textit{HTML} tienen las restricciones necesarias para que se cumpla con lo esperado.
 
 Las únicas funcionalidades que podrían requerir de pruebas serían:
 
