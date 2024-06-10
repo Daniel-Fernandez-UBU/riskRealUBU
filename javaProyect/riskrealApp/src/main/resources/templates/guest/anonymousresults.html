@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Resultados</title>
-    <!-- Integra Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="~{fragments/resources :: head}"></head>
+<body>
+<header th:insert="~{fragments/header :: new-header}"></header>
+<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;">
+        </div>
+        <!--/.bg-holder-->
 
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    
-    <body>
-    
-     <!-- Barra de navegación -->
-     <nav th:insert="~{fragments/header :: main-header}">
-     </nav>
-    
-    <h1>Resultado: </h1>
-    <h3 th:text="'Resultado final: ' + ${resultado}"></h3>
-  	</body>
-  	
-    
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-12 mb-10">
+              <div class="d-flex align-items-center flex-column">
+			    <h3 th:text="'Resultado final: ' + ${resultado}"></h3>			  	
+				</div>
+              </div>
+              <div th:insert="~{fragments/resources :: end}"></div>
+            </div>
+          </div>
+      </section>
+
+	<div th:insert="~{fragments/resources :: scripts}"></div>
+	
 </head>

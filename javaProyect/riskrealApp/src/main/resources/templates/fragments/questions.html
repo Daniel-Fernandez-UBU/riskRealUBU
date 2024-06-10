@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="~{fragments/resources :: head}"></head>
+<body>
+
+	<div th:fragment="singleImage">
+    	<h2 class="text-center" th:text="${pregunta.getDescription()}"></h2>
+        <br>
+		<form action="/quizShowResults" method="post">
+			<div class="row g-5 flex-center">
+				<div class="col-md-4 col-sm-4">
+				  <!--  For manage the security in POST  -->
+				  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				  <input type="hidden" th:name="pregunta" th:value="${pregunta.getId()}" />
+				  <div th:each="respuesta : ${pregunta.getAnswers()}">
+				    <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getText()}" 
+				    th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}" 
+				    required>
+				    <label class="fs-2 fs-sm-2" th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
+				  </div>
+		  		</div>
+		 	<div class="col-md-3">
+	            <div class="card card-span text-white">
+	               <img class="img-fluid" th:src="${pregunta.getImage().get(0)}"  style="max-width: 100%;" alt="..." /> 
+	            </div>
+		 	</div>
+			<div th:if="${preguntaActual < 2}" th:insert="~{fragments/resources :: firstquestion}"></div>
+			<div th:if="${preguntaActual > 1} and ${preguntaActual < quiz.getQuestions().size()}" th:insert="~{fragments/resources :: continuequestion}"></div>
+			<div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: lastquestion}"></div>
+		 	</div>
+		</form>
+	</div>
+	
+<div th:fragment="multiImage">
+    <div class="row g-5 flex-center">
+        <h2 class="text-center" th:text="${pregunta.getDescription()}"></h2>
+        <div th:each="image : ${pregunta.getImage()}" class="col-md-3">
+            <div class="card card-span text-white">
+                <img class="img-fluid" th:src="${image}" style="max-width: 100%;" alt="..." />
+            </div>
+        </div>
+    </div>
+    <br>
+    <form action="/quizShowResults" method="post">
+        <div class="row g-3 flex-center">
+            <!-- For manage the security in POST -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="hidden" th:name="pregunta" th:value="${pregunta.getId()}" />
+            <div th:each="respuesta : ${pregunta.getAnswers()}" class="col-md-5 col-sm-5">
+                <div class="card card-span">
+                    <img class="img-fluid" th:src="${respuesta.getImage()}" style="max-width: 100%;" alt="..." />
+                </div>
+                <div class="text-center mt-2">
+	                <input type="radio" th:name="respuestaSeleccionada" th:value="${respuesta.getText()}" 
+	                       th:checked="${userselection.containsKey(pregunta.getId()) && userselection.get(pregunta.getId()).equals(respuesta.getText())}" 
+	                       required>
+	                <label class="fw-bold" th:for="'respuesta_' + ${pregunta.getId()}" th:text="' ' + ${respuesta.getText()}"></label><br>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div th:if="${preguntaActual < 2}" th:insert="~{fragments/resources :: firstquestion}"></div>
+            <div th:if="${preguntaActual > 1} and ${preguntaActual < quiz.getQuestions().size()}" th:insert="~{fragments/resources :: continuequestion}"></div>
+            <div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: lastquestion}"></div>
+        </div>
+        <br>
+    </form>
+</div>
+
+	
+</body>
+</html>

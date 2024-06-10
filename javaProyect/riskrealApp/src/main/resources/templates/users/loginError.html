@@ -39,9 +39,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			      <a href="/resetPassword" class="fs-1 badge bg-info text-white" th:text="#{login.forgot.password}"></a>
 				</div>
               </div>
+              <div th:insert="~{fragments/resources :: end}"></div>
             </div>
             </div>
-      </section>			      
+      </section>	
 	<div th:insert="~{fragments/resources :: scripts}"></div>
 </body>
 </html>

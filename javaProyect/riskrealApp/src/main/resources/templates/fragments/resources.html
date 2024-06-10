@@ -153,7 +153,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
  </div>
 </div>
 
-	
+    <div th:fragment="end" class="container mt-7">
+      <div class="row flex-center">
+        <div class="col-12 col-lg-12 mb-12 text-center">
+          <h5 class="lh-lg fw-bold text-1000" th:text="#{end.company.info}"></h5>
+          <ul class="list-unstyled">
+            <li class="lh-lg"><a class="text-800 text-decoration-none" href="#!" th:text="#{end.about}"></a></li>
+          </ul>
+        </div>
+       </div>
+      </div>
+
 
 
 </body>
