@@ -29,7 +29,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					      <br />
 					      <div class="input-group">
 					         <i class="fa fa-building" aria-hidden="true"></i>
-					         <input class="form-control text-center" type="text" id="company" th:field="*{company}" th:placeholder="${user.getCompany()}" required/>
+					         <input class="form-control" type="text" id="company" th:field="*{company}" th:placeholder="${user.getCompany()}" required/>
 					         </div>
 					    </div>
 					   	<div class="form-group">
@@ -37,7 +37,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					      <br />
 					      <div class="input-group">
 					         <i class="fa fa-envelope" aria-hidden="true"></i>
-					         <input class="form-control text-center" type="email" id="email" th:field="*{email}" th:value="${user.getEmail()}" readonly/>
+					         <input class="form-control" type="email" id="email" th:field="*{email}" th:value="${user.getEmail()}" readonly/>
 					         </div>
 					    </div>
 						<div class="form-group">
@@ -45,7 +45,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					      <br />
 					      <div class="input-group">
 					         <i class="fa fa-lock" aria-hidden="true"></i>
-					         <input class="form-control text-center" type="password" id="password" th:field="*{password}"  th:placeholder="#{register.password}" />
+					         <input class="form-control" type="password" id="password" th:field="*{password}"  th:placeholder="#{register.password}" />
 					         </div>
 					    </div>	
 					   	<div class="form-group">
@@ -53,14 +53,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					      <br />
 					      <div class="input-group">
 					         <i class="fa fa-user-circle" aria-hidden="true"></i>
-					         <input class="form-control text-center" type="text" id="firstname" th:field="*{firstname}"  th:placeholder="${user.getFirstname()}" required/>
+					         <input class="form-control" type="text" id="firstname" th:field="*{firstname}"  th:placeholder="${user.getFirstname()}" required/>
 					         </div>
 					      </div>
 					   	<div class="form-group">
 					      <label for="lastname" th:text="#{register.lastname}"></label>
 					      <div class="input-group">
 					         <i class="fa fa-user-circle" aria-hidden="true"></i>
-					       	 <input class="form-control text-center" type="text" id="lastname" th:field="*{lastname}"  th:placeholder="${user.getLastname()}" required/>
+					       	 <input class="form-control" type="text" id="lastname" th:field="*{lastname}"  th:placeholder="${user.getLastname()}" required/>
 					      </div>
 					    </div>	   
 					    <div class="form-group">

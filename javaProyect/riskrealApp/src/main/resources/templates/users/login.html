@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:attr="lang=${lang}" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="~{fragments/resources :: head}"></head>
+<body>
+	<header th:insert="~{fragments/header :: new-header}"></header>
+	<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;"></div>
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-12 mb-10">
+              <div class="d-flex align-items-center flex-column">
+               	<h1 class="fw-bold" th:text="#{login.text}"></h1>
+			   </div>
+              </div>
+            </div>
+          </div>
+      </section>
+       <section class="py-0" id="header" style="margin-top: -25rem !important;">
+        <div class="container">
+		  <div class="row g-2 flex-center">
+       		<div class="col-md-7">
+       			<div class="d-flex align-items-center flex-column justify-content-center text-center"> 
+			      <form class="form-signin" method="post" action="/login">
+			        <div th:if="${show}" th:class="'alert alert-' + ${type}" role="alert" th:text="#{'register.' + ${type}}"></div>
+			        <p>
+			          <label for="username" class="sr-only">Username</label>
+			          <input type="text" id="email" name="username" class="form-control" placeholder="Username" required>
+			        </p>
+			        <p>
+			          <label for="password" class="sr-only">Password</label>
+			          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			        </p>
+					<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+			        <button class="btn btn-lg btn-primary btn-md btn-sm btn-block" type="submit" th:text="#{header.login}"></button>
+			      </form>
+				</div>
+              </div>
+            </div>
+            </div>
+      </section>			      
+	<div th:insert="~{fragments/resources :: scripts}"></div>
+</body>
+</html>

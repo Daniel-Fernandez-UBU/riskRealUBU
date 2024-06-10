@@ -1,6 +1,5 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,13 +68,45 @@ public class QuizController {
 	}
 	
 	/**
+	 * Method getQuizDescription.
+	 * @param model
+	 * @param formFile
+	 * @param session
+	 * @return the string
+	 */
+	@PostMapping("/quizDescription")
+	public String getQuizDescription(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
+		
+		String file;
+		file = jsonPathLang + "/" + formFile;
+		
+		// We get full quiz from json file
+		Quiz quiz = jsonService.getJsonQuiz(file);
+		
+		// New UserSelection object
+        UserSelection userSelection = new UserSelection();
+                
+        // We put the attribute to the session
+        session.setAttribute("userSelection", userSelection);
+		
+		// We put the quiz in the session
+		session.setAttribute("quiz", quiz);
+		
+		session.setAttribute("preguntaActual", 1);
+		
+		model.addAttribute("quiz", quiz);
+		
+		return "/quiz/quizdescription";
+	}
+	
+	/**
 	 * Página cuestionario.html
 	 *
 	 * @param model the model
 	 * @param session the session
 	 * @return the string
 	 */
-	@RequestMapping(value = "/quiz2", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/quizStarting", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mostrarCuestionario(Model model, HttpSession session) {
 		
 		UserSelection userSelection = (UserSelection) session.getAttribute("userSelection");
@@ -98,48 +129,20 @@ public class QuizController {
 		
 		// To let the html access "preguntaActual"
 		model.addAttribute("preguntaActual", preguntaActual);
+				
 		
-		// Just for test - to format the session creation time
-		Date creationTime = new Date(session.getCreationTime());
-		// Just for test -  show of the session id
-		System.out.println("Fecha de creación de la sesión: " + creationTime.toString());
-		System.out.println("Id de sesión: " + session.getId());		
-		
-		
-		return "/quiz2";
+		return "/quiz/quiz";
 	}
 	
 
 	/**
 	 * Start quiz.
 	 *
-	 * @param model the model
-	 * @param archivo the archivo
-	 * @param session the session
 	 * @return the string
 	 */
 	@PostMapping("/quizStartQuiz")
-	public String startQuiz(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
-		
-		String file;
-		file = jsonPathLang + "/" + formFile;
-		
-		// We get full quiz from json file
-		Quiz cuestionario = jsonService.getJsonQuiz(file);
-		
-		// New UserSelection object
-        UserSelection userSelection = new UserSelection();
-                
-        // We put the attribute to the session
-        session.setAttribute("userSelection", userSelection);
-		
-		// We put the quiz in the session
-		session.setAttribute("quiz", cuestionario);
-		
-		session.setAttribute("preguntaActual", 1);
-		
-		//return "quiz";
-		return "redirect:/quiz2";
+	public String startQuiz() {
+		return "redirect:/quizStarting";
 	}
 	
 	/**
@@ -168,20 +171,18 @@ public class QuizController {
 			saveScore(userSelection, quiz, questionInt, text);
 		}
 		
-		System.out.println(estado);
-		
 		if (estado.equalsIgnoreCase("Next")) {
 			
 			session.setAttribute("preguntaActual", questionInt+1);
 					
-			return "redirect:/quiz2";
+			return "redirect:/quizStarting";
 		}
 		
 		if (estado.equalsIgnoreCase("Prev")) {
 			
 			session.setAttribute("preguntaActual", questionInt-1);
 					
-			return "redirect:/quiz2";
+			return "redirect:/quizStarting";
 		}
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -214,7 +215,7 @@ public class QuizController {
 		// Download CSV
 		csvService.downloadCSV();
 		
-		return "results";
+		return "/quiz/results";
 	}
 	    
 	

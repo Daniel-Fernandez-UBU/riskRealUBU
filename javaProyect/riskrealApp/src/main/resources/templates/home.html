@@ -28,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <div class="container">
 		  <div class="row g-2 flex-center">
        		<div class="col-md-3" th:each="entry : ${jsonQuiz}">
-			    <form th:action="${isAuthenticated} ? '/quizStartQuiz' : '/anonymousData'" method="POST">
+			    <form th:action="${isAuthenticated} ? '/quizDescription' : '/anonymousData'" method="POST">
 			        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			        <input type="hidden" name="archivo" th:value="${entry.key}" />
 			            <div class="card card-span text-white">

@@ -54,7 +54,7 @@ public class RegisterController {
      * @param model the model
      * @return the string
      */
-    @GetMapping("/register/form")
+    @GetMapping("/registerForm")
     public String register(Model model) {
     	
     	User user = new User();
@@ -70,7 +70,7 @@ public class RegisterController {
      * @param user the user
      * @return the string
      */
-    @PostMapping("/register/done")
+    @PostMapping("/registerDone")
     public String saveUserProfile(@ModelAttribute("user") User user, Model model) {
 
     	// If the user is already registered, return login with info message
@@ -101,7 +101,7 @@ public class RegisterController {
         model.addAttribute("show", true);
 
         // Return to login page
-        return "/login";
+        return "/users/login";
     }
     
     /**

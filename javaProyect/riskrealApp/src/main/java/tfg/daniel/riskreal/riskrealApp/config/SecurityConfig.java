@@ -45,8 +45,8 @@ public class SecurityConfig {
 		return httpSecurity
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/", "/resetPassword", "/send-email", "/changePassword", "/anonymous**", "/vendors/**", "/guest**",
-							"/src/**", "/gulp/**", "/images/**", "/assets/**", "/register/**").permitAll()
-					.requestMatchers("/json**", "/profileManagement", "/updateProfile").hasAuthority("ADMIN")
+							"/src/**", "/gulp/**", "/images/**", "/assets/**", "/register**").permitAll()
+					.requestMatchers("/json**", "/profileManagement", "/updateProfile", "/csv/download").hasAuthority("ADMIN")
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login

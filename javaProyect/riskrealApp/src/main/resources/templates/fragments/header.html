@@ -54,9 +54,8 @@
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
       <ul class="navbar-nav dropleft ms-auto">
-       	<li th:insert="~{fragments/navoptions :: langOptions}"></li>
-	    <div th:insert="~{fragments/navoptions :: isAuthenticated}"></div>
-	    <div th:insert="~{fragments/navoptions :: isAnonymous}"></div>
+	    <div th:insert="~{fragments/navoptions :: isAuthenticatedQuiz}"></div>
+	    <div th:insert="~{fragments/navoptions :: isAnonymousQuiz}"></div>
       </ul>
     </div>
   </div>

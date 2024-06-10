@@ -70,7 +70,7 @@ public class jsonController {
             }
         }
 
-		return "loadQuiz";
+		return "/quiz/loadQuiz";
 	}
 	
     @PostMapping("/json/upload")

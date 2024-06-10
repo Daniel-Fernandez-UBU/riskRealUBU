@@ -108,6 +108,52 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</div>
 	
 	
+<div th:fragment="firstquestion" class="col-12 text-center">
+    <div class="d-flex justify-content-center">
+		 <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" >Previous</button>
+		 <button  class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" >Next</button>
+		 <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" >Enviar resultados</button>
+    </div>
+</div>
+
+ 	
+<div th:fragment="continuequestion" class="col-12 text-center">
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev">Previous</button>
+        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next">Next</button>
+        <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados">Enviar resultados</button>
+    </div>
+</div>
+
+<div th:fragment="lastquestion" class="col-12 text-center">
+    <div class="d-flex justify-content-center">
+		  <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" >Previous</button>
+		  <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" >Next</button>
+		 <button  class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" >Enviar resultados</button>
+    </div>
+</div>
+
+<div th:fragment="warning" class="modal fade border border-5" id="avisoSesion" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content ">
+     <div class="modal-header ">
+       <h5 class="modal-title" id="avisoModalLabel">¿Desesas salir del cuestionario?</h5>
+       <button type="button" class="close" onclick="closeAdvise()" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="fw-bold modal-body border-danger border-5">
+       En caso de confirmar perderás el progreso actual.
+     </div>
+     <div class="modal-footer text-center justify-content-center">
+       <button type="button" class="btn btn-lg btn-danger btn-md btn-sm" onclick="closeAdvise()">Cancelar</button>
+       <button type="button" class="btn btn-lg btn-success btn-md btn-sm" onclick="toHome()">Confirmar</button>
+     </div>
+   </div>
+ </div>
+</div>
+
+	
 
 
 </body>
