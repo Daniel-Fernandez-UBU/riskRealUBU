@@ -32,6 +32,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: rootroot
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SERVER_PORT: 8088
+      ADMIN_USERNAME: admin@riskreal.com
+      ADMIN_PASSWORD: admin
+      TEST_QUIZ: test_quiz_
     ports:
       - '8088:8088'
     volumes:

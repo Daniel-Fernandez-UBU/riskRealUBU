@@ -1,16 +1,16 @@
 {	
     "id": 1,
-    "title": "Competências transversais",
+    "title": "Soft Skills",
 	"image": [
 		"principalHD.png"
 		],
-    "language": "pt",
-	"description": "description do questionário",
+    "language": "it",
+	"description": "description del questionario",
 	"type": 1,
     "questions": [
       {
         "id": 1,
-        "description": "Conheço facilmente novas pessoas",
+        "description": "Faccio conoscenza facilmente con nuove persone",
         "image": [
 			"principalHD.png"
 			],
@@ -18,19 +18,19 @@
         "answers": [
           {
 			"id": 1,
-            "text": "1 - Discordo totalmente",
+            "text": "1 - Fortemente in disaccordo",
             "image": "principalHD.png",
             "value": 1
           },
           {
 			"id": 2,
-            "text": "2 - Desacordo",
+            "text": "2 - Disagio",
             "image": "principalHD.png",
             "value": 2
           },
           {
 			"id": "3",
-            "text": "3 - Não concordo nem discordo",
+            "text": "3 - Né d'accordo né in disaccordo",
             "image": "principalHD.png",
             "value": 3
           },
@@ -42,7 +42,7 @@
           },
           {
 			"id": 5,
-            "text": "5 - Concordo totalmente",
+            "text": "5 - Fortemente d'accordo",
             "image": "principalHD.png",
             "value": 5
           }
