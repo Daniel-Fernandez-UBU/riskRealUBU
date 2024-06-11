@@ -1,10 +1,141 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
-Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
-Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
-Se busca que no sea una mera operación de copiar y pegar diagramas y extractos del código fuente, sino que realmente se justifiquen los caminos de solución que se han tomado, especialmente aquellos que no sean triviales.
-Puede ser el lugar más adecuado para documentar los aspectos más interesantes del diseño y de la implementación, con un mayor hincapié en aspectos tales como el tipo de arquitectura elegido, los índices de las tablas de la base de datos, normalización y desnormalización, distribución en ficheros3, reglas de negocio dentro de las bases de datos (EDVHV GH GDWRV DFWLYDV), aspectos de desarrollo relacionados con el WWW...
-Este apartado, debe convertirse en el resumen de la experiencia práctica del proyecto, y por sí mismo justifica que la memoria se convierta en un documento útil, fuente de referencia para los autores, los tutores y futuros alumnos.
+Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, incluyendo las diferentes decisiones que se han ido tomando y los problemas que se han tenido que afrontar.
+
+\section{Inicio del proyecto}
+
+La selección del proyecto suponía un doble reto personal:
+
+\begin{itemize}
+	\item Nunca había programado aplicaciones web ni conocía la tecnología de Spring Boot.
+	\item No había un proyecto base, documentado, como inicio del proyecto, sino que era crear algo nuevo desde cero.
+\end{itemize}
+
+Tras la primera reunión con el tutor, donde me expuso el camino que se quería seguir con el proyecto, me puse a recabar información sobre é.
+
+\section{Metodologías}
+
+Desde el inicio del proyecto se ha dedicado tiempo y esfuerzo en que la realización del proyecto fuese de la manera más profesional posible.
+
+La gestión del proyecto se ha realizado teniendo como base la metodología ágil de \textit{Scrum} ~\cite{web:scrum}.
+
+Al tratarse de un Trabajo de Fin de Grado, que se realiza de forma individual, no se siguió de forma completa, porque el grupo de desarrolladores estaba formado solo por un miembro.
+
+Cómo se ha aplicado la metodología:
+
+\begin{itemize}
+	\item Reunión inicial de \textit{kick-off} ~\cite{web:kickoff} del proyecto, donde se presentó el proyecto y se establecieron ciertos objetivos generales.
+	\item Se utilizó una estrategia de desarrollo incremental basada en \textit{sprints}, a través de iteraciones y revisiones.
+	\item La duración media de los \textit{sprints} fue de dos semanas, excepto los últimos del proyecto, que han sido de una semana.
+	\item En la finalización de cada \textit{sprints} se entregaba un incremento del proyecto.
+	\item Se realizaba una reunión de revisión del \textit{sprint} que servía también como reunión de planificación del nuevo \textit{sprint}.
+	\item Se definía en el tablero kanban de \textit{Zube.io} una lista de tareas y se asociaban al nuevo \textit{sprint}.
+	\item Para monitorizar el progreso se han utilizado gráficos \textit{burndup}.
+\end{itemize}
+
+\section{Formación}
+
+La principal tecnología en el desarrollo del proyecto ha sido \textit{Spring Boot}, sobre la que no se tenía ningún conocimiento previo, lo que me ha llevado a tener que formarme por diferentes medios:
+
+\begin{itemize}
+	\item Spring Boot 3. Aplicaciones web y REST APIs con Spring MVC (Udemy) ~\cite{udemy:eliseo}.
+	\item Cómo convertir en imagen de docker una aplicación de Spring Boot ~\cite{doc:springbootdocker}.
+	\item Cómo aplicar estilos de personalización de \textit{bootstrap} y \textit{CSS} en documentos \textit{HTML}.
+	\item Uso y configuración de un archivo \textit{docker compose} ~\cite{web:dockercompose}.
+	\item Cómo se utiliza \LaTeX para la generación de documentos.
+\end{itemize}
+
+Me gustaría destacar la web \href{https://www.baeldung.com/spring-boot}{Baeldung}, al contener mucha información sobre Spring Boot en general.
+
+\section{Desarrollo de la aplicación web}
+
+Se va a dividir el desarrollo de la aplicación web en varios apartados, para poder detallar mejor el proceso de construcción de la misma.
+
+\subsection{Código de la aplicación}
+
+El desarrollo del código de la aplicación supuso un primer reto, pues en el inicio del proyecto todavía no terminaba de comprender cómo iba a crear una aplicación web con java, ya que no era lo que estaba acostumbrado a crear con este lenguaje de programación.
+
+Una vez se comprendió cómo funcionaba, de forma básica, \textit{Spring Web} como \textit{starter} del proyecto, este paso se convirtió en algo trivial.
+
+La primera parte de la creación de la aplicación consistía en poder ``leer'' un archivo \textit{JSON} y convertirlo a objetos en java con los que se pudiese trabajar de forma nativa.
+
+Se crearon varias clases modelo para agrupar el contenido del \textit{JSON}:
+
+ \begin{itemize}
+	\item Clase \textit{Quiz}: Contiene la descripción básica del cuestionario y un listado de preguntas.
+	\item Clase \textit{Questions}: Contiene la información de cada pregunta y un listado de respuestas.
+	\item Clase \textit{Answers}: Contiene la información de cada respuesta.
+\end{itemize}
+
+Una vez conseguido lo anterior, la base del proyecto ya estaba construida.
+
+Para la presentación de contenidos en las páginas web, se usaron clases \textit{controller} en java, que sirven de enlace entre la propia aplicación y el código \textit{HTML} de la página web.
+
+A través de estas clases, se pasaban los cuestionarios completos al código \textit{HTML} de la página web y en ella, con \textit{Thymeleaf} se mostraba la información.
+
+Ya se tenía la forma de ver el contenido del \textit{JSON} en las páginas web.
+
+Hasta aquí tendríamos una base más ``robusta'' de la aplicación, teniendo todo lo necesario dentro del propio proyecto de java.
+
+Los primeros problemas los encontramos al intentar actualizar los archivos de propiedades, ya que al ser internos de la aplicación, necesitaban un reinicio de la misma cada vez que había un cambio, algo que no era funcional para un entorno de producción.
+
+A raíz de lo anterior, se empezó a trabajar con archivos \textit{JSON} externos a la aplicación, utilizando rutas relativas para poder encontrar los archivos siempre, independientemene de la ubicación raíz del proyecto.
+
+Finalmente, se incluyeron varios tipos de clases de java adicionales:
+
+ \begin{itemize}
+	\item Clases de configuración: Se utilizaron ciertas clases para modificar la configuración por defecto de Spring Boot. También se ha utilizado para acceder a un archivo de propiedades personalizado, donde se definen algunos elementos de configuración y personalización de la aplicación.
+	\item Clases de servicio: Contienen los métodos a los que se tienen que acceder desde otras clases, evitando duplicidad en el código y teniendo una clase centralizada para la gestión de la mayoría de los procesos, siendo más sencillo comprender su código y ahorrando métodos adicionales en otras clases.
+\end{itemize}
+
+\subsection{Código de las páginas web}
+
+La estética y el diseño de las páginas web ha sido lo más complejo en cuanto a presentación final del proyecto.
+
+Ayudado de \textit{bootstrap} y personalización a través de plantillas \textit{CSS} se ha conseguido aplicar un estilo homogéneo a toda la aplicación.
+
+El uso de los fragmentos de \textit{Thymeleaf} ha ayudado a que los ficheros \textit{HTML} que componen la página web sean más legibles, evitando tener que escribir las mismas líneas de forma repetitiva, simplificándolo todo a una simple línea que enlaza con el \textit{fragmento} indicado.
+
+Definitivamente, implementar las etiquetas \textit{HTML} ha sido lo más costoso en cuanto a programación se refiere, porque conseguir cuadrar y encajar todos los apartados en su sitio ha sido un trabajo de prueba y error constante.
+
+\subsection{Integración de servicios y dependencias}
+
+Los servicios o dependencias más destacables que implementa la aplicación son los siguientes:
+
+\subsubsection{Servicio de envío de correos electrónicos}
+
+Durante el proceso de desarrollo de un servicio de correo electrónico que enviase a los usuarios una nueva contraseña en caso de que no recordasen la suya, se probaron configuraciones con varios servidores de correo, pero finalmente, por simplifidad y acceso a documentación, se utilizó \textit{Gmail} que permite la creación de cuentas gratuitas y el uso de sus servidores de correo desde cualquier \textit{API} siempre que se utilice un \textit{token} ~\cite{gmail:token}.
+
+La configuración completa del servidor de correo, así como, sus credenciales, se independizaron de la aplicación en un archivo de propiedades, para permitir su modificación por cualquier otro servicio de correo, dando libertar al programador para cambiarlo sin necesidad de compilar de nuevo el proyecto.
+
+\subsubsection{Seguridad con Spring Security y Spring JPA}
+
+En primer lugar, tras aplicar \textit{Spring Security}, la mayoría de las páginas dejaron de funcionar, todas aquellas que eran de tipo \textit{POST}.
+
+Tras investigar descubrí que esto sucedía porque la primera medida de seguridad que se aplica, es la necesidad de recibir un \textit{CSRF token} (\textit{Cross-Site Request Forgery}) ~\cite{web:csrf} para evitar ataques \textit{man in the middle} a los formularios de las aplicaciones web, al requerir un \textit{token} de autenticación, para comprobar la autenticidad de la comunicación.
+
+Debido a esto, todos los formularios tienen configurado un campo ``oculto'' que envía este \textit{token} al controlador de la aplicación, para permitir el acceso.
+
+Se decidió utilizar una base de datos \textit{mysql} que se levanta cada vez que se inicia la aplicación, almacena los datos en una carpeta externa a la misma, para tener persistencia, y que está vinculada con el la seguridad de la aplicación, ya que se definieron los campos de nuestras tablas de usuarios y perfiles que se iban a usar tanto para iniciar sesión, como para comprobar a qué parte de la aplicación tiene cada uno.
+
+\section{Documentación}
+
+Para generar la documentación del proyecto, se ha utilizado una plantilla de \LaTeX, que permite mantener una estructura uniforme y el mismo estilo durante la documentación de todo el proyecto, aportando un aura de profesionalidad y sin los poblemas y complicaciones de formatos que nos podemos encontrar en otros programas comerciales.
+
+La documentación de la aplicación se ha generado desde el propio editor de código, \textit{Spring Tool Suite 4 for Eclipse}, siguiendo el formato \textit{javadoc} ~\cite{doc:javadoc}.
+
+Este formato permite la visualización de todas las clases utilizadas en formato \textit{HTML}, pudiendo navegar por los diferentes métodos y obteniendo una breve descripción de cada uno, así como de los parmáetros de entrada que esperan o del retorno de cada método.
+\clearpage
+\section{Publicación}
+
+Se ha intentado realizar la publicación de la aplicación en la plataforma en la nube de \textit{GitPod} ~\cite{gitpod}, porque permitía la integración de un repositorio de \textit{GitHub} y poder desplegar tus aplicaciones con un archivo \textit{docker-compose.yml}, pero las limitaciones del plan gratuito en cuanto a horas mensuales de ejecución no han permitido tenerla disponible de forma continua, si puediendo comprobarse su correcto despliegue y funcionamiento.
+
+Despliegue de la aplicación con ``docker compose up -d'' en \textit{GitPod}:
+\imagen{gitPodDespliegue}{Despliegue de la aplicación en la plataforma web de GitPod.}{.5}
+
+Acceso a la aplicación web a través de la dirección web que genera \textit{GitPod}:
+\imagen{gitPodWeb}{Funcionamiento de la aplicación web a través de GitPod.}{.5}
 
 
-Para el desarrollo incremental del proyecto completo, tanto aplicación web como documentación, se ha utilizado el repositorio de GitHub "Repositorio", donde se puede comprobar el trabajo continuo realizado.
+
+
