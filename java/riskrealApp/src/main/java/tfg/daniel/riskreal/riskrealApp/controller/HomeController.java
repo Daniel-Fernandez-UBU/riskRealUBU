@@ -2,7 +2,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +61,6 @@ public class HomeController {
      * @param model the model
      * @param session the session
      * @return the string
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     @GetMapping("/")
     public String home(Model model,  HttpSession session) {

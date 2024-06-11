@@ -200,7 +200,8 @@ public class RegisterController {
 	/**
 	 * Method roleManagement.
 	 * 
-	 * @param model
+	 * @param newProfile
+	 * @param email
 	 * @return role management view
 	 * 
 	 */

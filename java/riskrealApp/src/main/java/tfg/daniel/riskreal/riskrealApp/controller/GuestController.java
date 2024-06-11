@@ -26,6 +26,14 @@ import tfg.daniel.riskreal.riskrealApp.repository.UserRepository;
 import tfg.daniel.riskreal.riskrealApp.services.CSVService;
 import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
+
+/**
+ * Class GuestController.
+ *  
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ * 
+ */
 @Controller
 public class GuestController {
 	
@@ -56,6 +64,13 @@ public class GuestController {
 	    this.jsonPathLang = customConfig.getQuizFilePath();
 	}
 	
+	/**
+	 * Method setGuestData.
+	 * @param model
+	 * @param formFile
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/anonymousData")
 	public String setGuestData(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
 		
@@ -74,7 +89,9 @@ public class GuestController {
 	/**
 	 * Method getGuestDescrption.
 	 * @param model
-	 * @param formFile
+	 * @param gender
+	 * @param age
+	 * @param rol
 	 * @param session
 	 * @return
 	 */
@@ -107,6 +124,14 @@ public class GuestController {
 		return "guest/anonymousdescription";
 	}
 	
+	/**
+	 * Method startGuestQuiz.
+	 * @param session
+	 * @param gender
+	 * @param age
+	 * @param rol
+	 * @return
+	 */
 	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
 			@RequestParam("age") String age, @RequestParam("rol") String rol) {

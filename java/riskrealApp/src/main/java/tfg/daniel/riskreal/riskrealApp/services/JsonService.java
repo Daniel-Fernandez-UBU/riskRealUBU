@@ -81,7 +81,8 @@ public class JsonService {
 	
 	/**
 	 * Method for get the full Quiz from json file.
-	 * @param String jsonQuiz - full json path
+	 * @param jsonQuiz - full json path
+	 * @param value true or false
 	 * @return
 	 */
 	public Quiz getJsonQuiz(String jsonQuiz, boolean value) {
@@ -167,7 +168,7 @@ public class JsonService {
 	 * 
 	 * Method that from a file, get all the json files in the path
 	 * @param file
-	 * @return List<String> jsonFiles
+	 * @return List jsonFiles
 	 * 
 	 */
 	public List<String> getJsonFiles(File file){

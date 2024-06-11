@@ -54,7 +54,8 @@ public class UserSelection {
 	
 	/**
 	 * Setter answersValues.
-	 * @param answersValues
+	 * @param id
+	 * @param value
 	 */
 
 	public void setAnswerValue(Integer id, Integer value) {

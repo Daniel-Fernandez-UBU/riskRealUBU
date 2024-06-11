@@ -26,6 +26,13 @@ import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.services.JsonService;
 
 
+/**
+ * Class jsonController.
+ *  
+ * @author Daniel Fernández Barrientos.
+ * @version 1.0
+ * 
+ */
 @Controller
 public class jsonController {
 	
