@@ -1,77 +1,82 @@
 \capitulo{3}{Conceptos teóricos}
 
-En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
+La parte del proyecto que me ha supuesto mayor complejidad teórica ha sido la relacionada con la tecnología de \textit{Spring Boot} ~\cite{web:springboot}.
+Entender cómo funciona \textit{docker} ~\cite{web:dockerDocs} tampoco ha sido una tarea sencilla, pero el sí necesaria, tanto para hacer más accesible la aplicación como para potenciar mis habilidades técnicas.
 
-Algunos conceptos teóricos de \LaTeX{} \footnote{Créditos a los proyectos de Álvaro López Cantero: Configurador de Presupuestos y Roberto Izquierdo Amo: PLQuiz}.
+\section{Spring Boot}
 
-\section{Secciones}
+Spring Boot ~\cite{web:springbootArch} es la evolución del clásico \textit{framework} de creación de aplicaciones web.
 
-Las secciones se incluyen con el comando section.
-
-\subsection{Subsecciones}
-
-Además de secciones tenemos subsecciones.
-
-\subsubsection{Subsubsecciones}
-
-Y subsecciones. 
-
-
-\section{Referencias}
-
-Las referencias se incluyen en el texto usando cite~\cite{udemy:eliseo}. Para citar webs, artículos o libros~\cite{koza92}, si se desean citar más de uno en el mismo lugar~\cite{bortolot2005, bortolot2008}.
-
-
-\section{Imágenes}
-
-Se pueden incluir imágenes con los comandos standard de \LaTeX, pero esta plantilla dispone de comandos propios como por ejemplo el siguiente:
-
-\imagen{escudoInfor}{Autómata para una expresión vacía}{.5}
-
-
-
-\section{Listas de items}
-
-Existen tres posibilidades:
-
-\begin{itemize}
-	\item primer item.
-	\item segundo item.
-\end{itemize}
+La construcción de una aplicación web con un \textit{framework} antiguo consistía en los siguientes pasos:
 
 \begin{enumerate}
-	\item primer item.
-	\item segundo item.
+	\item Crear un proyecto de java.
+	\item Importar las dependencias necesarias.
+	\item Preparar todos los archivos de configuración necesarios para que funcione la aplicación.
+	\item Desplegar la aplicación en un servidor web.
 \end{enumerate}
 
-\begin{description}
-	\item[Primer item] más información sobre el primer item.
-	\item[Segundo item] más información sobre el segundo item.
-\end{description}
-	
-\begin{itemize}
-\item 
-\end{itemize}
+Este mismo proceso con Spring Boot consta de los siguientes pasos:
 
-\section{Tablas}
+\begin{enumerate}
+	\item Acceder a \textit{Spring Initializr} ~\cite{web:springinitializr}.
+	\item Indicar el tipo de proyecto, el lenguaje de programación y los \textit{starters} \cite{web:springStarters} de Spring necesarios.
+	\item Generar el proyecto.
+\end{enumerate}
 
-Igualmente se pueden usar los comandos específicos de \LaTeX o bien usar alguno de los comandos de la plantilla.
+El paso 2 de la lista anterior engloba todos los pasos de la primera lista, incluso va más allá, porque el proyecto que genera se puede arrancar desde la propia \textit{suite} de Spring y tendrías tu aplicación web funcionando en muy poco tiempo.
 
-\tablaSmall{Herramientas y tecnologías utilizadas en cada parte del proyecto}{l c c c c}{herramientasportipodeuso}
-{ \multicolumn{1}{l}{Herramientas} & App Web & BBDD & Memoria \\}{ 
-HTML5 & X & & \\
-CSS & X & &\\
-BOOTSTRAP & X & &\\
-Java & X & &\\
-Spring Boot & X & &\\
-Eclipse & X & &\\
-Thymeleaf & X & &\\
-Docker & X & X &\\
-JSON & X & X &\\
-CSV & X & X &\\
-MySQL & & X & X\\
-GitHub & X & X & X\\
-Zube.io & X & X & X\\
-Mik\TeX{} & & & X\\
-\LaTeX  & & & X\\
-} 
+\subsection{\textit{Starters} Utilizados}
+
+A continuación, se van a comentar ciertos aspectos de los \textit{starters} que se han utilizado en la construcción de la aplicación.
+
+\subsubsection{Spring Web}
+
+Establece la configuraión del proyecto para su funcionamiento como una aplicación web. Al incluir un servidor \textit{Apache Tomcat} no es necesario generar el archivo \textit{JAR o WAR} y desplegarlo en un servidor, solo con levantar la aplicación esta ya se lanza en el servidor web embebido.
+ 
+
+\subsubsection{Spring Security}
+
+Establece la configuración de seguridad por defecto en la aplicación web. Sin más configuración adicional, genera una contraseña por defecto de administrador con cada inicio de la aplicación, ya que securiza todas las páginas web de forma predeterminada.
+
+Con ciertas clases de java, Spring Security ~\cite{web:springSecurity} permite personalizar la configuración de la aplicación.
+
+\subsubsection{Spring JPA}
+
+Establece toda la integración para usar clases relacionadas con tablas de una base de datos. Elimina la necesidad de crear patrones DAO ~\cite{web:dao} para nuestras clases y simplifica este proceso de forma considerable.
+
+\begin{enumerate}
+	\item Creamos nuestra clase de java.
+	\item Incluimos las anotaciones ~\cite{web:anotacionesJPA} en la clase.
+	\item Creamos una interfaz que extienda de \textit{JPA repository}  ~\cite{web:springCJPArepo} o de \textit{CRUD repository} ~\cite{web:springCRUDrepo} asociada a nuestra clase.
+	\item Ya disponemos de todo lo necesario para actualizar, borrar, crear o recuperar objetos de la base de datos.
+\end{enumerate}
+
+\subsubsection{Thymeleaf}
+
+Es un motor de generación de plantillas y de generación dinámica de código \textit{HTML}.
+
+Permite incluir cierta lógica en las etiquetas \textit{HTML} de nuestras páginas web para mostrar u ocultar opciones, iterar sobre un objeto o lista para crear tantas filas en una tabla como valores.
+
+Permite el poder enviar variables desde nuestro controlador de java a la página web, reconocer esas variables y mostrar su contenido.
+
+También incluye el soporte para los archivos de personalización, pudiendo acceder a los archivos de propiedades en función del idioma seleccionado en la web.
+
+\subsubsection{Docker Compose Support}
+
+Permite tener un fichero de \textit{docker compose} dentro del propio proyecto de java, para levantar el contenedor que sea necesario en el momento de inicio de la aplicación.
+
+Por ejemplo, si se utiliza una base de datos, se puede configurar que esta se levante en un contenedor a la vez que se ejecuta el proyecto, para no tener que configurar una base de datos fuera del mismo, simplificando el entorno de desarollo.
+
+\section{Docker}
+
+Un \textit{docker} o contenedor, es una imagen de un sistema operativo básico con una o varias aplicaciones instaladas que al arrancarse, permite el acceder a esta aplicación sin necesidad de dedicar una gran fuente de recursos a su funcionamiento.
+
+Es realmente mucho más sencillo que todo eso, se podría simplificar con lo siguiente: \textbf{Docker es un servidor corriendo como un microservicio}.
+
+Lo mejor de Docker es que las imágenes son multiplataforma, con tener un servicio de docker instalado en el equipo, puede correr cualquiera de las imágenes disponible en su repositorio.
+
+Facilita el despliegue y portabilidad de nuevas aplicaciones, a la vez que disminuye el tamaño de la infraestructura necesaria para su funcionamiento.
+
+
+
