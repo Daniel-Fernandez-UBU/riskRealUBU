@@ -11,7 +11,7 @@ La selección del proyecto suponía un doble reto personal:
 	\item No había un proyecto base, documentado, como inicio del proyecto, sino que era crear algo nuevo desde cero.
 \end{itemize}
 
-Tras la primera reunión con el tutor, donde me expuso el camino que se quería seguir con el proyecto, me puse a recabar información sobre é.
+Tras la primera reunión con el tutor, donde me expuso el camino que se quería seguir con el proyecto, me puse a recabar información sobre ello.
 
 \section{Metodologías}
 
@@ -30,7 +30,7 @@ Cómo se ha aplicado la metodología:
 	\item En la finalización de cada \textit{sprints} se entregaba un incremento del proyecto.
 	\item Se realizaba una reunión de revisión del \textit{sprint} que servía también como reunión de planificación del nuevo \textit{sprint}.
 	\item Se definía en el tablero kanban de \textit{Zube.io} una lista de tareas y se asociaban al nuevo \textit{sprint}.
-	\item Para monitorizar el progreso se han utilizado gráficos \textit{burndup}.
+	\item Para monitorizar el progreso se han utilizado gráficos \textit{burnup}.
 \end{itemize}
 
 \section{Formación}
@@ -41,11 +41,16 @@ La principal tecnología en el desarrollo del proyecto ha sido \textit{Spring Bo
 	\item Spring Boot 3. Aplicaciones web y REST APIs con Spring MVC (Udemy) ~\cite{udemy:eliseo}.
 	\item Cómo convertir en imagen de docker una aplicación de Spring Boot ~\cite{doc:springbootdocker}.
 	\item Cómo aplicar estilos de personalización de \textit{bootstrap} y \textit{CSS} en documentos \textit{HTML}.
-	\item Uso y configuración de un archivo \textit{docker compose} ~\cite{web:dockercompose}.
-	\item Cómo se utiliza \LaTeX para la generación de documentos.
 \end{itemize}
 
 Me gustaría destacar la web \href{https://www.baeldung.com/spring-boot}{Baeldung}, al contener mucha información sobre Spring Boot en general.
+
+Aunque en menor menida, también he tenido que formarme en otras de las tecnologías utilizadas:
+
+\begin{itemize}
+	\item Uso y configuración de un archivo \textit{docker compose} ~\cite{web:dockercompose}.
+	\item Cómo se utiliza \LaTeX para la generación de documentos.
+\end{itemize}
 
 \section{Desarrollo de la aplicación web}
 
@@ -53,11 +58,11 @@ Se va a dividir el desarrollo de la aplicación web en varios apartados, para po
 
 \subsection{Código de la aplicación}
 
-El desarrollo del código de la aplicación supuso un primer reto, pues en el inicio del proyecto todavía no terminaba de comprender cómo iba a crear una aplicación web con java, ya que no era lo que estaba acostumbrado a crear con este lenguaje de programación.
+El desarrollo del código de la aplicación supuso un primer reto, pues en el inicio del proyecto todavía no terminaba de comprender cómo iba a crear una aplicación web con Java, ya que no era lo que estaba acostumbrado a crear con este lenguaje de programación.
 
 Una vez se comprendió cómo funcionaba, de forma básica, \textit{Spring Web} como \textit{starter} del proyecto, este paso se convirtió en algo trivial.
 
-La primera parte de la creación de la aplicación consistía en poder ``leer'' un archivo \textit{JSON} y convertirlo a objetos en java con los que se pudiese trabajar de forma nativa.
+La primera parte de la creación de la aplicación consistía en poder ``leer'' un archivo \textit{JSON} y convertirlo a objetos en Java con los que se pudiese trabajar de forma nativa.
 
 Se crearon varias clases modelo para agrupar el contenido del \textit{JSON}:
 
@@ -69,19 +74,19 @@ Se crearon varias clases modelo para agrupar el contenido del \textit{JSON}:
 
 Una vez conseguido lo anterior, la base del proyecto ya estaba construida.
 
-Para la presentación de contenidos en las páginas web, se usaron clases \textit{controller} en java, que sirven de enlace entre la propia aplicación y el código \textit{HTML} de la página web.
+Para la presentación de contenidos en las páginas web, se usaron clases \textit{controller} en Java, que sirven de enlace entre la propia aplicación y el código \textit{HTML} de la página web.
 
 A través de estas clases, se pasaban los cuestionarios completos al código \textit{HTML} de la página web y en ella, con \textit{Thymeleaf} se mostraba la información.
 
 Ya se tenía la forma de ver el contenido del \textit{JSON} en las páginas web.
 
-Hasta aquí tendríamos una base más ``robusta'' de la aplicación, teniendo todo lo necesario dentro del propio proyecto de java.
+Hasta aquí tendríamos una base más ``robusta'' de la aplicación, teniendo todo lo necesario dentro del propio proyecto de Java.
 
 Los primeros problemas los encontramos al intentar actualizar los archivos de propiedades, ya que al ser internos de la aplicación, necesitaban un reinicio de la misma cada vez que había un cambio, algo que no era funcional para un entorno de producción.
 
 A raíz de lo anterior, se empezó a trabajar con archivos \textit{JSON} externos a la aplicación, utilizando rutas relativas para poder encontrar los archivos siempre, independientemene de la ubicación raíz del proyecto.
 
-Finalmente, se incluyeron varios tipos de clases de java adicionales:
+Finalmente, se incluyeron varios tipos de clases de Java adicionales:
 
  \begin{itemize}
 	\item Clases de configuración: Se utilizaron ciertas clases para modificar la configuración por defecto de Spring Boot. También se ha utilizado para acceder a un archivo de propiedades personalizado, donde se definen algunos elementos de configuración y personalización de la aplicación.
@@ -128,7 +133,7 @@ Este formato permite la visualización de todas las clases utilizadas en formato
 \clearpage
 \section{Publicación}
 
-Se ha intentado realizar la publicación de la aplicación en la plataforma en la nube de \textit{GitPod} ~\cite{gitpod}, porque permitía la integración de un repositorio de \textit{GitHub} y poder desplegar tus aplicaciones con un archivo \textit{docker-compose.yml}, pero las limitaciones del plan gratuito en cuanto a horas mensuales de ejecución no han permitido tenerla disponible de forma continua, si puediendo comprobarse su correcto despliegue y funcionamiento.
+Se ha intentado realizar la publicación de la aplicación en la plataforma en la nube de \textit{GitPod} ~\cite{doc:gitpod}, porque permitía la integración de un repositorio de \textit{GitHub} y poder desplegar tus aplicaciones con un archivo \textit{docker-compose.yml}, pero las limitaciones del plan gratuito en cuanto a horas mensuales de ejecución no han permitido tenerla disponible de forma continua, sí puediendo comprobarse su correcto despliegue y funcionamiento.
 
 Despliegue de la aplicación con ``docker compose up -d'' en \textit{GitPod}:
 \imagen{gitPodDespliegue}{Despliegue de la aplicación en la plataforma web de GitPod.}{.5}
