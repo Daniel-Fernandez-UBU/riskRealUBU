@@ -104,18 +104,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
 <div th:fragment="firstquestion" class="col-12 text-center">
     <div class="d-flex justify-content-center">
-		 <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" >Previous</button>
-		 <button  class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" >Next</button>
-		 <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" >Enviar resultados</button>
+		 <button disabled class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" th:text="#{quiz.prev.question}"></button>
+		 <button  class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" th:text="#{quiz.next.question}"></button>
+		 <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" th:text="#{quiz.send.results}"> </button>
     </div>
 </div>
 
  	
 <div th:fragment="continuequestion" class="col-12 text-center">
     <div class="d-flex justify-content-center">
-        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev">Previous</button>
-        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next">Next</button>
-        <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados">Enviar resultados</button>
+        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="prev" th:text="#{quiz.prev.question}"></button>
+        <button class="btn btn-outline-primary mx-2" type="submit" name="accion" value="next" th:text="#{quiz.next.question}"></button>
+        <button disabled class="btn btn-outline-success mx-2" type="submit" name="accion" value="resultados" th:text="#{quiz.send.results}"> </button>
     </div>
 </div>
 
