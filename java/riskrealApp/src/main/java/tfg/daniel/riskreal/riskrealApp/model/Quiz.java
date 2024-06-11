@@ -20,6 +20,9 @@ public class Quiz {
 	/** The id. */
 	private int id;
 	
+	/** The id. */
+	private int maxvalue;
+	
 	/** The title. */
 	private String title;
 	
@@ -36,7 +39,7 @@ public class Quiz {
 	private int type;
 	
 	/** The questions. */
-	private List<Questions> questions;
+	private List<Question> questions;
 	
 	/**
 	 * Gets the image.
@@ -57,6 +60,27 @@ public class Quiz {
 		this.image = image;
 	}
 	
+	
+	/**
+	 * Gets the maxvalue.
+	 *
+	 * @return the maxvalue
+	 */
+	public int getMaxvalue() {
+		return maxvalue;
+	}
+
+	
+	/**
+	 * Sets the maxvalue.
+	 *
+	 * @param maxvalue the new maxvalue
+	 */
+	public void setMaxvalue(int maxvalue) {
+		this.maxvalue = maxvalue;
+	}
+
+
 	/**
 	 * Gets the id.
 	 *
@@ -116,7 +140,7 @@ public class Quiz {
 	 *
 	 * @param questions the new questions
 	 */
-	public void setQuestions(List<Questions> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 	
@@ -125,7 +149,7 @@ public class Quiz {
 	 *
 	 * @return the questions
 	 */
-	public List<Questions> getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
 	

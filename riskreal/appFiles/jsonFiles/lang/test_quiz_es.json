@@ -1,5 +1,6 @@
 {	
     "id": 1,
+	"maxvalue": 5,
     "title": "Habilidades Blandas",
 	"image": [
 		"quizMain.png"

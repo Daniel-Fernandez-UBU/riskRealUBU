@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
-import tfg.daniel.riskreal.riskrealApp.model.Answers;
-import tfg.daniel.riskreal.riskrealApp.model.Questions;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
 import tfg.daniel.riskreal.riskrealApp.model.User;
 import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
@@ -168,7 +166,7 @@ public class QuizController {
 		String rol = (String) session.getAttribute("rol");
 		
 		if(text != null) {
-			saveScore(userSelection, quiz, questionInt, text);
+			jsonService.saveScore(userSelection, quiz, questionInt, text);
 		}
 		
 		if (estado.equalsIgnoreCase("Next")) {
@@ -211,38 +209,12 @@ public class QuizController {
 		
 		// To let the html acces "cuestionario"
 		model.addAttribute("resultado", score);
+		model.addAttribute("max", quiz.getMaxvalue());
 		
 		// Download CSV
 		csvService.downloadCSV();
 		
 		return "/quiz/results";
 	}
-	    
-	
-	/**
-	 * Method saveScore().
-	 *
-	 * @param userSelection the user selection
-	 * @param quiz the quiz
-	 * @param questionInt the question int
-	 * @param text the text
-	 */
-	private void saveScore(UserSelection userSelection, Quiz quiz, int questionInt, String text) {
-		int value = 0;
-		
-		for (Questions quest : quiz.getQuestions()) {
-			if (quest.getId() == questionInt) {
-				for (Answers ans : quest.getAnswers()) {
-					if (ans.getText().equals(text)) {
-						value = ans.getValue();
-					}
-				}
-			}
-		}
-		
-		userSelection.setAnswerValue(questionInt, value);
-		userSelection.setAnswer(questionInt, text);
-		
-	}
-	
+	    	
 }

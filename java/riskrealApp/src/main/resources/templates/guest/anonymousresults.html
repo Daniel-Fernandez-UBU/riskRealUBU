@@ -13,7 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="row flex-center">
             <div class="col-12 mb-10">
               <div class="d-flex align-items-center flex-column">
-			    <h3 th:text="'Resultado final: ' + ${resultado}"></h3>			  	
+			    <h3 th:text="#{final.score} + ' ' + ${resultado}  + '/' + ${max}"></h3>			  	
 				</div>
               </div>
               <div th:insert="~{fragments/resources :: end}"></div>

@@ -136,7 +136,7 @@ public class RegisterController {
         userRepository.save(user);
                 
         // Return to login page
-        return "redirect:/user/profile";
+        return "redirect:/userProfile";
     }
     
     /**

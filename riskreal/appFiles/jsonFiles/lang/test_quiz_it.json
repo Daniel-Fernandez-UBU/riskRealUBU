@@ -1,5 +1,6 @@
 {	
     "id": 1,
+	"maxvalue": 5,
     "title": "Soft Skills",
 	"image": [
 		"principalHD.png"
