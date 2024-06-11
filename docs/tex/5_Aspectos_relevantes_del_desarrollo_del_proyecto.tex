@@ -109,8 +109,7 @@ Los servicios o dependencias más destacables que implementa la aplicación son 
 
 \subsubsection{Servicio de envío de correos electrónicos}
 
-Durante el proceso de desarrollo de un servicio de correo electrónico que enviase a los usuarios una nueva contraseña en caso de que no recordasen la suya, se probaron configuraciones con varios servidores de correo. Finalmente, por simplicidad y acceso a documentación, se utilizó \textit{Gmail}, que permite la creación de cuentas gratuitas y el uso de sus servidores de correo desde cualquier \textit{API}, siempre que se utilice un \textit{token}~\cite{gmail
-}.
+Durante el proceso de desarrollo de un servicio de correo electrónico que enviase a los usuarios una nueva contraseña en caso de que no recordasen la suya, se probaron configuraciones con varios servidores de correo. Finalmente, por simplicidad y acceso a documentación, se utilizó \textit{Gmail}, que permite la creación de cuentas gratuitas y el uso de sus servidores de correo desde cualquier \textit{API}, siempre que se utilice un \textit{token} ~\cite{gmail:token}.
 
 La configuración completa del servidor de correo, así como sus credenciales, se independizaron de la aplicación en un archivo de propiedades, para permitir su modificación por cualquier otro servicio de correo, dando libertad al programador para cambiarlo sin necesidad de compilar de nuevo el proyecto.
 
@@ -122,9 +121,9 @@ Tras investigar descubrí que esto sucedía porque la primera medida de segurida
 
 Debido a esto, todos los formularios tienen configurado un campo ``oculto'' que envía este \textit{token} al controlador de la aplicación para permitir el acceso.
 
-Se decidió utilizar una base de datos \textit{mysql} que se inicia junto con la aplicación, almacena los datos en una carpeta externa a la misma para tener persistencia.
+Se decidió utilizar una base de datos \textit{MySQL} que se inicia junto con la aplicación para almacenar los datos en una carpeta externa a la misma y así garantizar la persistencia.
 
-La base de datos está relacionada con la seguridad de la aplicación, porque esta consulta las tablas de usuarios y perfiles para permitir el inicio de sesión de los usuarios en la aplicación web.
+La base de datos está relacionada con la seguridad de la aplicación, ya que consulta las tablas de usuarios y perfiles para permitir el inicio de sesión de los usuarios, y determinar su nivel de acceso.
 
 \section{Documentación}
 
