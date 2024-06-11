@@ -27,7 +27,6 @@ services:
       JSON_QUIZ_FILE_PATH: /opt/jsonFiles
       JSON_QUIZ_FILE_PATH_LANG: /opt/jsonFiles/lang
       CSV_SCORE_PATH: /opt/csvFiles/scores.csv
-      JSON_QUIZ_IMAGES_PATH: ../images/
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/appRiskRealUbu
       SPRING_DATASOURCE_PASSWORD: rootroot
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
@@ -39,6 +38,8 @@ services:
       - '8088:8088'
     volumes:
       - ./appFiles:/opt
+      - ./appFiles/images:/workspace/BOOT-INF/classes/static/images
+        
 
     networks:
       - riskreal-network

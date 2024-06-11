@@ -3,13 +3,33 @@
 
 En esta parte de la memoria se van a presentar las distintas herramientas y técnicas utilizadas en el desarollo del proyecto.
 Se incluirán todas las que se hayan valorado o utilizado, incluso aquellas que tras ciertas pruebas o pasos, se hayan descartado por haber encontrado una alternativa más funcional.
+A continuación, una tabla resumen con las herramientas utilizadas en cada parte del proyecto:
 
-\section{Eclipse}
+\tablaSmall{Herramientas y tecnologías utilizadas en cada parte del proyecto}{l c c c c}{herramientasportipodeuso}
+{ \multicolumn{1}{l}{Herramientas} & App Web & BBDD & Memoria \\}{ 
+HTML5 & X & & \\
+CSS & X & &\\
+BOOTSTRAP & X & &\\
+Java & X & &\\
+Spring Boot & X & &\\
+Eclipse & X & &\\
+Thymeleaf & X & &\\
+Docker & X & X &\\
+JSON & X & X &\\
+CSV & X & X &\\
+MySQL & & X & X\\
+GitHub & X & X & X\\
+Zube.io & X & X & X\\
+Mik\TeX{} & & & X\\
+\LaTeX  & & & X\\
+} 
+
+\section{Spring Tool Suite for Eclipse}
 
 Herramienta de desarrollo (IDE) que se utilizará para llevar a cambo el proyecto.
-A pesar de haber otras similares, como InteliJ, he preferido utilizar Eclipse al estar más fmailiarizado con ella por ser la utilizada en otras asignaturas de la carrera para la programación en Java.
+A pesar de haber otras similares, como InteliJ, he preferido utilizar la \textit{suite} de \textit{Spring Boot} para Eclipse al estar más familiarizado con el entorno de trabajo, ya que ha sido la herramienta utilizada en otras asignaturas del grado.
 
-\section{\LaTeX }
+\section{\LaTeX}
 El editor de texto para generar toda la documentación relacionada con el trabajo de fin de grado será \LaTeX.
 Aún estándo acostumbrado a utilizar Microsoft Word para este tipo de tareas, veo en utilizar \LaTeX  una oportunidad de aprender un nuevo generador de documentos.
 La curva de aprendizaje es más grande que con Word (en mi caso), pero el resultado merece la pena porque permite aplicar formatos de forma sencilla, un aspecto en el que Word para documentos muy grandes, está en clara desventaja.
@@ -20,66 +40,110 @@ Es un programa sencillo y tiene por separado tanto la parte de edición como la 
 
 \section{Spring Boot}
 
-Para la aplicación web en java se utilizará el Framework de Spring.
-Es mi primera vez con un framework en java, y para aprender conceptos de forma más rápida y con ejemplos he tomado como referencia un curso en Udemy \cite{udemy:eliseo} para dar un acelerón en el aprendizaje.
-Gracias a las dependencias predefinidas, facilita el desarrollo de la aplicación de forma considerable.
+Spring Boot ~\cite{web:springbootArch} es la evolución del clásico \textit{framework} de creación de aplicaciones web.
 
-\subsection{Spring Web}
+La construcción de una aplicación web con un \textit{framework} antiguo consistía en los siguientes pasos:
 
-Es la dependencia principal de Spring Boot para la creación de aplicaciones web. 
-Simplifica la creación de controladores, el manejo de las solicitude y se integra de forma sencilla con motores de plantillas para la creación de HTML dinámico.
+\begin{enumerate}
+	\item Crear un proyecto de java.
+	\item Importar las dependencias necesarias.
+	\item Preparar todos los archivos de configuración necesarios para que funcione la aplicación.
+	\item Desplegar la aplicación en un servidor web.
+\end{enumerate}
 
-\subsection{Spring JPA}
+Este mismo proceso con Spring Boot consta de los siguientes pasos:
 
-Es la dependencia de Spring para el manejo de entidades persistentes de una base de datos. 
+\begin{enumerate}
+	\item Acceder a \textit{Spring Initializr} ~\cite{web:springinitializr}.
+	\item Indicar el tipo de proyecto, el lenguaje de programación y los \textit{starters} \cite{web:springStarters} de Spring necesarios.
+	\item Generar el proyecto.
+\end{enumerate}
 
-Con los respositorios CRUD o JPA, y la inclusió por defecto de Hibernate, simplifica hasta el extremo la gestión de nuestros "objetos" en la base de datos.
+El paso 2 de la lista anterior engloba todos los pasos de la primera lista, incluso va más allá, porque el proyecto que genera se puede arrancar desde la propia \textit{suite} de Spring y tendrías tu aplicación web funcionando en muy poco tiempo.
 
-\subsection{Spring Security}
+\subsection{\textit{Starters} Utilizados}
 
-Es la dependencia de Spring para dotar de seguridad nuestra aplicación de forma automática.
+A continuación, se van a comentar ciertos aspectos de los \textit{starters} que se han utilizado en la construcción de la aplicación.
 
-Esta seguridad se basa en autenticación y autorizació principalmente, para poder permitir ciertas partes de nuestra web a usuarios "invitados" o limitar el acceso a otras en función del rol del usuario que haya iniciado sesión.
+\subsubsection{Spring Web}
 
-Integra de forma predeterminada protección contra amenazas comunes, como CSRF (Cross-Site Request Forgery).
+Establece la configuraión del proyecto para su funcionamiento como una aplicación web. Al incluir un servidor \textit{Apache Tomcat} no es necesario generar el archivo \textit{JAR o WAR} y desplegarlo en un servidor, solo con levantar la aplicación esta ya se lanza en el servidor web embebido.
+ 
+
+\subsubsection{Spring Security}
+
+Establece la configuración de seguridad por defecto en la aplicación web. Sin más configuración adicional, genera una contraseña por defecto de administrador con cada inicio de la aplicación, ya que securiza todas las páginas web de forma predeterminada.
+
+Con ciertas clases de java, Spring Security ~\cite{web:springSecurity} permite personalizar la configuración de la aplicación.
+
+\subsubsection{Spring JPA}
+
+Establece toda la integración para usar clases relacionadas con tablas de una base de datos. Elimina la necesidad de crear patrones DAO ~\cite{web:dao} para nuestras clases y simplifica este proceso de forma considerable.
+
+\begin{enumerate}
+	\item Creamos nuestra clase de java.
+	\item Incluimos las anotaciones ~\cite{web:anotacionesJPA} en la clase.
+	\item Creamos una interfaz que extienda de \textit{JPA repository}  ~\cite{web:springJPArepo} o de \textit{CRUD repository} ~\cite{web:springCRUDrepo} asociada a nuestra clase.
+	\item Ya disponemos de todo lo necesario para actualizar, borrar, crear o recuperar objetos de la base de datos.
+\end{enumerate}
 
 \section{Thymeleaf}
 
-Es un motor de plantillas para html, para permitir la creación de html de forma dinámica.
+Es un motor de generación de plantillas y de generación dinámica de código \textit{HTML}.
 
-Es un motor sencillo de usar, con expresiones básicas, que nos permite utilizar los objetos que enviamos para generar más o menos código, mostrar u ocultar opciones, \dots
+Permite incluir cierta lógica en las etiquetas \textit{HTML} de nuestras páginas web para mostrar u ocultar opciones, iterar sobre un objeto o lista para crear tantas filas en una tabla como valores.
+
+Permite el poder enviar variables desde nuestro controlador de Java a la página web, reconocer esas variables y mostrar su contenido.
+
+También incluye el soporte para los archivos de personalización, pudiendo acceder a los archivos de propiedades en función del idioma seleccionado en la web.
+
+El uso de los \textit{fragments} es un gran aliado para ahorrarnos líneas de código.
 
 \section{HTML}
 
-Lenguaje utilizado en la creación de las páginas web, en particular HTML5, que tiene algunas funcionalidades básicas ya implementadas, como por ejemplo el uso de "required" en campos de formulario para que sea obligatorio rellenar los campos si necesidad de utilizar javascript para el control.
+Lenguaje utilizado en la creación de las páginas web, en particular HTML5, que tiene algunas funcionalidades básicas ya implementadas, como por ejemplo el uso de ``required'' en campos de formulario para que sea obligatorio rellenar los campos sin necesidad de utilizar JavaScript para el control.
 
 \section{MySQL}
 
 Se utiliza MySQL como base de datos para almacenar los usuarios y roles.
-
 Se ha decidido usar una base de datos porque su integración con Spring Security es muy sencilla y funcional. 
-
 A través de los repositorios CRUD que nos proporciona Spring JPA podemos gestionar las tablas y registros de forma ágil.
 
 \section{Docker}
 
-\textbf{Docker} consiste en tener microservicios corriendo en una máquina, si necesidad de tener una gran infraestructura montada.
+Un \textit{docker} o contenedor, es una imagen de un sistema operativo básico con una o varias aplicaciones instaladas que al arrancarse, permite el acceder a esta aplicación sin necesidad de dedicar una gran fuente de recursos a su funcionamiento.
 
-He utilizado docker tanto para el servidor de MySQL como para la propia aplicación Web, de esta forma con 2 simples docker, un docker-compose (fichero de configuración de dockers que permite descargarse, crear, parar o lanzar dockers) podemos tener toda la aplicación completa corriendo en cualquier entorno, ya que docker funciona en los principales sistemas operativos del mercado: Linux, Windows y macOS.
+Es realmente mucho más sencillo que todo eso, se podría simplificar con lo siguiente: \textbf{Docker es un servidor corriendo como un microservicio}.
+
+Lo mejor de Docker es que las imágenes son multiplataforma, con tener un servicio de docker instalado en el equipo, puede correr cualquiera de las imágenes disponible en su repositorio.
+
+Facilita el despliegue y portabilidad de nuevas aplicaciones, a la vez que disminuye el tamaño de la infraestructura necesaria para su funcionamiento.
+
+Se ha utilizado docker tanto para el servidor de MySQL como para la propia aplicación Web, de esta forma con 2 simples contenedores, un docker-compose (fichero de configuración de dockers que permite descargarse, crear, parar o lanzar dockers) podemos tener toda la aplicación completa corriendo en cualquier entorno, ya que docker funciona en los principales sistemas operativos del mercado: Linux, Windows y macOS.
+
+\subsection{Docker Compose}
+
+Esta herramienta complementaria de docker, \textit{docker compose} \cite{web:dockercompose} permite definir y gestionar aplicaciones que requieran más de un contenedor, de forma conjunta y sencilla.
+Se ha utilizado como base para la instalación del proyecto, explicando sus funcionalidades y permitiendo ciertas personalizaciones en el despligue de la aplicación.
 
 \section{GitHub}
 
-Se va a utilizar GitHub para dar visibilidad al trabajo diario y constante en el proyecto, ya que permite realizar aportaciones incrementales de código, documentación, etc del TFG completo.
+Se va utiliza GitHub para dar visibilidad al trabajo diario y constante en el proyecto, ya que permite realizar aportaciones incrementales de código, documentación, etc del TFG completo.
+
+Es la herramienta por excelencia para llevar un control de versiones en cualquier proyecto, sea software o no.
 
 \subsection{Repository}
 
 Se ha creado un repositorio~\cite{github:repo} donde se subirá todo el TFG al completo, tanto la documentación de la memoria, como la aplicación de java.
 
-\subsection{Proyect}
+\subsection{Releases}
 
-Se ha creado un proyecto~\cite{github:proyect} relacionado, que sigue como la base la metodología Kanban, para crear nuevas tareas, relacionarlas con el repositorio y utilizar pizarras y paneles para ver el progreso, en lo que se está trabajando y lo ya completado.
+En esta sección dentro del repositorio se han ido subiendo las diferentes versiones funcionales de la aplicación, para tener un lugar central desde el que descargarse la última versión ``liberada''.
 
-\textbf{Se prescinde de esta herramienta al sustituirse por Zube.io}
+\subsection{Packages}
+
+En esta parte de GitHub se han subido las imágenes de docker funcionales de la aplicación, para pemitir un despliegue sencillo desde una ubicación centralizada.
+Con un simple comando de \textit{docker pull url de la imagen} puede descargarte la imagen para empezar a utilizarla.
 
 \section{JSON}
 
@@ -87,11 +151,20 @@ Se van a utilizar ficheros con la estructura de un json para almacenar los cuest
 
 \section{Zube.io}
 
-Se va a utilizar la versión gratuita de Zube.io, que permite generar Sprints, y gráficos de seguimiento, como Burndowns o Burnups.
+Se va a utilizar la versión gratuita de Zube.io, que permite generar Sprints, y gráficos de seguimiento, como \textit{Burndown} o \textit{Burnup}.
 
 Gracias a la sencilla y completa integración con Github ofrece una versión más completa de la parte de Proyect de Github, por lo que he decidido utilizar esta plataforma para el seguimiento de las tareas en vez de la que ofrecía Github.
 
 La versión gratuita permite integrar lo necesario del repositorio y del proyecto, por lo que no es necesario ampliar a versiones más completas.
+
+Aunque se puede compartir con otros usuarios y colabores del proyecto, no se permite el acceso público.
+
+\section{GitPod}
+
+Se ha estudiado la posibilidad de usar \textit{gitpod} para alojar una versión funcional de la aplicación, ya que diferentes alternativas como \textit{Heroku} o \textit{Render} ni permitían un fácil despliegue con docker-compose.yml ni daban la opción de una prueba real de forma gratuita.
+
+A pesar de haber vinculado \textit{gitpod} con \textit{GitHub}, se limitaba a 50 horas el despliegue de una aplicación, pero eso no se incluye como parte del proyecto.
+
 
 
 

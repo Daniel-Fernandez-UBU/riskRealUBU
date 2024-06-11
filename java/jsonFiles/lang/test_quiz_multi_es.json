@@ -1,187 +1,46 @@
 {	
     "id": 1,
-    "title": "Multi Habilidades Blandas",
+    "title": "Escenario - Habilidades Blandas",
 	"image": [
 		"principalHD.png"
 		],
     "language": "es",
-	"description": "Descripción del cuestionario",
+	"description": "El escenario presentado incluye una situación posible. Se tiene que seleccionad la que mejor encaje con su personalidad",
 	"type":	1,
     "questions": [
       {
         "id": 1,
-        "description": "Me familiarizo fácilmente con gente nueva",
+        "description": "El/la trabajador/a está yendo a traajar, pero llega tarde porque se ha quedado dormido. En consecuencia, no llegará a tiempo al trabajo.",
         "image": [
-			"principalHD.png",
-			"principalHD.png"
+			"p11.png",
+			"p12.png",
+			"p13.png"
 			],
         "skill": 1,
         "answers": [
           {
 			"id": 1,
-            "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.png",
+            "text": "Aumenta la velocidad para que el viaje dure menos tiempo, evitando problemas con su superior.",
+            "image": "p111.png",
             "value": 1
           },
           {
 			"id": 2,
-            "text": "2 – En desacuerdo",
-            "image": "principalHD.png",
+            "text": "Llega tarde al trabajo y pone como excusa un problema con el coche.",
+            "image": "p112.png",
             "value": 2
           },
           {
 			"id": 3,
-            "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.png",
+            "text": "Llama a su superior para notificarle la probabilidad de que llegue tarde.",
+            "image": "p113.png",
             "value": 3
           },
           {
 			"id": 4,
-            "text": "4 – De acuerdo",
-            "image": "principalHD.png",
+            "text": "Va al trabajo y trata de acabar las tareas en menos tiempo del que estaba inicialmente programado.",
+            "image": "p114.png",
             "value": 4
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
-        "image": [
-			"principalHD.png"
-			],
-        "skill": 1,
-        "answers": [
-          {
-			"id": 1,
-            "text": "Si",
-            "image": "principalHD.jpg",
-            "value": 1
-          },
-          {
-			"id": 3,
-            "text": "No",
-            "image": "principalHD.jpg",
-            "value": 0
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
-        "image": [
-			"principalHD.png"
-			],
-        "skill": 1,
-        "answers": [
-          {
-			"id": 1,
-            "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 1
-          },
-          {
-			"id": 2,
-            "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 2
-          },
-          {
-			"id": 3,
-            "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 3
-          },
-          {
-			"id": 4,
-            "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
-            "value": 4
-          },
-          {
-			"id": 5,
-            "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
-            "value": 5
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
-        "image": [
-			"principalHD.png"
-			],
-        "skill": 1,
-        "answers": [
-		{
-			"id": 1,
-            "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 1
-          },
-          {
-			"id": 2,
-            "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 2
-          },
-          {
-			"id": 3,
-            "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 3
-          },
-          {
-			"id": 4,
-            "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
-            "value": 4
-          },
-          {
-			"id": 5,
-            "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
-            "value": 5
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
-        "image": [
-			"principalHD.png"
-			],
-        "skill": 1,
-        "answers": [
-		{
-			"id": 1,
-            "text": "1 - Totalmente en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 1
-          },
-          {
-			"id": 2,
-            "text": "2 – En desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 2
-          },
-          {
-			"id": 3,
-            "text": "3 – Ni de acuerdo ni en desacuerdo",
-            "image": "principalHD.jpg",
-            "value": 3
-          },
-          {
-			"id": 4,
-            "text": "4 – De acuerdo",
-            "image": "principalHD.jpg",
-            "value": 4
-          },
-          {
-			"id": 5,
-            "text": "5 – Totalmente de acuerdo",
-            "image": "principalHD.jpg",
-            "value": 5
           }
         ]
       }

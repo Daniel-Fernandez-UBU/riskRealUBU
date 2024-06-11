@@ -52,88 +52,9 @@ La estructura de la carpeta es la siguiente:
 
 \subsubsection{Fichero docker-compose.yml}
 
-Es el fichero más importante de esta carpeta, el único que realmente se necesitaría para instalar nuestra aplicación y en el que está toda la configuración importante de la misma, por ese motivo se ha decidido hacer una pequeña introduccion del contenido del fichero, para entender el motivo de cada línea y para que cada usuario pueda configurarlo a su gusto.
+Este es único fichero realmente necesario, ya que con el simple comando \textbf{docker compose up} en el mismo directorio en el que se encuentra este fichero, se levanta la aplicación.
 
-El contenido del fichero es el siguiente:
-\imagen{dockerComposeYML}{Contenido del fichero docker-compose.yml}
-
-A continuación, explicamos cada una de sus líneas:
-\begin{itemize}
-	\item services: --> Etiqueta que se utiliza para definir los servicios o dockers que se van a crear.
-	\begin{itemize}
-		\item db: --> Servicio para el docker que contiene la base de datos.
-		\begin{itemize}
-			\item image: mysql --> Imagen de la base de datos que se va a utilizar.
-			\item container\_name: riskreal-db-1 --> Nombre del docker que se va a crear.
-			\item restart: always --> Reinicia el docker si se genera un error.
-			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
-			\begin{itemize}
-				\item MYSQL\_DATABASE: appRiskRealUbu --> Nombre de la base de datos que se va a crear.
-				\item MYSQL\_ROOT\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
-			\end{itemize}
-			\item expose: --> Puertos internos que se van a abrir, para que el resto de contenedores de la misma red puedan acceder.
-			\begin{itemize}
-				\item - '3306' --> Se habilita el puerto 3306 para acceder a este docker por la red interna.
-			\end{itemize}
-			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
-			\begin{itemize}
-				\item '30306:3306' --> Permite el acceso a la base de datos desde el puerto 30306.
-			\end{itemize}
-			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
-			\begin{itemize}
-				\item ./dbdata:/var/lib/mysql --> Se utiliza la carpeta local dbdata para almacenar la base de datos completa. Si dbdata tuviese una base de datos MySQL, el docker la utilizaría al iniciar.
-			\end{itemize}
-			\item networks: --> Define la red interna del docker.
-			\begin{itemize}
-				\item - riskreal-network --> Nombre de la red interna.
-			\end{itemize}
-			\item healtcheck: --> Comprobación adicional para saber cuando ha terminado de levantar la base de datos en el docker.
-			\begin{itemize}
-				\item test: --> Se lanza un ping con mysqladmin a localhost para saber cuando ha iniciado la base de datos.
-				\item interval: 30s --> Define el intervalo de tiempo en el que se comprueba el estado.
-				\item timeout: 10s --> Indica el intervalo de tiempo que espera antes de indicar que no hay respuesta del servidor.
-				\item retries: 5 --> Número de veces que lo reintenta antes de indicar que el docker no ha iniciado correctamente.
-			\end{itemize}
-		\end{itemize}
-		\item webapp: --> Servicio para el docker que contiene la aplicación web.
-		\begin{itemize}
-			\item image: ghcr.io/daniel-fernandez-ubu/riskrealubu/riskrealapp:v1 --> Imagen de docker que se usará. Imagen propia de la Spring Boot App.
-			\item container\_name: riskreal-webapp-1 --> Nombre del docker que se va a crear.
-			\item environment: --> Definimos varias variables de entorno de la imagen que vamos a lanzar.
-				\begin{itemize}
-				 	\item JSON\_QUIZ\_FILE\_PATH: /opt/jsonFiles --> Ruta en la que se guardan los json con los cuestionarios que se quieren cargar en la aplicación.
-					\item JSON\_QUIZ\_FILE\_PATH\_LANG: /opt/jsonFiles/lang --> Ruta en la que se guardarán los cuestionarios ya cargados en la aplicación.
-					\item CSV\_SCORE\_PATH: /opt/csvFiles/scores.csv --> 
-- Ruta y nombre del fichero de resultados que se rellenará conforme se vayan realizando cuestionarios.
-					 \item SPRING\_DATASOURCE\_URL: \\ jdbc:mysql://db:3306/appRiskRealUbu --> Dirección de la base de datos. 
-					 \item SPRING\_DATASOURCE\_PASSWORD: rootroot --> Contraseña de root para acceder a la base de datos.
-					 \item SPRING\_DATASOURCE\_DRIVER\_CLASS\_NAME: \\com.mysql.cj.jdbc.Driver --> Driver de conexión a la base de datos.
-					 \item SERVER\_PORT: 8088 --> Puerto en el que se publicará la aplicación.
-				\end{itemize}
-			\item ports: --> Puertos que se publican del docker para acceder a él desde fuera de la red interna, es decir, desde el equipo anfitrión.
-			\begin{itemize}
-				\item '8088:8088' --> Redirecciona el puerto 8088 del servidor anfitrión al puerto 8088 interno del docker, en el que se ha publicado la aplicación.
-			\end{itemize}
-			\item volumes: --> Se definen los directorios que queremos que sean persistentes, es decir, que tras el reinicio o eliminación del docker, se mantengan.
-			\begin{itemize}
-				\item ./appFiles:/opt --> Se utiliza para indicar la ruta de los cuestionarios que queremos cargar, los ya almacenados y el fichero de resultados.
-			\end{itemize}
-			\item networks: --> Define la red interna del docker.
-			\begin{itemize}
-				\item - riskreal-network --> Nombre de la red interna.
-			\end{itemize}
-			\item depends\_on: --> Se definen los servicios de los que depende el inicio de este docker.
-			\begin{itemize}
-				\item db: --> Servicio del que depende.
-				\item condition: service\_healthy --> Necesita que se haya iniciado de forma correcta la base de datos para iniciar el docker.
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
-	\item neworks: --> Sección en la que se definen las redes.
-	\begin{itemize}
-		\item riskreal-network: --> Nombre de la red definida.
-	\end{itemize}
-\end{itemize}
+La explicación del contenido se ha realizado en \ref{subsec:dockerComposeFile}.
 
 \subsection{Instalación de la aplicación}
 
@@ -163,5 +84,119 @@ Escribimos \textbf{docker compose up -d} y comprobamos con \textit{docker ps} cu
 Si queremos parar la aplicación podemos lanzar el comando \textit{docker compose down} explicado en la sección anterior, pero tenemos que lanzarlo estando a la altura de nuestro fichero \textit{docker-compose.yml} para que funcione.
 
 \section{Manual del usuario}
+
+Este manual va a servir como guía para poder navegar por la aplicación de forma sencilla.
+Nota: \textit{Las imágenes de los cuestionarios que se muestran en este manual son imágenes de prueba que se han precargado en cuestionarios de prueba, aunque siempre aparezca la misma.}
+
+En primer lugar accedemos a la aplicación, actualmente la url por defecto de acceso es \url{localhost:8088}.
+
+\imagen{appInicio}{Pantalla de inicio de la aplicación web.}
+
+En la barra superior hay varias opciones disponibles, la de cambio de idioma:
+
+\imagen{appIdioma}{Selección de idioma de la aplicación web.}
+
+Y la de Inicio de Sesión o Registro:
+
+\imagen{appInvitado}{Opciones de usuario de la aplicación web.}
+
+También se puede realizar el cuestionario disponible para usuarios anónimos, pulsando en el botón que tenemos en el centro de la imagen del cuestionario.
+
+Si se selecciona Registro, saldrá un formulario con diversos campos que se tienen que completar, algunos de ellos solo permiten valores de un listado:
+
+\imagen{appRegistro}{Registro en la aplicación web.}
+
+Una vez registrado, se accede a la página de inicio de sesión para que se introduzcan los datos poder acceder a la aplicación.
+
+Si en la página inicial se hubiese seleccionado iniciar sesión:
+
+\imagen{appInicioSesion}{Pantalla de inicio de sesión de la aplicación web.}
+
+Nos encontraríamos con un formulario para incluir el nombre de usuario (correo electrónico) y la contraseña. 
+
+Tras hacerlo se vuelve a la página inicial, desde la que se podrá iniciar un cuestionario, cambiar el idioma, cerrar sesión o ver el perfil.
+
+Al ser un usuario autenticado, aparecerán las dos últimas opciones que se comentaban al pulsar en el nombre de usuario, en la parte superior derecha de la página:
+
+\imagen{appUserEng}{Pantalla de inicio de la aplicación web en inglés.}
+
+Se ha cambiado el idioma a inglés solo para mostrar la funcionalidad.
+
+Al acceder al perfil, se podrán ver todos los datos incluidos durante el registro. 
+
+Se pueden editar todos los datos excepto el nombre de usuario:
+
+\imagen{appPerfil}{Pantalla de perfíl de usuario.}
+
+Al iniciar uno de los cuestionarios disponibles desde la página de inicio, se obtendrá una pantalla similar a esta:
+
+\imagen{appDesCuestionario}{Pantalla de descripción del cuestionario.}
+
+Donde se verá la imágen principal del cuestionario junto con una descripción del mismo. Finalmente se podrá iniciar el cuestionario.
+
+Los cuestionarios tienen un formato similar al siguiente:
+
+\imagen{appIniCuest}{Pantalla de inicio de la aplicación web.}
+
+Con las opciones a la izquierda, la imagen relacionada con la pregunta a la derecha y debajo 3 botones: Anterior, Siguiente o Enviar resultados.
+
+Los botones, según avances en las preguntas, se irán habilitando, para que se pueda retroceder en cualquier momento, lo único indispensable es que si se quiere cambiar de pregunta, se debe seleccionar alguna respuesta previamente. Lo mismo sucede al enviar resultados, por lo que todas las preguntas deben haber sido seleccionadas.
+
+Al llegar a la última pregunta y pulsar en ``Enviar Resultados'', saldrá una nueva pantalla, con el resultado que has obtenido en el test:
+
+\imagen{appResultado}{Pantalla de resultado del cuestionario.}
+
+Si se quiere hacer el cuestionario siendo un invitado, la única diferencia es que tras pulsar en el cuestionario disponible en la página de inicio, antes del proceso anterior, aparece una pantalla donde se piden algunos datos adicionales:
+
+\imagen{appDataGuest}{Pantalla de datos adicionales para los usuarios anónimos.}
+
+Por último, si se ha iniciado sesión con un usuario administrador, se tendrá acceso a más opciones de las indicadas hasta ahora:
+
+\imagen{appAdmin}{Opciones del usuario administrador.}
+
+A continuación, se van a comentar cada una de ellas.
+
+Al seleccionar en la opción de ``Cargar Cuestionario'' accedemos a la siguiente pantalla, desde la que se puede cargar un nuevo json desde el almacenamiento del equipo:
+
+\imagen{appCargarJSON}{Pantalla de carga de archivos json.}
+
+O generar un cuestionario utilizando un json previamente cargado:
+
+\imagen{appGenerarCuestionario}{Pantalla de generación de cuestionarios.}
+
+La opción de ``Descargar resultados'' la tenemos disponible desde cualquier parte de la web, excepto mientras se está realizando un cuestionario, y tras pulsar en ella, se nos descarga de forma automática un archivo \textit{score.csv} con los datos de todos los cuestionarios que se han realizado.
+
+\imagen{appDescargaResultados}{Pantalla tras pulsar en descargar resultados.}
+
+El usuario administrador, desde la opción de Gestión de Roles, puede modificar los permisos sobre la aplicación de otros usuarios, y convertirlos también en administradores:
+
+\imagen{appRoles}{Pantalla de gestión de roles de la aplicación web.}
+
+El rol del usuario administrador no es modificable en ningún caso.
+
+Si al iniciar sesión la contraseña introducida no es correcta, se mostrará una nueva ventana donde se puede proabr de nuevo o restarurarla:
+\imagen{appLoginError}{Pantalla inicio de sesión erróneo.}
+
+
+Al pulsar en \textit{Recuperar contraseña} se abre una nueva ventana donde se pide el el correo electrónico.
+\imagen{appPassRecovery}{Pantalla inicio de recuperación de contraseña.}
+
+Si el correo introducido es correcto y el usuario está registrado en la base de datos de la aplicación, pasados unos segundos le llegará un correo a su buzón y la aplicación devolverá a la página de inicio.
+
+El correo de recuperación que se recibe es similar a este:
+\imagen{appEmailReceived}{Correo con la nueva contraseña de un solo uso.}
+
+Tras iniciar sesión con la contraseña que se ha recibido, la aplicación pedirá que se cambie:
+\imagen{appCambioPass}{Pantalla cambio de contraseña.}
+
+Después de cambiarla, se volverá a la página de inicio con la sesión iniciada.
+
+\clearpage
+Por último, para salir de aplicación, al pulsar en ``Cerrar Sesión'' se pedirá confirmación antes de hacerse efectivo:
+
+\imagen{appCerrarSesion}{Pantalla de cierre de sesión.}
+
+
+
 
 

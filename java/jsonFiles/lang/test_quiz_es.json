@@ -2,17 +2,17 @@
     "id": 1,
     "title": "Habilidades Blandas",
 	"image": [
-		"principalHD.png"
+		"quizMain.png"
 		],
     "language": "es",
-	"description": "Descripción del cuestionario",
+	"description": "Bienvenido al cuestionario de autoevaluación de habilidades blandas RiskRealApp. Se le van a presentar 5 preguntas de opción múltiple. Tendrá que responder con Sí o No o indicar en qué medida está de acuerdo con la afirmación del 1 al 5",
 	"type":	1,
     "questions": [
       {
         "id": 1,
         "description": "Me familiarizo fácilmente con gente nueva",
         "image": [
-			"principalHD.png"
+			"p1.png"
 			],
         "skill": 1,
         "answers": [
@@ -52,7 +52,7 @@
         "id": 2,
         "description": "¿Usted y sus compañeros se apoyan mutuamente en el trabajo?",
         "image": [
-			"principalHD.png"
+			"p2.png"
 			],
         "skill": 1,
         "answers": [
@@ -74,7 +74,7 @@
         "id": 3,
         "description": "Dondequiera que he estado, he sido una fuerza poderosa para el cambio constructivo.",
         "image": [
-			"principalHD.png"
+			"p3.png"
 			],
         "skill": 1,
         "answers": [
@@ -114,7 +114,7 @@
         "id": 4,
         "description": "Normalmente busco múltiples formas de hacer las mismas cosas en mi rutina diaria.",
         "image": [
-			"principalHD.png"
+			"p4.png"
 			],
         "skill": 1,
         "answers": [
@@ -154,7 +154,7 @@
         "id": 5,
         "description": "Me gusta leer cosas que estimulan mi capacidad de pensamiento.",
         "image": [
-			"principalHD.png"
+			"p5.png"
 			],
         "skill": 1,
         "answers": [
