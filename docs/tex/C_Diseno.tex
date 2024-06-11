@@ -2,10 +2,101 @@
 
 \section{Introducción}
 
+En este anexo se define la resolución de los objetivos y especificaciones expuestos anteriormente.
+
 \section{Diseño de datos}
 
+\subsection{Entidades}
+La aplicación cuenta con las siguientes entidades de base de datos:
+
+\begin{itemize}
+	\item \textit{Users}: Tiene su correo electrónico, nombre, apellido, rango de edad, código de empresa, género, rol en la empresa, contraseña y el estado en la aplicación.
+	\item \textit{Profiles}: Tiene el correo electrónico y el perfíl que tiene cada usuario en la aplicación.
+\end{itemize}
+\clearpage
+\subsubsection{Diagrama Relacional de las Entidades}
+\imagenB{diagramaClases}{Diagrama relacional de las entidades}{.5}
+
+\subsection{Clases}
+Además de las entidades anteriores, se tienen las siguientes clases modelo, que contienen los objetos con los que trabaja la aplicación:
+
+\begin{itemize}
+	\item \textit{User}: Relacionada con la entidad \textit{Users}.
+	\item \textit{Profile}: Relacionada con la entidad \textit{Profiles}.
+	\item \textit{Quiz}: Tiene el id, título, idioma, descripción, tipo e imágenes propias del cuestionario y un listado de preguntas.
+	\item \textit{Questions}: Tiene el id, descripción, habilidad, e imágenes de la pregunta y un listado de respuestas.
+	\item \textit{Answers}: Tiene el texto, la imagen, el id y el valor de cada respuesta.
+	\item \textit{UserSelection}: Tiene los mapas de datos de respuestas, y de valores de las respuestas. Se utiliza para el cálculo del resultado tras la realización de un cuestionario.
+	\item \textit{EmailRequest}: Tiene el campo del para, el asunto y el cuerpo del mensaje. Es la clase que se utiliza en el envío de correos electrónicos.
+\end{itemize}
+\clearpage
+\subsubsection{Diagrama Relacional de las Clases}
+\imagenB{diagramaClasesJava}{Diagrama relacional de las clases}{.5}
+
 \section{Diseño procedimental}
+En este aspecto se detallan los aspectos del acceso a los cuestionarios.
+
+La aplicación no realiza ningún proceso inicial de carga cuando arranca:
+
+\begin{itemize}
+	\item Los datos de los cuestionarios disponibles se muestran a la vez que se va accediendo a las diferentes páginas, para que sea transparente para lo usuarios la carga de nuevos cuestionarios.
+	\item Cada vez que un usuario inicia sesión, se comprueba la base de datos.
+\end{itemize}
+
+Se muestra como ejemplo el diagrama de secuencia de un usuario que inicia sesión de forma satisfactoria en la página web:
+\imagenB{diagramaAcceso}{Diagrama de secuencia de inicio de sesión en la aplicación web.}{.5}
 
 \section{Diseño arquitectónico}
+
+El hecho de que el proyecto se haya realizado utilizando \textit{Spring Boot} ha condicionado las decisiones del diseño.
+
+\subsection{Modelo-Vista-Controlador (MVC)}
+
+Es uno de los patrones aquitectónicos \cite{web:mvc} que más se utilizan en el desarrollo de aplicaciones, al tener tres capas diferenciadas cuyo objetivo es separar la vista del modelo de los datos subyacentes.
+
+El patrón divide la aplicación en las siguientes capas:
+
+\begin{itemize}
+	\item Modelo: Se corresponde con el acceso a los datos, se encarga de almacenar y gestionar los que utiliza la aplicación.
+	\item Vista: Capa de presentación, es la parte que ve el usuario, es la visualización del contenido de los datos del modelo.
+	\item Controlador: Es la capa encargada de relacionar las dos capas anteriores. 
+	\begin{itemize}
+		\item Envía los datos del modelo a las vistas para que accedan los usuarios.
+		\item Envía los eventos de los usuarios a los modelos, para actualizar los datos o traer otros nuevos.
+	\end{itemize}
+\end{itemize}
+
+\imagenB{diagramaMVC}{Patrón MVC.}{.5}
+
+\subsection{Repositorio}
+
+Para gestionar parte de los modelos de datos, se ha implementado un patrón de repositorio, que se encarga de implementar la lógica de la gestión de las clases del modelo implicadas con la base de datos \textit{mysql}.
+
+El resto de datos que utiliza nuestra aplicación provienen de archivos \textit{JSON} que contienen los cuestionarios.
+
+\subsection{Diseño de paquetes}
+
+En la elección del diseño de paquetes se ha tenido en cuenta la funcionalidad de cada clase, para agruparlas por características.
+
+La aplicación consta de 5 paquetes diferenciados:
+
+\begin{itemize}
+	\item \textit{Config}: Se corresponde con la configuración de la aplicación.
+	\item \textit{Controller}: Se corresponde con la capa de \textit{controlador} del modelo MVC.
+	\item \textit{Model}: Se corresponde con la capa de \textit{modelo} del modelo MVC.
+	\item \textit{Repository}: Contiene las clases necesarias para conectar los modelos con la base de datos.
+	\item \textit{Services}: Contiene diferentes utilidades utilizadas en las diferentes clases de la aplicación.
+\end{itemize}
+
+\subsection{Arquitectura general}
+
+La arquitectura general de la aplicación consta de dos contenedores independientes, uno con la base de datos y otro con la aplicación web.
+
+El contenedor de la aplicación web accede al de la base de datos para comprobar si los usuarios que inician sesión están registrados y los datos son correctos.
+
+A parte, el contenedor de la aplicación permite la conexión a la aplicación a través del puerto configurado.
+
+La estructura quedaría de la siguiente forma:
+\imagenB{diagramaAquitectura}{Diagrama de arquitectura.}{.4}
 
 

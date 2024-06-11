@@ -8,6 +8,7 @@
 \usepackage{lmodern} % scalable font
 \usepackage{microtype}
 \usepackage{placeins}
+\usepackage{pdflscape}
 
 %\usepackage{longtable}
 \RequirePackage{booktabs}
@@ -63,7 +64,32 @@
 		\caption{#2}\label{fig:#1}
 	\end{figure}
 }
+\newcommand{\imagenAncho}[3]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=#3\textwidth]{#1}
+		\caption{#2}\label{fig:#1}
+	\end{figure}
+	\FloatBarrier
+}
 
+
+% Imágenes
+
+% Comando para insertar una imagen en un lugar concreto.
+% Los parámetros son:
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
+\usepackage{graphicx}
+\newcommand{\imagenB}[3]{
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[width=#3\textwidth]{#1}
+		\caption{#2}\label{fig:#1}
+	\end{figure}
+	\FloatBarrier
+}
 
 
 % El comando \figura nos permite insertar figuras comodamente, y utilizando
@@ -361,10 +387,14 @@
 \makeatother
 
 
+\newcommand{\nombre}{Daniel Fernández Barrientos} %%% cambio de comando
+\newcommand{\tfgTitulo}{Generador de cuestionarios y escenarios de test sobre soft skills} %%% cambio de comando
+\newcommand{\tfgTutor}{Raúl Marticorena Sánchez} %%% cambio de comando
+
 % Datos de portada
-\title{título del TFG \\Documentación Técnica}
-\author{Daniel Fernández Barrientos}
-\tutor{Raúl Marticorena Sanchez}
+\title{\tfgTitulo\\Documentación Técnica}
+\author{\nombre}
+\tutor{\tfgTutor}
 \date{\today}
 
 \begin{document}
