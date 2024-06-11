@@ -68,7 +68,7 @@ Una vez instalado, la aplicación sería similar a la siguiente:
 Podemos cerrar la aplicación sin problema porque se queda en ejecución en segundo plano, pero para confirmarlo, podemos abrir \textit{el símbolo del sistema - cmd} o una consola de powershell y ejecutar el comando \textbf{docker version}, donde deberíamos obtener una imagen similar a la siguiente:
 \imagen{dockerVersion}{Versión de docker en ejecución desde CMD de Windows.}
 
-Lo importante de la imagen anterior es que aparezca la información de \textbf{Server: Docker Desktop}, si no apareciese, abrir la aplicación de Docker Desktop y comprobar que ahora si tenemos la información del servidor.
+Lo importante de la imagen anterior es que aparezca la información de \textbf{Server: Docker Desktop}, si no apareciese, abrir la aplicación de Docker Desktop y comprobar que ahora sí tenemos la información del servidor.
 
 \subsection{Git}
 
@@ -176,7 +176,8 @@ Tras unos instantes, ya nos aparecería el proyecto correctamente cargado en nue
 
 Tras haber completado correctamente todos los pasos anteriores, y teniendo \textit{Docker Server} funcionando, desde \textit{Spring Tools Suite} podemos ejecutar la aplicación.
 
-Los puertos por defecto que usa son: 3306 para \textit{mysql} y 8088 para la aplicación web, sería recomendable no tener ninguno de los 2 en uso, para el correcto despliegue de la aplicación sin necesidad de tener que cambiar opciones de configuración en \textit{application.properties}.
+Los puertos por defecto que usa son: 3306 para \textit{mysql} y 8088 para la aplicación web.
+Sería recomendable no tener ninguno de los 2 en uso para el correcto despliegue de la aplicación sin necesidad de tener que cambiar opciones de configuración en \textit{application.properties}.
 
 En la parte inferior izquierda de la interfaz de Spring Tool, tendremos \textit{Boot Dashboard} y si desplegamos \textit{local} nos aparecerá nuestra aplicación \textbf{riskrealApp}
 
@@ -308,11 +309,11 @@ A continuación, explicamos cada una de sus líneas:
 
 \section{Pruebas del sistema}
 
-Al tratarse de una aplicación web, no ha requerido el uso y/o desarrollo de una batería de pruebas.
+Dada la dificultad de realizar pruebas automáticas en una aplicación web, se ha trabajado con pruebas manuales.
 
 La mayoría de las funcionalidades se basan en el registro o modificación de datos de usuarios, donde los propios campos de los ficheros \textit{HTML} tienen las restricciones necesarias para que se cumpla con lo esperado.
 
-Las únicas funcionalidades que podrían requerir de pruebas serían:
+Las funcionalizades sobre las que se han realizado pruebas son:
 
 \begin{itemize}
 	\item La carga de un archivo json desde el sistema de archivos a la aplicación.
