@@ -2,7 +2,7 @@
 
 \section{Introducción}
 
-En este anexo se define la resolución de los objetivos y especificaciones expuestos anteriormente.
+En este anexo se define la resolución de las especificaciones y objetivos expuestos anteriormente.
 
 \section{Diseño de datos}
 
@@ -11,11 +11,22 @@ La aplicación cuenta con las siguientes entidades de base de datos:
 
 \begin{itemize}
 	\item \textit{Users}: Tiene su correo electrónico, nombre, apellido, rango de edad, código de empresa, género, rol en la empresa, contraseña y el estado en la aplicación.
-	\item \textit{Profiles}: Tiene el correo electrónico y el perfíl que tiene cada usuario en la aplicación.
+	\item \textit{Profiles}: Tiene el correo electrónico y la autoridad que tiene cada usuario en la aplicación.
 \end{itemize}
-\clearpage
-\subsubsection{Diagrama Relacional de las Entidades}
-\imagenB{diagramaClases}{Diagrama relacional de las entidades}{.5}
+\subsubsection{Diagrama Relacional}
+
+La relación es 1 a 1 porque cada email solo puede estar una vez en cada tabla.
+
+La tabla de \textit{Profiles} contiene la autoridad (permisos sobre la aplicación) de cada usuario dado de alta.
+
+Actualmente solo se puede tener uno de estos dos permisos:
+
+\begin{enumerate}
+	\item \textit{ADMIN}: Usuario administrador con acceso a todas las opciones de la aplicación.
+	 \item \textit{USER}: Usuario estándar de la aplicación, con acceso a cuestionarios y su perfil.
+\end{enumerate}
+
+\imagenB{diagramaClases}{Diagrama relacional}{.5}
 
 \subsection{Clases}
 Además de las entidades anteriores, se tienen las siguientes clases modelo, que contienen los objetos con los que trabaja la aplicación:
@@ -23,15 +34,15 @@ Además de las entidades anteriores, se tienen las siguientes clases modelo, que
 \begin{itemize}
 	\item \textit{User}: Relacionada con la entidad \textit{Users}.
 	\item \textit{Profile}: Relacionada con la entidad \textit{Profiles}.
-	\item \textit{Quiz}: Tiene el id, título, idioma, descripción, tipo e imágenes propias del cuestionario y un listado de preguntas.
-	\item \textit{Questions}: Tiene el id, descripción, habilidad, e imágenes de la pregunta y un listado de respuestas.
-	\item \textit{Answers}: Tiene el texto, la imagen, el id y el valor de cada respuesta.
+	\item \textit{Quiz}: Tiene el id, valor máximo, título, idioma, descripción, tipo e imágenes propias del cuestionario y un listado de preguntas.
+	\item \textit{Question}: Tiene el id, descripción, habilidad, e imágenes de la pregunta y un listado de respuestas.
+	\item \textit{Answer}: Tiene el texto, la imagen, el id y el valor de cada respuesta.
 	\item \textit{UserSelection}: Tiene los mapas de datos de respuestas, y de valores de las respuestas. Se utiliza para el cálculo del resultado tras la realización de un cuestionario.
 	\item \textit{EmailRequest}: Tiene el campo del para, el asunto y el cuerpo del mensaje. Es la clase que se utiliza en el envío de correos electrónicos.
 \end{itemize}
-\clearpage
-\subsubsection{Diagrama Relacional de las Clases}
-\imagenB{diagramaClasesJava}{Diagrama relacional de las clases}{.5}
+\subsubsection{Diagrama de Clases}
+El siguiente diagrama es el diagrama de clases que sigue la estructura de los archivos \textit{JSON} de los cuestionarios que se cargan en la aplicación.
+\imagenB{diagramaClasesJava}{Diagrama de clases}{.5}
 
 \section{Diseño procedimental}
 En este aspecto se detallan los aspectos del acceso a los cuestionarios.
@@ -43,8 +54,8 @@ La aplicación no realiza ningún proceso inicial de carga cuando arranca:
 	\item Cada vez que un usuario inicia sesión, se comprueba la base de datos.
 \end{itemize}
 
-Se muestra como ejemplo el diagrama de secuencia de un usuario que inicia sesión de forma satisfactoria en la página web:
-\imagenB{diagramaAcceso}{Diagrama de secuencia de inicio de sesión en la aplicación web.}{.5}
+Se muestra como ejemplo el diagrama de secuencia de un usuario que tras iniciar sesión, inicia un cuestionario.
+\imagenB{diagramaAcceso}{Diagrama de secuencia en la aplicación web.}{.5}
 
 \section{Diseño arquitectónico}
 
