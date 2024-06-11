@@ -4,22 +4,36 @@ Sobre este proyecto en particular, solo hay un trabajo relacionado, la aplicaci�
 
 \section{Web RiskReal.eu}
 Es la página web \cite{web:riskreal} que se ha utilizado como base para la creación del nuevo proyecto.
-La aplicación se basa en la utilización de diferentes cuestionarios para evaluar "soft skills" de trabajadores.
+La aplicación se basa en la utilización de diferentes cuestionarios para evaluar ``soft skills'' de trabajadores.
 
 \subsection{Descripción general}
 Desde la página principal se ofrece una descripción básica de lo que se puede hacer.
-Indica que con diversos escenarios de test, se pueden evaluar de forma eficiente las diferentes "soft skills".
+Indica que con diversos escenarios de test, se pueden evaluar de forma eficiente las diferentes ``soft skills''.
 
 Consta de dos páginas base, \textit{Inicio}, que consideraría la parte \textit{abierta} de la web, y \textit{Cursos}, con acceso restringido solo para usuarios registrados.
 
 \subsection{Parte abierta}
-Permite realizar un cuestionario propio, para obtener una evaluación orientativa de en qué estado nos encontramos en cuanto a habilidades blandas; y un test sobre un posible escenario, donde el "trabajador" va contestando en función de diferentes situaciones.
+Permite realizar un cuestionario propio, para obtener una evaluación orientativa de en qué estado nos encontramos en cuanto a habilidades blandas; y un test sobre un posible escenario, donde el ``trabajador'' va contestando en función de diferentes situaciones.
+
+No permite retroceder en las preguntas, tan solo se puede ir avanzando.
+
+El diseño de los tipos de cuestionario está diferenciado de inicio:
+
+\begin{itemize}
+	\item Cuestionario tipo test: Una pregunta con varias posibles respuestas, bien categóricas o binarias.
+	\item Cuestionario tipo escenario: Una pregunta con varias imágenes a modo de``situaciones'' y varias respuestas, donde se tiene que elegir la situación que más se acerque a lo que cada uno haría.
+\end{itemize}
+
+El no poder mezclar todo tipo de preguntas me parece una limitación en cuanto a la variedad de cuestionarios a poder realizar.
+
+Lo anterior se ha tenido en cuenta para que cada pregunta se gestione a nivel de pregunta, no a nivel de cuestionario completo, pudiendo mezclar los diferentes tipos de preguntas en el mismo cuestionario.
 
 \subsection{Parte privada}
 Se realiza un intento de registro con los siguentes datos:
 \imagen{dataRiskRealAppRegister}{Datos de registro de prueba.}{.5}
 Tras ello, no se recibe ningún correo de confirmación ni se consigue acceder a la propia aplicación.
-Debido al contratiempo anterior, no se puede analizar más en detalle como es la parte "privada" de la aplicación.
+Debido al contratiempo anterior, no se puede analizar más en detalle como es la parte ``privada'' de la aplicación.
+\clearpage
 Tampoco se permite el registro en la zona de empresas, obteniendo el mensaje que se puede ver en la siguiente imagen:
 \imagen{errorRiskRealAppRegister}{Error tras enviar el formulario de \textit{Ir a la zona para empresas}.}{.5}
 

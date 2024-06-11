@@ -27,7 +27,6 @@ services:
       JSON_QUIZ_FILE_PATH: /opt/jsonFiles
       JSON_QUIZ_FILE_PATH_LANG: /opt/jsonFiles/lang
       CSV_SCORE_PATH: /opt/csvFiles/scores.csv
-      #JSON_QUIZ_IMAGES_PATH: /opt/images/
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/appRiskRealUbu
       SPRING_DATASOURCE_PASSWORD: rootroot
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
