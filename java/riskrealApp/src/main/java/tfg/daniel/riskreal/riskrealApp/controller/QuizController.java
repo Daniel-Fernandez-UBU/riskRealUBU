@@ -67,9 +67,9 @@ public class QuizController {
 	
 	/**
 	 * Method getQuizDescription.
-	 * @param model
-	 * @param formFile
-	 * @param session
+	 * @param model the model
+	 * @param formFile file received
+	 * @param session the current session
 	 * @return the string
 	 */
 	@PostMapping("/quizDescription")

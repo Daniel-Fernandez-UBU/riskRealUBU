@@ -68,6 +68,7 @@ public class RegisterController {
      * Save user profile.
      *
      * @param user the user
+     * @param model the model
      * @return the string
      */
     @PostMapping("/registerDone")
@@ -164,7 +165,7 @@ public class RegisterController {
     /**
      * Method userProfile.
      * 
-     * @param model
+     * @param model the model
      * 
      * @return profile view
      */
@@ -185,7 +186,7 @@ public class RegisterController {
 	/**
 	 * Method roleManagement.
 	 * 
-	 * @param model
+	 * @param model the model
 	 * @return role management view
 	 * 
 	 */
@@ -200,8 +201,8 @@ public class RegisterController {
 	/**
 	 * Method roleManagement.
 	 * 
-	 * @param newProfile
-	 * @param email
+	 * @param newProfile the new profile selected
+	 * @param email the username
 	 * @return role management view
 	 * 
 	 */

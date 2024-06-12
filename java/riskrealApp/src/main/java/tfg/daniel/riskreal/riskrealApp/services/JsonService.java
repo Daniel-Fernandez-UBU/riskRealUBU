@@ -54,7 +54,7 @@ public class JsonService {
 	 * Method checkQuizSchema.
 	 * 
 	 * Method that check if the quiz json is valid or not
-	 * @param quizFile
+	 * @param quizFile the file
 	 * @return true or false
 	 */
 	public boolean checkQuizSchema(File quizFile) {
@@ -84,7 +84,7 @@ public class JsonService {
 	 * Method for get the full Quiz from json file.
 	 * @param jsonQuiz - full json path
 	 * @param value true or false
-	 * @return
+	 * @return quiz the quiz
 	 */
 	public Quiz getJsonQuiz(String jsonQuiz, boolean value) {
 		
@@ -116,7 +116,7 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeImages.
-	 * @param imageList
+	 * @param imageList the image list
 	 * @return image list normalized
 	 */
 	private List<String> normalizeImages(List<String> imageList){
@@ -132,7 +132,7 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeQuestions.
-	 * @param questionsList
+	 * @param questionsList the questions list
 	 * @return questions normalized
 	 */
 	private List<Question> normalizeQuestions(List<Question> questionsList){
@@ -149,7 +149,7 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeAnswers.
-	 * @param answersList
+	 * @param answersList the answers list
 	 * @return Answers normalized
 	 */
 	private List<Answer> normalizeAnswers(List<Answer> answersList){
@@ -168,7 +168,7 @@ public class JsonService {
 	 * Method getJsonFiles.
 	 * 
 	 * Method that from a file, get all the json files in the path
-	 * @param file
+	 * @param file the file
 	 * @return List jsonFiles
 	 * 
 	 */
@@ -183,6 +183,12 @@ public class JsonService {
         return jsonFiles;
 	}
 	
+	/**
+	 * Method readFileContent.
+	 * @param file to red
+	 * @return string buffer with the content
+	 * @throws IOException the exception
+	 */
     private static String readFileContent(File file) throws IOException {
         InputStream inputStream = new FileInputStream(file);
         byte[] buffer = new byte[(int) file.length()];

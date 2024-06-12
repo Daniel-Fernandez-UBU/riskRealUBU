@@ -29,7 +29,7 @@ public class UserSelection {
 
 	/**
 	 * Getter answers.
-	 * @return
+	 * @return answers hashMap
 	 */
 	public HashMap<Integer,String> getAnswers() {
 		return answers;
@@ -37,8 +37,8 @@ public class UserSelection {
 	
     /**
      * Setter answer.
-     * @param id
-     * @param value
+     * @param id answer id
+     * @param value answer value
      */
 	public void setAnswer(Integer id, String value) {
 		this.answers.put(id, value);
@@ -46,7 +46,7 @@ public class UserSelection {
 	
 	/**
 	 * Getter answersValues. 
-	 * @return
+	 * @return answersValues hashmap
 	 */
 	public HashMap<Integer, Integer> getAnswersValues() {
 		return answersValues;
@@ -54,8 +54,8 @@ public class UserSelection {
 	
 	/**
 	 * Setter answersValues.
-	 * @param id
-	 * @param value
+	 * @param id the answer id
+	 * @param value the answer value
 	 */
 
 	public void setAnswerValue(Integer id, Integer value) {

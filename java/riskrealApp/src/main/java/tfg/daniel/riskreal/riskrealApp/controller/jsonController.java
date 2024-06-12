@@ -63,6 +63,11 @@ public class jsonController {
 	    this.langService = customConfig.getLangAvailables();
 	}
 	
+	/**
+	 * The method jsonList.
+	 * @param model the model
+	 * @return the view
+	 */
 	@GetMapping("/jsonView")
 	public String jsonList(Model model) {
 		
@@ -80,6 +85,12 @@ public class jsonController {
 		return "/quiz/loadQuiz";
 	}
 	
+	/**
+	 * Method uploadJson.
+	 * @param file the file
+	 * @param redirectAttributes the redirected attributes
+	 * @return the view
+	 */
     @PostMapping("/json/upload")
     public String uploadJson(@RequestParam("file") MultipartFile file,
                              RedirectAttributes redirectAttributes) {
@@ -127,7 +138,14 @@ public class jsonController {
         return "redirect:/jsonView";
     }
 	
-	
+	/**
+	 * Method saveJsonQuiz.
+	 * @param model the model
+	 * @param session the current session
+	 * @param archivo the file
+	 * @param redirectAttributes the redirect attributes
+	 * @return the view
+	 */
     @PostMapping("/json/generateQuiz")
     public String saveJsonQuiz(Model model,  HttpSession session, @RequestParam("archivo") String archivo
     		,RedirectAttributes redirectAttributes) {

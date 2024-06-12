@@ -32,8 +32,8 @@ public class EmailService {
 	/**
 	 * Class constructor.
 	 * 
-	 * @param javaMailSender
-	 * @param templateEngine
+	 * @param javaMailSender the javaMailSender.
+	 * @param templateEngine the templateEngine.
 	 */
 	public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
 		this.javaMailSender = javaMailSender;
@@ -45,6 +45,8 @@ public class EmailService {
 	 * 
 	 * Send a email.
 	 * 
+	 * @param email the email
+	 * @throws MessagingException the exception
 	 */
 	public void sendMail(EmailRequest email) throws MessagingException {
 		try {

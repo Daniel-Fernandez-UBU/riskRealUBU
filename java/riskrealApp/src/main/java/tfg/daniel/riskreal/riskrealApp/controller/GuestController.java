@@ -64,10 +64,10 @@ public class GuestController {
 	
 	/**
 	 * Method setGuestData.
-	 * @param model
-	 * @param formFile
-	 * @param session
-	 * @return
+	 * @param model the model
+	 * @param formFile the file
+	 * @param session the current session
+	 * @return the view
 	 */
 	@PostMapping("/anonymousData")
 	public String setGuestData(Model model, @RequestParam("archivo") String formFile, HttpSession session) {
@@ -86,12 +86,12 @@ public class GuestController {
 	
 	/**
 	 * Method getGuestDescrption.
-	 * @param model
-	 * @param gender
-	 * @param age
-	 * @param rol
-	 * @param session
-	 * @return
+	 * @param model the model
+	 * @param gender the gender
+	 * @param age the age
+	 * @param rol the rol
+	 * @param session the current session
+	 * @return the view
 	 */
 	@PostMapping("/anonymousDescription")
 	public String getGuestDescription(Model model, HttpSession session, @RequestParam("gender") String gender,
@@ -124,11 +124,11 @@ public class GuestController {
 	
 	/**
 	 * Method startGuestQuiz.
-	 * @param session
-	 * @param gender
-	 * @param age
-	 * @param rol
-	 * @return
+	 * @param session the current session
+	 * @param gender the gender
+	 * @param age the age
+	 * @param rol the rol
+	 * @return the view
 	 */
 	@PostMapping("/anonymousQuiz")
 	public String startGuestQuiz(HttpSession session, @RequestParam("gender") String gender,
@@ -159,7 +159,12 @@ public class GuestController {
 		return "redirect:/anonymousStartQuiz";
 	}
 	
-	
+	/**
+	 * The method showGuestQuiz.
+	 * @param model the model
+	 * @param session the current session
+	 * @return the view.
+	 */
 	@RequestMapping(value = "/anonymousStartQuiz", method = { RequestMethod.GET, RequestMethod.POST })
 	public String showGuestQuiz(Model model, HttpSession session) {
 		
