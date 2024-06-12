@@ -6,6 +6,7 @@
 	"type": "object",
 	"required": [
 		"id",
+		"maxvalue",
 		"title",
 		"image",
 		"language",
@@ -20,6 +21,14 @@
 			"type": "integer",
 			"examples": [
 				1
+			],
+			"default": 0
+		},"maxvalue": {
+			"$id": "#root/maxvalue", 
+			"title": "Maxvalue", 
+			"type": "integer",
+			"examples": [
+				10
 			],
 			"default": 0
 		},

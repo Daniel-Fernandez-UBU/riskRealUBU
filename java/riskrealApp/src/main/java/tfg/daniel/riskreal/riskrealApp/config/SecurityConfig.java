@@ -38,7 +38,7 @@ public class SecurityConfig {
      * 
      * @param httpSecurity - default
      * @return httpSecurity with the current configuration.
-     * @throws Exception
+     * @throws Exception the exception
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
@@ -67,7 +67,7 @@ public class SecurityConfig {
      * 
      * This method define how the login have to check the username, password or profile in the custom database.
      * 
-     * @param dataSource
+     * @param dataSource dabase datasource
      * @return users - UserDetails with the information of email, password, status and profile.
      * 
      */

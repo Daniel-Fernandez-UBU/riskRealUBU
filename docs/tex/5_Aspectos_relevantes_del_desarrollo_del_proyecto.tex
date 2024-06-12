@@ -15,19 +15,19 @@ Tras la primera reunión con el tutor, donde me expuso el camino que se quería 
 
 \section{Metodologías}
 
-Desde el inicio del proyecto se ha dedicado tiempo y esfuerzo en que la realización del proyecto fuese de la manera más profesional posible.
+Desde el inicio del proyecto se ha dedicado tiempo y esfuerzo para que su realización fuese de la manera más profesional posible.
 
 La gestión del proyecto se ha realizado teniendo como base la metodología ágil de \textit{Scrum} ~\cite{web:scrum}.
 
 Al tratarse de un Trabajo de Fin de Grado, que se realiza de forma individual, no se siguió de forma completa, porque el grupo de desarrolladores estaba formado solo por un miembro.
 
-Cómo se ha aplicado la metodología:
+La metodología se ha aplicado de la siguiente manera:
 
 \begin{itemize}
 	\item Reunión inicial de \textit{kick-off} ~\cite{web:kickoff} del proyecto, donde se presentó el proyecto y se establecieron ciertos objetivos generales.
 	\item Se utilizó una estrategia de desarrollo incremental basada en \textit{sprints}, a través de iteraciones y revisiones.
-	\item La duración media de los \textit{sprints} fue de dos semanas, excepto los últimos del proyecto, que han sido de una semana.
-	\item En la finalización de cada \textit{sprints} se entregaba un incremento del proyecto.
+	\item La duración media de los \textit{sprints} fue de dos semanas, exceptuando los últimos del proyecto, que han sido de una semana.
+	\item A la finalización de cada \textit{sprints} se entregaba un incremento del proyecto.
 	\item Se realizaba una reunión de revisión del \textit{sprint} que servía también como reunión de planificación del nuevo \textit{sprint}.
 	\item Se definía en el tablero kanban de \textit{Zube.io} una lista de tareas y se asociaban al nuevo \textit{sprint}.
 	\item Para monitorizar el progreso se han utilizado gráficos \textit{burnup}.
@@ -40,7 +40,6 @@ La principal tecnología en el desarrollo del proyecto ha sido \textit{Spring Bo
 \begin{itemize}
 	\item Spring Boot 3. Aplicaciones web y REST APIs con Spring MVC (Udemy) ~\cite{udemy:eliseo}.
 	\item Cómo convertir en imagen de docker una aplicación de Spring Boot ~\cite{doc:springbootdocker}.
-	\item Cómo aplicar estilos de personalización de \textit{bootstrap} y \textit{CSS} en documentos \textit{HTML}.
 \end{itemize}
 
 Me gustaría destacar la web \href{https://www.baeldung.com/spring-boot}{Baeldung}, al contener mucha información sobre Spring Boot en general.
@@ -48,6 +47,7 @@ Me gustaría destacar la web \href{https://www.baeldung.com/spring-boot}{Baeldun
 Aunque en menor menida, también he tenido que formarme en otras de las tecnologías utilizadas:
 
 \begin{itemize}
+	\item Cómo aplicar estilos de personalización de \textit{bootstrap} y \textit{CSS} en documentos \textit{HTML}.
 	\item Uso y configuración de un archivo \textit{docker compose} ~\cite{web:dockercompose}.
 	\item Cómo se utiliza \LaTeX para la generación de documentos.
 \end{itemize}
@@ -58,50 +58,50 @@ Se va a dividir el desarrollo de la aplicación web en varios apartados, para po
 
 \subsection{Código de la aplicación}
 
-El desarrollo del código de la aplicación supuso un primer reto, pues en el inicio del proyecto todavía no terminaba de comprender cómo iba a crear una aplicación web con Java, ya que no era lo que estaba acostumbrado a crear con este lenguaje de programación.
+El desarrollo del código de la aplicación supuso un primer reto, ya que al inicio del proyecto no terminaba de comprender cómo crear una aplicación web con Java, dado que no estaba acostumbrado a utilizar este lenguaje para tales fines.
 
-Una vez se comprendió cómo funcionaba, de forma básica, \textit{Spring Web} como \textit{starter} del proyecto, este paso se convirtió en algo trivial.
+Una vez comprendido su funcionamiento básico, el uso de \textit{Spring Web} como \textit{starter} del proyecto se convirtió en algo trivial.
 
-La primera parte de la creación de la aplicación consistía en poder ``leer'' un archivo \textit{JSON} y convertirlo a objetos en Java con los que se pudiese trabajar de forma nativa.
+La primera parte de la creación de la aplicación consistía en poder ``leer'' un archivo \textit{JSON} y convertirlo en objetos Java con los que se pudiese trabajar de forma nativa.
 
 Se crearon varias clases modelo para agrupar el contenido del \textit{JSON}:
 
  \begin{itemize}
 	\item Clase \textit{Quiz}: Contiene la descripción básica del cuestionario y un listado de preguntas.
-	\item Clase \textit{Questions}: Contiene la información de cada pregunta y un listado de respuestas.
-	\item Clase \textit{Answers}: Contiene la información de cada respuesta.
+	\item Clase \textit{Question}: Contiene la información de cada pregunta y un listado de respuestas.
+	\item Clase \textit{Answer}: Contiene la información de cada respuesta.
 \end{itemize}
 
 Una vez conseguido lo anterior, la base del proyecto ya estaba construida.
 
-Para la presentación de contenidos en las páginas web, se usaron clases \textit{controller} en Java, que sirven de enlace entre la propia aplicación y el código \textit{HTML} de la página web.
+Para la presentación de contenidos en las páginas web, se usaron clases \textit{controller} en Java, que sirven de enlace entre los datos que maneja la aplicación y el código \textit{HTML} de la página web.
 
-A través de estas clases, se pasaban los cuestionarios completos al código \textit{HTML} de la página web y en ella, con \textit{Thymeleaf} se mostraba la información.
+A través de estas clases, se pasaban los cuestionarios completos al código \textit{HTML} de la página web y, con \textit{Thymeleaf}, se mostraba la información.
 
-Ya se tenía la forma de ver el contenido del \textit{JSON} en las páginas web.
+De este modo, ya se podía ver el contenido del archivo \textit{JSON} en las páginas web.
 
-Hasta aquí tendríamos una base más ``robusta'' de la aplicación, teniendo todo lo necesario dentro del propio proyecto de Java.
+Hasta aquí, tendríamos una base más robusta de la aplicación, teniendo todo lo necesario dentro del propio proyecto de Java.
 
-Los primeros problemas los encontramos al intentar actualizar los archivos de propiedades, ya que al ser internos de la aplicación, necesitaban un reinicio de la misma cada vez que había un cambio, algo que no era funcional para un entorno de producción.
+Los primeros problemas los encontramos al intentar actualizar los archivos de propiedades, ya que, al ser internos de la aplicación, necesitaban un reinicio de la misma cada vez que había un cambio, algo que no era funcional para un entorno de producción.
 
-A raíz de lo anterior, se empezó a trabajar con archivos \textit{JSON} externos a la aplicación, utilizando rutas relativas para poder encontrar los archivos siempre, independientemene de la ubicación raíz del proyecto.
+A raíz de lo anterior, se empezó a trabajar con archivos \textit{JSON} externos a la aplicación, utilizando rutas relativas para poder encontrar los archivos siempre, independientemente de la ubicación raíz del proyecto.
 
 Finalmente, se incluyeron varios tipos de clases de Java adicionales:
 
  \begin{itemize}
-	\item Clases de configuración: Se utilizaron ciertas clases para modificar la configuración por defecto de Spring Boot. También se ha utilizado para acceder a un archivo de propiedades personalizado, donde se definen algunos elementos de configuración y personalización de la aplicación.
-	\item Clases de servicio: Contienen los métodos a los que se tienen que acceder desde otras clases, evitando duplicidad en el código y teniendo una clase centralizada para la gestión de la mayoría de los procesos, siendo más sencillo comprender su código y ahorrando métodos adicionales en otras clases.
+	\item Clases de configuración: Se utilizaron ciertas clases para modificar la configuración por defecto de Spring Boot. También se han utilizado para acceder a un archivo de propiedades personalizado, donde se definen algunos elementos de configuración y personalización de la aplicación.
+	\item Clases de servicio: Contienen los métodos comunes entre clases, evitando duplicidad en el código y teniendo una clase centralizada para la gestión de la mayoría de los procesos, siendo más sencillo comprender su código y aplicar modificaciones de forma generalizada.
 \end{itemize}
 
 \subsection{Código de las páginas web}
 
-La estética y el diseño de las páginas web ha sido lo más complejo en cuanto a presentación final del proyecto.
+La estética y el diseño de las páginas web han sido lo más complejo en cuanto a la presentación final del proyecto.
 
-Ayudado de \textit{bootstrap} y personalización a través de plantillas \textit{CSS} se ha conseguido aplicar un estilo homogéneo a toda la aplicación.
+Con la ayuda de \textit{Bootstrap} y la personalización a través de plantillas \textit{CSS}, se ha conseguido aplicar un estilo homogéneo a toda la aplicación.
 
-El uso de los fragmentos de \textit{Thymeleaf} ha ayudado a que los ficheros \textit{HTML} que componen la página web sean más legibles, evitando tener que escribir las mismas líneas de forma repetitiva, simplificándolo todo a una simple línea que enlaza con el \textit{fragmento} indicado.
+El uso de los fragmentos de \textit{Thymeleaf} ha ayudado a que los ficheros \textit{HTML} que componen la página web sean más legibles, evitando tener que escribir las mismas líneas de forma repetitiva y simplificándolo todo a una simple línea que enlaza con el fragmento indicado.
 
-Definitivamente, implementar las etiquetas \textit{HTML} ha sido lo más costoso en cuanto a programación se refiere, porque conseguir cuadrar y encajar todos los apartados en su sitio ha sido un trabajo de prueba y error constante.
+Definitivamente, implementar las etiquetas \textit{HTML} ha sido lo más costoso en cuanto a programación se refiere, porque cuadrar y encajar todos los apartados en su sitio ha sido un trabajo de prueba y error constante.
 
 \subsection{Integración de servicios y dependencias}
 
@@ -109,23 +109,25 @@ Los servicios o dependencias más destacables que implementa la aplicación son 
 
 \subsubsection{Servicio de envío de correos electrónicos}
 
-Durante el proceso de desarrollo de un servicio de correo electrónico que enviase a los usuarios una nueva contraseña en caso de que no recordasen la suya, se probaron configuraciones con varios servidores de correo, pero finalmente, por simplifidad y acceso a documentación, se utilizó \textit{Gmail} que permite la creación de cuentas gratuitas y el uso de sus servidores de correo desde cualquier \textit{API} siempre que se utilice un \textit{token} ~\cite{gmail:token}.
+Durante el proceso de desarrollo de un servicio de correo electrónico que enviase a los usuarios una nueva contraseña en caso de que no recordasen la suya, se probaron configuraciones con varios servidores de correo. Finalmente, por simplicidad y acceso a documentación, se utilizó \textit{Gmail}, que permite la creación de cuentas gratuitas y el uso de sus servidores de correo desde cualquier \textit{API}, siempre que se utilice un \textit{token} ~\cite{gmail:token}.
 
-La configuración completa del servidor de correo, así como, sus credenciales, se independizaron de la aplicación en un archivo de propiedades, para permitir su modificación por cualquier otro servicio de correo, dando libertar al programador para cambiarlo sin necesidad de compilar de nuevo el proyecto.
+La configuración completa del servidor de correo, así como sus credenciales, se independizaron de la aplicación en un archivo de propiedades, para permitir su modificación por cualquier otro servicio de correo, dando libertad al programador para cambiarlo sin necesidad de compilar de nuevo el proyecto.
 
 \subsubsection{Seguridad con Spring Security y Spring JPA}
 
 En primer lugar, tras aplicar \textit{Spring Security}, la mayoría de las páginas dejaron de funcionar, todas aquellas que eran de tipo \textit{POST}.
 
-Tras investigar descubrí que esto sucedía porque la primera medida de seguridad que se aplica, es la necesidad de recibir un \textit{CSRF token} (\textit{Cross-Site Request Forgery}) ~\cite{web:csrf} para evitar ataques \textit{man in the middle} a los formularios de las aplicaciones web, al requerir un \textit{token} de autenticación, para comprobar la autenticidad de la comunicación.
+Tras investigar descubrí que esto sucedía porque la primera medida de seguridad que se aplica, es la necesidad de recibir un \textit{CSRF token} (\textit{Cross-Site Request Forgery}) ~\cite{web:csrf} para evitar ataques \textit{man in the middle} a los formularios de las aplicaciones web.
 
-Debido a esto, todos los formularios tienen configurado un campo ``oculto'' que envía este \textit{token} al controlador de la aplicación, para permitir el acceso.
+Debido a esto, todos los formularios tienen configurado un campo ``oculto'' que envía este \textit{token} al controlador de la aplicación para permitir el acceso.
 
-Se decidió utilizar una base de datos \textit{mysql} que se levanta cada vez que se inicia la aplicación, almacena los datos en una carpeta externa a la misma, para tener persistencia, y que está vinculada con el la seguridad de la aplicación, ya que se definieron los campos de nuestras tablas de usuarios y perfiles que se iban a usar tanto para iniciar sesión, como para comprobar a qué parte de la aplicación tiene cada uno.
+Se decidió utilizar una base de datos \textit{MySQL} que se inicia junto con la aplicación para almacenar los datos en una carpeta externa a la misma y así garantizar la persistencia.
+
+La base de datos está relacionada con la seguridad de la aplicación, ya que consulta las tablas de usuarios y perfiles para permitir el inicio de sesión de los usuarios, y determinar su nivel de acceso.
 
 \section{Documentación}
 
-Para generar la documentación del proyecto, se ha utilizado una plantilla de \LaTeX, que permite mantener una estructura uniforme y el mismo estilo durante la documentación de todo el proyecto, aportando un aura de profesionalidad y sin los poblemas y complicaciones de formatos que nos podemos encontrar en otros programas comerciales.
+Para generar la documentación del proyecto, se ha utilizado una plantilla de \LaTeX, que permite mantener una estructura uniforme y con un mismo estilo durante la documentación de todo el proyecto, aportando un aura de profesionalidad y sin los poblemas y complicaciones de formatos que nos podemos encontrar en otros programas comerciales.
 
 La documentación de la aplicación se ha generado desde el propio editor de código, \textit{Spring Tool Suite 4 for Eclipse}, siguiendo el formato \textit{javadoc} ~\cite{doc:javadoc}.
 

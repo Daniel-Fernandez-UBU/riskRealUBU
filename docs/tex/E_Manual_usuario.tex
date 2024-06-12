@@ -42,17 +42,17 @@ De la imagen anterior se puede ver que tenemos la posibilidad de descargar tres 
 	\item Install.zip: Contiene la carpeta de instalación, la única que vamos a necesitar para poner a funcionar nuestra aplicación.
 \end{itemize}
 
-\textit{Nota: Si has descargado Source code, tras descomprimirlo y acceder a la carpeta del proyecto, tendrás una carpeta install, que es donde está la parte que importa para la instalación de la aplicación.}
+\textit{Nota: Si se ha descargado Source code, tras descomprimirlo y acceder a la carpeta del proyecto, se dispondrá de una carpeta \textit{riskreal}, que es donde está la parte que importa para la instalación de la aplicación.}
 
 \subsection{Contenido de la carpeta install}
 
 La estructura de la carpeta es la siguiente:
 
-\imagen{installTree}{Contenido y estructura de la carpeta install.}
+\imagen{installTree}{Contenido y estructura de la carpeta riskreal.}
 
 \subsubsection{Fichero docker-compose.yml}
 
-Este es único fichero realmente necesario, ya que con el simple comando \textbf{docker compose up} en el mismo directorio en el que se encuentra este fichero, se levanta la aplicación.
+Este es el único fichero realmente necesario, ya que con el simple comando \textbf{docker compose up} en el mismo directorio en el que se encuentra este fichero, se levanta la aplicación.
 
 La explicación del contenido se ha realizado en \ref{subsec:dockerComposeFile}.
 
@@ -62,16 +62,16 @@ Desde la línea de comandos, navegamos hasta acceder a la carpeta install y esta
 
 \subsubsection{Instalación supervisada}
 
-Escribimos \textbf{docker compose up} y empezamos a ver cómo se lanzan las aplicaciones paso a paso. Si es la primera vez, tiene que hacer una descarga de las imágenes al repositorio de imágenes de docker, por lo que es normal que lleve algo más de tiempo.
+Escribimos \textbf{docker compose up} y empezamos a ver cómo se lanzan las aplicaciones paso a paso. Si es la primera vez, tiene que hacer una descarga de las imágenes al repositorio de imágenes de Docker, por lo que es normal que lleve algo más de tiempo.
 \imagen{dockerComposeUP}{Comando para la instalación.}
 
 En la siguiente imagen se ve el resultado de una ejecución correcta:
 \imagen{dockerComposeRunning}{Aplicación funcionando.}
 
-Desde otra consola de símbolo del sistema o desde Docker Desktop, podemos ver nuestros docker funcionando:
+Desde otra consola de símbolo del sistema o desde Docker Desktop, podemos ver nuestros contenedores funcionando:
 \imagen{dockerWorking}{Dockers en ejecución.}
 
-Para parar la ejecución y eliminar los docker, pulsamos \textit{Ctrl + C} y escribimos \textit{docker compose down} en la ventana del símbolo del sistema en la que los teníamos en ejecución.
+Para parar la ejecución y eliminar los contenedores, pulsamos \textit{Ctrl + C} y escribimos \textit{docker compose down} en la venta del símbolo del sistema donde estaban en ejecución.
 \imagen{dockerStop}{Parada de los docker lanzados.}
 
 \subsubsection{Instalación desatendida}
