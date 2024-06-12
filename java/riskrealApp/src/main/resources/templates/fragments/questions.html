@@ -28,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				 <div th:if="${preguntaActual == 1} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: firstquestion}"></div>
 				 <div th:if="${preguntaActual > 1} and ${preguntaActual < quiz.getQuestions().size()}" th:insert="~{fragments/resources :: continuequestion}"></div>
 				 <div th:if="${preguntaActual == quiz.getQuestions().size()} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: lastquestion}"></div>
-				 <div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: onequestion}"></div>
+				 <div th:if="${quiz.getQuestions().size() == 1}" th:insert="~{fragments/resources :: onequestion}"></div>
 		 	</div>
 		</form>
 	</div>
@@ -64,7 +64,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			 <div th:if="${preguntaActual == 1} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: firstquestion}"></div>
 			 <div th:if="${preguntaActual > 1} and ${preguntaActual < quiz.getQuestions().size()}" th:insert="~{fragments/resources :: continuequestion}"></div>
 			 <div th:if="${preguntaActual == quiz.getQuestions().size()} and ${quiz.getQuestions().size() > 1}" th:insert="~{fragments/resources :: lastquestion}"></div>
-			 <div th:if="${preguntaActual == quiz.getQuestions().size()}" th:insert="~{fragments/resources :: onequestion}"></div>
+			 <div th:if="${quiz.getQuestions().size() == 1}" th:insert="~{fragments/resources :: onequestion}"></div>
         </div>
         <br>
     </form>

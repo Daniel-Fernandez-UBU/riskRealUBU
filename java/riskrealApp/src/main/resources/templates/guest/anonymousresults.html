@@ -5,7 +5,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header th:insert="~{fragments/header :: new-other-header}"></header>
 <section class="py-11 bg-light-gradient border-bottom border-white border-5">
-        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;">
+        <div class="bg-holder overlay overlay-light" style="background-image:url(assets/img/gallery/header-bg.png);background-size:cover;opacity: 0.5;">
         </div>
         <!--/.bg-holder-->
 
@@ -13,7 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="row flex-center">
             <div class="col-12 mb-10">
               <div class="d-flex align-items-center flex-column">
-			    <h3 th:text="'Resultado final: ' + ${resultado}"></h3>			  	
+			    <h3 th:text="#{final.score} + ' ' + ${resultado}  + '/' + ${max}"></h3>			  	
 				</div>
               </div>
               <div th:insert="~{fragments/resources :: end}"></div>

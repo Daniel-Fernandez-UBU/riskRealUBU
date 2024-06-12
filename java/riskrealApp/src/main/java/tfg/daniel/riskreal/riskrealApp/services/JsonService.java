@@ -18,9 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
 import tfg.daniel.riskreal.riskrealApp.config.CustomConfig;
-import tfg.daniel.riskreal.riskrealApp.model.Answers;
-import tfg.daniel.riskreal.riskrealApp.model.Questions;
+import tfg.daniel.riskreal.riskrealApp.model.Answer;
+import tfg.daniel.riskreal.riskrealApp.model.Question;
 import tfg.daniel.riskreal.riskrealApp.model.Quiz;
+import tfg.daniel.riskreal.riskrealApp.model.UserSelection;
 
 /**
  * Class jsonService.
@@ -53,7 +54,7 @@ public class JsonService {
 	 * Method checkQuizSchema.
 	 * 
 	 * Method that check if the quiz json is valid or not
-	 * @param quizFile
+	 * @param quizFile the file
 	 * @return true or false
 	 */
 	public boolean checkQuizSchema(File quizFile) {
@@ -81,8 +82,9 @@ public class JsonService {
 	
 	/**
 	 * Method for get the full Quiz from json file.
-	 * @param String jsonQuiz - full json path
-	 * @return
+	 * @param jsonQuiz - full json path
+	 * @param value true or false
+	 * @return quiz the quiz
 	 */
 	public Quiz getJsonQuiz(String jsonQuiz, boolean value) {
 		
@@ -114,7 +116,7 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeImages.
-	 * @param imageList
+	 * @param imageList the image list
 	 * @return image list normalized
 	 */
 	private List<String> normalizeImages(List<String> imageList){
@@ -130,13 +132,13 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeQuestions.
-	 * @param questionsList
+	 * @param questionsList the questions list
 	 * @return questions normalized
 	 */
-	private List<Questions> normalizeQuestions(List<Questions> questionsList){
-		List<Questions> normalized = new ArrayList<>();
+	private List<Question> normalizeQuestions(List<Question> questionsList){
+		List<Question> normalized = new ArrayList<>();
 		
-    	for (Questions quest : questionsList) {
+    	for (Question quest : questionsList) {
     		quest.setImage(normalizeImages(quest.getImage())); 
     		quest.setAnswers(normalizeAnswers(quest.getAnswers()));
     		normalized.add(quest);
@@ -147,13 +149,13 @@ public class JsonService {
 	
 	/**
 	 * Method normalizeAnswers.
-	 * @param answersList
+	 * @param answersList the answers list
 	 * @return Answers normalized
 	 */
-	private List<Answers> normalizeAnswers(List<Answers> answersList){
-		List<Answers> normalized = new ArrayList<>();
+	private List<Answer> normalizeAnswers(List<Answer> answersList){
+		List<Answer> normalized = new ArrayList<>();
 		
-    	for (Answers ans : answersList) {
+    	for (Answer ans : answersList) {
     		ans.setImage(customConfig.getQuizImagePath() + ans.getImage()); 
     		normalized.add(ans);
     	}
@@ -166,8 +168,8 @@ public class JsonService {
 	 * Method getJsonFiles.
 	 * 
 	 * Method that from a file, get all the json files in the path
-	 * @param file
-	 * @return List<String> jsonFiles
+	 * @param file the file
+	 * @return List jsonFiles
 	 * 
 	 */
 	public List<String> getJsonFiles(File file){
@@ -181,6 +183,12 @@ public class JsonService {
         return jsonFiles;
 	}
 	
+	/**
+	 * Method readFileContent.
+	 * @param file to red
+	 * @return string buffer with the content
+	 * @throws IOException the exception
+	 */
     private static String readFileContent(File file) throws IOException {
         InputStream inputStream = new FileInputStream(file);
         byte[] buffer = new byte[(int) file.length()];
@@ -188,6 +196,33 @@ public class JsonService {
         inputStream.close();
         return new String(buffer, "UTF-8");
     }
+    
+    
+	/**
+	 * Method saveScore().
+	 *
+	 * @param userSelection the user selection
+	 * @param quiz the quiz
+	 * @param questionInt the question int
+	 * @param text the text
+	 */
+	public void saveScore(UserSelection userSelection, Quiz quiz, int questionInt, String text) {
+		int value = 0;
+		
+		for (Question quest : quiz.getQuestions()) {
+			if (quest.getId() == questionInt) {
+				for (Answer ans : quest.getAnswers()) {
+					if (ans.getText().equals(text)) {
+						value = ans.getValue();
+					}
+				}
+			}
+		}
+		
+		userSelection.setAnswerValue(questionInt, value);
+		userSelection.setAnswer(questionInt, text);
+		
+	}
 	
 
 }

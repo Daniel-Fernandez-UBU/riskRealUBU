@@ -2,7 +2,6 @@
 package tfg.daniel.riskreal.riskrealApp.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,10 @@ public class HomeController {
 	
 	/** The json path lang. */
 	private String jsonPathLang;;
-		
+	
+	/**
+	 * The init.
+	 */
 	@PostConstruct
 	public void init() {
 	    this.jsonPathLang = customConfig.getQuizFilePath();
@@ -62,7 +64,6 @@ public class HomeController {
      * @param model the model
      * @param session the session
      * @return the string
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     @GetMapping("/")
     public String home(Model model,  HttpSession session) {
@@ -150,8 +151,8 @@ public class HomeController {
     /**
      * Method checkAuthenticated.
      * 
-     * @param authentication
-     * @return
+     * @param authentication the authentication
+     * @return boolean true or false
      */
     private boolean checkAuthenticated(Authentication authentication) {
         if (authentication != null) {
